@@ -115,6 +115,20 @@
            (info "Controls: Mouse to move blue box, SPACE to pause")
            (p/shell "clojure" "-M:collision-area"))}
 
+  colors-palette
+  {:doc "🎮 Run Colors Palette - raylib color showcase"
+   :task (do
+           (header "🎨 Running Colors Palette")
+           (info "Hover over colors to see names, SPACE to show all")
+           (p/shell "clojure" "-M:colors-palette"))}
+
+  logo-anim
+  {:doc "🎮 Run Logo Animation - raylib logo state machine demo"
+   :task (do
+           (header "✨ Running Logo Animation")
+           (info "Watch the raylib logo animate, R to replay")
+           (p/shell "clojure" "-M:logo-anim"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -449,6 +463,8 @@ echo \"✅ Lint check passed!\"
            (println "   bb input-keys       Keyboard control demo")
            (println "   bb input-mouse      Mouse control demo")
            (println "   bb collision-area   Collision detection demo")
+           (println "   bb colors-palette   Raylib color showcase")
+           (println "   bb logo-anim        Logo animation demo")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
