@@ -260,7 +260,9 @@ flowchart TB
 | Command | Description |
 |---------|-------------|
 | `bb repl` | Start Clojure REPL for interactive development |
-| `bb nrepl` | Start nREPL server on port 7888 for editor connection |
+| `bb nrepl` | Start nREPL server on port 7889 (for non-GUI work) |
+
+> **For live game development:** Run a game (`bb asteroids`) then connect your editor to port **7888**.
 
 ### 🔍 Code Quality
 
@@ -318,51 +320,135 @@ To start a REPL, right-click on `deps.edn` and select "Run REPL".
 
 ### Connecting to nREPL
 
-Start the nREPL server:
+**For live game development (recommended):**
 
 ```bash
-bb nrepl   # or: clj -M:dev
+bb asteroids   # Starts game + nREPL on port 7888
 ```
 
 Then connect your editor to `localhost:7888`.
 
-## REPL Development
+**For standalone REPL (non-GUI work):**
 
-```mermaid
-sequenceDiagram
-    participant Editor
-    participant nREPL
-    participant Game
-    
-    Editor->>nREPL: Connect to port 7888
-    Editor->>nREPL: (require '[examples.asteroids :as game])
-    nREPL->>Game: Load namespace
-    Editor->>nREPL: (game/-main)
-    nREPL->>Game: Start game window
-    
-    loop Live Development
-        Editor->>nREPL: Modify function
-        nREPL->>Game: Hot-reload code
-        Game-->>Editor: See changes immediately
-    end
+```bash
+bb nrepl   # Starts nREPL on port 7889
 ```
+
+Then connect your editor to `localhost:7889`.
+
+## REPL Development
 
 One of the best things about Clojure is the REPL workflow. You can change code while the game is running and see changes immediately.
 
-Start a REPL:
+### Live Game Development (Recommended)
+
+Each game starts an **embedded nREPL server on port 7888**. This is the proper way to do live development:
+
+```mermaid
+sequenceDiagram
+    participant Terminal
+    participant Game
+    participant nREPL as nREPL:7888
+    participant Editor
+    
+    Terminal->>Game: bb asteroids
+    Game->>nREPL: Start embedded nREPL on 7888
+    Game->>Game: Open window & run
+    Editor->>nREPL: Connect to localhost:7888
+    
+    loop Live Development
+        Editor->>nREPL: Modify & eval function
+        nREPL->>Game: Hot-reload code
+        Game-->>Editor: See changes instantly!
+    end
+```
+
+**Step 1:** Start a game (it launches nREPL automatically):
 
 ```bash
-bb repl   # or: clj
+bb asteroids   # or: clojure -M:asteroids
 ```
 
-Then load and run an example:
+You'll see in the logs:
+```
+INFO: starting nREPL server on port 7888
+```
+
+**Step 2:** Connect your editor to `localhost:7888`:
+- **VS Code/Calva**: Run "Calva: Connect to a Running REPL Server"
+- **IntelliJ/Cursive**: Run → Edit Configurations → Remote REPL
+
+**Step 3:** Modify code live! Try these from your connected REPL:
 
 ```clojure
-(require '[examples.asteroids :as game])
-(game/-main)
+;; Access the running game state
+@examples.asteroids/game-atom
+
+;; Reset the game
+(reset! examples.asteroids/game-atom (examples.asteroids/initial-state))
+
+;; Make the ship bigger
+(swap! examples.asteroids/game-atom assoc-in [:ship :size] 50)
+
+;; Spawn more asteroids
+(swap! examples.asteroids/game-atom update :asteroids 
+       concat (repeatedly 5 examples.asteroids/make-asteroid))
 ```
 
-While the game is running, you can modify functions and re-evaluate them to see changes in real-time!
+### macOS Note
+
+On macOS, OpenGL requires the main thread (`-XstartOnFirstThread`). This means:
+- ❌ You **cannot** run games from a standalone REPL (`clj -M:dev`)
+- ✅ You **must** run the game first, then connect to its embedded nREPL
+
+### Standalone REPL (Non-GUI Work)
+
+For exploring code, testing logic, or non-GUI work, use the standalone REPL:
+
+```bash
+bb nrepl   # or: clj -M:dev (starts on port 7889)
+```
+
+> **Port note:** Standalone REPL uses port **7889** to avoid conflicts with games that use **7888**.
+
+What works from standalone REPL:
+
+```clojure
+;; Load and explore FFI bindings
+(require '[raylib.colors :as colors])
+(require '[raylib.enums :as enums])
+
+;; Colors are just Clojure maps!
+colors/red
+;; => {:r 230, :g 41, :b 55, :a 255}
+
+;; Create custom colors
+(def my-purple {:r 128 :g 0 :b 255 :a 255})
+
+;; Test game logic (pure functions)
+(require '[examples.asteroids :as ast])
+
+(ast/vector-add [1 2] [3 4])
+;; => [4 6]
+
+(ast/check-point-circle [100 100] [100 100] 50)
+;; => true (collision!)
+
+;; Explore game state structure
+(keys (ast/initial-state))
+;; => (:bullets :screen :dt :alive :asteroids :ship ...)
+```
+
+### REPL Capabilities Summary
+
+| Capability | Standalone REPL | Connected to Game |
+|------------|-----------------|-------------------|
+| Load FFI bindings | ✅ | ✅ |
+| Inspect colors/enums | ✅ | ✅ |
+| Test pure game logic | ✅ | ✅ |
+| Open windows/render | ❌ (macOS) | ✅ |
+| Modify running game | ❌ | ✅ |
+| Hot-reload functions | ❌ | ✅ |
 
 ## Available Examples
 

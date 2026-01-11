@@ -85,12 +85,12 @@
            (p/shell "clj"))}
 
   nrepl
-  {:doc "Start nREPL server on port 7888 for editor connection"
+  {:doc "Start nREPL server on port 7889 for non-GUI work (games use 7888)"
    :task (do
            (header "🔧 Starting nREPL Server")
-           (info "nREPL listening on port 7888")
-           (info "Connect your editor (Calva/Cursive) to this port")
-           (p/shell "clj" "-M:dev"))}
+           (info "nREPL listening on port 7889 (standalone, non-GUI work)")
+           (info "For live game dev: run a game first, connect to port 7888")
+           (p/shell "clojure" "-M:dev"))}
 
   ;; =============================================================================
   ;; 🔍 Linting (clj-kondo)
@@ -403,7 +403,12 @@ echo \"✅ Lint check passed!\"
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
-           (println "   bb nrepl            Start nREPL on port 7888")
+           (println "   bb nrepl            Start nREPL on port 7889 (non-GUI)")
+           (println "")
+           (println (color magenta "🎮 Live Game Dev (recommended):"))
+           (println "   1. bb asteroids     Start game (nREPL on 7888)")
+           (println "   2. Connect editor to localhost:7888")
+           (println "   3. Modify code live while game runs!")
            (println)
            (println (color yellow "🔍 Code Quality:"))
            (println "   bb check            ⭐ Fast check (compile + lint)")
