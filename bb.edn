@@ -1,0 +1,435 @@
+{:min-bb-version "1.3.0"
+
+ :tasks
+ {:requires ([babashka.process :as p]
+             [babashka.fs :as fs]
+             [clojure.string :as str])
+
+  :init
+  (do
+    (def bold "\033[1m")
+    (def green "\033[0;32m")
+    (def yellow "\033[1;33m")
+    (def red "\033[0;31m")
+    (def cyan "\033[0;36m")
+    (def magenta "\033[0;35m")
+    (def reset "\033[0m")
+
+    (defn color [c text] (str c text reset))
+    (defn step [n text] (println (color yellow (str "Step " n ":")) text))
+    (defn success [text] (println (color green (str "✅ " text))))
+    (defn error-msg [text] (println (color red (str "❌ " text))))
+    (defn info [text] (println (color cyan (str "ℹ️  " text))))
+    (defn warn [text] (println (color yellow (str "⚠️  " text))))
+    (defn header [text]
+      (println)
+      (println (color bold text))
+      (println (apply str (repeat (count text) "=")))))
+
+  ;; =============================================================================
+  ;; 🎮 Game Examples - Run with: bb <game-name>
+  ;; =============================================================================
+
+  hello-world
+  {:doc "🎮 Run Hello World example (basic window test)"
+   :task (do
+           (header "🎮 Running Hello World")
+           (info "Basic window with text - good for testing setup")
+           (p/shell "clj" "-M:hello-world"))}
+
+  pong
+  {:doc "🎮 Run Pong - classic two-player paddle game"
+   :task (do
+           (header "🏓 Running Pong")
+           (info "Controls: W/S (left paddle), K/J (right paddle), Enter to start")
+           (p/shell "clj" "-M:pong"))}
+
+  asteroids
+  {:doc "🎮 Run Asteroids - shoot asteroids and survive"
+   :task (do
+           (header "🚀 Running Asteroids")
+           (info "Controls: Arrow keys to move, Space to shoot")
+           (p/shell "clj" "-M:asteroids"))}
+
+  asteroids2
+  {:doc "🎮 Run Asteroids 2 - alternate version"
+   :task (do
+           (header "🚀 Running Asteroids 2")
+           (info "Controls: Arrow keys to move, Space to shoot")
+           (p/shell "clj" "-M:asteroids2"))}
+
+  tetris
+  {:doc "🎮 Run Tetris - block-stacking puzzle game"
+   :task (do
+           (header "🧱 Running Tetris")
+           (info "Controls: Arrow keys to move/rotate, Space to drop")
+           (p/shell "clj" "-M:tetris"))}
+
+  vampire-survivors
+  {:doc "🎮 Run Vampire Survivors - survival action game"
+   :task (do
+           (header "🧛 Running Vampire Survivors")
+           (p/shell "clj" "-M:vampire-survivors"))}
+
+  ;; =============================================================================
+  ;; 🔧 Development
+  ;; =============================================================================
+
+  repl
+  {:doc "Start Clojure REPL for interactive development"
+   :override-builtin true
+   :task (do
+           (header "🔧 Starting Clojure REPL")
+           (info "Use (require '[examples.asteroids :as game]) then (game/-main)")
+           (p/shell "clj"))}
+
+  nrepl
+  {:doc "Start nREPL server on port 7888 for editor connection"
+   :task (do
+           (header "🔧 Starting nREPL Server")
+           (info "nREPL listening on port 7888")
+           (info "Connect your editor (Calva/Cursive) to this port")
+           (p/shell "clj" "-M:dev"))}
+
+  ;; =============================================================================
+  ;; 🔍 Linting (clj-kondo)
+  ;; =============================================================================
+
+  lint
+  {:doc "Run clj-kondo linter on source files"
+   :task (do
+           (header "🔍 Running clj-kondo Linter")
+           (let [{:keys [exit]} (p/shell {:continue true} "clj-kondo" "--lint" "src")]
+             (if (zero? exit)
+               (success "No lint errors!")
+               (System/exit exit))))}
+
+  ;; =============================================================================
+  ;; 🎨 LSP Tasks (clojure-lsp)
+  ;; =============================================================================
+
+  lsp:format
+  {:doc "Format all Clojure files"
+   :task (do
+           (header "🎨 Formatting Code")
+           (let [{:keys [exit]} (p/shell {:continue true}
+                                         "clojure-lsp" "format"
+                                         "--project-root" (str (fs/cwd)))]
+             (if (zero? exit)
+               (success "Code formatted!")
+               (do
+                 (error-msg "Formatting failed")
+                 (System/exit exit)))))}
+
+  lsp:format-check
+  {:doc "Check formatting without making changes (dry run)"
+   :task (do
+           (header "🔍 Checking Code Formatting")
+           (let [{:keys [exit]} (p/shell {:continue true}
+                                         "clojure-lsp" "format" "--dry"
+                                         "--project-root" (str (fs/cwd)))]
+             (if (zero? exit)
+               (success "All files properly formatted!")
+               (do
+                 (warn "Files need formatting (see diff above)")
+                 (info "Run 'bb lsp:format' to fix")
+                 (System/exit 1)))))}
+
+  lsp:clean-ns
+  {:doc "Clean and organize ns forms"
+   :task (do
+           (header "🧹 Cleaning Namespace Forms")
+           (let [{:keys [exit]} (p/shell {:continue true}
+                                         "clojure-lsp" "clean-ns"
+                                         "--project-root" (str (fs/cwd)))]
+             (if (zero? exit)
+               (success "Namespaces cleaned!")
+               (do
+                 (error-msg "clean-ns failed")
+                 (System/exit exit)))))}
+
+  lsp:clean-ns-check
+  {:doc "Check ns forms without making changes (dry run)"
+   :task (do
+           (header "🔍 Checking Namespace Forms")
+           (let [{:keys [exit]} (p/shell {:continue true}
+                                         "clojure-lsp" "clean-ns" "--dry"
+                                         "--project-root" (str (fs/cwd)))]
+             (if (zero? exit)
+               (success "All namespace forms are clean!")
+               (do
+                 (warn "Namespaces need cleaning (see diff above)")
+                 (info "Run 'bb lsp:clean-ns' to fix")
+                 (System/exit exit)))))}
+
+  lsp:diagnostics
+  {:doc "Run clojure-lsp diagnostics"
+   :task (do
+           (header "🔬 Running LSP Diagnostics")
+           (let [{:keys [exit]} (p/shell {:continue true}
+                                         "clojure-lsp" "diagnostics"
+                                         "--project-root" (str (fs/cwd)))]
+             (if (zero? exit)
+               (success "No diagnostics found!")
+               (do
+                 (warn "Diagnostics found (see above)")
+                 (System/exit exit)))))}
+
+  lsp:check
+  {:doc "Run all LSP checks (format + clean-ns + diagnostics) - dry run"
+   :task (do
+           (header "🔍 Running All LSP Checks")
+           (step 1 "Checking code formatting...")
+           (let [{:keys [exit]} (p/shell {:continue true}
+                                         "clojure-lsp" "format" "--dry"
+                                         "--project-root" (str (fs/cwd)))]
+             (when-not (zero? exit)
+               (warn "Formatting issues found")
+               (info "Run 'bb lsp:format' to fix")))
+           (println)
+           (step 2 "Checking namespace forms...")
+           (let [{:keys [exit]} (p/shell {:continue true}
+                                         "clojure-lsp" "clean-ns" "--dry"
+                                         "--project-root" (str (fs/cwd)))]
+             (when-not (zero? exit)
+               (warn "Namespace issues found")
+               (info "Run 'bb lsp:clean-ns' to fix")))
+           (println)
+           (step 3 "Running diagnostics...")
+           (let [{:keys [exit]} (p/shell {:continue true}
+                                         "clojure-lsp" "diagnostics"
+                                         "--project-root" (str (fs/cwd)))]
+             (if (zero? exit)
+               (success "All LSP checks passed!")
+               (do
+                 (warn "Some issues found (see above)")
+                 (System/exit 1)))))}
+
+  lsp:fix
+  {:doc "Fix all auto-fixable issues (format + clean-ns)"
+   :task (do
+           (header "🔧 Fixing Code with LSP")
+           (step 1 "Formatting code...")
+           (p/shell {:continue true}
+                    "clojure-lsp" "format"
+                    "--project-root" (str (fs/cwd)))
+           (println)
+           (step 2 "Cleaning namespaces...")
+           (p/shell {:continue true}
+                    "clojure-lsp" "clean-ns"
+                    "--project-root" (str (fs/cwd)))
+           (println)
+           (success "All auto-fixes applied!")
+           (info "Run 'bb lsp:diagnostics' to check remaining issues"))}
+
+  ;; =============================================================================
+  ;; ✅ Code Quality Checks
+  ;; =============================================================================
+
+  check
+  {:doc "⭐ Fast checks (compile + lint) - use before committing"
+   :task (do
+           (header "🔍 Running Fast Checks")
+           (step 1 "Compile check...")
+           (p/shell "clj" "-M" "-e" "(require 'examples.asteroids)")
+           (println)
+           (step 2 "Lint check...")
+           (let [{:keys [exit]} (p/shell {:continue true} "clj-kondo" "--lint" "src")]
+             (println)
+             (if (zero? exit)
+               (success "All fast checks passed!")
+               (do
+                 (warn "Lint warnings found (see above)")
+                 (System/exit exit)))))}
+
+  check:full
+  {:doc "Comprehensive checks (compile + lint + LSP format + clean-ns)"
+   :task (do
+           (header "🔍 Running Comprehensive Checks")
+           (step 1 "Checking compilation...")
+           (p/shell "clj" "-M" "-e" "(require 'examples.asteroids)")
+           (println)
+           (step 2 "Running clj-kondo lint...")
+           (let [{:keys [exit]} (p/shell {:continue true} "clj-kondo" "--lint" "src")]
+             (when-not (zero? exit)
+               (warn "Lint warnings found")))
+           (println)
+           (step 3 "Checking code formatting...")
+           (let [{:keys [exit]} (p/shell {:continue true}
+                                         "clojure-lsp" "format" "--dry"
+                                         "--project-root" (str (fs/cwd)))]
+             (when-not (zero? exit)
+               (warn "Formatting issues found")
+               (info "Run 'bb lsp:format' to fix")))
+           (println)
+           (step 4 "Checking namespace forms...")
+           (let [{:keys [exit]} (p/shell {:continue true}
+                                         "clojure-lsp" "clean-ns" "--dry"
+                                         "--project-root" (str (fs/cwd)))]
+             (when-not (zero? exit)
+               (warn "Namespace issues found")
+               (info "Run 'bb lsp:clean-ns' to fix")))
+           (println)
+           (success "All comprehensive checks complete!")
+           (info "Fix issues with 'bb lsp:fix' if needed"))}
+
+  ;; =============================================================================
+  ;; 🪝 Git Hooks
+  ;; =============================================================================
+
+  hooks:install
+  {:doc "Install git pre-commit hook (lint only, fast)"
+   :task (do
+           (header "🪝 Installing Git Pre-commit Hook")
+           (let [hook-path ".git/hooks/pre-commit"
+                 hook-content "#!/bin/bash
+# raylib-clojure-playground pre-commit hook (fast - lint only)
+set -e
+echo \"🔍 Running pre-commit lint check...\"
+clj-kondo --lint src
+echo \"✅ Lint check passed!\"
+"]
+             (spit hook-path hook-content)
+             (p/shell "chmod" "+x" hook-path)
+             (success "Pre-commit hook installed (lint only)")
+             (info "Hook will run automatically on 'git commit'")
+             (info "To skip: git commit --no-verify")))}
+
+  hooks:uninstall
+  {:doc "Remove git pre-commit hook"
+   :task (let [hook-path ".git/hooks/pre-commit"]
+           (if (fs/exists? hook-path)
+             (do
+               (fs/delete hook-path)
+               (success "Pre-commit hook removed!"))
+             (info "No pre-commit hook found")))}
+
+  ;; =============================================================================
+  ;; 🧹 Build & Clean
+  ;; =============================================================================
+
+  clean
+  {:doc "Clean build artifacts"
+   :task (do
+           (header "🧹 Cleaning Build Artifacts")
+           (doseq [dir ["target" ".cpcache" "classes"]]
+             (when (fs/exists? dir)
+               (fs/delete-tree dir)
+               (println (str "  Removed " dir))))
+           (success "Cleaned!"))}
+
+  ;; =============================================================================
+  ;; 📦 Dependencies
+  ;; =============================================================================
+
+  deps
+  {:doc "Download and cache dependencies"
+   :task (do
+           (header "📦 Downloading Dependencies")
+           (p/shell "clj" "-P")
+           (p/shell "clj" "-P" "-M:dev")
+           (success "Dependencies cached!"))}
+
+  deps:tree
+  {:doc "Show dependency tree"
+   :task (do
+           (header "📦 Dependency Tree")
+           (p/shell "clj" "-Stree"))}
+
+  outdated
+  {:doc "Check for outdated dependencies"
+   :task (do
+           (header "🔍 Checking Outdated Dependencies")
+           (p/shell {:continue true}
+                    "clj" "-Sdeps"
+                    "{:deps {com.github.liquidz/antq {:mvn/version \"RELEASE\"}}}"
+                    "-M" "-m" "antq.core"))}
+
+  ;; =============================================================================
+  ;; 📊 Utilities
+  ;; =============================================================================
+
+  loc
+  {:doc "Count lines of code"
+   :task (let [clj-files (fs/glob "src" "**/*.clj")
+               lines (map (fn [f] (count (str/split-lines (slurp (str f))))) clj-files)
+               total (reduce + 0 lines)]
+           (header "📊 Lines of Code")
+           (println (str "  Total lines: " (color green (str total))))
+           (println (str "  Files: " (color cyan (str (count clj-files))))))}
+
+  tree
+  {:doc "Show project structure"
+   :task (do
+           (header "📁 Project Structure")
+           (p/shell "tree" "-I" "target|.git|.cpcache|classes" "-L" "3"))}
+
+  ;; =============================================================================
+  ;; 🍎 macOS Specific
+  ;; =============================================================================
+
+  macos:sign-lib
+  {:doc "Sign raylib library for macOS (fixes security warning)"
+   :task (do
+           (header "🍎 Signing Raylib Library for macOS")
+           (let [lib-path "libs/macos/libraylib.5.5.0.dylib"]
+             (if (fs/exists? lib-path)
+               (do
+                 (p/shell "codesign" "--force" "--sign" "-" lib-path)
+                 (success (str "Signed: " lib-path)))
+               (error-msg (str "Library not found: " lib-path)))))}
+
+  ;; =============================================================================
+  ;; ❓ Help
+  ;; =============================================================================
+
+  help
+  {:doc "Show help and available tasks"
+   :override-builtin true
+   :task (do
+           (println)
+           (println (color bold "🎮 Raylib Clojure Playground"))
+           (println "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+           (println "Game development experiments with Raylib in Clojure")
+           (println)
+           (println (color magenta "🎮 Run Games:"))
+           (println "   bb hello-world      Basic window test")
+           (println "   bb pong             Two-player paddle game")
+           (println "   bb asteroids        Shoot asteroids and survive")
+           (println "   bb asteroids2       Alternate asteroids version")
+           (println "   bb tetris           Block-stacking puzzle")
+           (println "   bb vampire-survivors  Survival action game")
+           (println)
+           (println (color cyan "🔧 Development:"))
+           (println "   bb repl             Start Clojure REPL")
+           (println "   bb nrepl            Start nREPL on port 7888")
+           (println)
+           (println (color yellow "🔍 Code Quality:"))
+           (println "   bb check            ⭐ Fast check (compile + lint)")
+           (println "   bb check:full       Comprehensive (+ LSP)")
+           (println "   bb lint             Run clj-kondo linter")
+           (println)
+           (println (color green "🎨 LSP (clojure-lsp):"))
+           (println "   bb lsp:format       Format all files")
+           (println "   bb lsp:format-check Check formatting (dry run)")
+           (println "   bb lsp:clean-ns     Clean namespace forms")
+           (println "   bb lsp:diagnostics  Find warnings/errors")
+           (println "   bb lsp:check        All LSP checks (dry run)")
+           (println "   bb lsp:fix          Auto-fix format + clean-ns")
+           (println)
+           (println (color cyan "🪝 Git Hooks:"))
+           (println "   bb hooks:install    Install pre-commit hook")
+           (println "   bb hooks:uninstall  Remove pre-commit hook")
+           (println)
+           (println (color yellow "📦 Dependencies:"))
+           (println "   bb deps             Download dependencies")
+           (println "   bb deps:tree        Show dependency tree")
+           (println "   bb outdated         Check outdated deps")
+           (println)
+           (println (color green "🛠️  Utilities:"))
+           (println "   bb clean            Clean build artifacts")
+           (println "   bb loc              Count lines of code")
+           (println "   bb tree             Show project structure")
+           (println "   bb macos:sign-lib   Sign raylib for macOS")
+           (println)
+           (println "Run 'bb tasks' for complete task list"))}}}
