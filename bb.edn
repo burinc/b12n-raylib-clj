@@ -227,6 +227,41 @@
            (info "SPACE: play sound (cycles through 10 slots) | ESC to exit")
            (p/shell "clojure" "-M:sound-multi"))}
 
+  mouse-wheel
+  {:doc "🖱️ Run Mouse Wheel - move box with mouse wheel"
+   :task (do
+           (header "🖱️ Running Mouse Wheel")
+           (info "Mouse wheel: move box up/down | ESC to exit")
+           (p/shell "clojure" "-M:mouse-wheel"))}
+
+  scissor-test
+  {:doc "✂️ Run Scissor Test - clip drawing to rectangle area"
+   :task (do
+           (header "✂️ Running Scissor Test")
+           (info "S: toggle scissor mode | Mouse: move scissor area | ESC to exit")
+           (p/shell "clojure" "-M:scissor-test"))}
+
+  random-values
+  {:doc "🎲 Run Random Values - raylib random number generation"
+   :task (do
+           (header "🎲 Running Random Values")
+           (info "Random value changes every 2 seconds | ESC to exit")
+           (p/shell "clojure" "-M:random-values"))}
+
+  camera-2d
+  {:doc "📷 Run 2D Camera - 2D camera with zoom/rotation"
+   :task (do
+           (header "📷 Running 2D Camera")
+           (info "LEFT/RIGHT: move | A/S: rotate | Mouse wheel: zoom | R: reset | ESC to exit")
+           (p/shell "clojure" "-M:camera-2d"))}
+
+  camera-3d-free
+  {:doc "🎥 Run 3D Camera Free - free-form 3D camera"
+   :task (do
+           (header "🎥 Running 3D Camera Free")
+           (info "Mouse: look | Wheel: zoom | Middle button: pan | Z: reset target | ESC to exit")
+           (p/shell "clojure" "-M:camera-3d-free"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -577,6 +612,11 @@ echo \"✅ Lint check passed!\"
            (println "   bb sound-loading    Basic WAV/OGG playback")
            (println "   bb music-stream     MP3 streaming with controls")
            (println "   bb sound-multi      Multiple sound instances")
+           (println "   bb mouse-wheel      Mouse wheel input")
+           (println "   bb scissor-test     Scissor mode clipping")
+           (println "   bb random-values    Random number generation")
+           (println "   bb camera-2d        2D camera with zoom/rotation")
+           (println "   bb camera-3d-free   Free-form 3D camera")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
