@@ -34,27 +34,48 @@
 
 ;; Color palette - all raylib colors with their names
 (def color-palette
-  [{:name "DARKGRAY" :color colors/darkgray}
-   {:name "MAROON" :color colors/maroon}
-   {:name "ORANGE" :color colors/orange}
-   {:name "DARKGREEN" :color colors/darkgreen}
-   {:name "DARKBLUE" :color colors/darkblue}
-   {:name "DARKPURPLE" :color colors/darkpurple}
-   {:name "DARKBROWN" :color colors/darkbrown}
-   {:name "GRAY" :color colors/gray}
-   {:name "RED" :color colors/red}
-   {:name "GOLD" :color colors/gold}
-   {:name "LIME" :color colors/lime}
-   {:name "BLUE" :color colors/blue}
-   {:name "VIOLET" :color colors/violet}
-   {:name "BROWN" :color colors/brown}
-   {:name "LIGHTGRAY" :color colors/lightgray}
-   {:name "PINK" :color colors/pink}
-   {:name "YELLOW" :color colors/yellow}
-   {:name "GREEN" :color colors/green}
-   {:name "SKYBLUE" :color colors/skyblue}
-   {:name "PURPLE" :color colors/purple}
-   {:name "BEIGE" :color colors/beige}])
+  [{:name "DARKGRAY"
+    :color colors/darkgray}
+   {:name "MAROON"
+    :color colors/maroon}
+   {:name "ORANGE"
+    :color colors/orange}
+   {:name "DARKGREEN"
+    :color colors/darkgreen}
+   {:name "DARKBLUE"
+    :color colors/darkblue}
+   {:name "DARKPURPLE"
+    :color colors/darkpurple}
+   {:name "DARKBROWN"
+    :color colors/darkbrown}
+   {:name "GRAY"
+    :color colors/gray}
+   {:name "RED"
+    :color colors/red}
+   {:name "GOLD"
+    :color colors/gold}
+   {:name "LIME"
+    :color colors/lime}
+   {:name "BLUE"
+    :color colors/blue}
+   {:name "VIOLET"
+    :color colors/violet}
+   {:name "BROWN"
+    :color colors/brown}
+   {:name "LIGHTGRAY"
+    :color colors/lightgray}
+   {:name "PINK"
+    :color colors/pink}
+   {:name "YELLOW"
+    :color colors/yellow}
+   {:name "GREEN"
+    :color colors/green}
+   {:name "SKYBLUE"
+    :color colors/skyblue}
+   {:name "PURPLE"
+    :color colors/purple}
+   {:name "BEIGE"
+    :color colors/beige}])
 
 (defn calc-rect-position
   "Calculate rectangle position for index i"
@@ -63,7 +84,10 @@
         row (quot i COLS)
         x (+ 20 (* col (+ RECT_SIZE RECT_SPACING)))
         y (+ 80 (* row (+ RECT_SIZE RECT_SPACING)))]
-    {:x x :y y :width RECT_SIZE :height RECT_SIZE}))
+    {:x x
+     :y y
+     :width RECT_SIZE
+     :height RECT_SIZE}))
 
 (defn initial-state []
   {:exit? false
@@ -78,7 +102,11 @@
 
 (defn point-in-rect?
   "Check if point is inside rectangle"
-  [{px :x py :y} {rx :x ry :y rw :width rh :height}]
+  [{px :x
+    py :y} {rx :x
+            ry :y
+            rw :width
+            rh :height}]
   (and (>= px rx) (<= px (+ rx rw))
        (>= py ry) (<= py (+ ry rh))))
 

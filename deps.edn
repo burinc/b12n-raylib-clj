@@ -103,4 +103,10 @@
   {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
               "-XstartOnFirstThread"
               "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
-   :main-opts ["-m" "examples.logo-anim"]}}}
+   :main-opts ["-m" "examples.logo-anim"]}
+
+  :split-screen-3d
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.split-screen-3d"]}}}

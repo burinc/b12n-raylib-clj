@@ -44,7 +44,8 @@
 ;; Screen Update Functions
 ;; =============================================================================
 
-(defn update-logo [{:keys [frames-counter] :as game}]
+(defn update-logo [{:keys [frames-counter]
+                    :as game}]
   (let [new-frames (inc frames-counter)]
     (if (> new-frames 120) ;; Wait 2 seconds (120 frames at 60fps)
       (-> game
@@ -93,7 +94,8 @@
   (rtd/draw-text! "GAMEPLAY SCREEN" 20 20 40 colors/maroon)
   (rtd/draw-text! "PRESS ENTER to JUMP to ENDING SCREEN" 130 220 20 colors/maroon)
   ;; Draw some placeholder game elements
-  (rsb/draw-circle-v! {:x 400 :y 300} 50 colors/gold)
+  (rsb/draw-circle-v! {:x 400
+                       :y 300} 50 colors/gold)
   (rsb/draw-rectangle! 100 350 100 50 colors/skyblue)
   (rsb/draw-rectangle! 600 350 100 50 colors/orange))
 

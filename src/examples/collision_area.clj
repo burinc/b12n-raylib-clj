@@ -43,13 +43,16 @@
   {:exit? false
    :paused? false
    ;; Box A: Auto-moving box
-   :box-a {:x 10 :y (- (/ HEIGHT 2.0) (/ BOX_A_HEIGHT 2.0))
-           :width BOX_A_WIDTH :height BOX_A_HEIGHT}
+   :box-a {:x 10
+           :y (- (/ HEIGHT 2.0) (/ BOX_A_HEIGHT 2.0))
+           :width BOX_A_WIDTH
+           :height BOX_A_HEIGHT}
    :box-a-speed BOX_A_SPEED
    ;; Box B: Mouse-controlled box
    :box-b {:x (- (/ WIDTH 2.0) (/ BOX_B_WIDTH 2.0))
            :y (- (/ HEIGHT 2.0) (/ BOX_B_HEIGHT 2.0))
-           :width BOX_B_WIDTH :height BOX_B_HEIGHT}})
+           :width BOX_B_WIDTH
+           :height BOX_B_HEIGHT}})
 
 (def game-atom (atom (initial-state)))
 
@@ -60,8 +63,14 @@
 
 (defn rects-collide?
   "Check if two rectangles collide"
-  [{ax :x ay :y aw :width ah :height}
-   {bx :x by :y bw :width bh :height}]
+  [{ax :x
+    ay :y
+    aw :width
+    ah :height}
+   {bx :x
+    by :y
+    bw :width
+    bh :height}]
   (and (<= ax (+ bx bw))
        (>= (+ ax aw) bx)
        (<= ay (+ by bh))
@@ -69,15 +78,25 @@
 
 (defn get-collision-rect
   "Get the intersection rectangle of two colliding rectangles"
-  [{ax :x ay :y aw :width ah :height}
-   {bx :x by :y bw :width bh :height}]
+  [{ax :x
+    ay :y
+    aw :width
+    ah :height}
+   {bx :x
+    by :y
+    bw :width
+    bh :height}]
   (let [x (max ax bx)
         y (max ay by)
         right (min (+ ax aw) (+ bx bw))
         bottom (min (+ ay ah) (+ by bh))]
-    {:x x :y y :width (- right x) :height (- bottom y)}))
+    {:x x
+     :y y
+     :width (- right x)
+     :height (- bottom y)}))
 
-(defn update-box-a [{:keys [paused? box-a box-a-speed] :as game}]
+(defn update-box-a [{:keys [paused? box-a box-a-speed]
+                     :as game}]
   (if paused?
     game
     (let [new-x (+ (:x box-a) box-a-speed)
@@ -91,7 +110,8 @@
           (assoc-in [:box-a :x] final-x)
           (assoc :box-a-speed new-speed)))))
 
-(defn update-box-b [{:keys [box-b] :as game}]
+(defn update-box-b [{:keys [box-b]
+                     :as game}]
   (let [mouse-x (rcm/get-mouse-x)
         mouse-y (rcm/get-mouse-y)
         ;; Center box on mouse

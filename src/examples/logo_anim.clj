@@ -53,7 +53,8 @@
 
 ;; State machine update functions
 
-(defn update-blinking [{:keys [frames-counter] :as game}]
+(defn update-blinking [{:keys [frames-counter]
+                        :as game}]
   (let [new-frames (inc frames-counter)]
     (if (>= new-frames 120)
       (-> game
@@ -61,21 +62,24 @@
           (assoc :frames-counter 0))
       (assoc game :frames-counter new-frames))))
 
-(defn update-top-left [{:keys [top-width left-height] :as game}]
+(defn update-top-left [{:keys [top-width left-height]
+                        :as game}]
   (let [new-top (+ top-width 4)
         new-left (+ left-height 4)]
     (if (>= new-top LOGO_SIZE)
       (assoc game :state :bottom-right :top-width LOGO_SIZE :left-height LOGO_SIZE)
       (assoc game :top-width new-top :left-height new-left))))
 
-(defn update-bottom-right [{:keys [bottom-width right-height] :as game}]
+(defn update-bottom-right [{:keys [bottom-width right-height]
+                            :as game}]
   (let [new-bottom (+ bottom-width 4)
         new-right (+ right-height 4)]
     (if (>= new-bottom LOGO_SIZE)
       (assoc game :state :letters :bottom-width LOGO_SIZE :right-height LOGO_SIZE)
       (assoc game :bottom-width new-bottom :right-height new-right))))
 
-(defn update-letters [{:keys [frames-counter letters-count alpha] :as game}]
+(defn update-letters [{:keys [frames-counter letters-count alpha]
+                       :as game}]
   (let [new-frames (inc frames-counter)
         ;; Every 12 frames, add a letter
         [new-letters new-frames-reset]
@@ -96,7 +100,8 @@
     (initial-state)
     game))
 
-(defn update-animation [{:keys [state] :as game}]
+(defn update-animation [{:keys [state]
+                         :as game}]
   (case state
     :blinking (update-blinking game)
     :top-left (update-top-left game)
@@ -119,7 +124,10 @@
 (defn fade-color
   "Create a faded version of a color"
   [{:keys [r g b]} alpha]
-  {:r r :g g :b b :a (int (* 255 alpha))})
+  {:r r
+   :g g
+   :b b
+   :a (int (* 255 alpha))})
 
 (defn draw [{:keys [state frames-counter letters-count
                     top-width left-height bottom-width right-height

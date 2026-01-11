@@ -40,7 +40,8 @@
   (rct/set-target-fps! 60)
   (debug-stats/enable!))
 
-(defn handle-input [{:keys [ball-x ball-y] :as game}]
+(defn handle-input [{:keys [ball-x ball-y]
+                     :as game}]
   (let [;; Calculate new position based on arrow key input
         new-x (cond-> ball-x
                 (rck/is-key-down? (:right enums/keyboard-key)) (+ MOVE_SPEED)
@@ -64,7 +65,8 @@
   (rcd/clear-background! colors/raywhite)
 
   ;; Draw the ball
-  (rsb/draw-circle-v! {:x ball-x :y ball-y} BALL_RADIUS colors/maroon)
+  (rsb/draw-circle-v! {:x ball-x
+                       :y ball-y} BALL_RADIUS colors/maroon)
 
   ;; Draw instructions
   (rtd/draw-text! "Move the ball with ARROW KEYS" 10 10 20 colors/darkgray)

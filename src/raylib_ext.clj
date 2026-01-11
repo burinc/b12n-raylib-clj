@@ -89,3 +89,9 @@
   {:arglists '([texture source dest origin rotation tint])}
   "DrawTexturePro"
   [::rs/texture ::rectangle ::rectangle ::rs/vector-2 ::mem/float ::rs/color] ::mem/void)
+
+(defcfn draw-texture-rec!
+  "Draw a part of a texture defined by a rectangle"
+  {:arglists '([texture source position tint])}
+  "DrawTextureRec"
+  [::rs/texture ::rectangle ::rs/vector-2 ::rs/color] ::mem/void)

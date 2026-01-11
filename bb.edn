@@ -129,6 +129,13 @@
            (info "Watch the raylib logo animate, R to replay")
            (p/shell "clojure" "-M:logo-anim"))}
 
+  split-screen-3d
+  {:doc "🎮 Run Split Screen 3D - two-player 3D camera demo"
+   :task (do
+           (header "🎮 Running Split Screen 3D")
+           (info "Player1: W/S | Player2: UP/DOWN")
+           (p/shell "clojure" "-M:split-screen-3d"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -465,6 +472,7 @@ echo \"✅ Lint check passed!\"
            (println "   bb collision-area   Collision detection demo")
            (println "   bb colors-palette   Raylib color showcase")
            (println "   bb logo-anim        Logo animation demo")
+           (println "   bb split-screen-3d  Two-player 3D split screen")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")

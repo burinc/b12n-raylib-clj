@@ -113,7 +113,8 @@
   (rcd/clear-background! colors/raywhite)
 
   ;; Draw the ball
-  (rsb/draw-circle-v! {:x ball-x :y ball-y} BALL_RADIUS colors/maroon)
+  (rsb/draw-circle-v! {:x ball-x
+                       :y ball-y} BALL_RADIUS colors/maroon)
 
   ;; Draw instructions
   (rtd/draw-text! "PRESS SPACE to PAUSE BALL MOVEMENT" 10 (- HEIGHT 25) 20 colors/lightgray)

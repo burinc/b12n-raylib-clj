@@ -85,7 +85,8 @@
   (rcd/clear-background! colors/raywhite)
 
   ;; Draw the ball at mouse position
-  (rsb/draw-circle-v! {:x ball-x :y ball-y} BALL_RADIUS ball-color)
+  (rsb/draw-circle-v! {:x ball-x
+                       :y ball-y} BALL_RADIUS ball-color)
 
   ;; Draw instructions
   (rtd/draw-text! "Move ball with mouse, click to change color" 10 10 20 colors/darkgray)

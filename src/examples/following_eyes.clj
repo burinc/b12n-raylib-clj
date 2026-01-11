@@ -34,11 +34,15 @@
   (let [center-y (/ HEIGHT 2.0)]
     {:exit? false
      ;; Eye sclera (white part) positions - fixed
-     :left-sclera {:x (- (/ WIDTH 2.0) 100) :y center-y}
-     :right-sclera {:x (+ (/ WIDTH 2.0) 100) :y center-y}
+     :left-sclera {:x (- (/ WIDTH 2.0) 100)
+                   :y center-y}
+     :right-sclera {:x (+ (/ WIDTH 2.0) 100)
+                    :y center-y}
      ;; Iris positions - will follow mouse
-     :left-iris {:x (- (/ WIDTH 2.0) 100) :y center-y}
-     :right-iris {:x (+ (/ WIDTH 2.0) 100) :y center-y}}))
+     :left-iris {:x (- (/ WIDTH 2.0) 100)
+                 :y center-y}
+     :right-iris {:x (+ (/ WIDTH 2.0) 100)
+                  :y center-y}}))
 
 (def game-atom (atom (initial-state)))
 
@@ -72,11 +76,14 @@
             angle (Math/atan2 dy dx)
             constrained-x (+ (:x sclera-center) (* max-distance (Math/cos angle)))
             constrained-y (+ (:y sclera-center) (* max-distance (Math/sin angle)))]
-        {:x constrained-x :y constrained-y}))))
+        {:x constrained-x
+         :y constrained-y}))))
 
-(defn update-eyes [{:keys [left-sclera right-sclera] :as game}]
+(defn update-eyes [{:keys [left-sclera right-sclera]
+                    :as game}]
   (let [mouse-pos (rcm/get-mouse-position)
-        mouse {:x (:x mouse-pos) :y (:y mouse-pos)}
+        mouse {:x (:x mouse-pos)
+               :y (:y mouse-pos)}
         ;; Calculate constrained iris positions
         left-iris (constrain-iris-to-sclera mouse left-sclera)
         right-iris (constrain-iris-to-sclera mouse right-sclera)]
