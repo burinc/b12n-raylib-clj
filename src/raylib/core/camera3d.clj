@@ -104,3 +104,9 @@
   "Check if cursor is not visible"
   "IsCursorHidden"
   [] ::mem/byte)
+
+(defcfn get-world-to-screen
+  "Get the screen space position for a 3D world space position"
+  {:arglists '([position camera])}
+  "GetWorldToScreen"
+  [::rs/vector-3 ::camera3d] ::rs/vector-2)

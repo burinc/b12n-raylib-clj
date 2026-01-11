@@ -171,6 +171,13 @@
            (info "Touch/Mouse gestures | Click buttons to toggle log modes | Q to exit")
            (p/shell "clojure" "-M:gestures-testbed"))}
 
+  world-screen
+  {:doc "🎯 Run World Screen - 3D to 2D coordinate conversion"
+   :task (do
+           (header "🎯 Running World Screen")
+           (info "Mouse: rotate camera | Wheel: zoom | ESC to exit")
+           (p/shell "clojure" "-M:world-screen"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -513,6 +520,7 @@ echo \"✅ Lint check passed!\"
            (println "   bb input-gamepad    Gamepad visualization")
            (println "   bb sprite-animation Spritesheet animation")
            (println "   bb gestures-testbed Touch gesture detection")
+           (println "   bb world-screen     3D to 2D coordinates")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
