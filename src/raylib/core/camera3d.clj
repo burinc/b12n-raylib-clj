@@ -134,8 +134,8 @@
   "Update camera position for selected mode. Returns updated camera map.
    mode: CAMERA_FREE, CAMERA_ORBITAL, CAMERA_FIRST_PERSON, CAMERA_THIRD_PERSON"
   [camera mode]
-  (let [seg (mem/alloc-instance ::camera3d)
-        _ (mem/serialize camera ::camera3d seg)
-        _ (update-camera! seg mode)
-        result (mem/deserialize seg ::camera3d)]
-    result))
+  (let [arena (mem/confined-arena)
+        seg (mem/alloc-instance ::camera3d arena)]
+    (mem/serialize-into camera ::camera3d seg arena)
+    (update-camera! seg mode)
+    (mem/deserialize-from seg ::camera3d)))
