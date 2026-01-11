@@ -199,6 +199,13 @@
            (info "Left-click: select cube | Right-click: toggle camera | ESC to exit")
            (p/shell "clojure" "-M:picking-3d"))}
 
+  audio-module
+  {:doc "🎵 Run Audio Module - music visualization with animated circles"
+   :task (do
+           (header "🎵 Running Audio Module")
+           (info "SPACE: restart | P: pause/resume | UP/DOWN: change speed | ESC to exit")
+           (p/shell "clojure" "-M:audio-module"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -545,6 +552,7 @@ echo \"✅ Lint check passed!\"
            (println "   bb camera-fps       Advanced FPS camera")
            (println "   bb basic-lighting   Shader-based lighting")
            (println "   bb picking-3d       Ray casting object selection")
+           (println "   bb audio-module     Music visualization")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")

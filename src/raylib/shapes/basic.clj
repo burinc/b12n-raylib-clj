@@ -21,4 +21,10 @@
   "DrawRectangle"
   [::mem/int ::mem/int ::mem/int ::mem/int ::rs/color] ::mem/void)
 
+(defcfn draw-rectangle-lines!
+  "Draw rectangle outline"
+  {:arglists '([x y width height color])}
+  "DrawRectangleLines"
+  [::mem/int ::mem/int ::mem/int ::mem/int ::rs/color] ::mem/void)
+
 ; ...
