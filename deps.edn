@@ -1,0 +1,46 @@
+{:paths ["src" "resources"]
+
+ :deps {org.clojure/clojure {:mvn/version "1.12.0"}
+        org.clojure/tools.logging {:mvn/version "1.3.0"}
+        org.suskalo/coffi {:mvn/version "1.0.615"}
+        insn/insn {:mvn/version "0.5.7"}}
+
+ ;; JVM options for native access (required for coffi/Panama FFI)
+ ;; Note: -XstartOnFirstThread is required for macOS GUI/OpenGL
+ :jvm-opts ["--enable-native-access=ALL-UNNAMED"
+            "-XstartOnFirstThread"
+            "-Djava.library.path=libs:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+
+ :aliases
+ {;; Development REPL with nREPL
+  :dev
+  {:extra-deps {nrepl/nrepl {:mvn/version "1.3.0"}}
+   :main-opts ["-m" "nrepl.cmdline"
+               "--port" "7888"]}
+
+  ;; Run examples - usage: clj -M:hello-world
+  :hello-world
+  {:main-opts ["-m" "examples.hello-world"]}
+
+  :pong
+  {:main-opts ["-m" "examples.pong"]}
+
+  :asteroids
+  {:main-opts ["-m" "examples.asteroids"]}
+
+  :asteroids2
+  {:main-opts ["-m" "examples.asteroids2"]}
+
+  :tetris
+  {:main-opts ["-m" "examples.tetris"]}
+
+  :vampire-survivors
+  {:main-opts ["-m" "examples.vampire-survivors"]}
+
+  ;; Build uberjar (optional)
+  :uberjar
+  {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.303"}}
+   :exec-fn hf.depstar/uberjar
+   :exec-args {:jar "target/raylib-playground.jar"
+               :aot true
+               :main-class examples.asteroids}}}}
