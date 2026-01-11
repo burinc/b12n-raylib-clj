@@ -249,11 +249,14 @@ flowchart TB
 | Command | Description |
 |---------|-------------|
 | `bb hello-world` | Basic window test - verify your setup works |
-| `bb pong` | Classic two-player paddle game |
-| `bb asteroids` | Shoot asteroids and survive |
-| `bb asteroids2` | Alternate asteroids version |
-| `bb tetris` | Block-stacking puzzle game |
-| `bb vampire-survivors` | Survival action game |
+| `bb bouncing-ball` | Simple physics with gravity toggle (⭐ Beginner) |
+| `bb screen-manager` | State machine for game screens (⭐ Beginner) |
+| `bb pong` | Classic two-player paddle game (⭐⭐ Easy) |
+| `bb following-eyes` | Eyes that follow mouse cursor (⭐⭐ Easy) |
+| `bb asteroids` | Shoot asteroids and survive (⭐⭐⭐ Intermediate) |
+| `bb asteroids2` | Alternate asteroids version (⭐⭐⭐ Intermediate) |
+| `bb tetris` | Block-stacking puzzle game (⭐⭐⭐ Intermediate) |
+| `bb vampire-survivors` | Survival action game (⭐⭐⭐⭐ Advanced) |
 
 ### 🔧 Development
 
@@ -455,7 +458,10 @@ colors/red
 | Example | Description | Complexity |
 |---------|-------------|------------|
 | Hello World | Basic window with text | ⭐ Beginner |
+| Bouncing Ball | Simple physics with gravity toggle | ⭐ Beginner |
+| Screen Manager | State machine for game screens | ⭐ Beginner |
 | Pong | Two-player paddle game | ⭐⭐ Easy |
+| Following Eyes | Eyes that follow mouse cursor | ⭐⭐ Easy |
 | Asteroids | Shoot asteroids and survive | ⭐⭐⭐ Intermediate |
 | Asteroids 2 | Alternate version with variations | ⭐⭐⭐ Intermediate |
 | Tetris | Block-stacking puzzle | ⭐⭐⭐ Intermediate |
@@ -478,6 +484,28 @@ Most examples share these common controls:
 | W / S | Move left paddle up/down |
 | K / J | Move right paddle up/down |
 | Enter | Start game |
+
+### Bouncing Ball
+
+| Key | Action |
+|-----|--------|
+| Space | Pause/resume ball movement |
+| G | Toggle gravity on/off |
+| Q | Exit |
+
+### Following Eyes
+
+| Key | Action |
+|-----|--------|
+| Mouse | Move to make eyes follow |
+| Q | Exit |
+
+### Screen Manager
+
+| Key | Action |
+|-----|--------|
+| Enter | Navigate between screens |
+| Q | Exit |
 
 ### Asteroids
 
