@@ -113,3 +113,22 @@
   {:arglists '([hex-value])}
   "GetColor"
   [::mem/int] ::rs/color)
+
+;; Additional shape drawing functions
+(defcfn draw-circle-int!
+  "Draw a color-filled circle (int version)"
+  {:arglists '([center-x center-y radius color])}
+  "DrawCircle"
+  [::mem/int ::mem/int ::mem/float ::rs/color] ::mem/void)
+
+(defcfn draw-rectangle-rounded!
+  "Draw rectangle with rounded edges"
+  {:arglists '([rec roundness segments color])}
+  "DrawRectangleRounded"
+  [::rectangle ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-rectangle-rec!
+  "Draw a color-filled rectangle (Rectangle version)"
+  {:arglists '([rec color])}
+  "DrawRectangleRec"
+  [::rectangle ::rs/color] ::mem/void)

@@ -150,6 +150,13 @@
            (info "Cyberpunk parallax scene - Q to exit")
            (p/shell "clojure" "-M:background-scrolling"))}
 
+  input-gamepad
+  {:doc "🎮 Run Input Gamepad - gamepad visualization demo"
+   :task (do
+           (header "🎮 Running Input Gamepad")
+           (info "Connect gamepad | LEFT/RIGHT: switch | Q to exit")
+           (p/shell "clojure" "-M:input-gamepad"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -489,6 +496,7 @@ echo \"✅ Lint check passed!\"
            (println "   bb split-screen-3d  Two-player 3D split screen")
            (println "   bb first-person-3d  FPS camera demo")
            (println "   bb background-scrolling  Parallax scrolling")
+           (println "   bb input-gamepad    Gamepad visualization")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
