@@ -40,8 +40,10 @@
                    :a 255}]
         (recur (inc i)
                (+ spacing width)
-               (conj buildings {:rect {:x (float x) :y (float y)
-                                       :width (float width) :height (float height)}
+               (conj buildings {:rect {:x (float x)
+                                       :y (float y)
+                                       :width (float width)
+                                       :height (float height)}
                                 :color color}))))))
 
 (defn clamp [v min-v max-v]
@@ -52,11 +54,16 @@
   (rct/set-target-fps! 60)
 
   (let [buildings (generate-buildings)
-        initial-player {:x 400.0 :y 280.0 :width 40.0 :height 40.0}]
+        initial-player {:x 400.0
+                        :y 280.0
+                        :width 40.0
+                        :height 40.0}]
 
     (loop [player initial-player
-           camera {:offset {:x (/ screen-width 2.0) :y (/ screen-height 2.0)}
-                   :target {:x (+ (:x player) 20.0) :y (+ (:y player) 20.0)}
+           camera {:offset {:x (/ screen-width 2.0)
+                            :y (/ screen-height 2.0)}
+                   :target {:x (+ (:x player) 20.0)
+                            :y (+ (:y player) 20.0)}
                    :rotation 0.0
                    :zoom 1.0}]
       (if (rcw/window-should-close?)
@@ -69,7 +76,8 @@
               new-player (assoc player :x new-player-x)
 
               ;; Camera follows player
-              new-target {:x (+ (:x new-player) 20) :y (+ (:y new-player) 20)}
+              new-target {:x (+ (:x new-player) 20)
+                          :y (+ (:y new-player) 20)}
 
               ;; Camera rotation with A/S
               new-rotation (cond
@@ -108,8 +116,10 @@
             (rsb/draw-rectangle-rec! rect color))
 
           ;; Draw player
-          (rsb/draw-rectangle-rec! {:x (:x new-player) :y (:y new-player)
-                                    :width (:width new-player) :height (:height new-player)}
+          (rsb/draw-rectangle-rec! {:x (:x new-player)
+                                    :y (:y new-player)
+                                    :width (:width new-player)
+                                    :height (:height new-player)}
                                    colors/red)
 
           ;; Draw crosshair at camera target

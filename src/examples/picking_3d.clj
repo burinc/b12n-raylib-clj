@@ -23,32 +23,70 @@
 (def MOUSE_RIGHT 1)
 
 (def colors
-  {:raywhite {:r 245 :g 245 :b 245 :a 255}
-   :gray {:r 130 :g 130 :b 130 :a 255}
-   :darkgray {:r 80 :g 80 :b 80 :a 255}
-   :red {:r 230 :g 41 :b 55 :a 255}
-   :maroon {:r 190 :g 33 :b 55 :a 255}
-   :green {:r 0 :g 228 :b 48 :a 255}})
+  {:raywhite {:r 245
+              :g 245
+              :b 245
+              :a 255}
+   :gray {:r 130
+          :g 130
+          :b 130
+          :a 255}
+   :darkgray {:r 80
+              :g 80
+              :b 80
+              :a 255}
+   :red {:r 230
+         :g 41
+         :b 55
+         :a 255}
+   :maroon {:r 190
+            :g 33
+            :b 55
+            :a 255}
+   :green {:r 0
+           :g 228
+           :b 48
+           :a 255}})
 
 (defn make-camera []
-  {:position {:x 10.0 :y 10.0 :z 10.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 10.0
+              :y 10.0
+              :z 10.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rcc/CAMERA_PERSPECTIVE})
 
 (defn initial-state []
   {:camera (make-camera)
-   :cube-position {:x 0.0 :y 1.0 :z 0.0}
-   :cube-size {:x 2.0 :y 2.0 :z 2.0}
-   :ray {:position {:x 0.0 :y 0.0 :z 0.0}
-         :direction {:x 0.0 :y 0.0 :z 0.0}}
-   :collision {:hit 0 :distance 0.0
-               :point {:x 0.0 :y 0.0 :z 0.0}
-               :normal {:x 0.0 :y 0.0 :z 0.0}}
+   :cube-position {:x 0.0
+                   :y 1.0
+                   :z 0.0}
+   :cube-size {:x 2.0
+               :y 2.0
+               :z 2.0}
+   :ray {:position {:x 0.0
+                    :y 0.0
+                    :z 0.0}
+         :direction {:x 0.0
+                     :y 0.0
+                     :z 0.0}}
+   :collision {:hit 0
+               :distance 0.0
+               :point {:x 0.0
+                       :y 0.0
+                       :z 0.0}
+               :normal {:x 0.0
+                        :y 0.0
+                        :z 0.0}}
    :cursor-hidden false})
 
-(defn update-state [{:keys [camera cube-position cube-size ray collision cursor-hidden] :as state}]
+(defn update-state [{:keys [camera cube-position cube-size ray collision cursor-hidden]
+                     :as state}]
   (let [;; Toggle camera controls with right click
         toggle-cursor? (rcm/is-mouse-button-pressed? MOUSE_RIGHT)
         new-cursor-hidden (if toggle-cursor? (not cursor-hidden) cursor-hidden)
@@ -78,9 +116,14 @@
                   new-coll (rcol/get-ray-collision-box new-ray bbox)]
               [new-ray new-coll])
             ;; Clear selection
-            [ray {:hit 0 :distance 0.0
-                  :point {:x 0.0 :y 0.0 :z 0.0}
-                  :normal {:x 0.0 :y 0.0 :z 0.0}}])
+            [ray {:hit 0
+                  :distance 0.0
+                  :point {:x 0.0
+                          :y 0.0
+                          :z 0.0}
+                  :normal {:x 0.0
+                           :y 0.0
+                           :z 0.0}}])
           [ray collision])]
 
     (assoc state
@@ -90,7 +133,9 @@
            :cursor-hidden new-cursor-hidden)))
 
 (defn draw-scene! [{:keys [camera cube-position cube-size ray collision]}]
-  (let [{sx :x sy :y sz :z} cube-size
+  (let [{sx :x
+         sy :y
+         sz :z} cube-size
         hit? (not (zero? (:hit collision)))]
 
     (rcd/begin-drawing!)

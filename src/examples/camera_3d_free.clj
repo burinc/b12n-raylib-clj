@@ -24,12 +24,20 @@
   (rcw/init-window! screen-width screen-height "raylib [core] example - 3d camera free")
 
   ;; Define camera
-  (let [initial-camera {:position {:x 10.0 :y 10.0 :z 10.0}
-                        :target {:x 0.0 :y 0.0 :z 0.0}
-                        :up {:x 0.0 :y 1.0 :z 0.0}
+  (let [initial-camera {:position {:x 10.0
+                                   :y 10.0
+                                   :z 10.0}
+                        :target {:x 0.0
+                                 :y 0.0
+                                 :z 0.0}
+                        :up {:x 0.0
+                             :y 1.0
+                             :z 0.0}
                         :fovy 45.0
                         :projection rc3d/CAMERA_PERSPECTIVE}
-        cube-position {:x 0.0 :y 0.0 :z 0.0}]
+        cube-position {:x 0.0
+                       :y 0.0
+                       :z 0.0}]
 
     (rc3d/disable-cursor!) ; Lock cursor for camera control
     (rct/set-target-fps! 60)
@@ -42,7 +50,9 @@
 
               ;; Reset camera target on Z key
               final-camera (if (rck/is-key-pressed? (:z enums/keyboard-key))
-                             (assoc updated-camera :target {:x 0.0 :y 0.0 :z 0.0})
+                             (assoc updated-camera :target {:x 0.0
+                                                            :y 0.0
+                                                            :z 0.0})
                              updated-camera)]
 
           ;; Draw

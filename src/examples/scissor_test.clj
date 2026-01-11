@@ -55,7 +55,8 @@
           (rcd/end-scissor-mode!))
 
         ;; Draw scissor area outline
-        (rsb/draw-rectangle-lines-ex! {:x scissor-x :y scissor-y
+        (rsb/draw-rectangle-lines-ex! {:x scissor-x
+                                       :y scissor-y
                                        :width (float scissor-width)
                                        :height (float scissor-height)}
                                       1.0 colors/black)

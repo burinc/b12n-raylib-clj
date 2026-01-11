@@ -66,6 +66,14 @@
 ;; Helper to create a bounding box from position and size
 (defn make-bounding-box
   "Create a bounding box from center position and size"
-  [{px :x py :y pz :z} {sx :x sy :y sz :z}]
-  {:min {:x (- px (/ sx 2)) :y (- py (/ sy 2)) :z (- pz (/ sz 2))}
-   :max {:x (+ px (/ sx 2)) :y (+ py (/ sy 2)) :z (+ pz (/ sz 2))}})
+  [{px :x
+    py :y
+    pz :z} {sx :x
+            sy :y
+            sz :z}]
+  {:min {:x (- px (/ sx 2))
+         :y (- py (/ sy 2))
+         :z (- pz (/ sz 2))}
+   :max {:x (+ px (/ sx 2))
+         :y (+ py (/ sy 2))
+         :z (+ pz (/ sz 2))}})
