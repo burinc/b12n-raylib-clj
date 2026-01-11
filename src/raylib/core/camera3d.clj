@@ -74,3 +74,33 @@
   {:arglists '([center-pos radius color])}
   "DrawSphere"
   [::rs/vector-3 ::mem/float ::rs/color] ::mem/void)
+
+;; Camera mode constants (for UpdateCamera)
+(def CAMERA_CUSTOM 0)
+(def CAMERA_FREE 1)
+(def CAMERA_ORBITAL 2)
+(def CAMERA_FIRST_PERSON 3)
+(def CAMERA_THIRD_PERSON 4)
+
+;; Camera update function
+(defcfn update-camera!
+  "Update camera position for selected mode"
+  {:arglists '([camera mode])}
+  "UpdateCamera"
+  [::mem/pointer ::mem/int] ::mem/void)
+
+;; Cursor control functions
+(defcfn disable-cursor!
+  "Disables cursor (lock cursor)"
+  "DisableCursor"
+  [] ::mem/void)
+
+(defcfn enable-cursor!
+  "Enables cursor (unlock cursor)"
+  "EnableCursor"
+  [] ::mem/void)
+
+(defcfn is-cursor-hidden?
+  "Check if cursor is not visible"
+  "IsCursorHidden"
+  [] ::mem/byte)

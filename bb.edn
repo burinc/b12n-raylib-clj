@@ -136,6 +136,13 @@
            (info "Player1: W/S | Player2: UP/DOWN")
            (p/shell "clojure" "-M:split-screen-3d"))}
 
+  first-person-3d
+  {:doc "🎮 Run First Person 3D - FPS camera with multiple modes"
+   :task (do
+           (header "🎮 Running First Person 3D")
+           (info "WASD + Mouse | 1-4: Camera modes | P: Projection")
+           (p/shell "clojure" "-M:first-person-3d"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -473,6 +480,7 @@ echo \"✅ Lint check passed!\"
            (println "   bb colors-palette   Raylib color showcase")
            (println "   bb logo-anim        Logo animation demo")
            (println "   bb split-screen-3d  Two-player 3D split screen")
+           (println "   bb first-person-3d  FPS camera demo")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
