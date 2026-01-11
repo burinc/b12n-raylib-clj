@@ -1,27 +1,22 @@
 {:paths ["src" "resources"]
-
  :deps {org.clojure/clojure {:mvn/version "1.12.0"}
         org.clojure/tools.logging {:mvn/version "1.3.0"}
         org.suskalo/coffi {:mvn/version "1.0.615"}
-        insn/insn {:mvn/version "0.5.4"}}
+        insn/insn {:mvn/version "0.5.4"}
+        ;; nREPL for live development - games start embedded nREPL server
+        nrepl/nrepl {:mvn/version "1.3.0"}}
 
  :aliases
- {;; Base JVM options for native access (required for coffi/Panama FFI)
-  ;; Note: -XstartOnFirstThread is required for macOS GUI/OpenGL
-  :jvm-base
-  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
-              "-XstartOnFirstThread"
-              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]}
-
-  ;; Development REPL with nREPL
+ {;; Development REPL with nREPL
   :dev
   {:extra-deps {nrepl/nrepl {:mvn/version "1.3.0"}}
    :jvm-opts ["--enable-native-access=ALL-UNNAMED"
               "-XstartOnFirstThread"
               "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
-   :main-opts ["-m" "nrepl.cmdline" "--port" "7888"]}
+   :main-opts ["-m" "nrepl.cmdline" "--port" "9999"]}
 
-  ;; Run examples - usage: clj -M:hello-world
+  ;; Run examples - usage: clojure -M:hello-world
+  ;; NOTE: Use 'clojure' not 'clj' - GUI apps don't work with rlwrap
   :hello-world
   {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
               "-XstartOnFirstThread"
