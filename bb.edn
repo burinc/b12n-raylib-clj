@@ -157,6 +157,13 @@
            (info "Connect gamepad | LEFT/RIGHT: switch | Q to exit")
            (p/shell "clojure" "-M:input-gamepad"))}
 
+  sprite-animation
+  {:doc "🎮 Run Sprite Animation - spritesheet animation demo"
+   :task (do
+           (header "🏃 Running Sprite Animation")
+           (info "LEFT/RIGHT: adjust speed | Q to exit")
+           (p/shell "clojure" "-M:sprite-animation"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -497,6 +504,7 @@ echo \"✅ Lint check passed!\"
            (println "   bb first-person-3d  FPS camera demo")
            (println "   bb background-scrolling  Parallax scrolling")
            (println "   bb input-gamepad    Gamepad visualization")
+           (println "   bb sprite-animation Spritesheet animation")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
