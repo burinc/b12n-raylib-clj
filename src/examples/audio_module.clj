@@ -64,7 +64,8 @@
    :pitch 1.0
    :paused false})
 
-(defn update-state [{:keys [circles pitch paused] :as state} music]
+(defn update-state [{:keys [circles pitch paused]
+                     :as state} music]
   (let [;; Update music buffer
         _ (ra/update-music-stream! music)
 

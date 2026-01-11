@@ -1,0 +1,39 @@
+(ns raylib.utils
+  "Utility functions (random values, colors, misc)"
+  (:require
+   [raylib.core]
+   [raylib.structs :as rs]
+   [coffi.mem :as mem]
+   [coffi.ffi :refer [defcfn]]))
+
+;; Random value generation
+(defcfn get-random-value
+  "Get a random value between min and max (both included)"
+  {:arglists '([min max])}
+  "GetRandomValue"
+  [::mem/int ::mem/int] ::mem/int)
+
+(defcfn set-random-seed!
+  "Set the seed for the random number generator"
+  {:arglists '([seed])}
+  "SetRandomSeed"
+  [::mem/int] ::mem/void)
+
+;; Color utilities
+(defcfn fade
+  "Get color with alpha applied, alpha goes from 0.0f to 1.0f"
+  {:arglists '([color alpha])}
+  "Fade"
+  [::rs/color ::mem/float] ::rs/color)
+
+(defcfn color-to-int
+  "Get hexadecimal value for a Color"
+  {:arglists '([color])}
+  "ColorToInt"
+  [::rs/color] ::mem/int)
+
+(defcfn color-from-hsv
+  "Get a Color from HSV values, hue [0..360], saturation/value [0..1]"
+  {:arglists '([hue saturation value])}
+  "ColorFromHSV"
+  [::mem/float ::mem/float ::mem/float] ::rs/color)

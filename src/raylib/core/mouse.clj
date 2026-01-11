@@ -50,4 +50,14 @@
   "GetMouseDelta"
   [] ::rs/vector-2)
 
+(defcfn get-mouse-wheel-move
+  "Get mouse wheel movement for X or Y, whichever is larger"
+  "GetMouseWheelMove"
+  [] ::mem/float)
+
+(defcfn get-mouse-wheel-move-v
+  "Get mouse wheel movement for both X and Y"
+  "GetMouseWheelMoveV"
+  [] ::rs/vector-2)
+
 ; ...

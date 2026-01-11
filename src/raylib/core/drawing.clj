@@ -20,3 +20,14 @@
   "End canvas drawing and swap buffers (double buffering)"
   "EndDrawing"
   [] ::mem/void)
+
+(defcfn begin-scissor-mode!
+  "Begin scissor mode (define screen area for following drawing)"
+  {:arglists '([x y width height])}
+  "BeginScissorMode"
+  [::mem/int ::mem/int ::mem/int ::mem/int] ::mem/void)
+
+(defcfn end-scissor-mode!
+  "End scissor mode"
+  "EndScissorMode"
+  [] ::mem/void)

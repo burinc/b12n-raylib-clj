@@ -41,3 +41,10 @@
    [[:id ::mem/int]
     [:texture ::texture]
     [:depth ::texture]]])
+
+(defalias ::rectangle
+  [::mem/struct
+   [[:x ::mem/float]
+    [:y ::mem/float]
+    [:width ::mem/float]
+    [:height ::mem/float]]])

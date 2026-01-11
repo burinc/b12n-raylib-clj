@@ -128,3 +128,14 @@
   {:arglists '([position camera])}
   "GetWorldToScreen"
   [::rs/vector-3 ::camera3d] ::rs/vector-2)
+
+;; Helper function that updates camera and returns the new state
+(defn update-camera
+  "Update camera position for selected mode. Returns updated camera map.
+   mode: CAMERA_FREE, CAMERA_ORBITAL, CAMERA_FIRST_PERSON, CAMERA_THIRD_PERSON"
+  [camera mode]
+  (let [arena (mem/confined-arena)
+        seg (mem/alloc-instance ::camera3d arena)]
+    (mem/serialize-into camera ::camera3d seg arena)
+    (update-camera! seg mode)
+    (mem/deserialize-from seg ::camera3d)))
