@@ -143,6 +143,13 @@
            (info "WASD + Mouse | 1-4: Camera modes | P: Projection")
            (p/shell "clojure" "-M:first-person-3d"))}
 
+  background-scrolling
+  {:doc "🎮 Run Background Scrolling - parallax scrolling demo"
+   :task (do
+           (header "🌃 Running Background Scrolling")
+           (info "Cyberpunk parallax scene - Q to exit")
+           (p/shell "clojure" "-M:background-scrolling"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -481,6 +488,7 @@ echo \"✅ Lint check passed!\"
            (println "   bb logo-anim        Logo animation demo")
            (println "   bb split-screen-3d  Two-player 3D split screen")
            (println "   bb first-person-3d  FPS camera demo")
+           (println "   bb background-scrolling  Parallax scrolling")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")

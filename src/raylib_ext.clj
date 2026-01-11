@@ -95,3 +95,21 @@
   {:arglists '([texture source position tint])}
   "DrawTextureRec"
   [::rs/texture ::rectangle ::rs/vector-2 ::rs/color] ::mem/void)
+
+(defcfn draw-texture-ex!
+  "Draw a texture with extended parameters"
+  {:arglists '([texture position rotation scale tint])}
+  "DrawTextureEx"
+  [::rs/texture ::rs/vector-2 ::mem/float ::mem/float ::rs/color] ::mem/void)
+
+(defcfn unload-texture!
+  "Unload texture from GPU memory (VRAM)"
+  {:arglists '([texture])}
+  "UnloadTexture"
+  [::rs/texture] ::mem/void)
+
+(defcfn get-color
+  "Get Color structure from hexadecimal value"
+  {:arglists '([hex-value])}
+  "GetColor"
+  [::mem/int] ::rs/color)
