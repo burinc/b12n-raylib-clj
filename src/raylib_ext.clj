@@ -138,3 +138,33 @@
   {:arglists '([x y width height color])}
   "DrawRectangleLines"
   [::mem/int ::mem/int ::mem/int ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-circle-v!
+  "Draw a color-filled circle (Vector version)"
+  {:arglists '([center radius color])}
+  "DrawCircleV"
+  [::rs/vector-2 ::mem/float ::rs/color] ::mem/void)
+
+(defcfn draw-line-ex!
+  "Draw a line with thickness"
+  {:arglists '([start-pos end-pos thick color])}
+  "DrawLineEx"
+  [::rs/vector-2 ::rs/vector-2 ::mem/float ::rs/color] ::mem/void)
+
+(defcfn draw-ring!
+  "Draw ring"
+  {:arglists '([center inner-radius outer-radius start-angle end-angle segments color])}
+  "DrawRing"
+  [::rs/vector-2 ::mem/float ::mem/float ::mem/float ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn fade
+  "Get color with alpha applied"
+  {:arglists '([color alpha])}
+  "Fade"
+  [::rs/color ::mem/float] ::rs/color)
+
+(defcfn check-collision-point-rec?
+  "Check if point is inside rectangle"
+  {:arglists '([point rec])}
+  "CheckCollisionPointRec"
+  [::rs/vector-2 ::rectangle] ::mem/byte)

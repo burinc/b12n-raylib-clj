@@ -164,6 +164,13 @@
            (info "LEFT/RIGHT: adjust speed | Q to exit")
            (p/shell "clojure" "-M:sprite-animation"))}
 
+  gestures-testbed
+  {:doc "👆 Run Gestures Testbed - touch/mouse gesture detection"
+   :task (do
+           (header "👆 Running Gestures Testbed")
+           (info "Touch/Mouse gestures | Click buttons to toggle log modes | Q to exit")
+           (p/shell "clojure" "-M:gestures-testbed"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -505,6 +512,7 @@ echo \"✅ Lint check passed!\"
            (println "   bb background-scrolling  Parallax scrolling")
            (println "   bb input-gamepad    Gamepad visualization")
            (println "   bb sprite-animation Spritesheet animation")
+           (println "   bb gestures-testbed Touch gesture detection")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
