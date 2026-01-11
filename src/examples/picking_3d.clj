@@ -6,10 +6,14 @@
    Difficulty: ⭐⭐☆☆ (2/4)
    Based on: core/core_3d_picking.c"
   (:require
-   [raylib.core :as rc]
+   [raylib.core.window :as rcw]
+   [raylib.core.timing :as rct]
+   [raylib.core.drawing :as rcd]
+   [raylib.text.drawing :as rtd]
    [raylib.core.camera3d :as rcc]
    [raylib.core.collision :as rcol]
-   [raylib.core.mouse :as rcm]))
+   [raylib.core.mouse :as rcm]
+   [raylib-ext :as ext]))
 
 (def screen-width 800)
 (def screen-height 450)
@@ -57,7 +61,7 @@
 
         ;; Update camera if cursor is hidden (FPS mode)
         new-camera (if new-cursor-hidden
-                     (rcc/update-camera camera rcc/CAMERA_FIRST_PERSON)
+                     (rcc/update-camera! camera rcc/CAMERA_FIRST_PERSON)
                      camera)
 
         ;; Handle left click for picking
@@ -89,8 +93,8 @@
   (let [{sx :x sy :y sz :z} cube-size
         hit? (not (zero? (:hit collision)))]
 
-    (rc/begin-drawing!)
-    (rc/clear-background! (:raywhite colors))
+    (rcd/begin-drawing!)
+    (rcd/clear-background! (:raywhite colors))
 
     (rcc/begin-mode-3d! camera)
 
@@ -114,28 +118,28 @@
     (rcc/end-mode-3d!)
 
     ;; UI text
-    (rc/draw-text! "Try clicking on the box with your mouse!" 240 10 20 (:darkgray colors))
+    (rtd/draw-text! "Try clicking on the box with your mouse!" 240 10 20 (:darkgray colors))
 
     (when hit?
       (let [text "BOX SELECTED"
-            text-width (rc/measure-text text 30)
+            text-width (ext/measure-text text 30)
             x (/ (- screen-width text-width) 2)
             y (int (* screen-height 0.1))]
-        (rc/draw-text! text x y 30 (:green colors))))
+        (rtd/draw-text! text x y 30 (:green colors))))
 
-    (rc/draw-text! "Right click mouse to toggle camera controls" 10 430 10 (:gray colors))
+    (rtd/draw-text! "Right click mouse to toggle camera controls" 10 430 10 (:gray colors))
 
-    (rc/draw-fps! 10 10)
+    (rtd/draw-fps! 10 10)
 
-    (rc/end-drawing!)))
+    (rcd/end-drawing!)))
 
 (defn -main [& _args]
-  (rc/init-window! screen-width screen-height "raylib [core] example - 3d picking")
-  (rc/set-target-fps! 60)
+  (rcw/init-window! screen-width screen-height "raylib [core] example - 3d picking")
+  (rct/set-target-fps! 60)
 
   (loop [state (initial-state)]
-    (if (rc/window-should-close?)
-      (rc/close-window!)
+    (if (rcw/window-should-close?)
+      (rcw/close-window!)
       (let [new-state (update-state state)]
         (draw-scene! new-state)
         (recur new-state)))))
