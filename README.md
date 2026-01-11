@@ -249,14 +249,38 @@ flowchart TB
 | Command | Description |
 |---------|-------------|
 | `bb hello-world` | Basic window test - verify your setup works |
-| `bb bouncing-ball` | Simple physics with gravity toggle (⭐ Beginner) |
-| `bb screen-manager` | State machine for game screens (⭐ Beginner) |
-| `bb pong` | Classic two-player paddle game (⭐⭐ Easy) |
-| `bb following-eyes` | Eyes that follow mouse cursor (⭐⭐ Easy) |
-| `bb asteroids` | Shoot asteroids and survive (⭐⭐⭐ Intermediate) |
-| `bb asteroids2` | Alternate asteroids version (⭐⭐⭐ Intermediate) |
-| `bb tetris` | Block-stacking puzzle game (⭐⭐⭐ Intermediate) |
-| `bb vampire-survivors` | Survival action game (⭐⭐⭐⭐ Advanced) |
+| `bb bouncing-ball` | Simple physics with gravity toggle |
+| `bb screen-manager` | State machine for game screens |
+| `bb pong` | Classic two-player paddle game |
+| `bb following-eyes` | Eyes that follow mouse cursor |
+| `bb asteroids` | Shoot asteroids and survive |
+| `bb asteroids2` | Alternate asteroids version |
+| `bb tetris` | Block-stacking puzzle game |
+| `bb vampire-survivors` | Survival action game |
+| `bb input-keys` | Keyboard input demo |
+| `bb input-mouse` | Mouse input demo |
+| `bb mouse-wheel` | Mouse wheel scrolling |
+| `bb input-gamepad` | Gamepad visualization |
+| `bb gestures-testbed` | Touch gesture detection |
+| `bb collision-area` | Collision detection demo |
+| `bb colors-palette` | Raylib color showcase |
+| `bb logo-anim` | Logo animation demo |
+| `bb scissor-test` | Scissor mode clipping |
+| `bb random-values` | Random number generation |
+| `bb camera-2d` | 2D camera with zoom/rotation |
+| `bb camera-3d-free` | Free-form 3D camera |
+| `bb split-screen-3d` | Two-player 3D split screen |
+| `bb first-person-3d` | First person camera |
+| `bb camera-fps` | Advanced FPS camera |
+| `bb world-screen` | 3D to 2D coordinates |
+| `bb picking-3d` | Ray casting object selection |
+| `bb background-scrolling` | Parallax scrolling |
+| `bb sprite-animation` | Spritesheet animation |
+| `bb basic-lighting` | Shader-based lighting |
+| `bb audio-module` | Music visualization |
+| `bb sound-loading` | Basic WAV/OGG playback |
+| `bb music-stream` | MP3 streaming with controls |
+| `bb sound-multi` | Multiple sound instances |
 
 ### 🔧 Development
 
@@ -455,17 +479,111 @@ colors/red
 
 ## Available Examples
 
-| Example | Description | Complexity |
-|---------|-------------|------------|
-| Hello World | Basic window with text | ⭐ Beginner |
-| Bouncing Ball | Simple physics with gravity toggle | ⭐ Beginner |
-| Screen Manager | State machine for game screens | ⭐ Beginner |
-| Pong | Two-player paddle game | ⭐⭐ Easy |
-| Following Eyes | Eyes that follow mouse cursor | ⭐⭐ Easy |
-| Asteroids | Shoot asteroids and survive | ⭐⭐⭐ Intermediate |
-| Asteroids 2 | Alternate version with variations | ⭐⭐⭐ Intermediate |
-| Tetris | Block-stacking puzzle | ⭐⭐⭐ Intermediate |
-| Vampire Survivors | Survival action game | ⭐⭐⭐⭐ Advanced |
+This project includes **33 examples** - a mix of original games and ports from the official raylib C examples.
+
+### 🎮 Original Games
+
+| Example | Command | Description | Complexity |
+|---------|---------|-------------|------------|
+| Pong | `bb pong` | Two-player paddle game | ⭐⭐ Easy |
+| Asteroids | `bb asteroids` | Shoot asteroids and survive | ⭐⭐⭐ Intermediate |
+| Asteroids 2 | `bb asteroids2` | Alternate version with variations | ⭐⭐⭐ Intermediate |
+| Tetris | `bb tetris` | Block-stacking puzzle | ⭐⭐⭐ Intermediate |
+| Vampire Survivors | `bb vampire-survivors` | Survival action game | ⭐⭐⭐⭐ Advanced |
+
+### 📚 Ported Raylib Examples
+
+These examples are Clojure ports of the official [raylib C examples](https://github.com/raysan5/raylib/tree/master/examples).
+
+#### Core Examples (17 ported)
+
+| Clojure Example | C Original | Command | Description | Difficulty |
+|-----------------|------------|---------|-------------|------------|
+| hello_world | core_basic_window | `bb hello-world` | Basic window with text | ⭐☆☆☆ |
+| bouncing_ball | - | `bb bouncing-ball` | Simple physics with gravity toggle | ⭐☆☆☆ |
+| following_eyes | - | `bb following-eyes` | Eyes that follow mouse cursor | ⭐☆☆☆ |
+| screen_manager | core_basic_screen_manager | `bb screen-manager` | State machine for game screens | ⭐☆☆☆ |
+| input_keys | core_input_keys | `bb input-keys` | Keyboard input handling | ⭐☆☆☆ |
+| input_mouse | core_input_mouse | `bb input-mouse` | Mouse input handling | ⭐☆☆☆ |
+| mouse_wheel | core_input_mouse_wheel | `bb mouse-wheel` | Mouse wheel scrolling | ⭐☆☆☆ |
+| input_gamepad | core_input_gamepad | `bb input-gamepad` | Gamepad visualization | ⭐⭐☆☆ |
+| gestures_testbed | core_input_gestures | `bb gestures-testbed` | Touch gesture detection | ⭐⭐☆☆ |
+| collision_area | - | `bb collision-area` | Collision detection demo | ⭐☆☆☆ |
+| colors_palette | - | `bb colors-palette` | Raylib color showcase | ⭐☆☆☆ |
+| logo_anim | - | `bb logo-anim` | Logo animation demo | ⭐☆☆☆ |
+| scissor_test | core_scissor_test | `bb scissor-test` | Scissor mode clipping | ⭐☆☆☆ |
+| random_values | core_random_values | `bb random-values` | Random number generation | ⭐☆☆☆ |
+| camera_2d | core_2d_camera | `bb camera-2d` | 2D camera with zoom/rotation | ⭐⭐☆☆ |
+| world_screen | core_world_screen | `bb world-screen` | 3D to 2D coordinate conversion | ⭐⭐☆☆ |
+| camera_3d_free | core_3d_camera_free | `bb camera-3d-free` | Free-form 3D camera | ⭐☆☆☆ |
+| split_screen_3d | core_3d_camera_split_screen | `bb split-screen-3d` | Two-player 3D split screen | ⭐⭐☆☆ |
+| first_person_3d | core_3d_camera_first_person | `bb first-person-3d` | First person camera | ⭐⭐☆☆ |
+| camera_fps | core_3d_camera_fps | `bb camera-fps` | Advanced FPS camera with physics | ⭐⭐⭐☆ |
+| picking_3d | core_3d_picking | `bb picking-3d` | Ray casting object selection | ⭐⭐☆☆ |
+
+#### Textures Examples (2 ported)
+
+| Clojure Example | C Original | Command | Description | Difficulty |
+|-----------------|------------|---------|-------------|------------|
+| background_scrolling | textures_background_scrolling | `bb background-scrolling` | Parallax scrolling | ⭐☆☆☆ |
+| sprite_animation | textures_sprite_anim | `bb sprite-animation` | Spritesheet animation | ⭐⭐☆☆ |
+
+#### Shaders Examples (1 ported)
+
+| Clojure Example | C Original | Command | Description | Difficulty |
+|-----------------|------------|---------|-------------|------------|
+| basic_lighting | shaders_basic_lighting | `bb basic-lighting` | Shader-based lighting | ⭐⭐⭐☆ |
+
+#### Audio Examples (4 ported)
+
+| Clojure Example | C Original | Command | Description | Difficulty |
+|-----------------|------------|---------|-------------|------------|
+| audio_module | audio_module_playing | `bb audio-module` | Music visualization | ⭐⭐☆☆ |
+| sound_loading | audio_sound_loading | `bb sound-loading` | Basic WAV/OGG playback | ⭐☆☆☆ |
+| music_stream | audio_music_stream | `bb music-stream` | MP3 streaming with controls | ⭐☆☆☆ |
+| sound_multi | audio_sound_multi | `bb sound-multi` | Multiple sound instances | ⭐⭐☆☆ |
+
+### 🚧 Raylib Examples Not Yet Ported
+
+The following categories from raylib's official examples have not been fully ported yet:
+
+#### Core (remaining ~30 examples)
+- `core_2d_camera_mouse_zoom` - Mouse zoom for 2D camera
+- `core_2d_camera_platformer` - Platformer-style camera
+- `core_2d_camera_split_screen` - 2D split screen
+- `core_3d_camera_mode` - Camera mode switching
+- `core_window_flags` - Window configuration flags
+- `core_window_letterbox` - Letterbox scaling
+- `core_window_should_close` - Custom close behavior
+- `core_drop_files` - Drag and drop files
+- `core_custom_frame_control` - Manual frame timing
+- `core_smooth_pixelperfect` - Pixel-perfect rendering
+- `core_vr_simulator` - VR stereo rendering
+- `core_loading_thread` - Background loading
+- And more...
+
+#### Shapes (~18 examples)
+- Basic shape drawing, collisions, curves, etc.
+
+#### Textures (~25 examples)  
+- Image loading, processing, drawing modes, etc.
+
+#### Text (~10 examples)
+- Font loading, text formatting, Unicode, etc.
+
+#### Models (~20 examples)
+- 3D model loading, animation, mesh generation, etc.
+
+#### Shaders (~15 examples)
+- Post-processing, custom shaders, compute shaders, etc.
+
+#### Audio (~5 examples)
+- Raw audio streaming, effects, spatial audio, etc.
+
+#### Physics (~8 examples)
+- Physics engine integration examples
+
+See the [raylib examples](https://github.com/raysan5/raylib/tree/master/examples) for the complete list.
 
 ## Controls
 
