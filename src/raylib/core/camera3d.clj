@@ -57,6 +57,12 @@
   "DrawCubeWires"
   [::rs/vector-3 ::mem/float ::mem/float ::mem/float ::rs/color] ::mem/void)
 
+(defcfn draw-cube-wires-v!
+  "Draw cube wires (Vector version)"
+  {:arglists '([position size color])}
+  "DrawCubeWiresV"
+  [::rs/vector-3 ::rs/vector-3 ::rs/color] ::mem/void)
+
 (defcfn draw-plane!
   "Draw a plane XZ"
   {:arglists '([center-pos size color])}
