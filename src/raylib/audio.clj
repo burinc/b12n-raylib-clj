@@ -128,3 +128,91 @@
   {:arglists '([music])}
   "GetMusicTimePlayed"
   [::music] ::mem/float)
+
+(defcfn set-music-pan!
+  "Set pan for a music (-1.0 left, 0.0 center, 1.0 right)"
+  {:arglists '([music pan])}
+  "SetMusicPan"
+  [::music ::mem/float] ::mem/void)
+
+;; Sound struct (40 bytes on 64-bit)
+;; { AudioStream stream; uint frameCount; }
+(defalias ::sound
+  [::mem/struct
+   [[:stream ::audio-stream] ; 32 bytes
+    [:frame-count ::mem/int] ; 4 bytes
+    [:_pad ::mem/int]]]) ; padding to 40 bytes
+
+;; Sound loading/unloading functions
+(defcfn load-sound
+  "Load sound from file"
+  {:arglists '([filename])}
+  "LoadSound"
+  [::mem/c-string] ::sound)
+
+(defcfn load-sound-alias
+  "Create a new sound that shares the same sample data as the source sound"
+  {:arglists '([source])}
+  "LoadSoundAlias"
+  [::sound] ::sound)
+
+(defcfn unload-sound!
+  "Unload sound"
+  {:arglists '([sound])}
+  "UnloadSound"
+  [::sound] ::mem/void)
+
+(defcfn unload-sound-alias!
+  "Unload a sound alias (does not deallocate sample data)"
+  {:arglists '([alias])}
+  "UnloadSoundAlias"
+  [::sound] ::mem/void)
+
+;; Sound control functions
+(defcfn play-sound!
+  "Play a sound"
+  {:arglists '([sound])}
+  "PlaySound"
+  [::sound] ::mem/void)
+
+(defcfn stop-sound!
+  "Stop playing a sound"
+  {:arglists '([sound])}
+  "StopSound"
+  [::sound] ::mem/void)
+
+(defcfn pause-sound!
+  "Pause a sound"
+  {:arglists '([sound])}
+  "PauseSound"
+  [::sound] ::mem/void)
+
+(defcfn resume-sound!
+  "Resume a paused sound"
+  {:arglists '([sound])}
+  "ResumeSound"
+  [::sound] ::mem/void)
+
+(defcfn is-sound-playing?
+  "Check if a sound is currently playing"
+  {:arglists '([sound])}
+  "IsSoundPlaying"
+  [::sound] ::mem/int)
+
+(defcfn set-sound-volume!
+  "Set volume for a sound (1.0 is max level)"
+  {:arglists '([sound volume])}
+  "SetSoundVolume"
+  [::sound ::mem/float] ::mem/void)
+
+(defcfn set-sound-pitch!
+  "Set pitch for a sound (1.0 is base level)"
+  {:arglists '([sound pitch])}
+  "SetSoundPitch"
+  [::sound ::mem/float] ::mem/void)
+
+(defcfn set-sound-pan!
+  "Set pan for a sound (-1.0 left, 0.0 center, 1.0 right)"
+  {:arglists '([sound pan])}
+  "SetSoundPan"
+  [::sound ::mem/float] ::mem/void)

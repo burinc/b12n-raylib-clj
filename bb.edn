@@ -206,6 +206,27 @@
            (info "SPACE: restart | P: pause/resume | UP/DOWN: change speed | ESC to exit")
            (p/shell "clojure" "-M:audio-module"))}
 
+  sound-loading
+  {:doc "🔊 Run Sound Loading - basic WAV/OGG sound playback"
+   :task (do
+           (header "🔊 Running Sound Loading")
+           (info "SPACE: play WAV | ENTER: play OGG | ESC to exit")
+           (p/shell "clojure" "-M:sound-loading"))}
+
+  music-stream
+  {:doc "🎶 Run Music Stream - MP3 streaming with pan/volume control"
+   :task (do
+           (header "🎶 Running Music Stream")
+           (info "SPACE: restart | P: pause | LEFT/RIGHT: pan | UP/DOWN: volume | ESC to exit")
+           (p/shell "clojure" "-M:music-stream"))}
+
+  sound-multi
+  {:doc "🔉 Run Sound Multi - multiple sound instances using aliases"
+   :task (do
+           (header "🔉 Running Sound Multi")
+           (info "SPACE: play sound (cycles through 10 slots) | ESC to exit")
+           (p/shell "clojure" "-M:sound-multi"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -553,6 +574,9 @@ echo \"✅ Lint check passed!\"
            (println "   bb basic-lighting   Shader-based lighting")
            (println "   bb picking-3d       Ray casting object selection")
            (println "   bb audio-module     Music visualization")
+           (println "   bb sound-loading    Basic WAV/OGG playback")
+           (println "   bb music-stream     MP3 streaming with controls")
+           (println "   bb sound-multi      Multiple sound instances")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
