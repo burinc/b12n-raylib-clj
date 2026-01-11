@@ -192,6 +192,13 @@
            (info "Mouse: orbital camera | Y/R/G/B: toggle lights | ESC to exit")
            (p/shell "clojure" "-M:basic-lighting"))}
 
+  picking-3d
+  {:doc "🎯 Run 3D Picking - ray casting object selection"
+   :task (do
+           (header "🎯 Running 3D Picking")
+           (info "Left-click: select cube | Right-click: toggle camera | ESC to exit")
+           (p/shell "clojure" "-M:picking-3d"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -537,6 +544,7 @@ echo \"✅ Lint check passed!\"
            (println "   bb world-screen     3D to 2D coordinates")
            (println "   bb camera-fps       Advanced FPS camera")
            (println "   bb basic-lighting   Shader-based lighting")
+           (println "   bb picking-3d       Ray casting object selection")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
