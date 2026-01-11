@@ -3,7 +3,7 @@
  :deps {org.clojure/clojure {:mvn/version "1.12.0"}
         org.clojure/tools.logging {:mvn/version "1.3.0"}
         org.suskalo/coffi {:mvn/version "1.0.615"}
-        insn/insn {:mvn/version "0.5.7"}
+        insn/insn {:mvn/version "0.5.4"}
         ;; nREPL for live development - games start embedded nREPL server on 7888
         nrepl/nrepl {:mvn/version "1.3.0"}}
 
@@ -54,4 +54,23 @@
   {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
               "-XstartOnFirstThread"
               "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
-   :main-opts ["-m" "examples.vampire-survivors"]}}}
+   :main-opts ["-m" "examples.vampire-survivors"]}
+
+  ;; New examples ported from raylib C examples
+  :bouncing-ball
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.bouncing-ball"]}
+
+  :following-eyes
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.following-eyes"]}
+
+  :screen-manager
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.screen-manager"]}}}

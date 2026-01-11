@@ -72,6 +72,28 @@
            (header "🧛 Running Vampire Survivors")
            (p/shell "clojure" "-M:vampire-survivors"))}
 
+  ;; New examples ported from raylib C examples
+  bouncing-ball
+  {:doc "🎮 Run Bouncing Ball - simple physics demo"
+   :task (do
+           (header "⚽ Running Bouncing Ball")
+           (info "Controls: SPACE to pause, G to toggle gravity")
+           (p/shell "clojure" "-M:bouncing-ball"))}
+
+  following-eyes
+  {:doc "🎮 Run Following Eyes - mouse tracking demo"
+   :task (do
+           (header "👀 Running Following Eyes")
+           (info "Move your mouse to make the eyes follow!")
+           (p/shell "clojure" "-M:following-eyes"))}
+
+  screen-manager
+  {:doc "🎮 Run Screen Manager - state machine demo"
+   :task (do
+           (header "📺 Running Screen Manager")
+           (info "Controls: ENTER to navigate between screens")
+           (p/shell "clojure" "-M:screen-manager"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -400,6 +422,9 @@ echo \"✅ Lint check passed!\"
            (println "   bb asteroids2       Alternate asteroids version")
            (println "   bb tetris           Block-stacking puzzle")
            (println "   bb vampire-survivors  Survival action game")
+           (println "   bb bouncing-ball    Simple physics demo")
+           (println "   bb following-eyes   Mouse tracking demo")
+           (println "   bb screen-manager   State machine demo")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
