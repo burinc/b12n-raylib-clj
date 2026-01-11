@@ -94,6 +94,27 @@
            (info "Controls: ENTER to navigate between screens")
            (p/shell "clojure" "-M:screen-manager"))}
 
+  input-keys
+  {:doc "🎮 Run Input Keys - keyboard control demo"
+   :task (do
+           (header "⌨️ Running Input Keys")
+           (info "Controls: Arrow keys to move the ball")
+           (p/shell "clojure" "-M:input-keys"))}
+
+  input-mouse
+  {:doc "🎮 Run Input Mouse - mouse control demo"
+   :task (do
+           (header "🖱️ Running Input Mouse")
+           (info "Move mouse, click to change ball color")
+           (p/shell "clojure" "-M:input-mouse"))}
+
+  collision-area
+  {:doc "🎮 Run Collision Area - collision detection demo"
+   :task (do
+           (header "💥 Running Collision Area")
+           (info "Controls: Mouse to move blue box, SPACE to pause")
+           (p/shell "clojure" "-M:collision-area"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -425,6 +446,9 @@ echo \"✅ Lint check passed!\"
            (println "   bb bouncing-ball    Simple physics demo")
            (println "   bb following-eyes   Mouse tracking demo")
            (println "   bb screen-manager   State machine demo")
+           (println "   bb input-keys       Keyboard control demo")
+           (println "   bb input-mouse      Mouse control demo")
+           (println "   bb collision-area   Collision detection demo")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")
