@@ -81,6 +81,18 @@
   "DrawSphere"
   [::rs/vector-3 ::mem/float ::rs/color] ::mem/void)
 
+(defcfn draw-sphere-ex!
+  "Draw sphere with extended parameters"
+  {:arglists '([center-pos radius rings slices color])}
+  "DrawSphereEx"
+  [::rs/vector-3 ::mem/float ::mem/int ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-sphere-wires!
+  "Draw sphere wires"
+  {:arglists '([center-pos radius rings slices color])}
+  "DrawSphereWires"
+  [::rs/vector-3 ::mem/float ::mem/int ::mem/int ::rs/color] ::mem/void)
+
 ;; Camera mode constants (for UpdateCamera)
 (def CAMERA_CUSTOM 0)
 (def CAMERA_FREE 1)

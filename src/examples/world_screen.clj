@@ -29,13 +29,22 @@
 (def HEIGHT 450)
 
 (defn initial-state []
-  {:camera {:position {:x 10.0 :y 10.0 :z 10.0}
-            :target {:x 0.0 :y 0.0 :z 0.0}
-            :up {:x 0.0 :y 1.0 :z 0.0}
+  {:camera {:position {:x 10.0
+                       :y 10.0
+                       :z 10.0}
+            :target {:x 0.0
+                     :y 0.0
+                     :z 0.0}
+            :up {:x 0.0
+                 :y 1.0
+                 :z 0.0}
             :fovy 45.0
             :projection rc3/CAMERA_PERSPECTIVE}
-   :cube-position {:x 0.0 :y 0.0 :z 0.0}
-   :cube-screen-position {:x 0.0 :y 0.0}
+   :cube-position {:x 0.0
+                   :y 0.0
+                   :z 0.0}
+   :cube-screen-position {:x 0.0
+                          :y 0.0}
    :camera-ptr nil})
 
 (def game-atom (atom (initial-state)))
@@ -88,7 +97,8 @@
     ;; Disable cursor for camera control
     (rc3/disable-cursor!)))
 
-(defn tick [{:keys [camera camera-ptr cube-position] :as game}]
+(defn tick [{:keys [camera camera-ptr cube-position]
+             :as game}]
   (debug-stats/update!)
 
   ;; Update camera using raylib's built-in third-person mode

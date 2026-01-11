@@ -36,7 +36,8 @@
 (defn initial-state []
   {:exit? false
    :scarfy nil
-   :position {:x 350.0 :y 280.0}
+   :position {:x 350.0
+              :y 280.0}
    :current-frame 0
    :frames-counter 0
    :frames-speed 8}) ; frames per second
@@ -51,7 +52,8 @@
   (let [scarfy (rtl/load-texture! "resources/scarfy.png")]
     (swap! game-atom assoc :scarfy scarfy)))
 
-(defn update-animation [{:keys [scarfy frames-counter frames-speed current-frame] :as game}]
+(defn update-animation [{:keys [scarfy frames-counter frames-speed current-frame]
+                         :as game}]
   (let [new-counter (inc frames-counter)]
     (if (>= new-counter (/ 60 frames-speed))
       ;; Advance to next frame
@@ -62,7 +64,8 @@
       ;; Just increment counter
       (assoc game :frames-counter new-counter))))
 
-(defn handle-input [{:keys [frames-speed] :as game}]
+(defn handle-input [{:keys [frames-speed]
+                     :as game}]
   (let [new-speed (cond
                     (rck/is-key-pressed? (:right enums/keyboard-key))
                     (min MAX_FRAME_SPEED (inc frames-speed))
@@ -89,10 +92,14 @@
     (let [frame-width (/ (:width scarfy) NUM_FRAMES)
           frame-height (:height scarfy)
           frame-x (* current-frame frame-width)
-          frame-rec {:x frame-x :y 0 :width frame-width :height frame-height}]
+          frame-rec {:x frame-x
+                     :y 0
+                     :width frame-width
+                     :height frame-height}]
 
       ;; Draw full spritesheet as reference
-      (ext/draw-texture-ex! scarfy {:x 15 :y 40} 0.0 1.0 colors/white)
+      (ext/draw-texture-ex! scarfy {:x 15
+                                    :y 40} 0.0 1.0 colors/white)
 
       ;; Draw outline around full spritesheet
       (ext/draw-rectangle-lines! 15 40 (:width scarfy) (:height scarfy) colors/lime)

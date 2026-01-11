@@ -66,7 +66,8 @@
 (defn apply-trigger-deadzone [value deadzone]
   (if (< value deadzone) -1.0 value))
 
-(defn handle-input [{:keys [gamepad] :as game}]
+(defn handle-input [{:keys [gamepad]
+                     :as game}]
   (cond-> game
     (rck/is-key-pressed? (:left enums/keyboard-key))
     (update :gamepad #(max 0 (dec %)))
@@ -164,7 +165,10 @@
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE_LEFT))
     (rsb/draw-rectangle! 328 170 32 13 colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE_RIGHT))
-    (ext/draw-triangle! {:x 436 :y 168} {:x 436 :y 185} {:x 464 :y 177} colors/red))
+    (ext/draw-triangle! {:x 436
+                         :y 168} {:x 436
+                                  :y 185} {:x 464
+                                           :y 177} colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_UP))
     (ext/draw-circle-int! 557 144 13 colors/lime))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_RIGHT))
@@ -215,7 +219,10 @@
 
 (defn draw-generic-layout [gamepad left-x left-y right-x right-y left-trigger right-trigger]
   ;; Draw generic controller background
-  (ext/draw-rectangle-rounded! {:x 175 :y 110 :width 460 :height 220} 0.3 16 colors/darkgray)
+  (ext/draw-rectangle-rounded! {:x 175
+                                :y 110
+                                :width 460
+                                :height 220} 0.3 16 colors/darkgray)
 
   ;; Basic buttons
   (ext/draw-circle-int! 365 170 12 colors/raywhite)
@@ -256,12 +263,24 @@
     (rsb/draw-rectangle! 271 176 30 25 colors/red))
 
   ;; Shoulder buttons
-  (ext/draw-rectangle-rounded! {:x 215 :y 98 :width 100 :height 10} 0.5 16 colors/darkgray)
-  (ext/draw-rectangle-rounded! {:x 495 :y 98 :width 100 :height 10} 0.5 16 colors/darkgray)
+  (ext/draw-rectangle-rounded! {:x 215
+                                :y 98
+                                :width 100
+                                :height 10} 0.5 16 colors/darkgray)
+  (ext/draw-rectangle-rounded! {:x 495
+                                :y 98
+                                :width 100
+                                :height 10} 0.5 16 colors/darkgray)
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_LEFT_TRIGGER_1))
-    (ext/draw-rectangle-rounded! {:x 215 :y 98 :width 100 :height 10} 0.5 16 colors/red))
+    (ext/draw-rectangle-rounded! {:x 215
+                                  :y 98
+                                  :width 100
+                                  :height 10} 0.5 16 colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_TRIGGER_1))
-    (ext/draw-rectangle-rounded! {:x 495 :y 98 :width 100 :height 10} 0.5 16 colors/red))
+    (ext/draw-rectangle-rounded! {:x 495
+                                  :y 98
+                                  :width 100
+                                  :height 10} 0.5 16 colors/red))
 
   ;; Left stick
   (let [stick-color (if (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_LEFT_THUMB))

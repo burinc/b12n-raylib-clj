@@ -46,7 +46,8 @@
 (def STAND_HEIGHT 1.0)
 (def BOTTOM_HEIGHT 0.5)
 
-(def SENSITIVITY {:x 0.001 :y 0.001})
+(def SENSITIVITY {:x 0.001
+                  :y 0.001})
 (def PI 3.14159265358979323846)
 
 ;; Vector math helpers
@@ -82,7 +83,9 @@
    :z (- (* (:x a) (:y b)) (* (:y a) (:x b)))})
 
 (defn v3-negate [v]
-  {:x (- (:x v)) :y (- (:y v)) :z (- (:z v))})
+  {:x (- (:x v))
+   :y (- (:y v))
+   :z (- (:z v))})
 
 (defn v3-lerp [a b t]
   {:x (+ (:x a) (* (- (:x b) (:x a)) t))
@@ -117,20 +120,34 @@
 
 ;; Initial state
 (defn initial-state []
-  {:player {:position {:x 0.0 :y 0.0 :z 0.0}
-            :velocity {:x 0.0 :y 0.0 :z 0.0}
-            :dir {:x 0.0 :y 0.0 :z 0.0}
+  {:player {:position {:x 0.0
+                       :y 0.0
+                       :z 0.0}
+            :velocity {:x 0.0
+                       :y 0.0
+                       :z 0.0}
+            :dir {:x 0.0
+                  :y 0.0
+                  :z 0.0}
             :grounded? true}
-   :camera {:position {:x 0.0 :y 1.5 :z 0.0}
-            :target {:x 0.0 :y 1.5 :z -1.0}
-            :up {:x 0.0 :y 1.0 :z 0.0}
+   :camera {:position {:x 0.0
+                       :y 1.5
+                       :z 0.0}
+            :target {:x 0.0
+                     :y 1.5
+                     :z -1.0}
+            :up {:x 0.0
+                 :y 1.0
+                 :z 0.0}
             :fovy 60.0
             :projection rc3/CAMERA_PERSPECTIVE}
-   :look-rotation {:x 0.0 :y 0.0}
+   :look-rotation {:x 0.0
+                   :y 0.0}
    :head-timer 0.0
    :walk-lerp 0.0
    :head-lerp STAND_HEIGHT
-   :lean {:x 0.0 :y 0.0}})
+   :lean {:x 0.0
+          :y 0.0}})
 
 (def game-atom (atom (initial-state)))
 
@@ -140,7 +157,8 @@
   (debug-stats/enable!)
   (rc3/disable-cursor!))
 
-(defn update-body [{:keys [player look-rotation] :as game} side forward jump-pressed? crouch?]
+(defn update-body [{:keys [player look-rotation]
+                    :as game} side forward jump-pressed? crouch?]
   (let [delta (rct/get-frame-time)
         {:keys [position velocity dir grounded?]} player
         rot (:x look-rotation)
@@ -156,8 +174,12 @@
                                 [new-vel-y grounded?])
 
         ;; Calculate movement directions
-        front {:x (Math/sin rot) :y 0.0 :z (Math/cos rot)}
-        right {:x (Math/cos (- rot)) :y 0.0 :z (Math/sin (- rot))}
+        front {:x (Math/sin rot)
+               :y 0.0
+               :z (Math/cos rot)}
+        right {:x (Math/cos (- rot))
+               :y 0.0
+               :z (Math/sin (- rot))}
 
         ;; Desired direction based on input
         desired-dir {:x (+ (* side (:x right)) (* (- forward) (:x front)))
@@ -169,12 +191,16 @@
 
         ;; Apply friction/drag to horizontal velocity
         decel (if grounded? FRICTION AIR_DRAG)
-        hvel {:x (* (:x velocity) decel) :y 0.0 :z (* (:z velocity) decel)}
+        hvel {:x (* (:x velocity) decel)
+              :y 0.0
+              :z (* (:z velocity) decel)}
 
         ;; Stop very slow movement
         hvel-length (v3-length hvel)
         hvel (if (< hvel-length (* MAX_SPEED 0.01))
-               {:x 0.0 :y 0.0 :z 0.0}
+               {:x 0.0
+                :y 0.0
+                :z 0.0}
                hvel)
 
         ;; Calculate acceleration (strafing mechanic)
@@ -194,8 +220,12 @@
 
         ;; Floor collision
         [new-pos new-vel grounded?] (if (<= (:y new-pos) 0.0)
-                                      [{:x (:x new-pos) :y 0.0 :z (:z new-pos)}
-                                       {:x (:x new-vel) :y 0.0 :z (:z new-vel)}
+                                      [{:x (:x new-pos)
+                                        :y 0.0
+                                        :z (:z new-pos)}
+                                       {:x (:x new-vel)
+                                        :y 0.0
+                                        :z (:z new-vel)}
                                        true]
                                       [new-pos new-vel grounded?])]
 
@@ -204,9 +234,14 @@
                          :dir new-dir
                          :grounded? grounded?})))
 
-(defn update-camera-fps [{:keys [player look-rotation head-timer walk-lerp lean] :as game}]
-  (let [up {:x 0.0 :y 1.0 :z 0.0}
-        target-offset {:x 0.0 :y 0.0 :z -1.0}
+(defn update-camera-fps [{:keys [player look-rotation head-timer walk-lerp lean]
+                          :as game}]
+  (let [up {:x 0.0
+            :y 1.0
+            :z 0.0}
+        target-offset {:x 0.0
+                       :y 0.0
+                       :z -1.0}
 
         ;; Yaw rotation (left/right)
         yaw (v3-rotate-by-axis-angle target-offset up (:x look-rotation))
@@ -303,27 +338,42 @@
 (defn draw-level []
   (let [floor-extent 25
         tile-size 5.0
-        tile-color1 {:r 150 :g 200 :b 200 :a 255}]
+        tile-color1 {:r 150
+                     :g 200
+                     :b 200
+                     :a 255}]
 
     ;; Floor tiles (checkerboard)
     (doseq [y (range (- floor-extent) floor-extent)
             x (range (- floor-extent) floor-extent)]
       (when (or (and (odd? y) (odd? x))
                 (and (even? y) (even? x)))
-        (rc3/draw-plane! {:x (* x tile-size) :y 0.0 :z (* y tile-size)}
-                         {:x tile-size :y tile-size}
+        (rc3/draw-plane! {:x (* x tile-size)
+                          :y 0.0
+                          :z (* y tile-size)}
+                         {:x tile-size
+                          :y tile-size}
                          (if (and (odd? y) (odd? x)) tile-color1 colors/lightgray))))
 
     ;; Tower cubes at corners
-    (let [tower-size {:x 16.0 :y 32.0 :z 16.0}
-          tower-color {:r 150 :g 200 :b 200 :a 255}]
+    (let [tower-size {:x 16.0
+                      :y 32.0
+                      :z 16.0}
+          tower-color {:r 150
+                       :g 200
+                       :b 200
+                       :a 255}]
       (doseq [[tx tz] [[16.0 16.0] [-16.0 16.0] [-16.0 -16.0] [16.0 -16.0]]]
-        (let [pos {:x tx :y 16.0 :z tz}]
+        (let [pos {:x tx
+                   :y 16.0
+                   :z tz}]
           (rc3/draw-cube-v! pos tower-size tower-color)
           (rc3/draw-cube-wires-v! pos tower-size colors/darkblue))))
 
     ;; Red sun
-    (rc3/draw-sphere! {:x 300.0 :y 300.0 :z 0.0} 100.0 colors/red)))
+    (rc3/draw-sphere! {:x 300.0
+                       :y 300.0
+                       :z 0.0} 100.0 colors/red)))
 
 (defn draw [{:keys [camera player]}]
   (rcd/begin-drawing!)
@@ -341,7 +391,8 @@
   (rtd/draw-text! "- Move keys: W, A, S, D, Space, Left-Ctrl" 15 30 10 colors/black)
   (rtd/draw-text! "- Look around: mouse" 15 45 10 colors/black)
   (let [vel (:velocity player)
-        vel-len (v2-length {:x (:x vel) :y (:z vel)})]
+        vel-len (v2-length {:x (:x vel)
+                            :y (:z vel)})]
     (rtd/draw-text! (format "- Velocity Len: (%06.3f)" vel-len) 15 60 10 colors/black))
 
   ;; Draw debug stats overlay

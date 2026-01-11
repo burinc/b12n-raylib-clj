@@ -185,6 +185,13 @@
            (info "WASD: move | Mouse: look | Space: jump | Ctrl: crouch | ESC to exit")
            (p/shell "clojure" "-M:camera-fps"))}
 
+  basic-lighting
+  {:doc "💡 Run Basic Lighting - shader-based dynamic lighting"
+   :task (do
+           (header "💡 Running Basic Lighting")
+           (info "Mouse: orbital camera | Y/R/G/B: toggle lights | ESC to exit")
+           (p/shell "clojure" "-M:basic-lighting"))}
+
   ;; =============================================================================
   ;; 🔧 Development
   ;; =============================================================================
@@ -529,6 +536,7 @@ echo \"✅ Lint check passed!\"
            (println "   bb gestures-testbed Touch gesture detection")
            (println "   bb world-screen     3D to 2D coordinates")
            (println "   bb camera-fps       Advanced FPS camera")
+           (println "   bb basic-lighting   Shader-based lighting")
            (println)
            (println (color cyan "🔧 Development:"))
            (println "   bb repl             Start Clojure REPL")

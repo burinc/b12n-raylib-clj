@@ -81,11 +81,20 @@
 (def game-atom (atom (initial-state)))
 
 ;; UI positions
-(def log-button1 {:x 53 :y 7 :width 48 :height 26})
-(def log-button2 {:x 108 :y 7 :width 36 :height 26})
-(def protractor-pos {:x 266.0 :y 315.0})
-(def last-gesture-pos {:x 165 :y 130})
-(def gesture-log-pos {:x 10 :y 10})
+(def log-button1 {:x 53
+                  :y 7
+                  :width 48
+                  :height 26})
+(def log-button2 {:x 108
+                  :y 7
+                  :width 36
+                  :height 26})
+(def protractor-pos {:x 266.0
+                     :y 315.0})
+(def last-gesture-pos {:x 165
+                       :y 130})
+(def gesture-log-pos {:x 10
+                      :y 10})
 
 (defn init []
   (rcw/init-window! WIDTH HEIGHT "raylib [core] example - input gestures testbed")
@@ -102,7 +111,8 @@
       0 true
       false)))
 
-(defn update-gesture-log [{:keys [gesture-log gesture-log-index previous-gesture log-mode] :as game}]
+(defn update-gesture-log [{:keys [gesture-log gesture-log-index previous-gesture log-mode]
+                           :as game}]
   (let [current-gesture (rcg/get-gesture-detected)]
     (if (should-fill-log? current-gesture previous-gesture log-mode)
       (let [new-index (if (<= gesture-log-index 0) (dec GESTURE_LOG_SIZE) (dec gesture-log-index))
@@ -114,7 +124,8 @@
                :gesture-log-index new-index))
       game)))
 
-(defn update-last-gesture [{:keys [previous-gesture] :as game}]
+(defn update-last-gesture [{:keys [previous-gesture]
+                            :as game}]
   (let [current-gesture (rcg/get-gesture-detected)]
     (if (and (not= current-gesture 0)
              (not= current-gesture 4)
@@ -133,7 +144,8 @@
                 :else (:current-angle game))]
     (assoc game :current-angle angle)))
 
-(defn handle-log-buttons [{:keys [log-mode] :as game}]
+(defn handle-log-buttons [{:keys [log-mode]
+                           :as game}]
   (if (rcm/is-mouse-button-released? 0)
     (let [mouse-pos (rcm/get-mouse-position)]
       (cond
@@ -178,7 +190,8 @@
     (ext/draw-circle-int! (+ x 80) (+ y 16) 10 (if (= last-gesture rcg/GESTURE_TAP) colors/blue colors/lightgray))
 
     ;; Drag indicator (ring)
-    (ext/draw-ring! {:x (+ x 103) :y (+ y 16)} 6.0 11.0 0.0 360.0 0
+    (ext/draw-ring! {:x (+ x 103)
+                     :y (+ y 16)} 6.0 11.0 0.0 360.0 0
                     (if (= last-gesture rcg/GESTURE_DRAG) colors/lime colors/lightgray))
 
     ;; Double tap indicator
@@ -186,15 +199,27 @@
     (ext/draw-circle-int! (+ x 103) (+ y 43) 10 (if (= last-gesture rcg/GESTURE_DOUBLETAP) colors/skyblue colors/lightgray))
 
     ;; Pinch out indicator (triangles pointing outward)
-    (ext/draw-triangle! {:x (+ x 122) :y (+ y 16)} {:x (+ x 137) :y (+ y 26)} {:x (+ x 137) :y (+ y 6)}
+    (ext/draw-triangle! {:x (+ x 122)
+                         :y (+ y 16)} {:x (+ x 137)
+                                       :y (+ y 26)} {:x (+ x 137)
+                                                     :y (+ y 6)}
                         (if (= last-gesture rcg/GESTURE_PINCH_OUT) colors/orange colors/lightgray))
-    (ext/draw-triangle! {:x (+ x 147) :y (+ y 6)} {:x (+ x 147) :y (+ y 26)} {:x (+ x 162) :y (+ y 16)}
+    (ext/draw-triangle! {:x (+ x 147)
+                         :y (+ y 6)} {:x (+ x 147)
+                                      :y (+ y 26)} {:x (+ x 162)
+                                                    :y (+ y 16)}
                         (if (= last-gesture rcg/GESTURE_PINCH_OUT) colors/orange colors/lightgray))
 
     ;; Pinch in indicator (triangles pointing inward)
-    (ext/draw-triangle! {:x (+ x 125) :y (+ y 33)} {:x (+ x 125) :y (+ y 53)} {:x (+ x 140) :y (+ y 43)}
+    (ext/draw-triangle! {:x (+ x 125)
+                         :y (+ y 33)} {:x (+ x 125)
+                                       :y (+ y 53)} {:x (+ x 140)
+                                                     :y (+ y 43)}
                         (if (= last-gesture rcg/GESTURE_PINCH_IN) colors/violet colors/lightgray))
-    (ext/draw-triangle! {:x (+ x 144) :y (+ y 43)} {:x (+ x 159) :y (+ y 53)} {:x (+ x 159) :y (+ y 33)}
+    (ext/draw-triangle! {:x (+ x 144)
+                         :y (+ y 43)} {:x (+ x 159)
+                                       :y (+ y 53)} {:x (+ x 159)
+                                                     :y (+ y 33)}
                         (if (= last-gesture rcg/GESTURE_PINCH_IN) colors/violet colors/lightgray))
 
     ;; Touch count indicators
@@ -244,12 +269,20 @@
     (ext/draw-circle-v! protractor-pos 80.0 colors/white)
 
     ;; Cross lines
-    (ext/draw-line-ex! {:x (- x 90) :y y} {:x (+ x 90) :y y} 3.0 colors/lightgray)
-    (ext/draw-line-ex! {:x x :y (- y 90)} {:x x :y (+ y 90)} 3.0 colors/lightgray)
+    (ext/draw-line-ex! {:x (- x 90)
+                        :y y} {:x (+ x 90)
+                               :y y} 3.0 colors/lightgray)
+    (ext/draw-line-ex! {:x x
+                        :y (- y 90)} {:x x
+                                      :y (+ y 90)} 3.0 colors/lightgray)
 
     ;; Diagonal lines (30/150 degree markers)
-    (ext/draw-line-ex! {:x (- x 80) :y (- y 45)} {:x (+ x 80) :y (+ y 45)} 3.0 colors/green)
-    (ext/draw-line-ex! {:x (- x 80) :y (+ y 45)} {:x (+ x 80) :y (- y 45)} 3.0 colors/green)
+    (ext/draw-line-ex! {:x (- x 80)
+                        :y (- y 45)} {:x (+ x 80)
+                                      :y (+ y 45)} 3.0 colors/green)
+    (ext/draw-line-ex! {:x (- x 80)
+                        :y (+ y 45)} {:x (+ x 80)
+                                      :y (- y 45)} 3.0 colors/green)
 
     ;; Angle labels
     (rtd/draw-text! "0" (int (+ x 96)) (int (- y 9)) 20 colors/black)
@@ -263,7 +296,8 @@
 
     ;; Current angle line
     (when (not= current-angle 0.0)
-      (ext/draw-line-ex! protractor-pos {:x final-x :y final-y} 3.0 gesture-color))))
+      (ext/draw-line-ex! protractor-pos {:x final-x
+                                         :y final-y} 3.0 gesture-color))))
 
 (defn draw-touch-points [{:keys [gesture-color]}]
   (let [current-gesture (rcg/get-gesture-detected)

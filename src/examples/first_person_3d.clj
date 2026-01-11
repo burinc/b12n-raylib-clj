@@ -44,7 +44,9 @@
            x (- (rand 30.0) 15.0)
            z (- (rand 30.0) 15.0)]
        {:height height
-        :position {:x x :y (/ height 2.0) :z z}
+        :position {:x x
+                   :y (/ height 2.0)
+                   :z z}
         :color {:r (+ 20 (rand-int 235))
                 :g (+ 10 (rand-int 45))
                 :b 30
@@ -53,9 +55,15 @@
 (defn make-camera
   "Create initial camera"
   []
-  {:position {:x 0.0 :y 2.0 :z 4.0}
-   :target {:x 0.0 :y 2.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 0.0
+              :y 2.0
+              :z 4.0}
+   :target {:x 0.0
+            :y 2.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 60.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -132,7 +140,8 @@
     1 "ORTHOGRAPHIC"
     "UNKNOWN"))
 
-(defn handle-camera-mode-switch [{:keys [camera-ptr] :as game}]
+(defn handle-camera-mode-switch [{:keys [camera-ptr]
+                                  :as game}]
   (cond
     (rck/is-key-pressed? (:one enums/keyboard-key))
     (do
@@ -165,7 +174,8 @@
 
     :else game))
 
-(defn handle-projection-toggle [{:keys [camera-ptr] :as game}]
+(defn handle-projection-toggle [{:keys [camera-ptr]
+                                 :as game}]
   (if (rck/is-key-pressed? (:p enums/keyboard-key))
     (let [current-proj (mem/read-int (mem/slice camera-ptr 40 4))]
       (if (= current-proj rc3d/CAMERA_PERSPECTIVE)
@@ -181,7 +191,8 @@
           game)))
     game))
 
-(defn update-camera-state [{:keys [camera-ptr camera-mode] :as game}]
+(defn update-camera-state [{:keys [camera-ptr camera-mode]
+                            :as game}]
   ;; Call raylib's UpdateCamera to handle movement
   (rc3d/update-camera! camera-ptr camera-mode)
   ;; Read back updated camera values
@@ -208,12 +219,21 @@
   (rc3d/begin-mode-3d! camera)
 
   ;; Draw ground
-  (rc3d/draw-plane! {:x 0 :y 0 :z 0} {:x 32 :y 32} colors/lightgray)
+  (rc3d/draw-plane! {:x 0
+                     :y 0
+                     :z 0} {:x 32
+                            :y 32} colors/lightgray)
 
   ;; Draw walls
-  (rc3d/draw-cube! {:x -16.0 :y 2.5 :z 0.0} 1.0 5.0 32.0 colors/blue) ; Blue wall
-  (rc3d/draw-cube! {:x 16.0 :y 2.5 :z 0.0} 1.0 5.0 32.0 colors/lime) ; Green wall
-  (rc3d/draw-cube! {:x 0.0 :y 2.5 :z 16.0} 32.0 5.0 1.0 colors/gold) ; Yellow wall
+  (rc3d/draw-cube! {:x -16.0
+                    :y 2.5
+                    :z 0.0} 1.0 5.0 32.0 colors/blue) ; Blue wall
+  (rc3d/draw-cube! {:x 16.0
+                    :y 2.5
+                    :z 0.0} 1.0 5.0 32.0 colors/lime) ; Green wall
+  (rc3d/draw-cube! {:x 0.0
+                    :y 2.5
+                    :z 16.0} 32.0 5.0 1.0 colors/gold) ; Yellow wall
 
   ;; Draw random columns
   (doseq [{:keys [position height color]} columns]
@@ -228,7 +248,10 @@
   (rc3d/end-mode-3d!)
 
   ;; Draw info box (controls)
-  (rsb/draw-rectangle! 5 5 330 100 {:r 102 :g 191 :b 255 :a 127})
+  (rsb/draw-rectangle! 5 5 330 100 {:r 102
+                                    :g 191
+                                    :b 255
+                                    :a 127})
   (rtd/draw-text! "Camera controls:" 15 15 10 colors/black)
   (rtd/draw-text! "- Move: W, A, S, D, Space, Left-Ctrl" 15 30 10 colors/black)
   (rtd/draw-text! "- Look around: mouse" 15 45 10 colors/black)
@@ -237,7 +260,10 @@
   (rtd/draw-text! "- Exit: Q" 15 90 10 colors/black)
 
   ;; Draw camera status box
-  (rsb/draw-rectangle! 600 5 195 100 {:r 102 :g 191 :b 255 :a 127})
+  (rsb/draw-rectangle! 600 5 195 100 {:r 102
+                                      :g 191
+                                      :b 255
+                                      :a 127})
   (rtd/draw-text! "Camera status:" 610 15 10 colors/black)
   (rtd/draw-text! (str "- Mode: " (camera-mode-name camera-mode)) 610 30 10 colors/black)
   (rtd/draw-text! (str "- Proj: " (projection-name (:projection camera))) 610 45 10 colors/black)

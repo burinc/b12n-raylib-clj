@@ -33,7 +33,10 @@
 (def FORE_SPEED 1.0)
 
 ;; Background color (dark blue: 0x052c46ff)
-(def BG_COLOR {:r 5 :g 44 :b 70 :a 255})
+(def BG_COLOR {:r 5
+               :g 44
+               :b 70
+               :a 255})
 
 (defn initial-state []
   {:exit? false
@@ -60,7 +63,8 @@
            :foreground foreground)))
 
 (defn update-scrolling [{:keys [background midground foreground
-                                scrolling-back scrolling-mid scrolling-fore] :as game}]
+                                scrolling-back scrolling-mid scrolling-fore]
+                         :as game}]
   (let [;; Update scrolling positions
         new-back (- scrolling-back BACK_SPEED)
         new-mid (- scrolling-mid MID_SPEED)
@@ -91,9 +95,11 @@
   [texture scroll-x y-offset]
   (let [tex-width (* (:width texture) 2)]
     ;; Draw first copy
-    (ext/draw-texture-ex! texture {:x scroll-x :y y-offset} 0.0 2.0 colors/white)
+    (ext/draw-texture-ex! texture {:x scroll-x
+                                   :y y-offset} 0.0 2.0 colors/white)
     ;; Draw second copy (seamless wrap)
-    (ext/draw-texture-ex! texture {:x (+ tex-width scroll-x) :y y-offset} 0.0 2.0 colors/white)))
+    (ext/draw-texture-ex! texture {:x (+ tex-width scroll-x)
+                                   :y y-offset} 0.0 2.0 colors/white)))
 
 (defn draw [{:keys [background midground foreground
                     scrolling-back scrolling-mid scrolling-fore]}]
