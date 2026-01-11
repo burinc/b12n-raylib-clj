@@ -2,17 +2,17 @@
   "Vampire Survivors Clone - A top-down survival roguelike
    Survive waves of enemies, auto-attack with weapons, collect XP, level up!"
   (:require
-    [raylib.core.window :as rcw]
-    [raylib.nrepl :as nrepl]
-    [raylib.core.timing :as rct]
-    [raylib.core.drawing :as rcd]
-    [raylib.core.keyboard :as rck]
-    [raylib.text.drawing :as rtd]
-    [raylib.colors :as colors]
-    [raylib.enums :as enums]
-    [raylib.shapes.basic :as rsb]
-    [raylib-ext :as ext]
-    [debug-stats])
+   [raylib.core.window :as rcw]
+   [raylib.nrepl :as nrepl]
+   [raylib.core.timing :as rct]
+   [raylib.core.drawing :as rcd]
+   [raylib.core.keyboard :as rck]
+   [raylib.text.drawing :as rtd]
+   [raylib.colors :as colors]
+   [raylib.enums :as enums]
+   [raylib.shapes.basic :as rsb]
+   [raylib-ext :as ext]
+   [debug-stats])
   (:gen-class))
 
 ;; ============================================================================
@@ -67,17 +67,22 @@
 (defn normalize [v]
   (let [len (Math/sqrt (+ (* (:x v) (:x v)) (* (:y v) (:y v))))]
     (if (> len 0)
-      {:x (/ (:x v) len) :y (/ (:y v) len)}
-      {:x 0 :y 0})))
+      {:x (/ (:x v) len)
+       :y (/ (:y v) len)}
+      {:x 0
+       :y 0})))
 
 (defn vec-scale [v s]
-  {:x (* (:x v) s) :y (* (:y v) s)})
+  {:x (* (:x v) s)
+   :y (* (:y v) s)})
 
 (defn vec-add [v1 v2]
-  {:x (+ (:x v1) (:x v2)) :y (+ (:y v1) (:y v2))})
+  {:x (+ (:x v1) (:x v2))
+   :y (+ (:y v1) (:y v2))})
 
 (defn vec-sub [v1 v2]
-  {:x (- (:x v1) (:x v2)) :y (- (:y v1) (:y v2))})
+  {:x (- (:x v1) (:x v2))
+   :y (- (:y v1) (:y v2))})
 
 (defn vec-len [v]
   (Math/sqrt (+ (* (:x v) (:x v)) (* (:y v) (:y v)))))
@@ -86,7 +91,8 @@
   (Math/atan2 (- (:y to) (:y from)) (- (:x to) (:x from))))
 
 (defn rotate-vec [angle]
-  {:x (Math/cos angle) :y (Math/sin angle)})
+  {:x (Math/cos angle)
+   :y (Math/sin angle)})
 
 (defn clamp [v min-v max-v]
   (max min-v (min max-v v)))
@@ -188,14 +194,38 @@
 
 ;; Weapon upgrade effects per level (multiplicative bonuses)
 (def weapon-level-bonuses
-  {1 {:damage 1.0 :projectile-count 1 :area 1.0 :cooldown 1.0}
-   2 {:damage 1.2 :projectile-count 1 :area 1.1 :cooldown 0.95}
-   3 {:damage 1.4 :projectile-count 2 :area 1.2 :cooldown 0.90}
-   4 {:damage 1.6 :projectile-count 2 :area 1.3 :cooldown 0.85}
-   5 {:damage 1.8 :projectile-count 3 :area 1.4 :cooldown 0.80}
-   6 {:damage 2.0 :projectile-count 3 :area 1.5 :cooldown 0.75}
-   7 {:damage 2.3 :projectile-count 4 :area 1.6 :cooldown 0.70}
-   8 {:damage 2.6 :projectile-count 5 :area 1.8 :cooldown 0.65}})
+  {1 {:damage 1.0
+      :projectile-count 1
+      :area 1.0
+      :cooldown 1.0}
+   2 {:damage 1.2
+      :projectile-count 1
+      :area 1.1
+      :cooldown 0.95}
+   3 {:damage 1.4
+      :projectile-count 2
+      :area 1.2
+      :cooldown 0.90}
+   4 {:damage 1.6
+      :projectile-count 2
+      :area 1.3
+      :cooldown 0.85}
+   5 {:damage 1.8
+      :projectile-count 3
+      :area 1.4
+      :cooldown 0.80}
+   6 {:damage 2.0
+      :projectile-count 3
+      :area 1.5
+      :cooldown 0.75}
+   7 {:damage 2.3
+      :projectile-count 4
+      :area 1.6
+      :cooldown 0.70}
+   8 {:damage 2.6
+      :projectile-count 5
+      :area 1.8
+      :cooldown 0.65}})
 
 ;; ============================================================================
 ;; DATA DEFINITIONS - PASSIVE ITEMS
@@ -270,7 +300,10 @@
     :base-speed 40
     :xp-value 1
     :size 20
-    :color {:r 100 :g 150 :b 100 :a 255}}
+    :color {:r 100
+            :g 150
+            :b 100
+            :a 255}}
 
    :bat
    {:name "Bat"
@@ -279,7 +312,10 @@
     :base-speed 100
     :xp-value 1
     :size 15
-    :color {:r 80 :g 60 :b 80 :a 255}}
+    :color {:r 80
+            :g 60
+            :b 80
+            :a 255}}
 
    :skeleton
    {:name "Skeleton"
@@ -288,7 +324,10 @@
     :base-speed 60
     :xp-value 3
     :size 22
-    :color {:r 200 :g 200 :b 180 :a 255}}
+    :color {:r 200
+            :g 200
+            :b 180
+            :a 255}}
 
    :ghoul
    {:name "Ghoul"
@@ -297,7 +336,10 @@
     :base-speed 35
     :xp-value 5
     :size 28
-    :color {:r 60 :g 80 :b 60 :a 255}}
+    :color {:r 60
+            :g 80
+            :b 60
+            :a 255}}
 
    :elite-zombie
    {:name "Elite Zombie"
@@ -306,7 +348,10 @@
     :base-speed 50
     :xp-value 10
     :size 30
-    :color {:r 150 :g 200 :b 150 :a 255}
+    :color {:r 150
+            :g 200
+            :b 150
+            :a 255}
     :elite? true}
 
    :boss-giant
@@ -316,7 +361,10 @@
     :base-speed 30
     :xp-value 100
     :size 60
-    :color {:r 200 :g 50 :b 50 :a 255}
+    :color {:r 200
+            :g 50
+            :b 50
+            :a 255}
     :boss? true}
 
    :boss-reaper
@@ -326,7 +374,10 @@
     :base-speed 40
     :xp-value 200
     :size 70
-    :color {:r 30 :g 30 :b 30 :a 255}
+    :color {:r 30
+            :g 30
+            :b 30
+            :a 255}
     :boss? true}})
 
 ;; ============================================================================
@@ -334,26 +385,53 @@
 ;; ============================================================================
 
 (def spawn-waves
-  [{:start-time 0 :enemies [:zombie] :multiplier 1.0}
-   {:start-time (* 60 2) :enemies [:zombie :bat] :multiplier 1.2}
-   {:start-time (* 60 4) :enemies [:zombie :bat :skeleton] :multiplier 1.5}
-   {:start-time (* 60 6) :enemies [:bat :skeleton] :multiplier 1.8}
-   {:start-time (* 60 8) :enemies [:skeleton :ghoul] :multiplier 2.0}
-   {:start-time (* 60 10) :enemies [:skeleton :ghoul :elite-zombie] :multiplier 2.5 :boss :boss-giant}
-   {:start-time (* 60 12) :enemies [:ghoul :elite-zombie] :multiplier 3.0}
-   {:start-time (* 60 15) :enemies [:ghoul :elite-zombie] :multiplier 4.0}
-   {:start-time (* 60 18) :enemies [:elite-zombie] :multiplier 5.0}
-   {:start-time (* 60 20) :enemies [:elite-zombie] :multiplier 6.0 :boss :boss-reaper}
-   {:start-time (* 60 25) :enemies [:elite-zombie :ghoul] :multiplier 8.0}])
+  [{:start-time 0
+    :enemies [:zombie]
+    :multiplier 1.0}
+   {:start-time (* 60 2)
+    :enemies [:zombie :bat]
+    :multiplier 1.2}
+   {:start-time (* 60 4)
+    :enemies [:zombie :bat :skeleton]
+    :multiplier 1.5}
+   {:start-time (* 60 6)
+    :enemies [:bat :skeleton]
+    :multiplier 1.8}
+   {:start-time (* 60 8)
+    :enemies [:skeleton :ghoul]
+    :multiplier 2.0}
+   {:start-time (* 60 10)
+    :enemies [:skeleton :ghoul :elite-zombie]
+    :multiplier 2.5
+    :boss :boss-giant}
+   {:start-time (* 60 12)
+    :enemies [:ghoul :elite-zombie]
+    :multiplier 3.0}
+   {:start-time (* 60 15)
+    :enemies [:ghoul :elite-zombie]
+    :multiplier 4.0}
+   {:start-time (* 60 18)
+    :enemies [:elite-zombie]
+    :multiplier 5.0}
+   {:start-time (* 60 20)
+    :enemies [:elite-zombie]
+    :multiplier 6.0
+    :boss :boss-reaper}
+   {:start-time (* 60 25)
+    :enemies [:elite-zombie :ghoul]
+    :multiplier 8.0}])
 
 ;; ============================================================================
 ;; GAME STATE INITIALIZATION
 ;; ============================================================================
 
 (defn make-player []
-  {:position {:x (/ WORLD_WIDTH 2) :y (/ WORLD_HEIGHT 2)}
-   :velocity {:x 0 :y 0}
-   :facing {:x 1 :y 0}                                      ;; Direction player is facing
+  {:position {:x (/ WORLD_WIDTH 2)
+              :y (/ WORLD_HEIGHT 2)}
+   :velocity {:x 0
+              :y 0}
+   :facing {:x 1
+            :y 0}                                      ;; Direction player is facing
    :health PLAYER_BASE_HP
    :max-health PLAYER_BASE_HP
    :level 1
@@ -372,7 +450,9 @@
            :max-hp 1.0}
 
    ;; Weapons and passives
-   :weapons [{:type :whip :level 1 :cooldown-timer 0}]
+   :weapons [{:type :whip
+              :level 1
+              :cooldown-timer 0}]
    :passives []})
 
 (defn make-camera [player]
@@ -421,15 +501,15 @@
                     :max-hp 1.0}
         passives (:passives player)]
     (reduce
-      (fn [stats passive]
-        (let [passive-def (get passive-definitions (:type passive))
-              stat-key (:stat passive-def)
-              bonus (* (:level passive) (:bonus-per-level passive-def))]
-          (if (= stat-key :armor)
-            (update stats stat-key + bonus)
-            (update stats stat-key + bonus))))
-      base-stats
-      passives)))
+     (fn [stats passive]
+       (let [passive-def (get passive-definitions (:type passive))
+             stat-key (:stat passive-def)
+             bonus (* (:level passive) (:bonus-per-level passive-def))]
+         (if (= stat-key :armor)
+           (update stats stat-key + bonus)
+           (update stats stat-key + bonus))))
+     base-stats
+     passives)))
 
 (defn get-effective-pickup-radius [player]
   (* PLAYER_PICKUP_RADIUS (get-in player [:stats :pickup-radius])))
@@ -481,7 +561,8 @@
     {:id (next-id)
      :type enemy-type
      :position position
-     :velocity {:x 0 :y 0}
+     :velocity {:x 0
+                :y 0}
      :health (* (:base-hp enemy-def) time-multiplier)
      :max-health (* (:base-hp enemy-def) time-multiplier)
      :damage (* (:base-damage enemy-def) time-multiplier)
@@ -489,7 +570,8 @@
      :xp-value (:xp-value enemy-def)
      :size (:size enemy-def)
      :color (:color enemy-def)
-     :knockback {:x 0 :y 0}
+     :knockback {:x 0
+                 :y 0}
      :hit-flash 0
      :boss? (get enemy-def :boss? false)
      :elite? (get enemy-def :elite? false)}))
@@ -505,9 +587,9 @@
             enemy-types (:enemies current-wave)
             new-enemies (vec (for [_ (range enemies-to-spawn)]
                                (create-enemy
-                                 (rand-nth enemy-types)
-                                 (spawn-position-around-player (:position player))
-                                 game-time)))]
+                                (rand-nth enemy-types)
+                                (spawn-position-around-player (:position player))
+                                game-time)))]
         (-> game
             (update :enemies into new-enemies)
             (assoc :spawn-timer 0)))
@@ -553,7 +635,8 @@
   {:id (next-id)
    :type weapon-type
    :position position
-   :velocity {:x 0 :y 0}
+   :velocity {:x 0
+              :y 0}
    :damage damage
    :area area
    :pierce -1
@@ -570,12 +653,12 @@
 (defn find-nearest-enemy [position enemies]
   (when (seq enemies)
     (reduce
-      (fn [nearest enemy]
-        (let [dist-nearest (distance position (:position nearest))
-              dist-enemy (distance position (:position enemy))]
-          (if (< dist-enemy dist-nearest) enemy nearest)))
-      (first enemies)
-      (rest enemies))))
+     (fn [nearest enemy]
+       (let [dist-nearest (distance position (:position nearest))
+             dist-enemy (distance position (:position enemy))]
+         (if (< dist-enemy dist-nearest) enemy nearest)))
+     (first enemies)
+     (rest enemies))))
 
 (defn fire-whip [player weapon-stats]
   (let [pos (:position player)
@@ -593,7 +676,8 @@
              {:id (next-id)
               :type :whip
               :position (vec-add pos offset)
-              :velocity {:x 0 :y 0}
+              :velocity {:x 0
+                         :y 0}
               :damage damage
               :area (* 40 (:area weapon-stats))
               :pierce -1
@@ -637,7 +721,8 @@
   [{:id (next-id)
     :type :garlic
     :position (:position player)
-    :velocity {:x 0 :y 0}
+    :velocity {:x 0
+               :y 0}
     :damage (:damage weapon-stats)
     :area (* 80 (:area weapon-stats))
     :pierce -1
@@ -656,7 +741,8 @@
               :type :bible
               :position (vec-add pos {:x (* (Math/cos angle) base-radius)
                                       :y (* (Math/sin angle) base-radius)})
-              :velocity {:x 0 :y 0}
+              :velocity {:x 0
+                         :y 0}
               :damage (:damage weapon-stats)
               :area (* 20 (:area weapon-stats))
               :pierce -1
@@ -743,7 +829,8 @@
              (or (rck/is-key-down? (:s enums/keyboard-key))
                  (rck/is-key-down? (:down enums/keyboard-key))) 1
              :else 0)
-        dir (normalize {:x dx :y dy})
+        dir (normalize {:x dx
+                        :y dy})
         vel (vec-scale dir move-speed)
         new-pos (vec-add (:position player) (vec-scale vel dt))
         ;; Clamp to world bounds
@@ -765,21 +852,21 @@
   (let [weapons (:weapons player)
         player-stats (:stats player)]
     (reduce
-      (fn [[player new-projectiles] weapon-idx]
-        (let [weapon (get weapons weapon-idx)
-              weapon-stats (get-weapon-stats weapon player-stats)
-              new-timer (- (:cooldown-timer weapon) dt)]
-          (if (<= new-timer 0)
+     (fn [[player new-projectiles] weapon-idx]
+       (let [weapon (get weapons weapon-idx)
+             weapon-stats (get-weapon-stats weapon player-stats)
+             new-timer (- (:cooldown-timer weapon) dt)]
+         (if (<= new-timer 0)
             ;; Fire weapon
-            (let [projectiles (fire-weapon weapon player enemies)
-                  updated-weapon (assoc weapon :cooldown-timer (:cooldown weapon-stats))]
-              [(assoc-in player [:weapons weapon-idx] updated-weapon)
-               (into new-projectiles projectiles)])
+           (let [projectiles (fire-weapon weapon player enemies)
+                 updated-weapon (assoc weapon :cooldown-timer (:cooldown weapon-stats))]
+             [(assoc-in player [:weapons weapon-idx] updated-weapon)
+              (into new-projectiles projectiles)])
             ;; Just update timer
-            [(assoc-in player [:weapons weapon-idx :cooldown-timer] new-timer)
-             new-projectiles])))
-      [player []]
-      (range (count weapons)))))
+           [(assoc-in player [:weapons weapon-idx :cooldown-timer] new-timer)
+            new-projectiles])))
+     [player []]
+     (range (count weapons)))))
 
 (defn update-player [game dt]
   (let [{:keys [player enemies]} game
@@ -921,7 +1008,8 @@
    :position position
    :damage damage
    :lifetime DAMAGE_NUMBER_LIFETIME
-   :velocity {:x (rand-range -20 20) :y -50}
+   :velocity {:x (rand-range -20 20)
+              :y -50}
    :critical? critical?})
 
 (defn create-xp-gem [position value]
@@ -954,48 +1042,48 @@
               ;; Process this projectile against all enemies using filter-based approach
               [updated-proj surviving-enemies dmg-nums gems killed]
               (reduce
-                (fn [[p surviving dmg-nums gems killed] enemy]
-                  (let [enemy-id (:id enemy)]
-                    (if (and (not (contains? (:hit-enemies p) enemy-id))
-                             (check-circle-collision proj-pos proj-radius
-                                                     (:position enemy) (:size enemy)))
+               (fn [[p surviving dmg-nums gems killed] enemy]
+                 (let [enemy-id (:id enemy)]
+                   (if (and (not (contains? (:hit-enemies p) enemy-id))
+                            (check-circle-collision proj-pos proj-radius
+                                                    (:position enemy) (:size enemy)))
                       ;; Hit!
-                      (let [damage (:damage p)
-                            new-enemy-health (- (:health enemy) damage)
-                            kb-dir (normalize (vec-sub (:position enemy) player-pos))
-                            kb-force (vec-scale kb-dir 200)
+                     (let [damage (:damage p)
+                           new-enemy-health (- (:health enemy) damage)
+                           kb-dir (normalize (vec-sub (:position enemy) player-pos))
+                           kb-force (vec-scale kb-dir 200)
 
                             ;; Update projectile pierce
-                            new-pierce (if (= (:pierce p) -1)
-                                         -1
-                                         (dec (:pierce p)))
-                            updated-p (-> p
-                                          (update :hit-enemies conj enemy-id)
-                                          (assoc :pierce new-pierce))
+                           new-pierce (if (= (:pierce p) -1)
+                                        -1
+                                        (dec (:pierce p)))
+                           updated-p (-> p
+                                         (update :hit-enemies conj enemy-id)
+                                         (assoc :pierce new-pierce))
 
                             ;; Create damage number
-                            dmg-num (create-damage-number (:position enemy) damage false)]
-                        (if (<= new-enemy-health 0)
+                           dmg-num (create-damage-number (:position enemy) damage false)]
+                       (if (<= new-enemy-health 0)
                           ;; Enemy died - don't add to surviving, create gem
-                          (let [gem (create-xp-gem (:position enemy) (:xp-value enemy))]
-                            [updated-p
-                             surviving
-                             (conj dmg-nums dmg-num)
-                             (conj gems gem)
-                             (inc killed)])
+                         (let [gem (create-xp-gem (:position enemy) (:xp-value enemy))]
+                           [updated-p
+                            surviving
+                            (conj dmg-nums dmg-num)
+                            (conj gems gem)
+                            (inc killed)])
                           ;; Enemy damaged - add updated enemy to surviving
-                          [updated-p
-                           (conj surviving (-> enemy
-                                               (assoc :health new-enemy-health)
-                                               (update :knockback vec-add kb-force)
-                                               (assoc :hit-flash HIT_FLASH_DURATION)))
-                           (conj dmg-nums dmg-num)
-                           gems
-                           killed]))
+                         [updated-p
+                          (conj surviving (-> enemy
+                                              (assoc :health new-enemy-health)
+                                              (update :knockback vec-add kb-force)
+                                              (assoc :hit-flash HIT_FLASH_DURATION)))
+                          (conj dmg-nums dmg-num)
+                          gems
+                          killed]))
                       ;; No collision - keep enemy as-is
-                      [p (conj surviving enemy) dmg-nums gems killed])))
-                [proj [] new-damage-numbers new-xp-gems killed-count]
-                remaining-enemies)
+                     [p (conj surviving enemy) dmg-nums gems killed])))
+               [proj [] new-damage-numbers new-xp-gems killed-count]
+               remaining-enemies)
               ;; Check if projectile should be removed (pierce exhausted)
               keep-proj? (or (= (:pierce updated-proj) -1)
                              (> (:pierce updated-proj) 0))
@@ -1018,9 +1106,9 @@
     (if invincible?
       game
       (let [colliding-enemy (first (filter
-                                     #(check-circle-collision player-pos (/ PLAYER_SIZE 2)
-                                                              (:position %) (:size %))
-                                     enemies))]
+                                    #(check-circle-collision player-pos (/ PLAYER_SIZE 2)
+                                                             (:position %) (:size %))
+                                    enemies))]
         (if colliding-enemy
           (let [raw-damage (:damage colliding-enemy)
                 armor (get-in player [:stats :armor] 0)
@@ -1041,12 +1129,12 @@
         pickup-radius (get-effective-pickup-radius player)
         [collected remaining]
         (reduce
-          (fn [[collected remaining] gem]
-            (if (< (distance player-pos (:position gem)) (/ pickup-radius 2))
-              [(+ collected (:xp-value gem)) remaining]
-              [collected (conj remaining gem)]))
-          [0 []]
-          xp-gems)]
+         (fn [[collected remaining] gem]
+           (if (< (distance player-pos (:position gem)) (/ pickup-radius 2))
+             [(+ collected (:xp-value gem)) remaining]
+             [collected (conj remaining gem)]))
+         [0 []]
+         xp-gems)]
     (if (> collected 0)
       (-> game
           (update-in [:player :xp] + collected)
@@ -1119,8 +1207,8 @@
             (case (:type choice)
               :weapon-upgrade
               (let [weapon-idx (first (keep-indexed
-                                        (fn [i w] (when (= (:type w) (:weapon-type choice)) i))
-                                        (:weapons player)))]
+                                       (fn [i w] (when (= (:type w) (:weapon-type choice)) i))
+                                       (:weapons player)))]
                 (update-in player [:weapons weapon-idx :level] inc))
 
               :new-weapon
@@ -1130,8 +1218,8 @@
 
               :passive-upgrade
               (let [passive-idx (first (keep-indexed
-                                         (fn [i p] (when (= (:type p) (:passive-type choice)) i))
-                                         (:passives player)))]
+                                        (fn [i p] (when (= (:type p) (:passive-type choice)) i))
+                                        (:passives player)))]
                 (update-in player [:passives passive-idx :level] inc))
 
               :new-passive
@@ -1164,7 +1252,8 @@
         shake-x (if (> screen-shake 0) (rand-range -5 5) 0)
         shake-y (if (> screen-shake 0) (rand-range -5 5) 0)]
     (-> game
-        (assoc :camera {:x (+ clamped-x shake-x) :y (+ clamped-y shake-y)})
+        (assoc :camera {:x (+ clamped-x shake-x)
+                        :y (+ clamped-y shake-y)})
         (update :screen-shake #(max 0 (- % 0.016))))))
 
 ;; ============================================================================
@@ -1270,8 +1359,14 @@
   (let [grid-size 100
         start-x (- (mod (:x camera) grid-size))
         start-y (- (mod (:y camera) grid-size))
-        dark-bg {:r 15 :g 15 :b 25 :a 255}
-        grid-color {:r 30 :g 30 :b 45 :a 255}]
+        dark-bg {:r 15
+                 :g 15
+                 :b 25
+                 :a 255}
+        grid-color {:r 30
+                    :g 30
+                    :b 45
+                    :a 255}]
     ;; Background
     #_(rsb/draw-rectangle! 0 0 SCREEN_WIDTH SCREEN_HEIGHT dark-bg)
     ;; Grid lines
@@ -1291,8 +1386,14 @@
         invincible? (> (:invincibility-timer player) 0)
         flash? (and invincible? (even? (int (* (:invincibility-timer player) 10))))
         color (if flash?
-                {:r 255 :g 255 :b 255 :a 150}
-                {:r 100 :g 150 :b 255 :a 255})]
+                {:r 255
+                 :g 255
+                 :b 255
+                 :a 150}
+                {:r 100
+                 :g 150
+                 :b 255
+                 :a 255})]
     ;; Body
     (ext/draw-circle! x y PLAYER_SIZE color)
     ;; Direction indicator
@@ -1300,7 +1401,10 @@
           indicator-pos {:x (+ x (* (:x facing) 25))
                          :y (+ y (* (:y facing) 25))}]
       (ext/draw-circle! (int (:x indicator-pos)) (int (:y indicator-pos)) 6
-                        {:r 255 :g 255 :b 100 :a 255}))))
+                        {:r 255
+                         :g 255
+                         :b 100
+                         :a 255}))))
 
 (defn draw-enemies [enemies camera]
   (doseq [enemy enemies]
@@ -1340,17 +1444,41 @@
               y (int (:y screen-pos))
               size (:area proj)
               color (case (:type proj)
-                      :whip {:r 200 :g 150 :b 50 :a 200}
-                      :magic-wand {:r 150 :g 100 :b 255 :a 255}
-                      :knife {:r 200 :g 200 :b 200 :a 255}
-                      :garlic {:r 200 :g 255 :b 200 :a 100}
-                      :bible {:r 255 :g 255 :b 100 :a 255}
-                      :cross {:r 255 :g 255 :b 255 :a 255}
-                      :axe {:r 150 :g 100 :b 50 :a 255}
+                      :whip {:r 200
+                             :g 150
+                             :b 50
+                             :a 200}
+                      :magic-wand {:r 150
+                                   :g 100
+                                   :b 255
+                                   :a 255}
+                      :knife {:r 200
+                              :g 200
+                              :b 200
+                              :a 255}
+                      :garlic {:r 200
+                               :g 255
+                               :b 200
+                               :a 100}
+                      :bible {:r 255
+                              :g 255
+                              :b 100
+                              :a 255}
+                      :cross {:r 255
+                              :g 255
+                              :b 255
+                              :a 255}
+                      :axe {:r 150
+                            :g 100
+                            :b 50
+                            :a 255}
                       colors/white)]
           ;; Different shapes for different weapons
           (case (:type proj)
-            :garlic (ext/draw-circle! x y size {:r 200 :g 255 :b 200 :a 50})
+            :garlic (ext/draw-circle! x y size {:r 200
+                                                :g 255
+                                                :b 200
+                                                :a 50})
             :whip (rsb/draw-rectangle! (int (- x size)) (int (- y 5)) (int (* size 2)) 10 color)
             (ext/draw-circle! x y size color)))))))
 
@@ -1363,11 +1491,23 @@
               size (+ 6 (* (:xp-value gem) 0.5))
               glow-size (+ size 3)
               color (cond
-                      (>= (:xp-value gem) 10) {:r 100 :g 255 :b 100 :a 255}
-                      (>= (:xp-value gem) 5) {:r 100 :g 200 :b 255 :a 255}
-                      :else {:r 100 :g 150 :b 255 :a 255})]
+                      (>= (:xp-value gem) 10) {:r 100
+                                               :g 255
+                                               :b 100
+                                               :a 255}
+                      (>= (:xp-value gem) 5) {:r 100
+                                              :g 200
+                                              :b 255
+                                              :a 255}
+                      :else {:r 100
+                             :g 150
+                             :b 255
+                             :a 255})]
           ;; Glow
-          (ext/draw-circle! x y glow-size {:r (:r color) :g (:g color) :b (:b color) :a 100})
+          (ext/draw-circle! x y glow-size {:r (:r color)
+                                           :g (:g color)
+                                           :b (:b color)
+                                           :a 100})
           ;; Gem
           (ext/draw-circle! x y size color))))))
 
@@ -1375,7 +1515,10 @@
   (doseq [num damage-numbers]
     (let [screen-pos (world-to-screen (:position num) camera)
           alpha (int (* 255 (/ (:lifetime num) DAMAGE_NUMBER_LIFETIME)))
-          color {:r 255 :g (if (:critical? num) 100 255) :b 100 :a alpha}]
+          color {:r 255
+                 :g (if (:critical? num) 100 255)
+                 :b 100
+                 :a alpha}]
       (rtd/draw-text! (str (int (:damage num)))
                       (int (:x screen-pos)) (int (:y screen-pos))
                       20 color))))
@@ -1392,10 +1535,16 @@
         bar-width 250
         bar-height 25]
     ;; Background
-    (rsb/draw-rectangle! bar-x bar-y bar-width bar-height {:r 60 :g 20 :b 20 :a 255})
+    (rsb/draw-rectangle! bar-x bar-y bar-width bar-height {:r 60
+                                                           :g 20
+                                                           :b 20
+                                                           :a 255})
     ;; Health
     (rsb/draw-rectangle! bar-x bar-y (int (* bar-width hp-pct)) bar-height
-                         {:r 200 :g 50 :b 50 :a 255})
+                         {:r 200
+                          :g 50
+                          :b 50
+                          :a 255})
     ;; Border
     (ext/draw-line! bar-x bar-y (+ bar-x bar-width) bar-y colors/white)
     (ext/draw-line! bar-x (+ bar-y bar-height) (+ bar-x bar-width) (+ bar-y bar-height) colors/white)
@@ -1414,10 +1563,16 @@
         bar-width 250
         bar-height 15]
     ;; Background
-    (rsb/draw-rectangle! bar-x bar-y bar-width bar-height {:r 20 :g 20 :b 60 :a 255})
+    (rsb/draw-rectangle! bar-x bar-y bar-width bar-height {:r 20
+                                                           :g 20
+                                                           :b 60
+                                                           :a 255})
     ;; XP
     (rsb/draw-rectangle! bar-x bar-y (int (* bar-width xp-pct)) bar-height
-                         {:r 80 :g 80 :b 200 :a 255})
+                         {:r 80
+                          :g 80
+                          :b 200
+                          :a 255})
     ;; Level text
     (rtd/draw-text! (str "LV " (:level player))
                     (+ bar-x bar-width 10) (+ bar-y -2) 18 colors/white)))
@@ -1440,16 +1595,40 @@
     (doseq [[idx weapon] (map-indexed vector weapons)]
       (let [x (+ start-x (* idx (+ icon-size spacing)))
             color (case (:type weapon)
-                    :whip {:r 200 :g 150 :b 50 :a 255}
-                    :magic-wand {:r 150 :g 100 :b 255 :a 255}
-                    :knife {:r 200 :g 200 :b 200 :a 255}
-                    :garlic {:r 150 :g 255 :b 150 :a 255}
-                    :bible {:r 255 :g 255 :b 100 :a 255}
-                    :cross {:r 255 :g 255 :b 255 :a 255}
-                    :axe {:r 150 :g 100 :b 50 :a 255}
+                    :whip {:r 200
+                           :g 150
+                           :b 50
+                           :a 255}
+                    :magic-wand {:r 150
+                                 :g 100
+                                 :b 255
+                                 :a 255}
+                    :knife {:r 200
+                            :g 200
+                            :b 200
+                            :a 255}
+                    :garlic {:r 150
+                             :g 255
+                             :b 150
+                             :a 255}
+                    :bible {:r 255
+                            :g 255
+                            :b 100
+                            :a 255}
+                    :cross {:r 255
+                            :g 255
+                            :b 255
+                            :a 255}
+                    :axe {:r 150
+                          :g 100
+                          :b 50
+                          :a 255}
                     colors/gray)]
         ;; Icon background
-        (rsb/draw-rectangle! x start-y icon-size icon-size {:r 40 :g 40 :b 40 :a 255})
+        (rsb/draw-rectangle! x start-y icon-size icon-size {:r 40
+                                                            :g 40
+                                                            :b 40
+                                                            :a 255})
         ;; Weapon symbol
         (ext/draw-circle! (+ x (/ icon-size 2)) (+ start-y (/ icon-size 2)) 12 color)
         ;; Level
@@ -1465,7 +1644,10 @@
 ;; ============================================================================
 
 (defn draw-pause-menu []
-  (let [overlay-color {:r 0 :g 0 :b 0 :a 180}]
+  (let [overlay-color {:r 0
+                       :g 0
+                       :b 0
+                       :a 180}]
     (rsb/draw-rectangle! 0 0 SCREEN_WIDTH SCREEN_HEIGHT overlay-color)
     (let [text "PAUSED"
           size 60
@@ -1479,7 +1661,10 @@
                       (int (+ (/ SCREEN_HEIGHT 2) 20)) size colors/gray))))
 
 (defn draw-level-up-menu [choices _player]
-  (let [overlay-color {:r 0 :g 0 :b 50 :a 200}]
+  (let [overlay-color {:r 0
+                       :g 0
+                       :b 50
+                       :a 200}]
     (rsb/draw-rectangle! 0 0 SCREEN_WIDTH SCREEN_HEIGHT overlay-color)
 
     ;; Title
@@ -1500,7 +1685,10 @@
               box-width (- choice-width 20)]
           ;; Box background
           (rsb/draw-rectangle! (int x) (int y) (int box-width) choice-height
-                               {:r 40 :g 40 :b 60 :a 255})
+                               {:r 40
+                                :g 40
+                                :b 60
+                                :a 255})
           ;; Number key
           (rtd/draw-text! (str "[" (inc idx) "]")
                           (int (+ x 10)) (int (+ y 10)) 24 colors/yellow)
@@ -1532,7 +1720,10 @@
             (rtd/draw-text! desc (int (+ x 10)) (int (+ y 75)) 14 colors/lightgray)))))))
 
 (defn draw-game-over [game]
-  (let [overlay-color {:r 100 :g 0 :b 0 :a 200}]
+  (let [overlay-color {:r 100
+                       :g 0
+                       :b 0
+                       :a 200}]
     (rsb/draw-rectangle! 0 0 SCREEN_WIDTH SCREEN_HEIGHT overlay-color)
 
     (let [text "GAME OVER"

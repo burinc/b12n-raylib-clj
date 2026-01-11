@@ -162,21 +162,21 @@
   (let [piece-pos-x (int (/ (- GRID_HORIZONTAL_SIZE 4) 2))
         piece-pos-y 0
         {:keys [begin-play incoming-piece grid]} game
-        
+
         ;; If beginning, generate first incoming piece
         [game incoming-piece] (if begin-play
                                 [(assoc game :begin-play false) (get-random-piece)]
                                 [game incoming-piece])
-        
+
         ;; Current piece becomes the incoming piece
         new-piece incoming-piece
-        
+
         ;; Generate new incoming piece
         new-incoming (get-random-piece)
-        
+
         ;; Place the piece on the grid
         new-grid (place-piece-on-grid grid new-piece piece-pos-x piece-pos-y)]
-    
+
     (assoc game
            :piece new-piece
            :incoming-piece new-incoming
@@ -220,7 +220,7 @@
                :grid new-grid
                :detection false
                :piece-active false))
-      
+
       ;; Move piece down
       (let [new-grid (reduce
                       (fn [g [i j]]
@@ -286,7 +286,7 @@
                :grid (move-piece-lateral grid :left)
                :piece-position-x (dec piece-position-x)
                :lateral-movement-counter 0))
-      
+
       (rck/is-key-down? (:right enums/keyboard-key))
       (if (check-lateral-collision grid :right)
         game
@@ -294,7 +294,7 @@
                :grid (move-piece-lateral grid :right)
                :piece-position-x (inc piece-position-x)
                :lateral-movement-counter 0))
-      
+
       :else game)))
 
 ;; ROTATION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -452,17 +452,17 @@
 (defn update-game [game]
   ;; Update debug stats
   (debug-stats/update!)
-  
+
   ;; Handle F11 fullscreen toggle
   (when (rck/is-key-pressed? (:f11 enums/keyboard-key))
     (rcw/toggle-borderless-windowed!))
-  
+
   (if (:game-over game)
     ;; Game over - check for restart
     (if (rck/is-key-pressed? (:enter enums/keyboard-key))
       (init-game)
       game)
-    
+
     ;; Game running
     (let [game (if (rck/is-key-pressed? (:p enums/keyboard-key))
                  (update game :pause not)
@@ -487,14 +487,14 @@
                        :line-to-delete false
                        :lines (+ (:lines game) deleted-lines)))
               game))
-          
+
           ;; Normal gameplay
           (if (not (:piece-active game))
             ;; Create new piece
             (-> game
                 create-piece
                 (assoc :fast-fall-movement-counter 0))
-            
+
             ;; Piece is falling
             (let [;; Update counters
                   game (-> game
@@ -502,22 +502,22 @@
                            (update :gravity-movement-counter inc)
                            (update :lateral-movement-counter inc)
                            (update :turn-movement-counter inc))
-                  
+
                   ;; Immediate response to key presses
                   game (cond-> game
                          (or (rck/is-key-pressed? (:left enums/keyboard-key))
                              (rck/is-key-pressed? (:right enums/keyboard-key)))
                          (assoc :lateral-movement-counter LATERAL_SPEED)
-                         
+
                          (rck/is-key-pressed? (:up enums/keyboard-key))
                          (assoc :turn-movement-counter TURNING_SPEED))
-                  
+
                   ;; Fast fall
                   game (if (and (rck/is-key-down? (:down enums/keyboard-key))
                                 (>= (:fast-fall-movement-counter game) FAST_FALL_AWAIT_COUNTER))
                          (update game :gravity-movement-counter + (:gravity-speed game))
                          game)
-                  
+
                   ;; Gravity movement
                   game (if (>= (:gravity-movement-counter game) (:gravity-speed game))
                          (let [detection (check-detection (:grid game))
@@ -526,17 +526,17 @@
                                game (check-completion game)]
                            (assoc game :gravity-movement-counter 0))
                          game)
-                  
+
                   ;; Lateral movement
                   game (if (>= (:lateral-movement-counter game) LATERAL_SPEED)
                          (resolve-lateral-movement game)
                          game)
-                  
+
                   ;; Turn movement
                   game (if (>= (:turn-movement-counter game) TURNING_SPEED)
                          (resolve-turn-movement game)
                          game)
-                  
+
                   ;; Check game over
                   game (if (check-game-over (:grid game))
                          (assoc game :game-over true)
@@ -568,7 +568,7 @@
 (defn draw-game [game]
   (rcd/begin-drawing!)
   (rcd/clear-background! colors/raywhite)
-  
+
   (when game
     (if-not (:game-over game)
       (do
@@ -579,7 +579,7 @@
                              (* SQUARE_SIZE 2))
                           50)
               fading-color (:fading-color game)]
-          
+
           ;; Draw main grid
           (doseq [j (range GRID_VERTICAL_SIZE)
                   i (range GRID_HORIZONTAL_SIZE)]
@@ -587,7 +587,7 @@
                   y (int (+ offset-y (* j SQUARE_SIZE)))
                   square-type (grid-get (:grid game) i j)]
               (draw-grid-square x y square-type fading-color)))
-          
+
           ;; Draw incoming piece preview
           (let [preview-x 500
                 preview-y 45]
@@ -604,11 +604,11 @@
                     (ext/draw-line! x y x (+ y SQUARE_SIZE) colors/lightgray)
                     (ext/draw-line! (+ x SQUARE_SIZE) y (+ x SQUARE_SIZE) (+ y SQUARE_SIZE) colors/lightgray)
                     (ext/draw-line! x (+ y SQUARE_SIZE) (+ x SQUARE_SIZE) (+ y SQUARE_SIZE) colors/lightgray)))))
-            
+
             ;; Draw labels
             (rtd/draw-text! "INCOMING:" preview-x (- preview-y 15) 10 colors/gray)
             (rtd/draw-text! (str "LINES:      " (format "%04d" (:lines game))) preview-x (+ preview-y 100) 10 colors/gray))
-          
+
           ;; Draw pause message
           (when (:pause game)
             (let [text "GAME PAUSED"
@@ -616,13 +616,13 @@
                   width (ext/measure-text text size)]
               (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2)))
                               (int (- (/ SCREEN_HEIGHT 2) 40)) size colors/gray))))
-        
+
         ;; Draw controls info
         (rtd/draw-text! "F1 debug | F11 fullscreen | P pause | Arrows: move | Up: rotate" 10 (- SCREEN_HEIGHT 25) 12 colors/darkgray)
-        
+
         ;; Draw debug stats
         (debug-stats/draw!))
-      
+
       ;; Game over screen
       (let [text "PRESS [ENTER] TO PLAY AGAIN"
             size 20
@@ -630,7 +630,7 @@
         (rtd/draw-text! text (int (- (/ (rcw/get-screen-width) 2) (/ width 2)))
                         (int (- (/ (rcw/get-screen-height) 2) 50)) size colors/gray)
         (debug-stats/draw!))))
-  
+
   (rcd/end-drawing!))
 
 ;; MAIN ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -642,18 +642,18 @@
   (rcw/set-config-flags! (bit-or (:window-resizable enums/config-flag)
                                  (:vsync-hint enums/config-flag)))
   (rcw/init-window! SCREEN_WIDTH SCREEN_HEIGHT "classic game: tetris")
-  
+
   ;; Enable debug stats - press F1 to toggle
   (debug-stats/enable!)
-  
+
   (reset! game-state (init-game))
-  
+
   (loop []
     (when-not (rcw/window-should-close?)
       (swap! game-state update-game)
       (draw-game @game-state)
       (recur)))
-  
+
   (rcw/close-window!))
 
 (comment

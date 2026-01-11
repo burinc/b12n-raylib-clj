@@ -20,7 +20,9 @@
 (def render-target (atom nil))
 
 ;; Current scale and offset for letterboxing
-(def screen-state (atom {:scale 1.0 :offset-x 0 :offset-y 0}))
+(def screen-state (atom {:scale 1.0
+                         :offset-x 0
+                         :offset-y 0}))
 
 ;; CREDITS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; All the math and helper functions for this asteroids impl are from
@@ -71,7 +73,8 @@
 
 ;; Helper to convert [x y] to {:x x :y y} for raylib structs
 (defn vec->point [[x y]]
-  {:x (float x) :y (float y)})
+  {:x (float x)
+   :y (float y)})
 
 ;; STATE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -160,7 +163,8 @@
      (* (Math/sin angle) magnitude)]))
 
 (defn move-ship [game]
-  (update game :ship (fn [{:keys [position velocity] :as  ship}]
+  (update game :ship (fn [{:keys [position velocity]
+                           :as  ship}]
                        (assoc ship :position
                               (vector-wrap (vector-add position velocity) WIDTH)))))
 
@@ -198,7 +202,8 @@
   (let [result (ext/check-collision-circles? (vec->point center1) (float radius1) (vec->point center2) (float radius2))]
     (if (boolean? result) result (pos? result))))
 
-(defn ship-collides-asteroid? [sps {:keys [position size] :as asteroid}]
+(defn ship-collides-asteroid? [sps {:keys [position size]
+                                    :as asteroid}]
   (not (every? false?
                (map (fn [point]
                       (check-point-circle point position (asteroid-radius asteroid)))
@@ -233,13 +238,12 @@
         collided-asteroids (mapv second collisions)
         collided-bullets (mapv first collisions)
         asteroids-remaining  (mapcat (fn [asteroid]
-                                    (if (some #(= asteroid %) collided-asteroids)
-                                      (explode-asteroid asteroid)
-                                      [asteroid])) asteroids)
+                                       (if (some #(= asteroid %) collided-asteroids)
+                                         (explode-asteroid asteroid)
+                                         [asteroid])) asteroids)
         bullets-remaining (remove (fn [bullet] (some #(= bullet %) collided-bullets)) bullets)]
     (assoc game :bullets bullets-remaining
            :asteroids asteroids-remaining)))
-
 
 (defn bullet-firing-vector [ship]
   (let [angle (:orientation ship)
@@ -256,9 +260,9 @@
                (rck/is-key-down? (:left enums/keyboard-key)) (update :ship (fn [ship] (assoc ship :orientation (- (:orientation ship) 0.05))))
                (rck/is-key-down? (:right enums/keyboard-key)) (update :ship (fn [ship] (assoc ship :orientation (+ (:orientation ship) 0.05))))
                (rck/is-key-down? (:up enums/keyboard-key)) (update :ship (fn [ship]
-                                                        (assoc ship :velocity (vector-add (:velocity ship) (ship-thrust-vector ship)))))
+                                                                           (assoc ship :velocity (vector-add (:velocity ship) (ship-thrust-vector ship)))))
                (rck/is-key-down? (:down enums/keyboard-key)) (update :ship (fn [ship]
-                                                          (assoc ship :velocity (vector-sub (:velocity ship) (ship-thrust-vector ship))))))]
+                                                                             (assoc ship :velocity (vector-sub (:velocity ship) (ship-thrust-vector ship))))))]
     (if (rck/is-key-pressed? (:space enums/keyboard-key))
       (if (:alive game)
         (update game :bullets (fn [bullets]
@@ -295,7 +299,9 @@
         scale (min scale-x scale-y)
         offset-x (/ (- screen-width (* VIRTUAL_WIDTH scale)) 2.0)
         offset-y (/ (- screen-height (* VIRTUAL_HEIGHT scale)) 2.0)]
-    {:scale scale :offset-x offset-x :offset-y offset-y}))
+    {:scale scale
+     :offset-x offset-x
+     :offset-y offset-y}))
 
 (defn update-screen-state!
   "Update screen state when window is resized"
@@ -303,7 +309,8 @@
   (when (or (rcw/is-window-resized?) (= 1 (:frame-counter @game-atom)))
     (reset! screen-state (calculate-letterbox-scale))))
 
-(defn tick [{:keys [screen] :as game}]
+(defn tick [{:keys [screen]
+             :as game}]
   ;; Update debug stats (handles F1 toggle)
   (debug-stats/update!)
 
@@ -331,7 +338,8 @@
 
 ;; DRAW ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn draw-asteroid [{:keys [position] :as asteroid}]
+(defn draw-asteroid [{:keys [position]
+                      :as asteroid}]
   (let [x (int (Math/floor (first position)))
         y (int (Math/floor (second position)))
         radius (asteroid-radius asteroid)]
@@ -380,7 +388,8 @@
   (draw-triangle (retro-thrust-points1 (:ship game)) colors/orange)
   (draw-triangle (retro-thrust-points2 (:ship game)) colors/orange))
 
-(defn draw-ship [{:keys [frame-counter ship] :as game}]
+(defn draw-ship [{:keys [frame-counter ship]
+                  :as game}]
   (let [is-alternate-frame (< (mod frame-counter 5) 3)]
     (when (and (rck/is-key-down? (:up enums/keyboard-key)) is-alternate-frame)
       (draw-thrust game))
@@ -434,7 +443,8 @@
 
 (defn draw-to-render-texture
   "Draw game content to render texture at virtual resolution"
-  [{:keys [screen] :as game}]
+  [{:keys [screen]
+    :as game}]
   (ext/begin-texture-mode! @render-target)
   (condp = screen
     :title (draw-title-content game)
@@ -448,15 +458,20 @@
   (let [{:keys [scale offset-x offset-y]} @screen-state
         target @render-target
         ;; Source rectangle (entire render texture, flipped Y because OpenGL)
-        source {:x 0.0 :y (float VIRTUAL_HEIGHT)
-                :width (float VIRTUAL_WIDTH) :height (float (- VIRTUAL_HEIGHT))}
+        source {:x 0.0
+                :y (float VIRTUAL_HEIGHT)
+                :width (float VIRTUAL_WIDTH)
+                :height (float (- VIRTUAL_HEIGHT))}
         ;; Destination rectangle (scaled and centered on screen)
-        dest {:x (float offset-x) :y (float offset-y)
+        dest {:x (float offset-x)
+              :y (float offset-y)
               :width (float (* VIRTUAL_WIDTH scale))
               :height (float (* VIRTUAL_HEIGHT scale))}]
-    (ext/draw-texture-pro! (:texture target) source dest {:x 0.0 :y 0.0} 0.0 colors/white)))
+    (ext/draw-texture-pro! (:texture target) source dest {:x 0.0
+                                                          :y 0.0} 0.0 colors/white)))
 
-(defn draw [{:keys [screen] :as game}]
+(defn draw [{:keys [screen]
+             :as game}]
   (try
     ;; First render game to virtual resolution texture
     (draw-to-render-texture game)
@@ -487,7 +502,7 @@
 (defn init []
   ;; Set config flags before creating window
   (rcw/set-config-flags! (bit-or (:window-resizable enums/config-flag)
-                                  (:vsync-hint enums/config-flag)))
+                                 (:vsync-hint enums/config-flag)))
 
   ;; Get monitor size for fullscreen
   (rcw/init-window! VIRTUAL_WIDTH VIRTUAL_HEIGHT "Raylib Clojure Asteroids")

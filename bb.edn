@@ -30,46 +30,47 @@
   ;; 🎮 Game Examples - Run with: bb <game-name>
   ;; =============================================================================
 
+  ;; NOTE: Use 'clojure' not 'clj' - GUI apps don't work with rlwrap
   hello-world
   {:doc "🎮 Run Hello World example (basic window test)"
    :task (do
            (header "🎮 Running Hello World")
            (info "Basic window with text - good for testing setup")
-           (p/shell "clj" "-M:hello-world"))}
+           (p/shell "clojure" "-M:hello-world"))}
 
   pong
   {:doc "🎮 Run Pong - classic two-player paddle game"
    :task (do
            (header "🏓 Running Pong")
            (info "Controls: W/S (left paddle), K/J (right paddle), Enter to start")
-           (p/shell "clj" "-M:pong"))}
+           (p/shell "clojure" "-M:pong"))}
 
   asteroids
   {:doc "🎮 Run Asteroids - shoot asteroids and survive"
    :task (do
            (header "🚀 Running Asteroids")
            (info "Controls: Arrow keys to move, Space to shoot")
-           (p/shell "clj" "-M:asteroids"))}
+           (p/shell "clojure" "-M:asteroids"))}
 
   asteroids2
   {:doc "🎮 Run Asteroids 2 - alternate version"
    :task (do
            (header "🚀 Running Asteroids 2")
            (info "Controls: Arrow keys to move, Space to shoot")
-           (p/shell "clj" "-M:asteroids2"))}
+           (p/shell "clojure" "-M:asteroids2"))}
 
   tetris
   {:doc "🎮 Run Tetris - block-stacking puzzle game"
    :task (do
            (header "🧱 Running Tetris")
            (info "Controls: Arrow keys to move/rotate, Space to drop")
-           (p/shell "clj" "-M:tetris"))}
+           (p/shell "clojure" "-M:tetris"))}
 
   vampire-survivors
   {:doc "🎮 Run Vampire Survivors - survival action game"
    :task (do
            (header "🧛 Running Vampire Survivors")
-           (p/shell "clj" "-M:vampire-survivors"))}
+           (p/shell "clojure" "-M:vampire-survivors"))}
 
   ;; =============================================================================
   ;; 🔧 Development

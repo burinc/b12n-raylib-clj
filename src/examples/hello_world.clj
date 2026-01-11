@@ -48,24 +48,28 @@
   (rtd/draw-text! "press F1 for debug stats" 100 180 20 colors/gray)
   (rtd/draw-text! (str "dt: " (:dt game)) 100 220 20 colors/purple)
   ;(rtd/draw-text! (str "fps: " (:avg-fps game)) 100 250 20 colors/purple)
-  (rtd/draw-text {:text (str "fps: " (:avg-fps game)) :x 100 :y 250 :size 20 :color colors/purple})
+  (rtd/draw-text {:text (str "fps: " (:avg-fps game))
+                  :x 100
+                  :y 250
+                  :size 20
+                  :color colors/purple})
   ;; Draw debug stats overlay (only shows when F1 toggled on)
   (debug-stats/draw!)
   (rcd/end-drawing!))
 
 (def game-atom (atom
-                 {:exit? false
-                  :label "Hello world"
-                  :dt 0
-                  :time (System/nanoTime)
-                  :time-acc [1]}))
+                {:exit? false
+                 :label "Hello world"
+                 :dt 0
+                 :time (System/nanoTime)
+                 :time-acc [1]}))
 
 (defn start []
   (nrepl/start {:port 7888})
   (init)
   (loop []
     (let [game (tick (assoc @game-atom
-                       :dt (rct/get-frame-time)))]
+                            :dt (rct/get-frame-time)))]
       (when-not (or (:exit? game) (rcw/window-should-close?))
         (reset! game-atom game)
         (draw game)

@@ -1,9 +1,9 @@
 (ns raylib.core.window
   (:require
-    [raylib.core]
-    [raylib.internals :as ri]
-    [coffi.mem :as mem]
-    [coffi.ffi :refer [defcfn]]))
+   [raylib.core]
+   [raylib.internals :as ri]
+   [coffi.mem :as mem]
+   [coffi.ffi :refer [defcfn]]))
 
 (defcfn init-window!
   "Initialize window and OpenGL context"

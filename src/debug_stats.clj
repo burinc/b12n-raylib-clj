@@ -135,7 +135,7 @@
           {:keys [used-mb max-mb usage-pct]} (get-memory-stats)
           custom-stats (:custom-stats @state)
           frame-count (:frame-count @state)
-          
+
           ;; Layout
           padding 8
           line-height 18
@@ -152,31 +152,34 @@
                  (format-stat "Mem Usage" (format "%.1f" usage-pct) "%")
                  ""
                  (format-stat "Frame #" frame-count)]
-          
+
           ;; Add custom stats
           custom-lines (when (seq custom-stats)
                          (concat ["" "-- Custom --"]
                                  (map (fn [[k v]] (format-stat (name k) v)) custom-stats)))
-          
+
           all-lines (concat lines custom-lines)
-          
+
           ;; Calculate background size
           max-width (apply max (map #(if (empty? %) 0 (ext/measure-text % font-size)) all-lines))
           bg-width (+ max-width (* padding 2))
           bg-height (+ (* (count all-lines) line-height) (* padding 2))]
-      
+
       ;; Draw semi-transparent background
-      (rsb/draw-rectangle! x y bg-width bg-height {:r 0 :g 0 :b 0 :a 180})
-      
+      (rsb/draw-rectangle! x y bg-width bg-height {:r 0
+                                                   :g 0
+                                                   :b 0
+                                                   :a 180})
+
       ;; Draw border
       (rsb/draw-rectangle! x y bg-width 2 colors/green)
       (rsb/draw-rectangle! x (+ y bg-height -2) bg-width 2 colors/green)
       (rsb/draw-rectangle! x y 2 bg-height colors/green)
       (rsb/draw-rectangle! (+ x bg-width -2) y 2 bg-height colors/green)
-      
+
       ;; Draw title
       (rtd/draw-text! "[F1] Debug Stats" (+ x padding) (+ y padding) font-size colors/green)
-      
+
       ;; Draw stats
       (doseq [[idx line] (map-indexed vector all-lines)]
         (when-not (empty? line)

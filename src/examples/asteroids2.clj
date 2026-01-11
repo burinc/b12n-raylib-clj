@@ -44,17 +44,23 @@
         rotation 0.0
         collider-x (+ pos-x (* (Math/sin (* rotation DEG2RAD)) (/ ship-height 2.5)))
         collider-y (- pos-y (* (Math/cos (* rotation DEG2RAD)) (/ ship-height 2.5)))]
-    {:position {:x pos-x :y pos-y}
-     :speed {:x 0.0 :y 0.0}
+    {:position {:x pos-x
+                :y pos-y}
+     :speed {:x 0.0
+             :y 0.0}
      :acceleration 0.0
      :rotation rotation
-     :collider {:x collider-x :y collider-y :z 12.0}
+     :collider {:x collider-x
+                :y collider-y
+                :z 12.0}
      :color colors/lightgray
      :ship-height ship-height}))
 
 (defn make-shoot []
-  {:position {:x 0.0 :y 0.0}
-   :speed {:x 0.0 :y 0.0}
+  {:position {:x 0.0
+              :y 0.0}
+   :speed {:x 0.0
+           :y 0.0}
    :radius 2.0
    :rotation 0.0
    :life-spawn 0
@@ -62,8 +68,10 @@
    :color colors/white})
 
 (defn make-meteor [x y radius active]
-  {:position {:x (float x) :y (float y)}
-   :speed {:x 0.0 :y 0.0}
+  {:position {:x (float x)
+              :y (float y)}
+   :speed {:x 0.0
+           :y 0.0}
    :radius (float radius)
    :active active
    :color colors/blue})
@@ -71,7 +79,7 @@
 (defn init-game []
   (let [player (make-player)
         shoots (vec (repeatedly PLAYER_MAX_SHOOTS make-shoot))
-        
+
         ;; Initialize big meteors
         big-meteors (vec
                      (for [_ (range MAX_BIG_METEORS)]
@@ -94,15 +102,17 @@
                                              (recur (get-random-value (- METEORS_SPEED) METEORS_SPEED)
                                                     (get-random-value (- METEORS_SPEED) METEORS_SPEED))
                                              [vx vy]))]
-                         {:position {:x (float posx) :y (float posy)}
-                          :speed {:x (float velx) :y (float vely)}
+                         {:position {:x (float posx)
+                                     :y (float posy)}
+                          :speed {:x (float velx)
+                                  :y (float vely)}
                           :radius 40.0
                           :active true
                           :color colors/blue})))
-        
+
         medium-meteors (vec (repeatedly MAX_MEDIUM_METEORS #(make-meteor -100 -100 20 false)))
         small-meteors (vec (repeatedly MAX_SMALL_METEORS #(make-meteor -100 -100 10 false)))]
-    
+
     {:game-over false
      :pause false
      :victory false
@@ -121,7 +131,7 @@
   (cond-> player
     (rck/is-key-down? (:left enums/keyboard-key))
     (update :rotation #(- % 5))
-    
+
     (rck/is-key-down? (:right enums/keyboard-key))
     (update :rotation #(+ % 5))))
 
@@ -135,10 +145,10 @@
     (cond
       (rck/is-key-down? (:up enums/keyboard-key))
       (assoc player :acceleration (if (< acc 1) (+ acc 0.04) acc))
-      
+
       (rck/is-key-down? (:down enums/keyboard-key))
       (assoc player :acceleration (if (> acc 0) (- acc 0.04) 0))
-      
+
       :else
       (assoc player :acceleration
              (cond
@@ -153,7 +163,7 @@
         ship-height (:ship-height player)
         new-x (+ (:x pos) (* (:x speed) acc))
         new-y (- (:y pos) (* (:y speed) acc))
-        
+
         ;; Wall wrapping
         wrapped-x (cond
                     (> new-x (+ SCREEN_WIDTH ship-height)) (- ship-height)
@@ -163,7 +173,8 @@
                     (> new-y (+ SCREEN_HEIGHT ship-height)) (- ship-height)
                     (< new-y (- ship-height)) (+ SCREEN_HEIGHT ship-height)
                     :else new-y)]
-    (assoc player :position {:x wrapped-x :y wrapped-y})))
+    (assoc player :position {:x wrapped-x
+                             :y wrapped-y})))
 
 (defn update-player-collider [player]
   (let [pos (:position player)
@@ -171,7 +182,9 @@
         ship-height (:ship-height player)
         collider-x (+ (:x pos) (* (Math/sin (* rot DEG2RAD)) (/ ship-height 2.5)))
         collider-y (- (:y pos) (* (Math/cos (* rot DEG2RAD)) (/ ship-height 2.5)))]
-    (assoc player :collider {:x collider-x :y collider-y :z 12.0})))
+    (assoc player :collider {:x collider-x
+                             :y collider-y
+                             :z 12.0})))
 
 (defn update-player [player]
   (-> player
@@ -206,24 +219,27 @@
           new-y (- (:y pos) (:y speed))
           radius (:radius shoot)
           life-spawn (:life-spawn shoot)
-          
+
           ;; Check if out of bounds
           out-of-bounds? (or (> new-x (+ SCREEN_WIDTH radius))
                              (< new-x (- 0 radius))
                              (> new-y (+ SCREEN_HEIGHT radius))
                              (< new-y (- 0 radius)))
-          
+
           ;; Check if life expired
           life-expired? (>= life-spawn 60)]
-      
+
       (if (or out-of-bounds? life-expired?)
         (assoc shoot
-               :position {:x 0.0 :y 0.0}
-               :speed {:x 0.0 :y 0.0}
+               :position {:x 0.0
+                          :y 0.0}
+               :speed {:x 0.0
+                       :y 0.0}
                :life-spawn 0
                :active false)
         (assoc shoot
-               :position {:x new-x :y new-y}
+               :position {:x new-x
+                          :y new-y}
                :life-spawn (inc life-spawn))))
     shoot))
 
@@ -237,7 +253,7 @@
           radius (:radius meteor)
           new-x (+ (:x pos) (:x speed))
           new-y (+ (:y pos) (:y speed))
-          
+
           ;; Wall wrapping
           wrapped-x (cond
                       (> new-x (+ SCREEN_WIDTH radius)) (- radius)
@@ -247,7 +263,8 @@
                       (> new-y (+ SCREEN_HEIGHT radius)) (- radius)
                       (< new-y (- 0 radius)) (+ SCREEN_HEIGHT radius)
                       :else new-y)]
-      (assoc meteor :position {:x wrapped-x :y wrapped-y}))
+      (assoc meteor :position {:x wrapped-x
+                               :y wrapped-y}))
     meteor))
 
 (defn update-meteors [meteors]
@@ -262,7 +279,8 @@
 
 (defn check-player-meteor-collision [player meteors]
   (let [collider (:collider player)
-        collider-pos {:x (:x collider) :y (:y collider)}
+        collider-pos {:x (:x collider)
+                      :y (:y collider)}
         collider-radius (:z collider)]
     (some (fn [meteor]
             (and (:active meteor)
@@ -281,7 +299,7 @@
            small-count small-meteors-count
            destroyed destroyed-meteors-count
            shoot-idx 0]
-      
+
       (if (>= shoot-idx (count shoots))
         ;; Done processing all shoots
         (assoc game
@@ -292,12 +310,12 @@
                :mid-meteors-count mid-count
                :small-meteors-count small-count
                :destroyed-meteors-count destroyed)
-        
+
         (let [shoot (nth shoots shoot-idx)]
           (if-not (:active shoot)
             (recur shoots big-meteors medium-meteors small-meteors
                    mid-count small-count destroyed (inc shoot-idx))
-            
+
             ;; Check collision with big meteors
             (if-let [big-idx (first (keep-indexed
                                      (fn [idx meteor]
@@ -338,7 +356,7 @@
                        small-count
                        (inc destroyed)
                        (inc shoot-idx)))
-              
+
               ;; Check collision with medium meteors
               (if-let [med-idx (first (keep-indexed
                                        (fn [idx meteor]
@@ -379,7 +397,7 @@
                          (+ small-count 2)
                          (inc destroyed)
                          (inc shoot-idx)))
-                
+
                 ;; Check collision with small meteors
                 (if-let [small-idx (first (keep-indexed
                                            (fn [idx meteor]
@@ -399,7 +417,7 @@
                            small-count
                            (inc destroyed)
                            (inc shoot-idx)))
-                  
+
                   ;; No collision, continue to next shoot
                   (recur shoots big-meteors medium-meteors small-meteors
                          mid-count small-count destroyed (inc shoot-idx)))))))))))
@@ -407,17 +425,17 @@
 (defn update-game [game]
   ;; Update debug stats (handles F1 toggle)
   (debug-stats/update!)
-  
+
   ;; Handle F11 fullscreen toggle
   (when (rck/is-key-pressed? (:f11 enums/keyboard-key))
     (rcw/toggle-borderless-windowed!))
-  
+
   (if (:game-over game)
     ;; Game over - check for restart
     (if (rck/is-key-pressed? (:enter enums/keyboard-key))
       (init-game)
       game)
-    
+
     ;; Game running
     (let [game (if (rck/is-key-pressed? (:p enums/keyboard-key))
                  (update game :pause not)
@@ -426,39 +444,39 @@
         game
         (let [;; Update player
               game (update game :player update-player)
-              
+
               ;; Handle shooting
               game (if (rck/is-key-pressed? (:space enums/keyboard-key))
                      (update game :shoots fire-shoot (:player game))
                      game)
-              
+
               ;; Update shoots
               game (update game :shoots update-shoots)
-              
+
               ;; Update meteors
               game (-> game
                        (update :big-meteors update-meteors)
                        (update :medium-meteors update-meteors)
                        (update :small-meteors update-meteors))
-              
+
               ;; Check player collision with meteors
               player-hit? (or (check-player-meteor-collision (:player game) (:big-meteors game))
                               (check-player-meteor-collision (:player game) (:medium-meteors game))
                               (check-player-meteor-collision (:player game) (:small-meteors game)))
-              
+
               game (if player-hit?
                      (assoc game :game-over true)
                      game)
-              
+
               ;; Handle shoot-meteor collisions
               game (handle-shoot-meteor-collisions game)
-              
+
               ;; Check victory
               total-meteors (+ MAX_BIG_METEORS MAX_MEDIUM_METEORS MAX_SMALL_METEORS)
               game (if (= (:destroyed-meteors-count game) total-meteors)
                      (assoc game :victory true)
                      game)
-              
+
               ;; Update custom debug stats
               _ (do
                   (debug-stats/set-custom-stat! :big-meteors (count (filter :active (:big-meteors game))))
@@ -491,7 +509,10 @@
       (if (:active meteor)
         (ext/draw-circle! x y radius active-color)
         ;; Faded lightgray (0.3 alpha)
-        (ext/draw-circle! x y radius {:r 200 :g 200 :b 200 :a 76})))))
+        (ext/draw-circle! x y radius {:r 200
+                                      :g 200
+                                      :b 200
+                                      :a 76})))))
 
 (defn draw-shoots [shoots]
   (doseq [shoot shoots]
@@ -505,41 +526,41 @@
 (defn draw-game [game]
   (rcd/begin-drawing!)
   (rcd/clear-background! colors/raywhite)
-  
+
   (when game  ; Only draw if game state exists
     (if-not (:game-over game)
       (do
         ;; Draw spaceship
         (draw-spaceship (:player game))
-        
+
         ;; Draw meteors
         (draw-meteors (:big-meteors game) colors/darkgray)
         (draw-meteors (:medium-meteors game) colors/gray)
         (draw-meteors (:small-meteors game) colors/gray)
-        
+
         ;; Draw shoots
         (draw-shoots (:shoots game))
-        
+
         ;; Draw victory message
         (when (:victory game)
           (let [text "VICTORY"
                 size 20
                 width (ext/measure-text text size)]
             (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2))) (int (/ SCREEN_HEIGHT 2)) size colors/lightgray)))
-        
+
         ;; Draw pause message
         (when (:pause game)
           (let [text "GAME PAUSED"
                 size 40
                 width (ext/measure-text text size)]
             (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2))) (int (- (/ SCREEN_HEIGHT 2) 40)) size colors/gray)))
-        
+
         ;; Draw controls info
         (rtd/draw-text! "F1 debug stats | F11 fullscreen | P pause" 10 (- SCREEN_HEIGHT 25) 12 colors/darkgray)
-        
+
         ;; Draw debug stats overlay (F1 to toggle)
         (debug-stats/draw!))
-      
+
       ;; Game over screen
       (do
         (let [text "PRESS [ENTER] TO PLAY AGAIN"
@@ -549,7 +570,7 @@
                           (int (- (/ (rcw/get-screen-height) 2) 50)) size colors/gray))
         ;; Draw debug stats even on game over screen
         (debug-stats/draw!))))
-  
+
   (rcd/end-drawing!))
 
 ;; MAIN ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -558,23 +579,23 @@
 
 (defn -main [& _args]
   (nrepl/start {:port 7888})
-   (rcw/set-config-flags! (bit-or (:window-resizable enums/config-flag)
-                                  (:vsync-hint enums/config-flag)))
+  (rcw/set-config-flags! (bit-or (:window-resizable enums/config-flag)
+                                 (:vsync-hint enums/config-flag)))
   (rcw/init-window! SCREEN_WIDTH SCREEN_HEIGHT "classic game: asteroids")
- 
+
 ;;   (rct/set-target-fps! 60)
-  
+
   ;; Enable debug stats - press F1 to toggle
   (debug-stats/enable!)
-  
+
   (reset! game-state (init-game))
-  
+
   (loop []
     (when-not (rcw/window-should-close?)
       (swap! game-state update-game)
       (draw-game @game-state)
       (recur)))
-  
+
   (rcw/close-window!))
 
 (comment

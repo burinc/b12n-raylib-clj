@@ -16,8 +16,14 @@
 (def PADDLE_HEIGHT 50)
 (def PADDLE_WIDTH 10)
 (def BALL_RADIUS 10)
-(def TOP {:x 0 :y 10 :width WIDTH :height 1})
-(def BOTTOM {:x 0 :y (- HEIGHT 10) :width WIDTH :height 1})
+(def TOP {:x 0
+          :y 10
+          :width WIDTH
+          :height 1})
+(def BOTTOM {:x 0
+             :y (- HEIGHT 10)
+             :width WIDTH
+             :height 1})
 (def PADDLE1_X 50)
 (def PADDLE2_X 750)
 (def MAX_POINTS 11)
@@ -69,15 +75,23 @@
   (move-paddle game (:k enums/keyboard-key) (:j enums/keyboard-key) :paddle2))
 
 (defn check-collision [x y radius rect]
-  (let [result (ext/check-collision-circle-rec? {:x x :y y} radius rect)]
+  (let [result (ext/check-collision-circle-rec? {:x x
+                                                 :y y} radius rect)]
     (if (boolean? result) result (pos? result))))
 
-(defn move-ball [{:keys [ball paddle1 paddle2] :as game}]
+(defn move-ball [{:keys [ball paddle1 paddle2]
+                  :as game}]
   (let [[x y dx dy] ball
         top? (check-collision x y BALL_RADIUS TOP)
         bottom? (check-collision x y BALL_RADIUS BOTTOM)
-        paddle1-rect {:x PADDLE1_X :y paddle1 :width PADDLE_WIDTH :height PADDLE_HEIGHT}
-        paddle2-rect {:x PADDLE2_X :y paddle2 :width PADDLE_WIDTH :height PADDLE_HEIGHT}
+        paddle1-rect {:x PADDLE1_X
+                      :y paddle1
+                      :width PADDLE_WIDTH
+                      :height PADDLE_HEIGHT}
+        paddle2-rect {:x PADDLE2_X
+                      :y paddle2
+                      :width PADDLE_WIDTH
+                      :height PADDLE_HEIGHT}
         paddle1? (and (check-collision x y BALL_RADIUS paddle1-rect)
                       (< x (+ PADDLE1_X PADDLE_WIDTH)))
         paddle2? (and (check-collision x y BALL_RADIUS paddle2-rect)
@@ -95,14 +109,16 @@
     (assoc game :ball [(+ x xx) (+ y yy) xx yy]
            :scored scored)))
 
-(defn handle-score [{:keys [scored] :as game}]
+(defn handle-score [{:keys [scored]
+                     :as game}]
   (if (nil? scored)
     game
     (-> game
         (update scored inc)
         (assoc :ball [400 225 (rand-direction) (rand-direction)]))))
 
-(defn handle-endgame [{:keys [left right] :as game}]
+(defn handle-endgame [{:keys [left right]
+                       :as game}]
   (let [ended? (or (>= left MAX_POINTS) (>= right MAX_POINTS))]
     (if ended?
       (assoc game :screen :ending
@@ -119,7 +135,8 @@
     (initial-state)
     game))
 
-(defn tick [{:keys [screen] :as game}]
+(defn tick [{:keys [screen]
+             :as game}]
   (condp = screen
     :title (-> game handle-start)
     :game (-> game
@@ -169,7 +186,8 @@
     (rtd/draw-text! text (int (- (quot WIDTH 2) (/ width 2))) (- HEIGHT 100) size colors/white))
   (rcd/end-drawing!))
 
-(defn draw [{:keys [screen] :as game}]
+(defn draw [{:keys [screen]
+             :as game}]
   (condp = screen
     :title (draw-title game)
     :game (draw-game game)
