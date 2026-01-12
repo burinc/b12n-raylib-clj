@@ -44,14 +44,14 @@
 
 (def example-categories
   "Categories with their emoji and descriptions"
-  {:games     {:emoji "🎮" :title "Original Games"}
-   :core      {:emoji "📦" :title "Core Examples"}
-   :shapes    {:emoji "🔷" :title "Shapes Examples"}
-   :textures  {:emoji "🖼️" :title "Textures Examples"}
-   :audio     {:emoji "🔊" :title "Audio Examples"}
-   :shaders   {:emoji "✨" :title "Shaders Examples"}
-   :models    {:emoji "🗿" :title "Models Examples"}
-   :text      {:emoji "📝" :title "Text Examples"}})
+  {:games {:emoji "🎮" :title "Original Games"}
+   :core {:emoji "📦" :title "Core Examples"}
+   :shapes {:emoji "🔷" :title "Shapes Examples"}
+   :textures {:emoji "🖼️" :title "Textures Examples"}
+   :audio {:emoji "🔊" :title "Audio Examples"}
+   :shaders {:emoji "✨" :title "Shaders Examples"}
+   :models {:emoji "🗿" :title "Models Examples"}
+   :text {:emoji "📝" :title "Text Examples"}})
 
 (def examples
   "Registry of all examples with metadata."
@@ -129,7 +129,15 @@
 
    ;; Shaders
    {:alias "basic-lighting" :category :shaders :title "Basic Lighting"
-    :desc "Dynamic lighting" :controls "Mouse, Y/R/G/B"}])
+    :desc "Dynamic lighting" :controls "Mouse, Y/R/G/B"}
+
+   ;; Models
+   {:alias "geometric-shapes" :category :models :title "Geometric Shapes"
+    :desc "3D primitives" :controls "Q to exit"}
+   {:alias "waving-cubes" :category :models :title "Waving Cubes"
+    :desc "Animated cube wave" :controls "Q to exit"}
+   {:alias "box-collisions" :category :models :title "Box Collisions"
+    :desc "3D collision detection" :controls "Arrow keys, Q"}])
 
 ;; =============================================================================
 ;; Example Lookup Functions

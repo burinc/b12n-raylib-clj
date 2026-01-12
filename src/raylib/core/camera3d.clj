@@ -139,3 +139,42 @@
     (mem/serialize-into camera ::camera3d seg arena)
     (update-camera! seg mode)
     (mem/deserialize-from seg ::camera3d)))
+
+;; Additional 3D shape drawing functions
+
+(defcfn draw-cylinder!
+  "Draw a cylinder/cone"
+  {:arglists '([position radius-top radius-bottom height slices color])}
+  "DrawCylinder"
+  [::rs/vector-3 ::mem/float ::mem/float ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-cylinder-ex!
+  "Draw a cylinder with base at startPos and top at endPos"
+  {:arglists '([start-pos end-pos start-radius end-radius sides color])}
+  "DrawCylinderEx"
+  [::rs/vector-3 ::rs/vector-3 ::mem/float ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-cylinder-wires!
+  "Draw a cylinder/cone wires"
+  {:arglists '([position radius-top radius-bottom height slices color])}
+  "DrawCylinderWires"
+  [::rs/vector-3 ::mem/float ::mem/float ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-cylinder-wires-ex!
+  "Draw a cylinder wires with base at startPos and top at endPos"
+  {:arglists '([start-pos end-pos start-radius end-radius sides color])}
+  "DrawCylinderWiresEx"
+  [::rs/vector-3 ::rs/vector-3 ::mem/float ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-capsule!
+  "Draw a capsule with the center of its sphere caps at startPos and endPos"
+  {:arglists '([start-pos end-pos radius slices rings color])}
+  "DrawCapsule"
+  [::rs/vector-3 ::rs/vector-3 ::mem/float ::mem/int ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-capsule-wires!
+  "Draw a capsule wireframe with the center of its sphere caps at startPos and endPos"
+  {:arglists '([start-pos end-pos radius slices rings color])}
+  "DrawCapsuleWires"
+  [::rs/vector-3 ::rs/vector-3 ::mem/float ::mem/int ::mem/int ::rs/color] ::mem/void)
+

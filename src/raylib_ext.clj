@@ -40,6 +40,18 @@
   "MeasureText"
   [::mem/c-string ::mem/int] ::mem/int)
 
+;; Color utility functions
+(defcfn color-from-hsv
+  "Get a Color from HSV values, hue [0..360], saturation/value [0..1]"
+  {:arglists '([hue saturation value])}
+  "ColorFromHSV"
+  [::mem/float ::mem/float ::mem/float] ::rs/color)
+
+(defcfn get-time
+  "Get elapsed time in seconds since InitWindow()"
+  "GetTime"
+  [] ::mem/double)
+
 ;; Collision detection
 (defcfn check-collision-circle-rec?
   "Check collision between circle and rectangle"

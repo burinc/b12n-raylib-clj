@@ -147,6 +147,19 @@
                   :task (h/run-example! "basic-lighting")}
 
   ;; =============================================================================
+  ;; 🗿 Models Examples
+  ;; =============================================================================
+
+  geometric-shapes {:doc "🗿 Geometric Shapes - 3D primitives (cubes, spheres, cylinders, capsules)"
+                    :task (h/run-example! "geometric-shapes")}
+
+  waving-cubes {:doc "🗿 Waving Cubes - animated rainbow cube wave with orbiting camera"
+                :task (h/run-example! "waving-cubes")}
+
+  box-collisions {:doc "🗿 Box Collisions - 3D collision detection demo"
+                  :task (h/run-example! "box-collisions")}
+
+  ;; =============================================================================
   ;; 🔷 Shapes Examples (to be ported from raylib)
   ;; =============================================================================
 
@@ -478,6 +491,7 @@ echo \"✅ Lint check passed!\"
            (println (h/color h/cyan "📚 Example Categories:"))
            (println "   🎮 Games      - pong, asteroids, tetris, vampire-survivors")
            (println "   📦 Core       - camera-2d, input-keys, picking-3d, ...")
+           (println "   🗿 Models     - geometric-shapes, waving-cubes, box-collisions")
            (println "   🔷 Shapes     - (coming soon)")
            (println "   🖼️ Textures   - background-scrolling, sprite-animation")
            (println "   🔊 Audio      - audio-module, sound-loading, music-stream")

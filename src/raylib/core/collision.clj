@@ -77,3 +77,16 @@
    :max {:x (+ px (/ sx 2))
          :y (+ py (/ sy 2))
          :z (+ pz (/ sz 2))}})
+
+;; 3D Collision detection functions
+(defcfn check-collision-boxes?
+  "Check collision between two bounding boxes"
+  {:arglists '([box1 box2])}
+  "CheckCollisionBoxes"
+  [::bounding-box ::bounding-box] ::mem/byte)
+
+(defcfn check-collision-box-sphere?
+  "Check collision between box and sphere"
+  {:arglists '([box center radius])}
+  "CheckCollisionBoxSphere"
+  [::bounding-box ::rs/vector-3 ::mem/float] ::mem/byte)
