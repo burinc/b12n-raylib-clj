@@ -195,6 +195,21 @@
   dna-helix {:doc "🗿 DNA Helix - animated double helix visualization"
              :task (h/run-example! "dna-helix")}
 
+  first-person-maze {:doc "🗿 First Person Maze - navigate 3D procedural maze"
+                     :task (h/run-example! "first-person-maze")}
+
+  yaw-pitch-roll {:doc "🗿 Yaw Pitch Roll - 3D rotation demonstration"
+                  :task (h/run-example! "yaw-pitch-roll")}
+
+  lissajous-3d {:doc "🗿 Lissajous 3D - parametric curve visualization"
+                :task (h/run-example! "lissajous-3d")}
+
+  lorenz-attractor {:doc "🗿 Lorenz Attractor - chaos theory visualization"
+                    :task (h/run-example! "lorenz-attractor")}
+
+  terrain-generation {:doc "🗿 Terrain Generation - procedural heightmap"
+                      :task (h/run-example! "terrain-generation")}
+
   ;; =============================================================================
   ;; 🔷 Shapes Examples (to be ported from raylib)
   ;; =============================================================================

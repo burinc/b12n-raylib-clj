@@ -313,7 +313,32 @@
     :category :models
     :title "DNA Helix"
     :desc "Double helix"
-    :controls "Arrows, SPACE, R, Q"}])
+    :controls "Arrows, SPACE, R, Q"}
+   {:alias "first-person-maze"
+    :category :models
+    :title "First Person Maze"
+    :desc "Navigate 3D maze"
+    :controls "WASD, Mouse, R, M, Q"}
+   {:alias "yaw-pitch-roll"
+    :category :models
+    :title "Yaw Pitch Roll"
+    :desc "3D rotation demo"
+    :controls "Arrows, SPACE, R, Q"}
+   {:alias "lissajous-3d"
+    :category :models
+    :title "Lissajous 3D"
+    :desc "Parametric curves"
+    :controls "1-5, Arrows, W/S, SPACE, Q"}
+   {:alias "lorenz-attractor"
+    :category :models
+    :title "Lorenz Attractor"
+    :desc "Chaos theory"
+    :controls "1-3, Arrows, SPACE, R, Q"}
+   {:alias "terrain-generation"
+    :category :models
+    :title "Terrain Generation"
+    :desc "Procedural terrain"
+    :controls "1-3, Arrows, G, W, SPACE, Q"}])
 
 ;; =============================================================================
 ;; Example Lookup Functions
