@@ -87,9 +87,15 @@
 
 (defn make-camera [maze]
   (let [[px py pz] (find-start-position maze)]
-    {:position {:x px :y py :z pz}
-     :target {:x (+ px 1) :y py :z pz}
-     :up {:x 0.0 :y 1.0 :z 0.0}
+    {:position {:x px
+                :y py
+                :z pz}
+     :target {:x (+ px 1)
+              :y py
+              :z pz}
+     :up {:x 0.0
+          :y 1.0
+          :z 0.0}
      :fovy 60.0
      :projection rc3d/CAMERA_PERSPECTIVE}))
 
@@ -127,7 +133,8 @@
       old-pos
       new-pos)))
 
-(defn handle-input [{:keys [maze] :as game}]
+(defn handle-input [{:keys [maze]
+                     :as game}]
   (cond-> game
     (rck/is-key-pressed? (:q enums/keyboard-key))
     (assoc :exit? true)
@@ -138,7 +145,8 @@
     (rck/is-key-pressed? (:r enums/keyboard-key))
     (merge (initial-state))))
 
-(defn update-camera [{:keys [camera maze] :as game}]
+(defn update-camera [{:keys [camera maze]
+                      :as game}]
   (let [old-pos (:position camera)
         ;; Update camera with raylib's built-in first person controls
         updated-camera (rc3d/update-camera camera rc3d/CAMERA_FIRST_PERSON)
@@ -159,7 +167,10 @@
                      :z (* MAZE_SIZE CELL_SIZE 0.5)}
                     {:x (* MAZE_SIZE CELL_SIZE)
                      :y (* MAZE_SIZE CELL_SIZE)}
-                    {:r 60 :g 60 :b 70 :a 255})
+                    {:r 60
+                     :g 60
+                     :b 70
+                     :a 255})
 
   ;; Draw walls
   (doseq [y (range MAZE_SIZE)
@@ -167,12 +178,22 @@
           :when (= :wall (get-cell maze x y))]
     (let [wx (+ (* x CELL_SIZE) (/ CELL_SIZE 2))
           wz (+ (* y CELL_SIZE) (/ CELL_SIZE 2))]
-      (rc3d/draw-cube! {:x wx :y (/ WALL_HEIGHT 2) :z wz}
+      (rc3d/draw-cube! {:x wx
+                        :y (/ WALL_HEIGHT 2)
+                        :z wz}
                        CELL_SIZE WALL_HEIGHT CELL_SIZE
-                       {:r 100 :g 100 :b 120 :a 255})
-      (rc3d/draw-cube-wires! {:x wx :y (/ WALL_HEIGHT 2) :z wz}
+                       {:r 100
+                        :g 100
+                        :b 120
+                        :a 255})
+      (rc3d/draw-cube-wires! {:x wx
+                              :y (/ WALL_HEIGHT 2)
+                              :z wz}
                              CELL_SIZE WALL_HEIGHT CELL_SIZE
-                             {:r 70 :g 70 :b 90 :a 255}))))
+                             {:r 70
+                              :g 70
+                              :b 90
+                              :a 255}))))
 
 (defn draw-minimap! [maze camera]
   (let [map-scale 6
@@ -183,14 +204,23 @@
     ;; Background
     (rsb/draw-rectangle! map-x map-y
                          (* MAZE_SIZE map-scale) (* MAZE_SIZE map-scale)
-                         {:r 0 :g 0 :b 0 :a 150})
+                         {:r 0
+                          :g 0
+                          :b 0
+                          :a 150})
     ;; Walls
     (doseq [y (range MAZE_SIZE)
             x (range MAZE_SIZE)]
       (let [cell (get-cell maze x y)
             color (if (= cell :wall)
-                    {:r 100 :g 100 :b 120 :a 255}
-                    {:r 40 :g 40 :b 50 :a 255})]
+                    {:r 100
+                     :g 100
+                     :b 120
+                     :a 255}
+                    {:r 40
+                     :g 40
+                     :b 50
+                     :a 255})]
         (rsb/draw-rectangle! (+ map-x (* x map-scale))
                              (+ map-y (* y map-scale))
                              map-scale map-scale color)))
@@ -205,7 +235,10 @@
 
 (defn draw [{:keys [camera maze show-minimap?]}]
   (rcd/begin-drawing!)
-  (rcd/clear-background! {:r 30 :g 30 :b 40 :a 255})
+  (rcd/clear-background! {:r 30
+                          :g 30
+                          :b 40
+                          :a 255})
 
   (rc3d/begin-mode-3d! camera)
   (draw-maze! maze)

@@ -49,9 +49,15 @@
    :time 0.0
    :animate? true
    :trail-length NUM_POINTS
-   :camera {:position {:x 8.0 :y 6.0 :z 8.0}
-            :target {:x 0.0 :y 0.0 :z 0.0}
-            :up {:x 0.0 :y 1.0 :z 0.0}
+   :camera {:position {:x 8.0
+                       :y 6.0
+                       :z 8.0}
+            :target {:x 0.0
+                     :y 0.0
+                     :z 0.0}
+            :up {:x 0.0
+                 :y 1.0
+                 :z 0.0}
             :fovy 45.0
             :projection rc3d/CAMERA_PERSPECTIVE}})
 
@@ -129,7 +135,8 @@
       (rck/is-key-down? (:s enums/keyboard-key))
       (update :c #(max 0.1 (- % (* 0.5 dt)))))))
 
-(defn update-animation [{:keys [animate?] :as game}]
+(defn update-animation [{:keys [animate?]
+                         :as game}]
   (if animate?
     (update game :time + (* 0.3 (rct/get-frame-time)))
     game))
@@ -144,9 +151,11 @@
       update-camera))
 
 (defn hsv->rgb [h s v]
-  (let [h (mod h 360)
+  (let [h (double (mod h 360))
+        s (double s)
+        v (double v)
         c (* v s)
-        x (* c (- 1 (Math/abs (- (mod (/ h 60) 2) 1))))
+        x (* c (- 1.0 (Math/abs (- (mod (/ h 60.0) 2.0) 1.0))))
         m (- v c)
         [r' g' b'] (cond
                      (< h 60) [c x 0]
@@ -173,16 +182,41 @@
     (when-let [head (last points)]
       (rc3d/draw-sphere! head 0.15 colors/white))))
 
-(defn draw [{:keys [camera a b c animate?] :as game}]
+(defn draw [{:keys [camera a b c animate?]
+             :as game}]
   (rcd/begin-drawing!)
-  (rcd/clear-background! {:r 20 :g 20 :b 30 :a 255})
+  (rcd/clear-background! {:r 20
+                          :g 20
+                          :b 30
+                          :a 255})
 
   (rc3d/begin-mode-3d! camera)
 
   ;; Draw axes
-  (rc3d/draw-line-3d! {:x -5 :y 0 :z 0} {:x 5 :y 0 :z 0} {:r 100 :g 50 :b 50 :a 255})
-  (rc3d/draw-line-3d! {:x 0 :y -5 :z 0} {:x 0 :y 5 :z 0} {:r 50 :g 100 :b 50 :a 255})
-  (rc3d/draw-line-3d! {:x 0 :y 0 :z -5} {:x 0 :y 0 :z 5} {:r 50 :g 50 :b 100 :a 255})
+  (rc3d/draw-line-3d! {:x -5
+                       :y 0
+                       :z 0} {:x 5
+                              :y 0
+                              :z 0} {:r 100
+                                     :g 50
+                                     :b 50
+                                     :a 255})
+  (rc3d/draw-line-3d! {:x 0
+                       :y -5
+                       :z 0} {:x 0
+                              :y 5
+                              :z 0} {:r 50
+                                     :g 100
+                                     :b 50
+                                     :a 255})
+  (rc3d/draw-line-3d! {:x 0
+                       :y 0
+                       :z -5} {:x 0
+                               :y 0
+                               :z 5} {:r 50
+                                      :g 50
+                                      :b 100
+                                      :a 255})
 
   ;; Draw the curve
   (let [points (generate-curve game)]

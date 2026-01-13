@@ -37,11 +37,19 @@
    :sigma 10.0 ; Prandtl number
    :rho 28.0 ; Rayleigh number  
    :beta (/ 8.0 3) ; Geometric factor
-   :points [{:x 0.1 :y 0.0 :z 0.0}]
+   :points [{:x 0.1
+             :y 0.0
+             :z 0.0}]
    :animate? true
-   :camera {:position {:x 15.0 :y 10.0 :z 15.0}
-            :target {:x 0.0 :y 3.0 :z 0.0}
-            :up {:x 0.0 :y 1.0 :z 0.0}
+   :camera {:position {:x 15.0
+                       :y 10.0
+                       :z 15.0}
+            :target {:x 0.0
+                     :y 3.0
+                     :z 0.0}
+            :up {:x 0.0
+                 :y 1.0
+                 :z 0.0}
             :fovy 45.0
             :projection rc3d/CAMERA_PERSPECTIVE}})
 
@@ -93,13 +101,19 @@
 
       ;; Preset rho values
       (rck/is-key-pressed? (:one enums/keyboard-key))
-      (-> (assoc :rho 28.0) (assoc :points [{:x 0.1 :y 0.0 :z 0.0}]))
+      (-> (assoc :rho 28.0) (assoc :points [{:x 0.1
+                                             :y 0.0
+                                             :z 0.0}]))
 
       (rck/is-key-pressed? (:two enums/keyboard-key))
-      (-> (assoc :rho 99.96) (assoc :points [{:x 0.1 :y 0.0 :z 0.0}]))
+      (-> (assoc :rho 99.96) (assoc :points [{:x 0.1
+                                              :y 0.0
+                                              :z 0.0}]))
 
       (rck/is-key-pressed? (:three enums/keyboard-key))
-      (-> (assoc :rho 14.0) (assoc :points [{:x 0.1 :y 0.0 :z 0.0}]))
+      (-> (assoc :rho 14.0) (assoc :points [{:x 0.1
+                                             :y 0.0
+                                             :z 0.0}]))
 
       ;; Adjust sigma
       (rck/is-key-down? (:up enums/keyboard-key))
@@ -115,7 +129,8 @@
       (rck/is-key-down? (:left enums/keyboard-key))
       (update :beta #(max 0.1 (- % (* 0.5 dt)))))))
 
-(defn update-simulation [{:keys [animate? sigma rho beta points] :as game}]
+(defn update-simulation [{:keys [animate? sigma rho beta points]
+                          :as game}]
   (if animate?
     (let [last-point (last points)
           ;; Add multiple points per frame for smoother curves
@@ -142,9 +157,11 @@
       update-camera))
 
 (defn hsv->rgb [h s v]
-  (let [h (mod h 360)
+  (let [h (double (mod h 360))
+        s (double s)
+        v (double v)
         c (* v s)
-        x (* c (- 1 (Math/abs (- (mod (/ h 60) 2) 1))))
+        x (* c (- 1.0 (Math/abs (- (mod (/ h 60.0) 2.0) 1.0))))
         m (- v c)
         [r' g' b'] (cond
                      (< h 60) [c x 0]
@@ -178,9 +195,13 @@
       (let [head (point->screen (last points))]
         (rc3d/draw-sphere! head 0.2 colors/white)))))
 
-(defn draw [{:keys [camera sigma rho beta points animate?] :as game}]
+(defn draw [{:keys [camera sigma rho beta points animate?]
+             :as game}]
   (rcd/begin-drawing!)
-  (rcd/clear-background! {:r 10 :g 10 :b 20 :a 255})
+  (rcd/clear-background! {:r 10
+                          :g 10
+                          :b 20
+                          :a 255})
 
   (rc3d/begin-mode-3d! camera)
 

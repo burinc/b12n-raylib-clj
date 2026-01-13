@@ -91,9 +91,15 @@
    :pitch 0.0 ; rotation around X axis
    :roll 0.0 ; rotation around Z axis
    :yaw 0.0 ; rotation around Y axis
-   :camera {:position {:x 0 :y 10 :z -20}
-            :target {:x 0 :y 0 :z 0}
-            :up {:x 0 :y 1 :z 0}
+   :camera {:position {:x 0
+                       :y 10
+                       :z -20}
+            :target {:x 0
+                     :y 0
+                     :z 0}
+            :up {:x 0
+                 :y 1
+                 :z 0}
             :fovy 45.0
             :projection rc3d/CAMERA_PERSPECTIVE}})
 
@@ -110,7 +116,8 @@
     (< value (- speed)) (+ value speed)
     :else 0.0))
 
-(defn handle-input [{:keys [pitch roll yaw] :as game}]
+(defn handle-input [{:keys [pitch roll yaw]
+                     :as game}]
   (let [;; Pitch controls (UP/DOWN)
         pitch-input (cond
                       (rck/is-key-down? (:down enums/keyboard-key)) 0.6
@@ -161,7 +168,9 @@
   "Draw wireframe airplane with given transformation matrix"
   (let [transform (fn [[x y z]]
                     (let [[tx ty tz] (transform-point matrix [x y z])]
-                      {:x tx :y ty :z tz}))]
+                      {:x tx
+                       :y ty
+                       :z tz}))]
     ;; Draw fuselage
     (doseq [[start end] (partition 2 1 (:fuselage airplane-vertices))]
       (rc3d/draw-line-3d! (transform start) (transform end) color))
@@ -188,7 +197,9 @@
   (let [origin [0 0 0]
         transform (fn [[x y z]]
                     (let [[tx ty tz] (transform-point matrix [x y z])]
-                      {:x tx :y ty :z tz}))]
+                      {:x tx
+                       :y ty
+                       :z tz}))]
     ;; X axis (red)
     (rc3d/draw-line-3d! (transform origin) (transform [size 0 0]) colors/red)
     ;; Y axis (green)  
@@ -215,7 +226,10 @@
     (rc3d/end-mode-3d!))
 
   ;; Draw info panel
-  (rsb/draw-rectangle! 30 370 260 70 {:r 0 :g 228 :b 48 :a 128})
+  (rsb/draw-rectangle! 30 370 260 70 {:r 0
+                                      :g 228
+                                      :b 48
+                                      :a 128})
   (rsb/draw-rectangle-lines! 30 370 260 70 colors/darkgreen)
   (rtd/draw-text! "Pitch: UP / DOWN" 40 380 10 colors/darkgray)
   (rtd/draw-text! "Roll: LEFT / RIGHT" 40 395 10 colors/darkgray)

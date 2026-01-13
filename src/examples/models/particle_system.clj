@@ -36,8 +36,11 @@
 (defn hsv->rgb
   "Convert HSV (h: 0-360, s: 0-1, v: 0-1) to RGB color map"
   [h s v]
-  (let [c (* v s)
-        x (* c (- 1 (Math/abs (- (mod (/ h 60.0) 2) 1))))
+  (let [h (double h)
+        s (double s)
+        v (double v)
+        c (* v s)
+        x (* c (- 1.0 (Math/abs (- (mod (/ h 60.0) 2.0) 1.0))))
         m (- v c)
         [r' g' b'] (cond
                      (< h 60) [c x 0]

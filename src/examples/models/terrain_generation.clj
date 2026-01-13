@@ -100,9 +100,15 @@
      :heightmap nil ; Generated lazily
      :show-grid? false
      :wireframe? false
-     :camera {:position {:x 15.0 :y 12.0 :z 15.0}
-              :target {:x 10.0 :y 0.0 :z 10.0}
-              :up {:x 0.0 :y 1.0 :z 0.0}
+     :camera {:position {:x 15.0
+                         :y 12.0
+                         :z 15.0}
+              :target {:x 10.0
+                       :y 0.0
+                       :z 10.0}
+              :up {:x 0.0
+                   :y 1.0
+                   :z 0.0}
               :fovy 45.0
               :projection rc3d/CAMERA_PERSPECTIVE}}))
 
@@ -114,10 +120,18 @@
 
 (defn apply-preset [game preset]
   (let [params (case preset
-                 :hills {:frequency 3.0 :amplitude 2.0 :octaves 3}
-                 :mountains {:frequency 5.0 :amplitude 5.0 :octaves 5}
-                 :plains {:frequency 2.0 :amplitude 0.5 :octaves 2}
-                 {:frequency 4.0 :amplitude 3.0 :octaves 4})]
+                 :hills {:frequency 3.0
+                         :amplitude 2.0
+                         :octaves 3}
+                 :mountains {:frequency 5.0
+                             :amplitude 5.0
+                             :octaves 5}
+                 :plains {:frequency 2.0
+                          :amplitude 0.5
+                          :octaves 2}
+                 {:frequency 4.0
+                  :amplitude 3.0
+                  :octaves 4})]
     (-> game
         (merge params)
         (assoc :heightmap nil))))
@@ -169,7 +183,8 @@
       (-> (update :amplitude #(max 0.5 (- % (* 1.0 dt))))
           (assoc :heightmap nil)))))
 
-(defn ensure-heightmap [{:keys [heightmap] :as game}]
+(defn ensure-heightmap [{:keys [heightmap]
+                         :as game}]
   (if heightmap
     game
     (assoc game :heightmap (generate-heightmap game))))
@@ -188,12 +203,30 @@
   [h max-h]
   (let [ratio (/ h max-h)]
     (cond
-      (< ratio 0.2) {:r 50 :g 100 :b 150 :a 255} ; Water blue
-      (< ratio 0.3) {:r 194 :g 178 :b 128 :a 255} ; Sand
-      (< ratio 0.5) {:r 34 :g 139 :b 34 :a 255} ; Grass green
-      (< ratio 0.7) {:r 85 :g 107 :b 47 :a 255} ; Forest green
-      (< ratio 0.85) {:r 139 :g 137 :b 137 :a 255} ; Rock gray
-      :else {:r 255 :g 255 :b 255 :a 255}))) ; Snow white
+      (< ratio 0.2) {:r 50
+                     :g 100
+                     :b 150
+                     :a 255} ; Water blue
+      (< ratio 0.3) {:r 194
+                     :g 178
+                     :b 128
+                     :a 255} ; Sand
+      (< ratio 0.5) {:r 34
+                     :g 139
+                     :b 34
+                     :a 255} ; Grass green
+      (< ratio 0.7) {:r 85
+                     :g 107
+                     :b 47
+                     :a 255} ; Forest green
+      (< ratio 0.85) {:r 139
+                      :g 137
+                      :b 137
+                      :a 255} ; Rock gray
+      :else {:r 255
+             :g 255
+             :b 255
+             :a 255}))) ; Snow white
 
 (defn draw-terrain! [heightmap wireframe? amplitude]
   (let [half-grid (* GRID_SIZE CELL_SIZE 0.5)]
@@ -211,10 +244,18 @@
             x1 (* (inc x) CELL_SIZE)
             z1 (* (inc z) CELL_SIZE)
             ;; Triangle vertices
-            p00 {:x x0 :y h00 :z z0}
-            p10 {:x x1 :y h10 :z z0}
-            p01 {:x x0 :y h01 :z z1}
-            p11 {:x x1 :y h11 :z z1}]
+            p00 {:x x0
+                 :y h00
+                 :z z0}
+            p10 {:x x1
+                 :y h10
+                 :z z0}
+            p01 {:x x0
+                 :y h01
+                 :z z1}
+            p11 {:x x1
+                 :y h11
+                 :z z1}]
         (if wireframe?
           (do
             (rc3d/draw-line-3d! p00 p10 colors/green)
@@ -226,9 +267,13 @@
             (rc3d/draw-triangle-3d! p00 p01 p10 color)
             (rc3d/draw-triangle-3d! p10 p01 p11 color)))))))
 
-(defn draw [{:keys [camera heightmap show-grid? wireframe? frequency amplitude] :as game}]
+(defn draw [{:keys [camera heightmap show-grid? wireframe? frequency amplitude]
+             :as game}]
   (rcd/begin-drawing!)
-  (rcd/clear-background! {:r 135 :g 206 :b 235 :a 255}) ; Sky blue
+  (rcd/clear-background! {:r 135
+                          :g 206
+                          :b 235
+                          :a 255}) ; Sky blue
 
   (rc3d/begin-mode-3d! camera)
 
@@ -241,7 +286,10 @@
   (rc3d/end-mode-3d!)
 
   ;; UI
-  (rsb/draw-rectangle! 5 5 300 80 {:r 0 :g 0 :b 0 :a 150})
+  (rsb/draw-rectangle! 5 5 300 80 {:r 0
+                                   :g 0
+                                   :b 0
+                                   :a 150})
   (rtd/draw-text! "Procedural Terrain" 10 10 20 colors/white)
   (rtd/draw-text! (format "Freq: %.1f | Amp: %.1f" frequency amplitude) 10 35 15 colors/lime)
   (rtd/draw-text! "Arrows: Adjust | 1-3: Presets | SPACE: New" 10 55 15 colors/gray)
