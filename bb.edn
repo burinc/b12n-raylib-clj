@@ -214,6 +214,16 @@
                    :task (h/run-example! "mesh-generation")}
 
   ;; =============================================================================
+  ;; 🎮 Classic Games (ported from raylib-games/classics)
+  ;; =============================================================================
+
+  snake {:doc "🎮 Snake - classic snake game"
+         :task (h/run-example! "snake")}
+
+  floppy {:doc "🎮 Floppy - flappy bird clone"
+          :task (h/run-example! "floppy")}
+
+  ;; =============================================================================
   ;; 🔷 Shapes Examples (to be ported from raylib)
   ;; =============================================================================
 

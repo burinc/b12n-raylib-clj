@@ -343,7 +343,18 @@
     :category :models
     :title "Mesh Generation"
     :desc "Procedural 3D shapes"
-    :controls "Left/Right, Click, SPACE, R, Q"}])
+    :controls "Left/Right, Click, SPACE, R, Q"}
+   ;; Classic Games
+   {:alias "snake"
+    :category :games
+    :title "Snake"
+    :desc "Classic snake game"
+    :controls "Arrows, P, ENTER, Q"}
+   {:alias "floppy"
+    :category :games
+    :title "Floppy"
+    :desc "Flappy bird clone"
+    :controls "SPACE, P, ENTER, Q"}])
 
 ;; =============================================================================
 ;; Example Lookup Functions
