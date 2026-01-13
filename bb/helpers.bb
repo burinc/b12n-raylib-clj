@@ -137,7 +137,19 @@
    {:alias "waving-cubes" :category :models :title "Waving Cubes"
     :desc "Animated cube wave" :controls "Q to exit"}
    {:alias "box-collisions" :category :models :title "Box Collisions"
-    :desc "3D collision detection" :controls "Arrow keys, Q"}])
+    :desc "3D collision detection" :controls "Arrow keys, Q"}
+   {:alias "orthographic-projection" :category :models :title "Orthographic Projection"
+    :desc "Perspective vs orthographic" :controls "SPACE, Q"}
+   {:alias "tesseract-view" :category :models :title "Tesseract View"
+    :desc "4D hypercube" :controls "Q to exit"}
+   {:alias "solar-system" :category :models :title "Solar System"
+    :desc "Orbiting planets" :controls "Q to exit"}
+   {:alias "spinning-cubes" :category :models :title "Spinning Cubes"
+    :desc "Color-cycling cubes" :controls "Q to exit"}
+   {:alias "point-cloud" :category :models :title "Point Cloud"
+    :desc "Spherical points" :controls "UP/DOWN, Q"}
+   {:alias "wireframe-shapes" :category :models :title "Wireframe Shapes"
+    :desc "Custom wireframes" :controls "SPACE, Q"}])
 
 ;; =============================================================================
 ;; Example Lookup Functions

@@ -178,3 +178,42 @@
   "DrawCapsuleWires"
   [::rs/vector-3 ::rs/vector-3 ::mem/float ::mem/int ::mem/int ::rs/color] ::mem/void)
 
+;; Line and circle 3D drawing
+
+(defcfn draw-line-3d!
+  "Draw a line in 3D world space"
+  {:arglists '([start-pos end-pos color])}
+  "DrawLine3D"
+  [::rs/vector-3 ::rs/vector-3 ::rs/color] ::mem/void)
+
+(defcfn draw-point-3d!
+  "Draw a point in 3D space"
+  {:arglists '([position color])}
+  "DrawPoint3D"
+  [::rs/vector-3 ::rs/color] ::mem/void)
+
+(defcfn draw-circle-3d!
+  "Draw a circle in 3D world space"
+  {:arglists '([center radius rotation-axis rotation-angle color])}
+  "DrawCircle3D"
+  [::rs/vector-3 ::mem/float ::rs/vector-3 ::mem/float ::rs/color] ::mem/void)
+
+(defcfn draw-triangle-3d!
+  "Draw a triangle in 3D space"
+  {:arglists '([v1 v2 v3 color])}
+  "DrawTriangle3D"
+  [::rs/vector-3 ::rs/vector-3 ::rs/vector-3 ::rs/color] ::mem/void)
+
+;; Ray drawing (useful for picking/debugging)
+
+(defalias ::ray
+  [::mem/struct
+   [[:position ::rs/vector-3]
+    [:direction ::rs/vector-3]]])
+
+(defcfn draw-ray!
+  "Draw a ray line"
+  {:arglists '([ray color])}
+  "DrawRay"
+  [::ray ::rs/color] ::mem/void)
+

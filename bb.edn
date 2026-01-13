@@ -159,6 +159,24 @@
   box-collisions {:doc "🗿 Box Collisions - 3D collision detection demo"
                   :task (h/run-example! "box-collisions")}
 
+  orthographic-projection {:doc "🗿 Orthographic Projection - perspective vs orthographic camera"
+                           :task (h/run-example! "orthographic-projection")}
+
+  tesseract-view {:doc "🗿 Tesseract View - 4D hypercube visualization"
+                  :task (h/run-example! "tesseract-view")}
+
+  solar-system {:doc "🗿 Solar System - orbiting planets demo"
+                :task (h/run-example! "solar-system")}
+
+  spinning-cubes {:doc "🗿 Spinning Cubes - animated color-cycling cubes"
+                  :task (h/run-example! "spinning-cubes")}
+
+  point-cloud {:doc "🗿 Point Cloud - spherical point cloud visualization"
+               :task (h/run-example! "point-cloud")}
+
+  wireframe-shapes {:doc "🗿 Wireframe Shapes - pyramid, octahedron, torus, spiral"
+                    :task (h/run-example! "wireframe-shapes")}
+
   ;; =============================================================================
   ;; 🔷 Shapes Examples (to be ported from raylib)
   ;; =============================================================================
