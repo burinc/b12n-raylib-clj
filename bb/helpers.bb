@@ -149,7 +149,19 @@
    {:alias "point-cloud" :category :models :title "Point Cloud"
     :desc "Spherical points" :controls "UP/DOWN, Q"}
    {:alias "wireframe-shapes" :category :models :title "Wireframe Shapes"
-    :desc "Custom wireframes" :controls "SPACE, Q"}])
+    :desc "Custom wireframes" :controls "SPACE, Q"}
+   {:alias "camera-modes" :category :models :title "Camera Modes"
+    :desc "Free/Orbital/FPS cameras" :controls "1/2/3, WASD, Q"}
+   {:alias "ray-picking" :category :models :title "Ray Picking"
+    :desc "Click to select cubes" :controls "Click, Right-click, Q"}
+   {:alias "bouncing-spheres" :category :models :title "Bouncing Spheres"
+    :desc "Physics in 3D box" :controls "SPACE, R, G, Q"}
+   {:alias "rotating-cube" :category :models :title "Rotating Cube"
+    :desc "3D rotation" :controls "Arrows, +/-, R, Q"}
+   {:alias "particle-system" :category :models :title "Particle System"
+    :desc "3D particles" :controls "SPACE, G, W, R, Q"}
+   {:alias "dna-helix" :category :models :title "DNA Helix"
+    :desc "Double helix" :controls "Arrows, SPACE, R, Q"}])
 
 ;; =============================================================================
 ;; Example Lookup Functions

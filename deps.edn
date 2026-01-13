@@ -271,4 +271,40 @@
   {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
               "-XstartOnFirstThread"
               "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
-   :main-opts ["-m" "examples.models.wireframe-shapes"]}}}
+   :main-opts ["-m" "examples.models.wireframe-shapes"]}
+
+  :camera-modes
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.models.camera-modes"]}
+
+  :ray-picking
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.models.ray-picking"]}
+
+  :bouncing-spheres
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.models.bouncing-spheres"]}
+
+  :rotating-cube
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.models.rotating-cube"]}
+
+  :particle-system
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.models.particle-system"]}
+
+  :dna-helix
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.models.dna-helix"]}}}

@@ -177,6 +177,24 @@
   wireframe-shapes {:doc "🗿 Wireframe Shapes - pyramid, octahedron, torus, spiral"
                     :task (h/run-example! "wireframe-shapes")}
 
+  camera-modes {:doc "🗿 Camera Modes - free, orbital, first-person camera"
+                :task (h/run-example! "camera-modes")}
+
+  ray-picking {:doc "🗿 Ray Picking - click to select 3D cubes"
+               :task (h/run-example! "ray-picking")}
+
+  bouncing-spheres {:doc "🗿 Bouncing Spheres - physics simulation in 3D box"
+                    :task (h/run-example! "bouncing-spheres")}
+
+  rotating-cube {:doc "🗿 Rotating Cube - 3D rotation with Rodrigues' formula"
+                 :task (h/run-example! "rotating-cube")}
+
+  particle-system {:doc "🗿 Particle System - 3D particles with gravity/wind"
+                   :task (h/run-example! "particle-system")}
+
+  dna-helix {:doc "🗿 DNA Helix - animated double helix visualization"
+             :task (h/run-example! "dna-helix")}
+
   ;; =============================================================================
   ;; 🔷 Shapes Examples (to be ported from raylib)
   ;; =============================================================================
