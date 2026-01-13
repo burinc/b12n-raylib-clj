@@ -27,9 +27,15 @@
 (def NUM_BLOCKS 15)
 
 (defn make-camera []
-  {:position {:x 30.0 :y 20.0 :z 30.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 30.0
+              :y 20.0
+              :z 30.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 70.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 

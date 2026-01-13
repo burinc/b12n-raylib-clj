@@ -30,9 +30,15 @@
 (def PI Math/PI)
 
 (defn make-camera []
-  {:position {:x 12.0 :y 8.0 :z 12.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 12.0
+              :y 8.0
+              :z 12.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -52,7 +58,8 @@
   (rcw/init-window! WIDTH HEIGHT "raylib [models] example - DNA helix")
   (rct/set-target-fps! 60))
 
-(defn handle-input [{:keys [helix-turns helix-radius] :as game}]
+(defn handle-input [{:keys [helix-turns helix-radius]
+                     :as game}]
   (cond-> game
     (rck/is-key-pressed? (:q enums/keyboard-key))
     (assoc :exit? true)
@@ -75,7 +82,8 @@
     (rck/is-key-pressed? (:left enums/keyboard-key))
     (update :helix-radius #(max 1.0 (- % 0.2)))))
 
-(defn update-rotation [{:keys [rotating?] :as game}]
+(defn update-rotation [{:keys [rotating?]
+                        :as game}]
   (if rotating?
     (let [dt (rct/get-frame-time)]
       (update game :rotation #(mod (+ % (* 30.0 dt)) 360.0)))
@@ -143,7 +151,10 @@
 
 (defn draw [{:keys [camera rotation rotating? helix-turns helix-radius helix-height points-per-turn]}]
   (rcd/begin-drawing!)
-  (rcd/clear-background! {:r 20 :g 20 :b 35 :a 255})
+  (rcd/clear-background! {:r 20
+                          :g 20
+                          :b 35
+                          :a 255})
 
   (rc3d/begin-mode-3d! camera)
 
@@ -158,9 +169,16 @@
     (draw-base-pairs! (int (* helix-turns 10)) helix-radius helix-height helix-turns rotation))
 
   ;; Draw vertical axis
-  (rc3d/draw-line-3d! {:x 0 :y (- (/ helix-height 2) 1) :z 0}
-                      {:x 0 :y (+ (/ helix-height 2) 1) :z 0}
-                      {:r 100 :g 100 :b 100 :a 100})
+  (rc3d/draw-line-3d! {:x 0
+                       :y (- (/ helix-height 2) 1)
+                       :z 0}
+                      {:x 0
+                       :y (+ (/ helix-height 2) 1)
+                       :z 0}
+                      {:r 100
+                       :g 100
+                       :b 100
+                       :a 100})
 
   ;; Draw grid
   (rc3d/draw-grid! 10 1.0)

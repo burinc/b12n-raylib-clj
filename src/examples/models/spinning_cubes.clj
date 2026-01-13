@@ -26,16 +26,47 @@
 
 ;; Cube definitions: position, size, rotation-speed, color
 (def cube-configs
-  [{:pos {:x -3.0 :y 0.0 :z 0.0} :size 1.5 :speed 1.0 :hue 0}
-   {:pos {:x 0.0 :y 0.0 :z 0.0} :size 2.0 :speed 1.5 :hue 120}
-   {:pos {:x 3.0 :y 0.0 :z 0.0} :size 1.0 :speed 2.0 :hue 240}
-   {:pos {:x -1.5 :y 2.5 :z -1.0} :size 0.8 :speed 2.5 :hue 60}
-   {:pos {:x 1.5 :y 2.5 :z 1.0} :size 0.8 :speed 3.0 :hue 180}])
+  [{:pos {:x -3.0
+          :y 0.0
+          :z 0.0}
+    :size 1.5
+    :speed 1.0
+    :hue 0}
+   {:pos {:x 0.0
+          :y 0.0
+          :z 0.0}
+    :size 2.0
+    :speed 1.5
+    :hue 120}
+   {:pos {:x 3.0
+          :y 0.0
+          :z 0.0}
+    :size 1.0
+    :speed 2.0
+    :hue 240}
+   {:pos {:x -1.5
+          :y 2.5
+          :z -1.0}
+    :size 0.8
+    :speed 2.5
+    :hue 60}
+   {:pos {:x 1.5
+          :y 2.5
+          :z 1.0}
+    :size 0.8
+    :speed 3.0
+    :hue 180}])
 
 (defn make-camera []
-  {:position {:x 8.0 :y 8.0 :z 8.0}
-   :target {:x 0.0 :y 1.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 8.0
+              :y 8.0
+              :z 8.0}
+   :target {:x 0.0
+            :y 1.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 

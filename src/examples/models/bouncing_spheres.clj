@@ -51,9 +51,15 @@
    :color (rand-nth sphere-colors)})
 
 (defn make-camera []
-  {:position {:x 15.0 :y 15.0 :z 15.0}
-   :target {:x 0.0 :y 2.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 15.0
+              :y 15.0
+              :z 15.0}
+   :target {:x 0.0
+            :y 2.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -69,7 +75,8 @@
   (rcw/init-window! WIDTH HEIGHT "raylib [models] example - bouncing spheres")
   (rct/set-target-fps! 60))
 
-(defn handle-input [{:keys [spheres] :as game}]
+(defn handle-input [{:keys [spheres]
+                     :as game}]
   (cond-> game
     (rck/is-key-pressed? (:q enums/keyboard-key))
     (assoc :exit? true)
@@ -87,7 +94,8 @@
 (defn clamp [v min-v max-v]
   (max min-v (min max-v v)))
 
-(defn update-sphere [{:keys [position velocity radius] :as sphere} dt gravity?]
+(defn update-sphere [{:keys [position velocity radius]
+                      :as sphere} dt gravity?]
   (let [;; Apply gravity
         vy (if gravity?
              (+ (:y velocity) (* GRAVITY dt))
@@ -121,10 +129,15 @@
                        :else [new-z (:z velocity)])]
 
     (assoc sphere
-           :position {:x final-x :y final-y :z final-z}
-           :velocity {:x vx :y final-vy :z vz})))
+           :position {:x final-x
+                      :y final-y
+                      :z final-z}
+           :velocity {:x vx
+                      :y final-vy
+                      :z vz})))
 
-(defn update-spheres [{:keys [spheres gravity?] :as game}]
+(defn update-spheres [{:keys [spheres gravity?]
+                       :as game}]
   (let [dt (rct/get-frame-time)]
     (assoc game :spheres (mapv #(update-sphere % dt gravity?) spheres))))
 
@@ -137,22 +150,70 @@
   ;; Draw the wireframe box
   (let [half HALF_BOX]
     ;; Bottom face
-    (rc3d/draw-line-3d! {:x (- half) :y 0 :z (- half)} {:x half :y 0 :z (- half)} colors/darkgray)
-    (rc3d/draw-line-3d! {:x half :y 0 :z (- half)} {:x half :y 0 :z half} colors/darkgray)
-    (rc3d/draw-line-3d! {:x half :y 0 :z half} {:x (- half) :y 0 :z half} colors/darkgray)
-    (rc3d/draw-line-3d! {:x (- half) :y 0 :z half} {:x (- half) :y 0 :z (- half)} colors/darkgray)
+    (rc3d/draw-line-3d! {:x (- half)
+                         :y 0
+                         :z (- half)} {:x half
+                                       :y 0
+                                       :z (- half)} colors/darkgray)
+    (rc3d/draw-line-3d! {:x half
+                         :y 0
+                         :z (- half)} {:x half
+                                       :y 0
+                                       :z half} colors/darkgray)
+    (rc3d/draw-line-3d! {:x half
+                         :y 0
+                         :z half} {:x (- half)
+                                   :y 0
+                                   :z half} colors/darkgray)
+    (rc3d/draw-line-3d! {:x (- half)
+                         :y 0
+                         :z half} {:x (- half)
+                                   :y 0
+                                   :z (- half)} colors/darkgray)
 
     ;; Top face
-    (rc3d/draw-line-3d! {:x (- half) :y BOX_SIZE :z (- half)} {:x half :y BOX_SIZE :z (- half)} colors/darkgray)
-    (rc3d/draw-line-3d! {:x half :y BOX_SIZE :z (- half)} {:x half :y BOX_SIZE :z half} colors/darkgray)
-    (rc3d/draw-line-3d! {:x half :y BOX_SIZE :z half} {:x (- half) :y BOX_SIZE :z half} colors/darkgray)
-    (rc3d/draw-line-3d! {:x (- half) :y BOX_SIZE :z half} {:x (- half) :y BOX_SIZE :z (- half)} colors/darkgray)
+    (rc3d/draw-line-3d! {:x (- half)
+                         :y BOX_SIZE
+                         :z (- half)} {:x half
+                                       :y BOX_SIZE
+                                       :z (- half)} colors/darkgray)
+    (rc3d/draw-line-3d! {:x half
+                         :y BOX_SIZE
+                         :z (- half)} {:x half
+                                       :y BOX_SIZE
+                                       :z half} colors/darkgray)
+    (rc3d/draw-line-3d! {:x half
+                         :y BOX_SIZE
+                         :z half} {:x (- half)
+                                   :y BOX_SIZE
+                                   :z half} colors/darkgray)
+    (rc3d/draw-line-3d! {:x (- half)
+                         :y BOX_SIZE
+                         :z half} {:x (- half)
+                                   :y BOX_SIZE
+                                   :z (- half)} colors/darkgray)
 
     ;; Vertical edges
-    (rc3d/draw-line-3d! {:x (- half) :y 0 :z (- half)} {:x (- half) :y BOX_SIZE :z (- half)} colors/darkgray)
-    (rc3d/draw-line-3d! {:x half :y 0 :z (- half)} {:x half :y BOX_SIZE :z (- half)} colors/darkgray)
-    (rc3d/draw-line-3d! {:x half :y 0 :z half} {:x half :y BOX_SIZE :z half} colors/darkgray)
-    (rc3d/draw-line-3d! {:x (- half) :y 0 :z half} {:x (- half) :y BOX_SIZE :z half} colors/darkgray)))
+    (rc3d/draw-line-3d! {:x (- half)
+                         :y 0
+                         :z (- half)} {:x (- half)
+                                       :y BOX_SIZE
+                                       :z (- half)} colors/darkgray)
+    (rc3d/draw-line-3d! {:x half
+                         :y 0
+                         :z (- half)} {:x half
+                                       :y BOX_SIZE
+                                       :z (- half)} colors/darkgray)
+    (rc3d/draw-line-3d! {:x half
+                         :y 0
+                         :z half} {:x half
+                                   :y BOX_SIZE
+                                   :z half} colors/darkgray)
+    (rc3d/draw-line-3d! {:x (- half)
+                         :y 0
+                         :z half} {:x (- half)
+                                   :y BOX_SIZE
+                                   :z half} colors/darkgray)))
 
 (defn draw [{:keys [camera spheres gravity?]}]
   (rcd/begin-drawing!)
@@ -161,7 +222,10 @@
   (rc3d/begin-mode-3d! camera)
 
   ;; Draw floor
-  (rc3d/draw-plane! {:x 0.0 :y 0.0 :z 0.0} {:x BOX_SIZE :y BOX_SIZE} colors/lightgray)
+  (rc3d/draw-plane! {:x 0.0
+                     :y 0.0
+                     :z 0.0} {:x BOX_SIZE
+                              :y BOX_SIZE} colors/lightgray)
 
   ;; Draw bounding box
   (draw-bounding-box)

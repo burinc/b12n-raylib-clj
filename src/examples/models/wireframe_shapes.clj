@@ -27,9 +27,15 @@
 (def TWO-PI (* 2.0 Math/PI))
 
 (defn make-camera []
-  {:position {:x 10.0 :y 10.0 :z 10.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 10.0
+              :y 10.0
+              :z 10.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -64,12 +70,22 @@
   (let [half (/ size 2.0)
         height size
         ;; Base corners
-        p1 {:x (+ (:x pos) half) :y (:y pos) :z (+ (:z pos) half)}
-        p2 {:x (- (:x pos) half) :y (:y pos) :z (+ (:z pos) half)}
-        p3 {:x (- (:x pos) half) :y (:y pos) :z (- (:z pos) half)}
-        p4 {:x (+ (:x pos) half) :y (:y pos) :z (- (:z pos) half)}
+        p1 {:x (+ (:x pos) half)
+            :y (:y pos)
+            :z (+ (:z pos) half)}
+        p2 {:x (- (:x pos) half)
+            :y (:y pos)
+            :z (+ (:z pos) half)}
+        p3 {:x (- (:x pos) half)
+            :y (:y pos)
+            :z (- (:z pos) half)}
+        p4 {:x (+ (:x pos) half)
+            :y (:y pos)
+            :z (- (:z pos) half)}
         ;; Apex
-        apex {:x (:x pos) :y (+ (:y pos) height) :z (:z pos)}]
+        apex {:x (:x pos)
+              :y (+ (:y pos) height)
+              :z (:z pos)}]
     ;; Base
     (rc3d/draw-line-3d! p1 p2 color)
     (rc3d/draw-line-3d! p2 p3 color)
@@ -85,12 +101,24 @@
   "Draw a wireframe octahedron at position with given size"
   [pos size color]
   (let [;; 6 vertices: top, bottom, and 4 middle
-        top {:x (:x pos) :y (+ (:y pos) size) :z (:z pos)}
-        bottom {:x (:x pos) :y (- (:y pos) size) :z (:z pos)}
-        front {:x (:x pos) :y (:y pos) :z (+ (:z pos) size)}
-        back {:x (:x pos) :y (:y pos) :z (- (:z pos) size)}
-        left {:x (- (:x pos) size) :y (:y pos) :z (:z pos)}
-        right {:x (+ (:x pos) size) :y (:y pos) :z (:z pos)}]
+        top {:x (:x pos)
+             :y (+ (:y pos) size)
+             :z (:z pos)}
+        bottom {:x (:x pos)
+                :y (- (:y pos) size)
+                :z (:z pos)}
+        front {:x (:x pos)
+               :y (:y pos)
+               :z (+ (:z pos) size)}
+        back {:x (:x pos)
+              :y (:y pos)
+              :z (- (:z pos) size)}
+        left {:x (- (:x pos) size)
+              :y (:y pos)
+              :z (:z pos)}
+        right {:x (+ (:x pos) size)
+               :y (:y pos)
+               :z (:z pos)}]
     ;; Top edges
     (rc3d/draw-line-3d! top front color)
     (rc3d/draw-line-3d! top back color)
@@ -158,26 +186,34 @@
     ;; Draw pyramid (animated position)
     (let [px (* 4.0 (Math/cos rotation))]
       (draw-wireframe-pyramid
-       {:x px :y 0.0 :z -3.0}
+       {:x px
+        :y 0.0
+        :z -3.0}
        1.5
        colors/red
        time))
 
     ;; Draw octahedron
     (draw-wireframe-octahedron
-     {:x 0.0 :y 1.5 :z 0.0}
+     {:x 0.0
+      :y 1.5
+      :z 0.0}
      1.0
      colors/blue)
 
     ;; Draw torus
     (draw-wireframe-torus
-     {:x -4.0 :y 1.0 :z 2.0}
+     {:x -4.0
+      :y 1.0
+      :z 2.0}
      1.0 0.3 12 16
      colors/green)
 
     ;; Draw spiral
     (draw-wireframe-spiral
-     {:x 4.0 :y 0.0 :z 2.0}
+     {:x 4.0
+      :y 0.0
+      :z 2.0}
      3.0 0.8 3 20
      colors/purple)
 

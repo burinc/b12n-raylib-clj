@@ -58,17 +58,27 @@
         vx (* speed (Math/cos elevation) (Math/cos angle))
         vy (+ 5 (rand 3)) ; Initial upward velocity
         vz (* speed (Math/cos elevation) (Math/sin angle))]
-    {:position {:x 0.0 :y 0.0 :z 0.0}
-     :velocity {:x vx :y vy :z vz}
+    {:position {:x 0.0
+                :y 0.0
+                :z 0.0}
+     :velocity {:x vx
+                :y vy
+                :z vz}
      :lifetime PARTICLE_LIFETIME
      :age 0.0
      :size (+ 0.05 (rand 0.1))
      :hue (rand 360)}))
 
 (defn make-camera []
-  {:position {:x 10.0 :y 8.0 :z 10.0}
-   :target {:x 0.0 :y 2.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 10.0
+              :y 8.0
+              :z 10.0}
+   :target {:x 0.0
+            :y 2.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -87,7 +97,8 @@
   (rcw/init-window! WIDTH HEIGHT "raylib [models] example - 3D particle system")
   (rct/set-target-fps! 60))
 
-(defn handle-input [{:keys [particles] :as game}]
+(defn handle-input [{:keys [particles]
+                     :as game}]
   (cond-> game
     (rck/is-key-pressed? (:q enums/keyboard-key))
     (assoc :exit? true)
@@ -105,7 +116,8 @@
     (rck/is-key-pressed? (:r enums/keyboard-key))
     (assoc :particles [] :emit-accumulator 0.0)))
 
-(defn update-particle [{:keys [position velocity age lifetime size hue] :as particle}
+(defn update-particle [{:keys [position velocity age lifetime size hue]
+                        :as particle}
                        dt gravity? wind? time]
   (let [;; Apply forces
         gravity-force (if gravity? GRAVITY 0.0)
@@ -131,11 +143,16 @@
 
     (when (< new-age lifetime)
       (assoc particle
-             :position {:x new-x :y final-y :z new-z}
-             :velocity {:x new-vx :y final-vy :z new-vz}
+             :position {:x new-x
+                        :y final-y
+                        :z new-z}
+             :velocity {:x new-vx
+                        :y final-vy
+                        :z new-vz}
              :age new-age))))
 
-(defn emit-particles [{:keys [particles emit-accumulator] :as game} dt]
+(defn emit-particles [{:keys [particles emit-accumulator]
+                       :as game} dt]
   (let [new-accumulator (+ emit-accumulator (* EMIT_RATE dt))
         particles-to-emit (int new-accumulator)
         remaining (- new-accumulator particles-to-emit)
@@ -148,7 +165,8 @@
            :particles new-particles
            :emit-accumulator remaining)))
 
-(defn update-particles [{:keys [particles gravity? wind? time] :as game}]
+(defn update-particles [{:keys [particles gravity? wind? time]
+                         :as game}]
   (let [dt (rct/get-frame-time)
         new-time (+ time dt)
         updated (keep #(update-particle % dt gravity? wind? new-time) particles)]
@@ -173,27 +191,43 @@
 
 (defn draw [{:keys [camera particles gravity? wind? time]}]
   (rcd/begin-drawing!)
-  (rcd/clear-background! {:r 20 :g 20 :b 30 :a 255})
+  (rcd/clear-background! {:r 20
+                          :g 20
+                          :b 30
+                          :a 255})
 
   (rc3d/begin-mode-3d! camera)
 
   ;; Draw emitter
-  (rc3d/draw-sphere! {:x 0.0 :y 0.0 :z 0.0} 0.3 colors/white)
+  (rc3d/draw-sphere! {:x 0.0
+                      :y 0.0
+                      :z 0.0} 0.3 colors/white)
 
   ;; Draw particles
-  (doseq [{:keys [position size] :as p} particles]
+  (doseq [{:keys [position size]
+           :as p} particles]
     (let [color (particle-color p)]
       (rc3d/draw-sphere! position size color)))
 
   ;; Draw ground plane
-  (rc3d/draw-plane! {:x 0.0 :y 0.0 :z 0.0} {:x 20.0 :y 20.0} {:r 40 :g 40 :b 50 :a 255})
+  (rc3d/draw-plane! {:x 0.0
+                     :y 0.0
+                     :z 0.0} {:x 20.0
+                              :y 20.0} {:r 40
+                                        :g 40
+                                        :b 50
+                                        :a 255})
 
   ;; Draw wind indicator if wind is on
   (when wind?
     (let [wind-x (* WIND_STRENGTH (Math/sin (* time 0.5)))
           wind-z (* WIND_STRENGTH (Math/cos (* time 0.7)))]
-      (rc3d/draw-line-3d! {:x 0 :y 5 :z 0}
-                          {:x wind-x :y 5 :z wind-z}
+      (rc3d/draw-line-3d! {:x 0
+                           :y 5
+                           :z 0}
+                          {:x wind-x
+                           :y 5
+                           :z wind-z}
                           colors/skyblue)))
 
   ;; Draw grid

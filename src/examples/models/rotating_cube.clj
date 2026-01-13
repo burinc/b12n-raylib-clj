@@ -28,9 +28,15 @@
 (def HEIGHT 450)
 
 (defn make-camera []
-  {:position {:x 4.0 :y 4.0 :z 4.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 4.0
+              :y 4.0
+              :z 4.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -39,7 +45,9 @@
    :camera (make-camera)
    :rotation 0.0
    :rotation-speed 60.0 ; degrees per second
-   :axis {:x 0.0 :y 1.0 :z 0.0} ; Y-axis by default
+   :axis {:x 0.0
+          :y 1.0
+          :z 0.0} ; Y-axis by default
    :axis-name "Y"})
 
 (def game-atom (atom (initial-state)))
@@ -48,20 +56,33 @@
   (rcw/init-window! WIDTH HEIGHT "raylib [models] example - rotating cube")
   (rct/set-target-fps! 60))
 
-(defn handle-input [{:keys [rotation-speed] :as game}]
+(defn handle-input [{:keys [rotation-speed]
+                     :as game}]
   (let [;; Change rotation axis
         new-axis (cond
                    (rck/is-key-pressed? (:up enums/keyboard-key))
-                   {:axis {:x 0.0 :y 1.0 :z 0.0} :axis-name "Y"}
+                   {:axis {:x 0.0
+                           :y 1.0
+                           :z 0.0}
+                    :axis-name "Y"}
 
                    (rck/is-key-pressed? (:down enums/keyboard-key))
-                   {:axis {:x 1.0 :y 0.0 :z 0.0} :axis-name "X"}
+                   {:axis {:x 1.0
+                           :y 0.0
+                           :z 0.0}
+                    :axis-name "X"}
 
                    (rck/is-key-pressed? (:left enums/keyboard-key))
-                   {:axis {:x 0.0 :y 0.0 :z 1.0} :axis-name "Z"}
+                   {:axis {:x 0.0
+                           :y 0.0
+                           :z 1.0}
+                    :axis-name "Z"}
 
                    (rck/is-key-pressed? (:right enums/keyboard-key))
-                   {:axis {:x 1.0 :y 1.0 :z 1.0} :axis-name "XYZ"}
+                   {:axis {:x 1.0
+                           :y 1.0
+                           :z 1.0}
+                    :axis-name "XYZ"}
 
                    :else nil)
 
@@ -86,7 +107,8 @@
       (not= speed-delta 0.0)
       (update :rotation-speed #(max 0.0 (min 360.0 (+ % (* speed-delta (rct/get-frame-time)))))))))
 
-(defn update-rotation [{:keys [rotation rotation-speed] :as game}]
+(defn update-rotation [{:keys [rotation rotation-speed]
+                        :as game}]
   (let [dt (rct/get-frame-time)
         new-rotation (mod (+ rotation (* rotation-speed dt)) 360.0)]
     (assoc game :rotation new-rotation)))
@@ -133,7 +155,9 @@
                   [nh half half]]
         ;; Rotate all vertices
         rotated (mapv (fn [[x y z]]
-                        (rotate-point {:x x :y y :z z} rotation axis))
+                        (rotate-point {:x x
+                                       :y y
+                                       :z z} rotation axis))
                       vertices)
         ;; Define edges (pairs of vertex indices)
         edges [[0 1] [1 2] [2 3] [3 0] ; back face
@@ -162,7 +186,9 @@
         axis-end {:x (* (:x axis) axis-length)
                   :y (* (:y axis) axis-length)
                   :z (* (:z axis) axis-length)}]
-    (rc3d/draw-line-3d! {:x 0 :y 0 :z 0} axis-end colors/gold)
+    (rc3d/draw-line-3d! {:x 0
+                         :y 0
+                         :z 0} axis-end colors/gold)
     (rc3d/draw-sphere! axis-end 0.15 colors/gold))
 
   ;; Draw grid
@@ -203,7 +229,9 @@
   (swap! game-atom assoc :rotation-speed 120.0)
 
   ;; Change axis
-  (swap! game-atom assoc :axis {:x 1.0 :y 1.0 :z 0.0} :axis-name "XY")
+  (swap! game-atom assoc :axis {:x 1.0
+                                :y 1.0
+                                :z 0.0} :axis-name "XY")
 
   ;; Reset
   (reset! game-atom (initial-state))

@@ -40,9 +40,15 @@
    CAMERA_FIRST_PERSON "FIRST PERSON (WASD + Mouse)"})
 
 (defn make-camera []
-  {:position {:x 10.0 :y 10.0 :z 10.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 10.0
+              :y 10.0
+              :z 10.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -58,7 +64,8 @@
   (rcw/init-window! WIDTH HEIGHT "raylib [models] example - camera modes")
   (rct/set-target-fps! 60))
 
-(defn handle-input [{:keys [camera-mode cursor-disabled?] :as game}]
+(defn handle-input [{:keys [camera-mode cursor-disabled?]
+                     :as game}]
   (let [new-mode (cond
                    (rck/is-key-pressed? (:one enums/keyboard-key)) CAMERA_FREE
                    (rck/is-key-pressed? (:two enums/keyboard-key)) CAMERA_ORBITAL
@@ -82,7 +89,8 @@
           ;; Reset camera when changing modes
           (assoc :camera (make-camera))))))
 
-(defn update-camera [{:keys [camera camera-mode] :as game}]
+(defn update-camera [{:keys [camera camera-mode]
+                      :as game}]
   (let [updated-camera (rc3d/update-camera camera camera-mode)]
     (assoc game :camera updated-camera)))
 
@@ -94,22 +102,39 @@
 (defn draw-scene [{:keys [camera]}]
   ;; Draw some reference geometry
   ;; Central pillar
-  (rc3d/draw-cube! {:x 0.0 :y 1.0 :z 0.0} 2.0 2.0 2.0 colors/red)
-  (rc3d/draw-cube-wires! {:x 0.0 :y 1.0 :z 0.0} 2.0 2.0 2.0 colors/maroon)
+  (rc3d/draw-cube! {:x 0.0
+                    :y 1.0
+                    :z 0.0} 2.0 2.0 2.0 colors/red)
+  (rc3d/draw-cube-wires! {:x 0.0
+                          :y 1.0
+                          :z 0.0} 2.0 2.0 2.0 colors/maroon)
 
   ;; Corner cubes
   (doseq [x [-5.0 5.0]
           z [-5.0 5.0]]
-    (rc3d/draw-cube! {:x x :y 0.5 :z z} 1.0 1.0 1.0 colors/blue)
-    (rc3d/draw-cube-wires! {:x x :y 0.5 :z z} 1.0 1.0 1.0 colors/darkblue))
+    (rc3d/draw-cube! {:x x
+                      :y 0.5
+                      :z z} 1.0 1.0 1.0 colors/blue)
+    (rc3d/draw-cube-wires! {:x x
+                            :y 0.5
+                            :z z} 1.0 1.0 1.0 colors/darkblue))
 
   ;; Spheres at different heights
-  (rc3d/draw-sphere! {:x 3.0 :y 1.0 :z 0.0} 0.5 colors/green)
-  (rc3d/draw-sphere! {:x -3.0 :y 2.0 :z 0.0} 0.5 colors/orange)
-  (rc3d/draw-sphere! {:x 0.0 :y 3.0 :z 3.0} 0.5 colors/purple)
+  (rc3d/draw-sphere! {:x 3.0
+                      :y 1.0
+                      :z 0.0} 0.5 colors/green)
+  (rc3d/draw-sphere! {:x -3.0
+                      :y 2.0
+                      :z 0.0} 0.5 colors/orange)
+  (rc3d/draw-sphere! {:x 0.0
+                      :y 3.0
+                      :z 3.0} 0.5 colors/purple)
 
   ;; Ground plane indicator
-  (rc3d/draw-plane! {:x 0.0 :y 0.0 :z 0.0} {:x 10.0 :y 10.0} colors/lightgray)
+  (rc3d/draw-plane! {:x 0.0
+                     :y 0.0
+                     :z 0.0} {:x 10.0
+                              :y 10.0} colors/lightgray)
 
   ;; Grid
   (rc3d/draw-grid! 20 1.0))

@@ -38,9 +38,15 @@
    [-1 -1 -1 1] [-1 -1 -1 -1]])
 
 (defn make-camera []
-  {:position {:x 4.0 :y 4.0 :z 4.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 0.0 :z 1.0} ; Z-up for this example
+  {:position {:x 4.0
+              :y 4.0
+              :z 4.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 0.0
+        :z 1.0} ; Z-up for this example
    :fovy 50.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -80,7 +86,9 @@
         proj-x (* c new-x)
         proj-y (* c y)
         proj-z (* c z)]
-    {:pos {:x proj-x :y proj-y :z proj-z}
+    {:pos {:x proj-x
+           :y proj-y
+           :z proj-z}
      :w new-w}))
 
 ;; Check if two vertices differ by exactly 1 coordinate (are connected by an edge)

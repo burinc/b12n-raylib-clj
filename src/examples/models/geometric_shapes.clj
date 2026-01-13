@@ -24,9 +24,15 @@
 (def HEIGHT 450)
 
 (defn make-camera []
-  {:position {:x 0.0 :y 10.0 :z 10.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 0.0
+              :y 10.0
+              :z 10.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -56,26 +62,54 @@
   (rc3d/begin-mode-3d! camera)
 
   ;; Draw cube (solid + wireframe)
-  (rc3d/draw-cube! {:x -4.0 :y 0.0 :z 2.0} 2.0 5.0 2.0 colors/red)
-  (rc3d/draw-cube-wires! {:x -4.0 :y 0.0 :z 2.0} 2.0 5.0 2.0 colors/gold)
-  (rc3d/draw-cube-wires! {:x -4.0 :y 0.0 :z -2.0} 3.0 6.0 2.0 colors/maroon)
+  (rc3d/draw-cube! {:x -4.0
+                    :y 0.0
+                    :z 2.0} 2.0 5.0 2.0 colors/red)
+  (rc3d/draw-cube-wires! {:x -4.0
+                          :y 0.0
+                          :z 2.0} 2.0 5.0 2.0 colors/gold)
+  (rc3d/draw-cube-wires! {:x -4.0
+                          :y 0.0
+                          :z -2.0} 3.0 6.0 2.0 colors/maroon)
 
   ;; Draw spheres
-  (rc3d/draw-sphere! {:x -1.0 :y 0.0 :z -2.0} 1.0 colors/green)
-  (rc3d/draw-sphere-wires! {:x 1.0 :y 0.0 :z 2.0} 2.0 16 16 colors/lime)
+  (rc3d/draw-sphere! {:x -1.0
+                      :y 0.0
+                      :z -2.0} 1.0 colors/green)
+  (rc3d/draw-sphere-wires! {:x 1.0
+                            :y 0.0
+                            :z 2.0} 2.0 16 16 colors/lime)
 
   ;; Draw cylinders
-  (rc3d/draw-cylinder! {:x 4.0 :y 0.0 :z -2.0} 1.0 2.0 3.0 4 colors/skyblue)
-  (rc3d/draw-cylinder-wires! {:x 4.0 :y 0.0 :z -2.0} 1.0 2.0 3.0 4 colors/darkblue)
-  (rc3d/draw-cylinder-wires! {:x 4.5 :y -1.0 :z 2.0} 1.0 1.0 2.0 6 colors/brown)
+  (rc3d/draw-cylinder! {:x 4.0
+                        :y 0.0
+                        :z -2.0} 1.0 2.0 3.0 4 colors/skyblue)
+  (rc3d/draw-cylinder-wires! {:x 4.0
+                              :y 0.0
+                              :z -2.0} 1.0 2.0 3.0 4 colors/darkblue)
+  (rc3d/draw-cylinder-wires! {:x 4.5
+                              :y -1.0
+                              :z 2.0} 1.0 1.0 2.0 6 colors/brown)
 
   ;; Draw cone (cylinder with 0 top radius)
-  (rc3d/draw-cylinder! {:x 1.0 :y 0.0 :z -4.0} 0.0 1.5 3.0 8 colors/gold)
-  (rc3d/draw-cylinder-wires! {:x 1.0 :y 0.0 :z -4.0} 0.0 1.5 3.0 8 colors/pink)
+  (rc3d/draw-cylinder! {:x 1.0
+                        :y 0.0
+                        :z -4.0} 0.0 1.5 3.0 8 colors/gold)
+  (rc3d/draw-cylinder-wires! {:x 1.0
+                              :y 0.0
+                              :z -4.0} 0.0 1.5 3.0 8 colors/pink)
 
   ;; Draw capsules
-  (rc3d/draw-capsule! {:x -3.0 :y 1.5 :z -4.0} {:x -4.0 :y -1.0 :z -4.0} 1.2 8 8 colors/violet)
-  (rc3d/draw-capsule-wires! {:x -3.0 :y 1.5 :z -4.0} {:x -4.0 :y -1.0 :z -4.0} 1.2 8 8 colors/purple)
+  (rc3d/draw-capsule! {:x -3.0
+                       :y 1.5
+                       :z -4.0} {:x -4.0
+                                 :y -1.0
+                                 :z -4.0} 1.2 8 8 colors/violet)
+  (rc3d/draw-capsule-wires! {:x -3.0
+                             :y 1.5
+                             :z -4.0} {:x -4.0
+                                       :y -1.0
+                                       :z -4.0} 1.2 8 8 colors/purple)
 
   ;; Draw grid
   (rc3d/draw-grid! 10 1.0)

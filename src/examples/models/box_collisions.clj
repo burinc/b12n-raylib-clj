@@ -28,20 +28,36 @@
 (def MOVE_SPEED 0.2)
 
 (defn make-camera []
-  {:position {:x 0.0 :y 10.0 :z 10.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 0.0
+              :y 10.0
+              :z 10.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
 (defn initial-state []
   {:exit? false
    :camera (make-camera)
-   :player-pos {:x 0.0 :y 1.0 :z 2.0}
-   :player-size {:x 1.0 :y 2.0 :z 1.0}
-   :enemy-box-pos {:x -4.0 :y 1.0 :z 0.0}
-   :enemy-box-size {:x 2.0 :y 2.0 :z 2.0}
-   :enemy-sphere-pos {:x 4.0 :y 0.0 :z 0.0}
+   :player-pos {:x 0.0
+                :y 1.0
+                :z 2.0}
+   :player-size {:x 1.0
+                 :y 2.0
+                 :z 1.0}
+   :enemy-box-pos {:x -4.0
+                   :y 1.0
+                   :z 0.0}
+   :enemy-box-size {:x 2.0
+                    :y 2.0
+                    :z 2.0}
+   :enemy-sphere-pos {:x 4.0
+                      :y 0.0
+                      :z 0.0}
    :enemy-sphere-radius 1.5
    :collision? false})
 
@@ -140,7 +156,9 @@
   (:player-pos @game-atom)
 
   ;; Teleport player
-  (swap! game-atom assoc :player-pos {:x -4.0 :y 1.0 :z 0.0})
+  (swap! game-atom assoc :player-pos {:x -4.0
+                                      :y 1.0
+                                      :z 0.0})
 
   ;; Reset
   (reset! game-atom (initial-state))

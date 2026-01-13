@@ -29,9 +29,15 @@
 (def MAX_POINTS 5000)
 
 (defn make-camera []
-  {:position {:x 5.0 :y 5.0 :z 5.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 5.0
+              :y 5.0
+              :z 5.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -46,7 +52,9 @@
         z (* r (Math/cos theta))
         ;; Color based on radius (distance from center)
         hue (* (/ r max-radius) 360.0)]
-    {:pos {:x x :y y :z z}
+    {:pos {:x x
+           :y y
+           :z z}
      :hue hue
      :radius r}))
 
@@ -66,7 +74,8 @@
   (rcw/init-window! WIDTH HEIGHT "raylib [models] example - point cloud")
   (rct/set-target-fps! 60))
 
-(defn handle-input [{:keys [num-points max-radius] :as game}]
+(defn handle-input [{:keys [num-points max-radius]
+                     :as game}]
   (cond-> game
     (rck/is-key-pressed? (:q enums/keyboard-key))
     (assoc :exit? true)
@@ -107,7 +116,9 @@
         (rc3d/draw-point-3d! pos color)))
 
     ;; Draw reference sphere wireframe
-    (rc3d/draw-sphere-wires! {:x 0.0 :y 0.0 :z 0.0} 2.0 10 10 colors/yellow)
+    (rc3d/draw-sphere-wires! {:x 0.0
+                              :y 0.0
+                              :z 0.0} 2.0 10 10 colors/yellow)
 
     (rc3d/end-mode-3d!)
 

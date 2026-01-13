@@ -29,18 +29,28 @@
 ;; Constants
 (def WIDTH 800)
 (def HEIGHT 450)
-(def CUBE_SIZE {:x 2.0 :y 2.0 :z 2.0})
+(def CUBE_SIZE {:x 2.0
+                :y 2.0
+                :z 2.0})
 
 ;; Define cube positions in a grid
 (def cube-positions
   (for [x (range -4 5 4)
         z (range -4 5 4)]
-    {:x (float x) :y 1.0 :z (float z)}))
+    {:x (float x)
+     :y 1.0
+     :z (float z)}))
 
 (defn make-camera []
-  {:position {:x 10.0 :y 10.0 :z 10.0}
-   :target {:x 0.0 :y 1.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 10.0
+              :y 10.0
+              :z 10.0}
+   :target {:x 0.0
+            :y 1.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -51,7 +61,9 @@
    :cursor-enabled? true
    :selected-cube nil
    :hover-cube nil
-   :cubes (vec (map-indexed (fn [i pos] {:id i :position pos :selected? false})
+   :cubes (vec (map-indexed (fn [i pos] {:id i
+                                         :position pos
+                                         :selected? false})
                             cube-positions))})
 
 (def game-atom (atom (initial-state)))
@@ -83,7 +95,8 @@
        (sort-by :distance)
        first))
 
-(defn handle-input [{:keys [camera cursor-enabled? cubes] :as game}]
+(defn handle-input [{:keys [camera cursor-enabled? cubes]
+                     :as game}]
   (let [;; Toggle cursor on right click
         toggle-cursor? (rcm/is-mouse-button-pressed? 1)
         new-cursor-enabled? (if toggle-cursor? (not cursor-enabled?) cursor-enabled?)
@@ -125,7 +138,8 @@
                                     %)
                                  cs)))))))
 
-(defn update-camera [{:keys [camera cursor-enabled?] :as game}]
+(defn update-camera [{:keys [camera cursor-enabled?]
+                      :as game}]
   (if cursor-enabled?
     game ; Don't update camera when cursor is enabled (for picking)
     (let [updated-camera (rc3d/update-camera camera rc3d/CAMERA_FREE)]

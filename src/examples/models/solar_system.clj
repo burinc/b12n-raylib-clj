@@ -34,9 +34,15 @@
 (def ROTATION_SPEED 0.2)
 
 (defn make-camera []
-  {:position {:x 16.0 :y 16.0 :z 16.0}
-   :target {:x 0.0 :y 0.0 :z 0.0}
-   :up {:x 0.0 :y 1.0 :z 0.0}
+  {:position {:x 16.0
+              :y 16.0
+              :z 16.0}
+   :target {:x 0.0
+            :y 0.0
+            :z 0.0}
+   :up {:x 0.0
+        :y 1.0
+        :z 0.0}
    :fovy 45.0
    :projection rc3d/CAMERA_PERSPECTIVE})
 
@@ -99,8 +105,12 @@
   (rc3d/begin-mode-3d! camera)
 
   ;; Draw the Sun (gold sphere at origin)
-  (rc3d/draw-sphere! {:x 0.0 :y 0.0 :z 0.0} SUN_RADIUS colors/gold)
-  (rc3d/draw-sphere-wires! {:x 0.0 :y 0.0 :z 0.0} SUN_RADIUS 16 16 colors/orange)
+  (rc3d/draw-sphere! {:x 0.0
+                      :y 0.0
+                      :z 0.0} SUN_RADIUS colors/gold)
+  (rc3d/draw-sphere-wires! {:x 0.0
+                            :y 0.0
+                            :z 0.0} SUN_RADIUS 16 16 colors/orange)
 
   ;; Calculate Earth's position on its orbit
   (let [earth-pos (orbit-position EARTH_ORBIT_RADIUS earth-orbit)]
@@ -118,9 +128,13 @@
       (rc3d/draw-sphere-wires! moon-pos MOON_RADIUS 8 8 colors/gray)))
 
   ;; Draw Earth's orbit path
-  (rc3d/draw-circle-3d! {:x 0.0 :y 0.0 :z 0.0}
+  (rc3d/draw-circle-3d! {:x 0.0
+                         :y 0.0
+                         :z 0.0}
                         EARTH_ORBIT_RADIUS
-                        {:x 1.0 :y 0.0 :z 0.0}
+                        {:x 1.0
+                         :y 0.0
+                         :z 0.0}
                         90.0
                         (ext/fade colors/red 0.5))
 
