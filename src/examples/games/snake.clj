@@ -38,9 +38,11 @@
 (defn initial-snake [offset]
   (let [start-x (/ (:x offset) 2)
         start-y (/ (:y offset) 2)]
-    {:segments (vec (repeat MAX-LENGTH {:x start-x :y start-y}))
+    {:segments (vec (repeat MAX-LENGTH {:x start-x
+                                        :y start-y}))
      :length 1
-     :speed {:x SQUARE-SIZE :y 0}}))
+     :speed {:x SQUARE-SIZE
+             :y 0}}))
 
 (defn spawn-fruit [offset snake]
   (let [grid-w (quot WIDTH SQUARE-SIZE)
@@ -85,7 +87,8 @@
   (rcw/init-window! WIDTH HEIGHT "classic game: snake")
   (rct/set-target-fps! 60))
 
-(defn handle-direction [{:keys [snake allow-move?] :as game}]
+(defn handle-direction [{:keys [snake allow-move?]
+                         :as game}]
   (let [{:keys [speed]} snake
         moving-horizontal? (not= 0 (:x speed))
         moving-vertical? (not= 0 (:y speed))]
@@ -94,30 +97,35 @@
       (and (rck/is-key-pressed? (:right enums/keyboard-key))
            (not moving-horizontal?) allow-move?)
       (-> game
-          (assoc-in [:snake :speed] {:x SQUARE-SIZE :y 0})
+          (assoc-in [:snake :speed] {:x SQUARE-SIZE
+                                     :y 0})
           (assoc :allow-move? false))
 
       (and (rck/is-key-pressed? (:left enums/keyboard-key))
            (not moving-horizontal?) allow-move?)
       (-> game
-          (assoc-in [:snake :speed] {:x (- SQUARE-SIZE) :y 0})
+          (assoc-in [:snake :speed] {:x (- SQUARE-SIZE)
+                                     :y 0})
           (assoc :allow-move? false))
 
       (and (rck/is-key-pressed? (:up enums/keyboard-key))
            (not moving-vertical?) allow-move?)
       (-> game
-          (assoc-in [:snake :speed] {:x 0 :y (- SQUARE-SIZE)})
+          (assoc-in [:snake :speed] {:x 0
+                                     :y (- SQUARE-SIZE)})
           (assoc :allow-move? false))
 
       (and (rck/is-key-pressed? (:down enums/keyboard-key))
            (not moving-vertical?) allow-move?)
       (-> game
-          (assoc-in [:snake :speed] {:x 0 :y SQUARE-SIZE})
+          (assoc-in [:snake :speed] {:x 0
+                                     :y SQUARE-SIZE})
           (assoc :allow-move? false))
 
       :else game)))
 
-(defn move-snake [{:keys [snake frames] :as game}]
+(defn move-snake [{:keys [snake frames]
+                   :as game}]
   (if (zero? (mod frames 5))
     (let [{:keys [segments length speed]} snake
           ;; Store old positions
@@ -129,13 +137,15 @@
           ;; Each segment takes position of the one in front
           new-segments (vec (concat [new-head]
                                     (take (dec MAX-LENGTH) old-positions)
-                                    (repeat (- MAX-LENGTH length) {:x 0 :y 0})))]
+                                    (repeat (- MAX-LENGTH length) {:x 0
+                                                                   :y 0})))]
       (-> game
           (assoc-in [:snake :segments] new-segments)
           (assoc :allow-move? true)))
     game))
 
-(defn check-wall-collision [{:keys [snake offset] :as game}]
+(defn check-wall-collision [{:keys [snake offset]
+                             :as game}]
   (let [head (first (:segments snake))
         max-x (- WIDTH (/ (:x offset) 2))
         max-y (- HEIGHT (/ (:y offset) 2))]
@@ -146,7 +156,8 @@
       (assoc game :game-over? true)
       game)))
 
-(defn check-self-collision [{:keys [snake] :as game}]
+(defn check-self-collision [{:keys [snake]
+                             :as game}]
   (let [{:keys [segments length]} snake
         head (first segments)
         body (take (dec length) (rest segments))]
@@ -156,7 +167,8 @@
       (assoc game :game-over? true)
       game)))
 
-(defn check-fruit-collision [{:keys [snake fruit offset] :as game}]
+(defn check-fruit-collision [{:keys [snake fruit offset]
+                              :as game}]
   (let [head (first (:segments snake))
         fpos (:position fruit)]
     (if (and (:active? fruit)
@@ -170,10 +182,12 @@
             new-fruit-pos (spawn-fruit offset new-snake)]
         (-> game
             (assoc :snake new-snake)
-            (assoc :fruit {:position new-fruit-pos :active? true})))
+            (assoc :fruit {:position new-fruit-pos
+                           :active? true})))
       game)))
 
-(defn handle-input [{:keys [game-over? paused?] :as game}]
+(defn handle-input [{:keys [game-over? paused?]
+                     :as game}]
   (cond-> game
     (rck/is-key-pressed? (:q enums/keyboard-key))
     (assoc :exit? true)
@@ -184,7 +198,8 @@
     (and (not game-over?) (rck/is-key-pressed? (:p enums/keyboard-key)))
     (update :paused? not)))
 
-(defn tick [{:keys [game-over? paused?] :as game}]
+(defn tick [{:keys [game-over? paused?]
+             :as game}]
   (let [game (handle-input game)]
     (if (or game-over? paused?)
       game

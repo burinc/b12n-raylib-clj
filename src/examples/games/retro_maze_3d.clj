@@ -31,10 +31,22 @@
 (def HEIGHT 240)
 
 ;; GameBoy green palette
-(def GB-GREEN01 {:r 155 :g 188 :b 15 :a 255}) ;; Lightest
-(def GB-GREEN02 {:r 110 :g 150 :b 27 :a 255})
-(def GB-GREEN03 {:r 48 :g 98 :b 48 :a 255})
-(def GB-GREEN04 {:r 15 :g 56 :b 15 :a 255}) ;; Darkest
+(def GB-GREEN01 {:r 155
+                 :g 188
+                 :b 15
+                 :a 255}) ;; Lightest
+(def GB-GREEN02 {:r 110
+                 :g 150
+                 :b 27
+                 :a 255})
+(def GB-GREEN03 {:r 48
+                 :g 98
+                 :b 48
+                 :a 255})
+(def GB-GREEN04 {:r 15
+                 :g 56
+                 :b 15
+                 :a 255}) ;; Darkest
 
 ;; Maze dimensions
 (def MAZE-WIDTH 25)
@@ -51,7 +63,11 @@
 ;; ============================================================================
 
 (defn make-grid [w h]
-  (vec (repeat h (vec (repeat w {:visited false :walls {:n true :s true :e true :w true}})))))
+  (vec (repeat h (vec (repeat w {:visited false
+                                 :walls {:n true
+                                         :s true
+                                         :e true
+                                         :w true}})))))
 
 (defn get-unvisited-neighbors [grid x y]
   (let [h (count grid)
@@ -142,9 +158,15 @@
      ;; Gameplay
      :maze maze
      :collision-map collision-map
-     :camera {:position {:x 1.5 :y 0.3 :z 1.5}
-              :target {:x 2.5 :y 0.3 :z 1.5}
-              :up {:x 0.0 :y 1.0 :z 0.0}
+     :camera {:position {:x 1.5
+                         :y 0.3
+                         :z 1.5}
+              :target {:x 2.5
+                       :y 0.3
+                       :z 1.5}
+              :up {:x 0.0
+                   :y 1.0
+                   :z 0.0}
               :fovy 60.0
               :projection rc3d/CAMERA_PERSPECTIVE}
      :player-angle 0.0
@@ -201,7 +223,8 @@
 ;; Update Functions
 ;; ============================================================================
 
-(defn update-title [{:keys [menu-option title-anim-y] :as game}]
+(defn update-title [{:keys [menu-option title-anim-y]
+                     :as game}]
   (let [new-anim-y (min 20 (+ title-anim-y 2))]
     (cond-> (assoc game :title-anim-y new-anim-y)
       (rck/is-key-pressed? (:down enums/keyboard-key))
@@ -214,7 +237,8 @@
       (-> (assoc :screen (if (zero? (:menu-option game)) SCREEN-GAMEPLAY SCREEN-TITLE))
           (assoc :exit? (= (:menu-option game) 1))))))
 
-(defn update-camera-first-person [{:keys [camera player-angle collision-map] :as game}]
+(defn update-camera-first-person [{:keys [camera player-angle collision-map]
+                                   :as game}]
   (let [;; Get mouse movement for looking
         mouse-delta (rcmouse/get-mouse-delta)
         sensitivity 0.003
@@ -250,7 +274,9 @@
         final-z (if (check-collision collision-map (:x pos) new-z radius) (:z pos) new-z)
 
         ;; Update camera
-        new-pos {:x final-x :y 0.3 :z final-z}
+        new-pos {:x final-x
+                 :y 0.3
+                 :z final-z}
         new-target {:x (+ final-x (Math/sin new-angle))
                     :y 0.3
                     :z (+ final-z (Math/cos new-angle))}]
@@ -260,7 +286,8 @@
         (assoc-in [:camera :position] new-pos)
         (assoc-in [:camera :target] new-target))))
 
-(defn update-gameplay [{:keys [frames paused collision-map camera exit-cell stamina time-remaining] :as game}]
+(defn update-gameplay [{:keys [frames paused collision-map camera exit-cell stamina time-remaining]
+                        :as game}]
   (cond
     ;; Toggle pause
     (rck/is-key-pressed? (:space enums/keyboard-key))
@@ -331,7 +358,8 @@
     (rck/is-key-pressed? (:q enums/keyboard-key))
     (assoc :exit? true)))
 
-(defn tick [{:keys [screen] :as game}]
+(defn tick [{:keys [screen]
+             :as game}]
   (-> game
       handle-input
       (as-> g
@@ -366,23 +394,33 @@
         map-w (count (first collision-map))
         [exit-x exit-z] exit-cell]
     ;; Draw floor
-    (rc3d/draw-plane! {:x (/ map-w 2.0) :y 0.0 :z (/ map-h 2.0)}
-                      {:x (float map-w) :y (float map-h)}
+    (rc3d/draw-plane! {:x (/ map-w 2.0)
+                       :y 0.0
+                       :z (/ map-h 2.0)}
+                      {:x (float map-w)
+                       :y (float map-h)}
                       GB-GREEN02)
 
     ;; Draw walls
     (doseq [z (range map-h)
             x (range map-w)
             :when (get-in collision-map [z x])]
-      (rc3d/draw-cube! {:x (+ x 0.5) :y 0.5 :z (+ z 0.5)}
+      (rc3d/draw-cube! {:x (+ x 0.5)
+                        :y 0.5
+                        :z (+ z 0.5)}
                        1.0 1.0 1.0
                        GB-GREEN03))
 
     ;; Draw exit marker (pulsing)
     (let [pulse (+ 0.3 (* 0.2 (Math/sin (* (rct/get-time) 3))))]
-      (rc3d/draw-cube! {:x (+ exit-x 0.5) :y 0.5 :z (+ exit-z 0.5)}
+      (rc3d/draw-cube! {:x (+ exit-x 0.5)
+                        :y 0.5
+                        :z (+ exit-z 0.5)}
                        0.8 0.8 0.8
-                       {:r 0 :g 200 :b 0 :a (int (* 255 pulse))}))))
+                       {:r 0
+                        :g 200
+                        :b 0
+                        :a (int (* 255 pulse))}))))
 
 (defn draw-minimap [{:keys [collision-map camera exit-cell]}]
   (let [map-h (count collision-map)
@@ -416,7 +454,10 @@
       (rsb/draw-rectangle! (+ (int offset-x) (* exit-x scale))
                            (+ (int offset-y) (* exit-z scale))
                            scale scale
-                           {:r 0 :g 255 :b 0 :a 255}))))
+                           {:r 0
+                            :g 255
+                            :b 0
+                            :a 255}))))
 
 (defn draw-hud [{:keys [time-remaining stamina]}]
   ;; Bottom bar
@@ -439,7 +480,8 @@
   (rtd/draw-text! "BACK TO TITLE" 100 117 12 (if (= menu-option 1) GB-GREEN03 GB-GREEN02))
   (rtd/draw-text! "EXIT GAME" 112 137 12 (if (= menu-option 2) GB-GREEN03 GB-GREEN02)))
 
-(defn draw-gameplay [{:keys [camera paused show-minimap] :as game}]
+(defn draw-gameplay [{:keys [camera paused show-minimap]
+                      :as game}]
   (rcd/clear-background! GB-GREEN01)
 
   ;; 3D view
@@ -472,7 +514,8 @@
   (rsb/draw-rectangle! 100 170 120 20 GB-GREEN02)
   (rtd/draw-text! "CONTINUE" 120 173 12 GB-GREEN03))
 
-(defn draw [{:keys [screen] :as game}]
+(defn draw [{:keys [screen]
+             :as game}]
   (rcd/begin-drawing!)
   (case screen
     0 (draw-title game)

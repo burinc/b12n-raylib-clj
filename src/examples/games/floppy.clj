@@ -85,7 +85,8 @@
         dist-sq (+ (* dx dx) (* dy dy))]
     (< dist-sq (* radius radius))))
 
-(defn handle-input [{:keys [game-over? paused?] :as game}]
+(defn handle-input [{:keys [game-over? paused?]
+                     :as game}]
   (cond-> game
     (rck/is-key-pressed? (:q enums/keyboard-key))
     (assoc :exit? true)
@@ -97,7 +98,8 @@
     (and (not game-over?) (rck/is-key-pressed? (:p enums/keyboard-key)))
     (update :paused? not)))
 
-(defn update-floppy [{:keys [floppy game-over?] :as game}]
+(defn update-floppy [{:keys [floppy game-over?]
+                      :as game}]
   (if game-over?
     game
     (let [dy (if (rck/is-key-down? (:space enums/keyboard-key))
@@ -106,7 +108,8 @@
           new-y (+ (:y floppy) dy)]
       (assoc-in game [:floppy :y] new-y))))
 
-(defn update-tubes [{:keys [tubes-speed tube-positions tubes] :as game}]
+(defn update-tubes [{:keys [tubes-speed tube-positions tubes]
+                     :as game}]
   ;; Move tubes left
   (let [new-positions (mapv (fn [pos] (update pos :x - tubes-speed)) tube-positions)
         new-tubes (mapv (fn [tube pos]
@@ -118,7 +121,8 @@
            :tube-positions new-positions
            :tubes new-tubes)))
 
-(defn check-collisions [{:keys [floppy tubes] :as game}]
+(defn check-collisions [{:keys [floppy tubes]
+                         :as game}]
   (let [{:keys [x y radius]} floppy
         ;; Check if bird hits any tube
         collision? (some (fn [tube]
@@ -131,7 +135,8 @@
       (assoc game :game-over? true)
       game)))
 
-(defn update-score [{:keys [floppy tubes score hi-score] :as game}]
+(defn update-score [{:keys [floppy tubes score hi-score]
+                     :as game}]
   (let [floppy-x (:x floppy)]
     (loop [i 0
            current-tubes tubes
@@ -154,7 +159,8 @@
                    true)
             (recur (inc i) current-tubes current-score superfx?)))))))
 
-(defn tick [{:keys [game-over? paused?] :as game}]
+(defn tick [{:keys [game-over? paused?]
+             :as game}]
   (let [game (handle-input game)]
     (if (or game-over? paused?)
       game
@@ -178,7 +184,8 @@
                       colors/gray))
     (do
       ;; Draw floppy bird
-      (rsb/draw-circle-v! {:x (:x floppy) :y (:y floppy)} (float (:radius floppy)) colors/darkgray)
+      (rsb/draw-circle-v! {:x (:x floppy)
+                           :y (:y floppy)} (float (:radius floppy)) colors/darkgray)
 
       ;; Draw tubes
       (doseq [tube tubes]
