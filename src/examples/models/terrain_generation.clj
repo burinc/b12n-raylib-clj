@@ -35,10 +35,12 @@
 
 ;; Simple noise function (value noise with interpolation)
 (defn hash-2d [x y seed]
-  (let [n (+ (* x 374761393) (* y 668265263) seed)]
+  (let [n (unchecked-add (unchecked-multiply (long x) 374761393)
+                         (unchecked-add (unchecked-multiply (long y) 668265263)
+                                        (long seed)))]
     (-> n
         (bit-xor (bit-shift-right n 13))
-        (* 1274126177)
+        (unchecked-multiply 1274126177)
         (bit-and 0x7fffffff)
         (/ 2147483647.0))))
 
