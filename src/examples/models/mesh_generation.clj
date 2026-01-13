@@ -32,16 +32,26 @@
 
 ;; Shape definitions
 (def shapes
-  [{:name "CUBE" :type :cube}
-   {:name "SPHERE" :type :sphere}
-   {:name "CYLINDER" :type :cylinder}
-   {:name "TORUS" :type :torus}
-   {:name "CONE" :type :cone}
-   {:name "HEMISPHERE" :type :hemisphere}
-   {:name "CAPSULE" :type :capsule}
-   {:name "POLYGON" :type :polygon}
-   {:name "STAR" :type :star}
-   {:name "SPIRAL" :type :spiral}])
+  [{:name "CUBE"
+    :type :cube}
+   {:name "SPHERE"
+    :type :sphere}
+   {:name "CYLINDER"
+    :type :cylinder}
+   {:name "TORUS"
+    :type :torus}
+   {:name "CONE"
+    :type :cone}
+   {:name "HEMISPHERE"
+    :type :hemisphere}
+   {:name "CAPSULE"
+    :type :capsule}
+   {:name "POLYGON"
+    :type :polygon}
+   {:name "STAR"
+    :type :star}
+   {:name "SPIRAL"
+    :type :spiral}])
 
 (defn initial-state []
   {:exit? false
@@ -49,9 +59,15 @@
    :rotation 0.0
    :auto-rotate? true
    :wireframe? false
-   :camera {:position {:x 5.0 :y 5.0 :z 5.0}
-            :target {:x 0.0 :y 0.0 :z 0.0}
-            :up {:x 0.0 :y 1.0 :z 0.0}
+   :camera {:position {:x 5.0
+                       :y 5.0
+                       :z 5.0}
+            :target {:x 0.0
+                     :y 0.0
+                     :z 0.0}
+            :up {:x 0.0
+                 :y 1.0
+                 :z 0.0}
             :fovy 45.0
             :projection rc3d/CAMERA_PERSPECTIVE}})
 
@@ -61,7 +77,8 @@
   (rcw/init-window! WIDTH HEIGHT "raylib [models] example - procedural shape generation")
   (rct/set-target-fps! 60))
 
-(defn handle-input [{:keys [current-shape] :as game}]
+(defn handle-input [{:keys [current-shape]
+                     :as game}]
   (let [num-shapes (count shapes)]
     (cond-> game
       (rck/is-key-pressed? (:q enums/keyboard-key))
@@ -80,7 +97,8 @@
       (rck/is-key-pressed? (:left enums/keyboard-key))
       (update :current-shape #(mod (+ % (dec num-shapes)) num-shapes)))))
 
-(defn update-rotation [{:keys [auto-rotate?] :as game}]
+(defn update-rotation [{:keys [auto-rotate?]
+                        :as game}]
   (if auto-rotate?
     (update game :rotation + (* 30.0 (rct/get-frame-time)))
     game))
@@ -97,8 +115,13 @@
 ;; Shape drawing functions
 (defn draw-cube! [rotation wireframe?]
   (let [size 2.0
-        pos {:x 0 :y 0 :z 0}
-        color {:r 230 :g 41 :b 55 :a 255}]
+        pos {:x 0
+             :y 0
+             :z 0}
+        color {:r 230
+               :g 41
+               :b 55
+               :a 255}]
     (if wireframe?
       (rc3d/draw-cube-wires! pos size size size color)
       (do
@@ -107,8 +130,13 @@
 
 (defn draw-sphere! [rotation wireframe?]
   (let [radius 1.5
-        pos {:x 0 :y 0 :z 0}
-        color {:r 0 :g 228 :b 48 :a 255}]
+        pos {:x 0
+             :y 0
+             :z 0}
+        color {:r 0
+               :g 228
+               :b 48
+               :a 255}]
     (if wireframe?
       (rc3d/draw-sphere-wires! pos radius 16 16 color)
       (do
@@ -116,8 +144,13 @@
         (rc3d/draw-sphere-wires! pos radius 16 16 colors/darkgray)))))
 
 (defn draw-cylinder! [rotation wireframe?]
-  (let [pos {:x 0 :y -1 :z 0}
-        color {:r 0 :g 121 :b 241 :a 255}]
+  (let [pos {:x 0
+             :y -1
+             :z 0}
+        color {:r 0
+               :g 121
+               :b 241
+               :a 255}]
     (if wireframe?
       (rc3d/draw-cylinder-wires! pos 1.0 1.0 2.0 16 color)
       (do
@@ -129,7 +162,10 @@
   (let [major-radius 1.5
         minor-radius 0.5
         segments 24
-        color {:r 253 :g 249 :b 0 :a 255}]
+        color {:r 253
+               :g 249
+               :b 0
+               :a 255}]
     (doseq [i (range segments)]
       (let [angle (* 2 Math/PI (/ i segments))
             cx (* major-radius (Math/cos angle))
@@ -154,13 +190,22 @@
                 npx (+ cx (* nrr (Math/cos angle)))
                 npy nry
                 npz (+ cz (* nrr (Math/sin angle)))]
-            (rc3d/draw-line-3d! {:x px :y py :z pz}
-                                {:x npx :y npy :z npz}
+            (rc3d/draw-line-3d! {:x px
+                                 :y py
+                                 :z pz}
+                                {:x npx
+                                 :y npy
+                                 :z npz}
                                 color)))))))
 
 (defn draw-cone! [rotation wireframe?]
-  (let [pos {:x 0 :y -1 :z 0}
-        color {:r 200 :g 122 :b 255 :a 255}]
+  (let [pos {:x 0
+             :y -1
+             :z 0}
+        color {:r 200
+               :g 122
+               :b 255
+               :a 255}]
     (if wireframe?
       (rc3d/draw-cylinder-wires! pos 0.0 1.5 2.0 16 color)
       (do
@@ -170,7 +215,10 @@
 (defn draw-hemisphere! [rotation wireframe?]
   ;; Draw hemisphere as latitude/longitude lines
   (let [radius 1.5
-        color {:r 255 :g 161 :b 0 :a 255}
+        color {:r 255
+               :g 161
+               :b 0
+               :a 255}
         lat-segments 8
         lon-segments 16]
     ;; Latitude lines (horizontal circles)
@@ -182,8 +230,12 @@
           (doseq [j (range lon-segments)]
             (let [lon1 (* 2 Math/PI (/ j lon-segments))
                   lon2 (* 2 Math/PI (/ (inc j) lon-segments))]
-              (rc3d/draw-line-3d! {:x (* r (Math/cos lon1)) :y y :z (* r (Math/sin lon1))}
-                                  {:x (* r (Math/cos lon2)) :y y :z (* r (Math/sin lon2))}
+              (rc3d/draw-line-3d! {:x (* r (Math/cos lon1))
+                                   :y y
+                                   :z (* r (Math/sin lon1))}
+                                  {:x (* r (Math/cos lon2))
+                                   :y y
+                                   :z (* r (Math/sin lon2))}
                                   color))))))
     ;; Longitude lines (vertical arcs)
     (doseq [j (range lon-segments)]
@@ -195,34 +247,56 @@
                 r2 (* radius (Math/cos lat2))
                 y1 (* radius (Math/sin lat1))
                 y2 (* radius (Math/sin lat2))]
-            (rc3d/draw-line-3d! {:x (* r1 (Math/cos lon)) :y y1 :z (* r1 (Math/sin lon))}
-                                {:x (* r2 (Math/cos lon)) :y y2 :z (* r2 (Math/sin lon))}
+            (rc3d/draw-line-3d! {:x (* r1 (Math/cos lon))
+                                 :y y1
+                                 :z (* r1 (Math/sin lon))}
+                                {:x (* r2 (Math/cos lon))
+                                 :y y2
+                                 :z (* r2 (Math/sin lon))}
                                 color)))))))
 
 (defn draw-capsule! [rotation wireframe?]
   ;; Capsule = cylinder with hemispherical caps
   (let [radius 0.8
         height 1.5
-        color {:r 102 :g 191 :b 255 :a 255}]
+        color {:r 102
+               :g 191
+               :b 255
+               :a 255}]
     ;; Middle cylinder
     (if wireframe?
-      (rc3d/draw-cylinder-wires! {:x 0 :y (- (/ height 2)) :z 0} radius radius height 16 color)
-      (rc3d/draw-cylinder! {:x 0 :y (- (/ height 2)) :z 0} radius radius height 16 color))
+      (rc3d/draw-cylinder-wires! {:x 0
+                                  :y (- (/ height 2))
+                                  :z 0} radius radius height 16 color)
+      (rc3d/draw-cylinder! {:x 0
+                            :y (- (/ height 2))
+                            :z 0} radius radius height 16 color))
     ;; Top sphere
     (if wireframe?
-      (rc3d/draw-sphere-wires! {:x 0 :y (/ height 2) :z 0} radius 16 16 color)
-      (rc3d/draw-sphere! {:x 0 :y (/ height 2) :z 0} radius color))
+      (rc3d/draw-sphere-wires! {:x 0
+                                :y (/ height 2)
+                                :z 0} radius 16 16 color)
+      (rc3d/draw-sphere! {:x 0
+                          :y (/ height 2)
+                          :z 0} radius color))
     ;; Bottom sphere
     (if wireframe?
-      (rc3d/draw-sphere-wires! {:x 0 :y (- (/ height 2)) :z 0} radius 16 16 color)
-      (rc3d/draw-sphere! {:x 0 :y (- (/ height 2)) :z 0} radius color))))
+      (rc3d/draw-sphere-wires! {:x 0
+                                :y (- (/ height 2))
+                                :z 0} radius 16 16 color)
+      (rc3d/draw-sphere! {:x 0
+                          :y (- (/ height 2))
+                          :z 0} radius color))))
 
 (defn draw-polygon! [rotation wireframe?]
   ;; Draw a pentagon prism
   (let [sides 5
         radius 1.5
         height 1.0
-        color {:r 127 :g 106 :b 79 :a 255}]
+        color {:r 127
+               :g 106
+               :b 79
+               :a 255}]
     (doseq [i (range sides)]
       (let [angle1 (* 2 Math/PI (/ i sides))
             angle2 (* 2 Math/PI (/ (inc i) sides))
@@ -233,22 +307,45 @@
             y-top (/ height 2)
             y-bot (- (/ height 2))]
         ;; Top edge
-        (rc3d/draw-line-3d! {:x x1 :y y-top :z z1} {:x x2 :y y-top :z z2} color)
+        (rc3d/draw-line-3d! {:x x1
+                             :y y-top
+                             :z z1} {:x x2
+                                     :y y-top
+                                     :z z2} color)
         ;; Bottom edge
-        (rc3d/draw-line-3d! {:x x1 :y y-bot :z z1} {:x x2 :y y-bot :z z2} color)
+        (rc3d/draw-line-3d! {:x x1
+                             :y y-bot
+                             :z z1} {:x x2
+                                     :y y-bot
+                                     :z z2} color)
         ;; Vertical edge
-        (rc3d/draw-line-3d! {:x x1 :y y-top :z z1} {:x x1 :y y-bot :z z1} color)
+        (rc3d/draw-line-3d! {:x x1
+                             :y y-top
+                             :z z1} {:x x1
+                                     :y y-bot
+                                     :z z1} color)
         ;; Diagonals to center (top)
-        (rc3d/draw-line-3d! {:x 0 :y y-top :z 0} {:x x1 :y y-top :z z1} color)
+        (rc3d/draw-line-3d! {:x 0
+                             :y y-top
+                             :z 0} {:x x1
+                                    :y y-top
+                                    :z z1} color)
         ;; Diagonals to center (bottom)
-        (rc3d/draw-line-3d! {:x 0 :y y-bot :z 0} {:x x1 :y y-bot :z z1} color)))))
+        (rc3d/draw-line-3d! {:x 0
+                             :y y-bot
+                             :z 0} {:x x1
+                                    :y y-bot
+                                    :z z1} color)))))
 
 (defn draw-star! [rotation wireframe?]
   ;; 3D star shape
   (let [outer-radius 2.0
         inner-radius 0.8
         points 5
-        color {:r 255 :g 109 :b 194 :a 255}]
+        color {:r 255
+               :g 109
+               :b 194
+               :a 255}]
     (doseq [i (range (* 2 points))]
       (let [angle1 (* Math/PI (/ i points))
             angle2 (* Math/PI (/ (inc i) points))
@@ -259,11 +356,23 @@
             x2 (* r2 (Math/cos angle2))
             z2 (* r2 (Math/sin angle2))]
         ;; Connect star points
-        (rc3d/draw-line-3d! {:x x1 :y 0 :z z1} {:x x2 :y 0 :z z2} color)
+        (rc3d/draw-line-3d! {:x x1
+                             :y 0
+                             :z z1} {:x x2
+                                     :y 0
+                                     :z z2} color)
         ;; Connect to center top
-        (rc3d/draw-line-3d! {:x x1 :y 0 :z z1} {:x 0 :y 1.0 :z 0} color)
+        (rc3d/draw-line-3d! {:x x1
+                             :y 0
+                             :z z1} {:x 0
+                                     :y 1.0
+                                     :z 0} color)
         ;; Connect to center bottom
-        (rc3d/draw-line-3d! {:x x1 :y 0 :z z1} {:x 0 :y -1.0 :z 0} color)))))
+        (rc3d/draw-line-3d! {:x x1
+                             :y 0
+                             :z z1} {:x 0
+                                     :y -1.0
+                                     :z 0} color)))))
 
 (defn draw-spiral! [rotation wireframe?]
   ;; 3D spiral/helix
@@ -271,7 +380,10 @@
         height 3.0
         turns 3
         segments 100
-        color {:r 0 :g 255 :b 255 :a 255}]
+        color {:r 0
+               :g 255
+               :b 255
+               :a 255}]
     (doseq [i (range segments)]
       (let [t1 (/ i segments)
             t2 (/ (inc i) segments)
@@ -283,7 +395,11 @@
             z1 (* radius (Math/sin angle1))
             x2 (* radius (Math/cos angle2))
             z2 (* radius (Math/sin angle2))]
-        (rc3d/draw-line-3d! {:x x1 :y y1 :z z1} {:x x2 :y y2 :z z2} color)))))
+        (rc3d/draw-line-3d! {:x x1
+                             :y y1
+                             :z z1} {:x x2
+                                     :y y2
+                                     :z z2} color)))))
 
 (defn draw-shape! [shape-type rotation wireframe?]
   (case shape-type
@@ -312,8 +428,14 @@
   (rc3d/end-mode-3d!)
 
   ;; UI - bottom info bar
-  (rsb/draw-rectangle! 30 400 310 30 {:r 135 :g 206 :b 235 :a 128})
-  (rsb/draw-rectangle-lines! 30 400 310 30 {:r 0 :g 82 :b 172 :a 128})
+  (rsb/draw-rectangle! 30 400 310 30 {:r 135
+                                      :g 206
+                                      :b 235
+                                      :a 128})
+  (rsb/draw-rectangle-lines! 30 400 310 30 {:r 0
+                                            :g 82
+                                            :b 172
+                                            :a 128})
   (rtd/draw-text! "LEFT/RIGHT or CLICK to cycle shapes" 40 408 10 colors/blue)
 
   ;; Shape name
