@@ -354,7 +354,12 @@
     :category :games
     :title "Floppy"
     :desc "Flappy bird clone"
-    :controls "SPACE, P, ENTER, Q"}])
+    :controls "SPACE, P, ENTER, Q"}
+   {:alias "retro-maze-3d"
+    :category :games
+    :title "Retro Maze 3D"
+    :desc "GameBoy-style maze escape"
+    :controls "WASD, Mouse, SPACE, M, ENTER, Q"}])
 
 ;; =============================================================================
 ;; Example Lookup Functions

@@ -223,6 +223,9 @@
   floppy {:doc "🎮 Floppy - flappy bird clone"
           :task (h/run-example! "floppy")}
 
+  retro-maze-3d {:doc "🎮 Retro Maze 3D - GameBoy-style maze escape"
+                 :task (h/run-example! "retro-maze-3d")}
+
   ;; =============================================================================
   ;; 🔷 Shapes Examples (to be ported from raylib)
   ;; =============================================================================
