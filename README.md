@@ -479,7 +479,7 @@ colors/red
 
 ## Available Examples
 
-This project includes **53 examples** - a mix of original games and ports from the official raylib C examples.
+This project includes **56 examples** - a mix of original games and ports from the official raylib C examples.
 
 ### 🎮 Original Games
 
@@ -568,6 +568,13 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 | lorenz_attractor | - | `bb lorenz-attractor` | Chaos theory butterfly pattern | ⭐⭐☆☆ |
 | terrain_generation | - | `bb terrain-generation` | Procedural heightmap terrain | ⭐⭐⭐☆ |
 | mesh_generation | models_mesh_generation | `bb mesh-generation` | Procedural 3D shape gallery | ⭐⭐☆☆ |
+
+#### Games Examples (2 ported)
+
+| Clojure Example | C Original | Command | Description | Difficulty |
+|-----------------|------------|---------|-------------|------------|
+| snake | games_snake | `bb snake` | Classic snake game | ⭐⭐☆☆ |
+| floppy | games_floppy | `bb floppy` | Flappy bird clone | ⭐⭐☆☆ |
 
 ### 🚧 Raylib Examples Not Yet Ported
 
