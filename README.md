@@ -543,7 +543,7 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 | music_stream | audio_music_stream | `bb music-stream` | MP3 streaming with controls | ⭐☆☆☆ |
 | sound_multi | audio_sound_multi | `bb sound-multi` | Multiple sound instances | ⭐⭐☆☆ |
 
-#### Models Examples (20 ported)
+#### Models Examples (21 ported)
 
 | Clojure Example | C Original | Command | Description | Difficulty |
 |-----------------|------------|---------|-------------|------------|
@@ -567,6 +567,7 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 | lissajous_3d | - | `bb lissajous-3d` | Parametric 3D curve visualization | ⭐⭐☆☆ |
 | lorenz_attractor | - | `bb lorenz-attractor` | Chaos theory butterfly pattern | ⭐⭐☆☆ |
 | terrain_generation | - | `bb terrain-generation` | Procedural heightmap terrain | ⭐⭐⭐☆ |
+| mesh_generation | models_mesh_generation | `bb mesh-generation` | Procedural 3D shape gallery | ⭐⭐☆☆ |
 
 ### 🚧 Raylib Examples Not Yet Ported
 
@@ -596,7 +597,7 @@ The following categories from raylib's official examples have not been fully por
 #### Text (~10 examples)
 - Font loading, text formatting, Unicode, etc.
 
-#### Models (~7 remaining)
+#### Models (~6 remaining)
 - 3D model loading, animation, mesh generation, skybox, heightmap, etc.
 
 #### Shaders (~15 examples)

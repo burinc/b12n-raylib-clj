@@ -210,6 +210,9 @@
   terrain-generation {:doc "🗿 Terrain Generation - procedural heightmap"
                       :task (h/run-example! "terrain-generation")}
 
+  mesh-generation {:doc "🗿 Mesh Generation - procedural 3D shapes"
+                   :task (h/run-example! "mesh-generation")}
+
   ;; =============================================================================
   ;; 🔷 Shapes Examples (to be ported from raylib)
   ;; =============================================================================

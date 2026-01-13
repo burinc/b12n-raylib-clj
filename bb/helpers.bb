@@ -338,7 +338,12 @@
     :category :models
     :title "Terrain Generation"
     :desc "Procedural terrain"
-    :controls "1-3, Arrows, G, W, SPACE, Q"}])
+    :controls "1-3, Arrows, G, W, SPACE, Q"}
+   {:alias "mesh-generation"
+    :category :models
+    :title "Mesh Generation"
+    :desc "Procedural 3D shapes"
+    :controls "Left/Right, Click, SPACE, R, Q"}])
 
 ;; =============================================================================
 ;; Example Lookup Functions
