@@ -233,8 +233,14 @@
   logo-raylib {:doc "🔷 Logo Raylib - raylib logo drawn with shapes"
                :task (h/run-example! "logo-raylib")}
 
+  logo-raylib-anim {:doc "🔷 Logo Raylib Anim - animated logo construction"
+                    :task (h/run-example! "logo-raylib-anim")}
+
   basic-shapes {:doc "🔷 Basic Shapes - circles, rectangles, triangles, polygons"
                 :task (h/run-example! "basic-shapes")}
+
+  rectangle-scaling {:doc "🔷 Rectangle Scaling - drag to resize rectangle"
+                     :task (h/run-example! "rectangle-scaling")}
 
   ;; =============================================================================
   ;; 📝 Text Examples
@@ -242,6 +248,9 @@
 
   writing-anim {:doc "📝 Writing Animation - typewriter text effect"
                 :task (h/run-example! "writing-anim")}
+
+  format-text {:doc "📝 Format Text - formatted score/timer display"
+               :task (h/run-example! "format-text")}
 
   ;; =============================================================================
   ;; 📦 Additional Core Examples

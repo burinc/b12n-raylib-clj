@@ -367,11 +367,21 @@
     :title "Logo Raylib"
     :desc "Raylib logo drawn with shapes"
     :controls "ESC to exit"}
+   {:alias "logo-raylib-anim"
+    :category :shapes
+    :title "Logo Raylib Anim"
+    :desc "Animated logo construction"
+    :controls "R to replay"}
    {:alias "basic-shapes"
     :category :shapes
     :title "Basic Shapes"
     :desc "Circles, rectangles, triangles, polygons"
     :controls "ESC to exit"}
+   {:alias "rectangle-scaling"
+    :category :shapes
+    :title "Rectangle Scaling"
+    :desc "Drag to resize rectangle"
+    :controls "Drag bottom-right corner"}
 
    ;; Text
    {:alias "writing-anim"
@@ -379,6 +389,11 @@
     :title "Writing Animation"
     :desc "Typewriter text effect"
     :controls "SPACE speed up, ENTER restart"}
+   {:alias "format-text"
+    :category :text
+    :title "Format Text"
+    :desc "Formatted score/timer display"
+    :controls "ESC to exit"}
 
    ;; Additional Core
    {:alias "window-should-close"

@@ -395,4 +395,22 @@
   {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
               "-XstartOnFirstThread"
               "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
-   :main-opts ["-m" "examples.camera-2d-platformer"]}}}
+   :main-opts ["-m" "examples.camera-2d-platformer"]}
+
+  :logo-raylib-anim
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.logo-raylib-anim"]}
+
+  :format-text
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.format-text"]}
+
+  :rectangle-scaling
+  {:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "examples.rectangle-scaling"]}}}
