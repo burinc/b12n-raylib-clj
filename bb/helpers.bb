@@ -397,6 +397,21 @@
     :title "Easings Ball"
     :desc "Easing function animation"
     :controls "ENTER to replay"}
+   {:alias "ball-physics"
+    :category :shapes
+    :title "Ball Physics"
+    :desc "Grab and throw balls"
+    :controls "Click, Right-click, Wheel, Middle"}
+   {:alias "simple-particles"
+    :category :shapes
+    :title "Simple Particles"
+    :desc "Water/smoke/fire effects"
+    :controls "Arrows, Click"}
+   {:alias "dashed-line"
+    :category :shapes
+    :title "Dashed Line"
+    :desc "Interactive dashed line"
+    :controls "Arrows, C"}
 
    ;; Text
    {:alias "writing-anim"

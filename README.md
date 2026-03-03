@@ -293,6 +293,9 @@ flowchart TB
 | `bb input-box` | Text input field |
 | `bb window-should-close` | Custom close confirmation |
 | `bb camera-2d-platformer` | Platformer camera modes |
+| `bb ball-physics` | Grab and throw balls |
+| `bb simple-particles` | Water/smoke/fire particles |
+| `bb dashed-line` | Interactive dashed line |
 
 ### 🔧 Development
 
@@ -491,7 +494,7 @@ colors/red
 
 ## Available Examples
 
-This project includes **69 examples** - a mix of original games and ports from the official raylib C examples.
+This project includes **72 examples** - a mix of original games and ports from the official raylib C examples.
 
 ### 🎮 Original Games
 
@@ -535,7 +538,7 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 | window_should_close | core_window_should_close | `bb window-should-close` | Custom close confirmation | ⭐☆☆☆ |
 | camera_2d_platformer | core_2d_camera_platformer | `bb camera-2d-platformer` | 5 camera follow modes | ⭐⭐⭐☆ |
 
-#### Shapes Examples (7 ported)
+#### Shapes Examples (10 ported)
 
 | Clojure Example | C Original | Command | Description | Difficulty |
 |-----------------|------------|---------|-------------|------------|
@@ -546,6 +549,9 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 | mouse_trail | shapes_mouse_trail | `bb mouse-trail` | Circles following mouse cursor | ⭐☆☆☆ |
 | lines_bezier | shapes_lines_bezier | `bb lines-bezier` | Interactive bezier curve | ⭐☆☆☆ |
 | easings_ball | shapes_easings_ball | `bb easings-ball` | Easing function animation | ⭐⭐☆☆ |
+| ball_physics | shapes_ball_physics | `bb ball-physics` | Grab and throw balls | ⭐⭐☆☆ |
+| simple_particles | shapes_simple_particles | `bb simple-particles` | Water/smoke/fire effects | ⭐⭐☆☆ |
+| dashed_line | shapes_dashed_line | `bb dashed-line` | Interactive dashed line | ⭐☆☆☆ |
 
 #### Text Examples (4 ported)
 
@@ -628,8 +634,8 @@ The following categories from raylib's official examples have not been fully por
 - `core_loading_thread` - Background loading
 - And more...
 
-#### Shapes (~11 remaining examples)
-- Collision area, dashed lines, kaleidoscope, double pendulum, etc.
+#### Shapes (~8 remaining examples)
+- Kaleidoscope, double pendulum, recursive tree, etc.
 
 #### Textures (~25 examples)  
 - Image loading, processing, drawing modes, etc.

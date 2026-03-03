@@ -251,6 +251,15 @@
   easings-ball {:doc "🔷 Easings Ball - easing function animation"
                 :task (h/run-example! "easings-ball")}
 
+  ball-physics {:doc "🔷 Ball Physics - grab and throw balls"
+                :task (h/run-example! "ball-physics")}
+
+  simple-particles {:doc "🔷 Simple Particles - water/smoke/fire effects"
+                    :task (h/run-example! "simple-particles")}
+
+  dashed-line {:doc "🔷 Dashed Line - interactive dashed line"
+               :task (h/run-example! "dashed-line")}
+
   ;; =============================================================================
   ;; 📝 Text Examples
   ;; =============================================================================

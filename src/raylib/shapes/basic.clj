@@ -116,3 +116,10 @@
   {:arglists '([start-pos end-pos thick color])}
   "DrawLineBezier"
   [::rs/vector-2 ::rs/vector-2 ::mem/float ::rs/color] ::mem/void)
+
+(defcfn draw-circle-lines-v!
+  "Draw circle outline (Vector version)"
+  {:arglists '([center radius color])}
+  "DrawCircleLinesV"
+  [::rs/vector-2 ::mem/float ::rs/color] ::mem/void)
+
