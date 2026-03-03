@@ -296,6 +296,9 @@ flowchart TB
 | `bb ball-physics` | Grab and throw balls |
 | `bb simple-particles` | Water/smoke/fire particles |
 | `bb dashed-line` | Interactive dashed line |
+| `bb starfield-effect` | 3D starfield simulation |
+| `bb easings-box` | Box animation with easing functions |
+| `bb double-pendulum` | Chaotic pendulum simulation |
 
 ### 🔧 Development
 
@@ -494,7 +497,7 @@ colors/red
 
 ## Available Examples
 
-This project includes **72 examples** - a mix of original games and ports from the official raylib C examples.
+This project includes **75 examples** - a mix of original games and ports from the official raylib C examples.
 
 ### 🎮 Original Games
 
@@ -538,7 +541,7 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 | window_should_close | core_window_should_close | `bb window-should-close` | Custom close confirmation | ⭐☆☆☆ |
 | camera_2d_platformer | core_2d_camera_platformer | `bb camera-2d-platformer` | 5 camera follow modes | ⭐⭐⭐☆ |
 
-#### Shapes Examples (10 ported)
+#### Shapes Examples (13 ported)
 
 | Clojure Example | C Original | Command | Description | Difficulty |
 |-----------------|------------|---------|-------------|------------|
@@ -552,6 +555,9 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 | ball_physics | shapes_ball_physics | `bb ball-physics` | Grab and throw balls | ⭐⭐☆☆ |
 | simple_particles | shapes_simple_particles | `bb simple-particles` | Water/smoke/fire effects | ⭐⭐☆☆ |
 | dashed_line | shapes_dashed_line | `bb dashed-line` | Interactive dashed line | ⭐☆☆☆ |
+| starfield_effect | shapes_starfield_effect | `bb starfield-effect` | 3D starfield simulation | ⭐⭐☆☆ |
+| easings_box | shapes_easings_box | `bb easings-box` | Box animation with easing functions | ⭐⭐☆☆ |
+| double_pendulum | shapes_double_pendulum | `bb double-pendulum` | Chaotic pendulum simulation | ⭐⭐☆☆ |
 
 #### Text Examples (4 ported)
 
@@ -634,8 +640,8 @@ The following categories from raylib's official examples have not been fully por
 - `core_loading_thread` - Background loading
 - And more...
 
-#### Shapes (~8 remaining examples)
-- Kaleidoscope, double pendulum, recursive tree, etc.
+#### Shapes (~5 remaining examples)
+- Kaleidoscope, recursive tree, ring drawing, etc.
 
 #### Textures (~25 examples)  
 - Image loading, processing, drawing modes, etc.

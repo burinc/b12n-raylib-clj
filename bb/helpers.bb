@@ -412,6 +412,21 @@
     :title "Dashed Line"
     :desc "Interactive dashed line"
     :controls "Arrows, C"}
+   {:alias "starfield-effect"
+    :category :shapes
+    :title "Starfield Effect"
+    :desc "3D starfield simulation"
+    :controls "SPACE, Wheel"}
+   {:alias "easings-box"
+    :category :shapes
+    :title "Easings Box"
+    :desc "Box animation with easing functions"
+    :controls "SPACE to reset"}
+   {:alias "double-pendulum"
+    :category :shapes
+    :title "Double Pendulum"
+    :desc "Chaotic pendulum simulation"
+    :controls "ESC to exit"}
 
    ;; Text
    {:alias "writing-anim"

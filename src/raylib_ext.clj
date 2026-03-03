@@ -186,3 +186,21 @@
   {:arglists '([text font-size])}
   "MeasureText"
   [::mem/c-string ::mem/int] ::mem/int)
+
+(defcfn draw-line-v!
+  "Draw a line (Vector version)"
+  {:arglists '([start-pos end-pos color])}
+  "DrawLineV"
+  [::rs/vector-2 ::rs/vector-2 ::rs/color] ::mem/void)
+
+(defcfn draw-rectangle-pro!
+  "Draw a color-filled rectangle with pro parameters"
+  {:arglists '([rec origin rotation color])}
+  "DrawRectanglePro"
+  [::rectangle ::rs/vector-2 ::mem/float ::rs/color] ::mem/void)
+
+(defcfn color-lerp
+  "Get color lerp interpolation between two colors"
+  {:arglists '([color1 color2 factor])}
+  "ColorLerp"
+  [::rs/color ::rs/color ::mem/float] ::rs/color)

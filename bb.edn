@@ -260,6 +260,15 @@
   dashed-line {:doc "🔷 Dashed Line - interactive dashed line"
                :task (h/run-example! "dashed-line")}
 
+  starfield-effect {:doc "🔷 Starfield Effect - 3D starfield simulation"
+                    :task (h/run-example! "starfield-effect")}
+
+  easings-box {:doc "🔷 Easings Box - box animation with easing functions"
+               :task (h/run-example! "easings-box")}
+
+  double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
+                   :task (h/run-example! "double-pendulum")}
+
   ;; =============================================================================
   ;; 📝 Text Examples
   ;; =============================================================================
