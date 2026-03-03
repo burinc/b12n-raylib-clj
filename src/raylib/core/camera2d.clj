@@ -26,6 +26,18 @@
   "EndMode2D"
   [] ::mem/void)
 
+(defcfn get-screen-to-world-2d
+  "Get world space position for a 2d camera screen space position"
+  {:arglists '([position camera])}
+  "GetScreenToWorld2D"
+  [::rs/vector-2 ::camera-2d] ::rs/vector-2)
+
+(defcfn get-world-to-screen-2d
+  "Get screen space position for a 2d camera world space position"
+  {:arglists '([position camera])}
+  "GetWorldToScreen2D"
+  [::rs/vector-2 ::camera-2d] ::rs/vector-2)
+
 ;; Helper to create a Camera2D map
 (defn make-camera-2d
   "Create a Camera2D map with default or specified values.

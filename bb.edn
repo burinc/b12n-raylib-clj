@@ -227,15 +227,31 @@
                  :task (h/run-example! "retro-maze-3d")}
 
   ;; =============================================================================
-  ;; 🔷 Shapes Examples (to be ported from raylib)
+  ;; 🔷 Shapes Examples
   ;; =============================================================================
 
-  ;; shapes:basic       - Basic shapes drawing
-  ;; shapes:lines       - Line drawing techniques
-  ;; shapes:bezier      - Bezier curves
-  ;; shapes:ring        - Ring/donut drawing
-  ;; shapes:sector      - Circle sector drawing
-  ;; ... more to come
+  logo-raylib {:doc "🔷 Logo Raylib - raylib logo drawn with shapes"
+               :task (h/run-example! "logo-raylib")}
+
+  basic-shapes {:doc "🔷 Basic Shapes - circles, rectangles, triangles, polygons"
+                :task (h/run-example! "basic-shapes")}
+
+  ;; =============================================================================
+  ;; 📝 Text Examples
+  ;; =============================================================================
+
+  writing-anim {:doc "📝 Writing Animation - typewriter text effect"
+                :task (h/run-example! "writing-anim")}
+
+  ;; =============================================================================
+  ;; 📦 Additional Core Examples
+  ;; =============================================================================
+
+  window-should-close {:doc "📦 Window Should Close - custom close confirmation"
+                       :task (h/run-example! "window-should-close")}
+
+  camera-2d-platformer {:doc "📦 Camera 2D Platformer - 5 camera follow modes"
+                        :task (h/run-example! "camera-2d-platformer")}
 
   ;; =============================================================================
   ;; 🔧 Development
