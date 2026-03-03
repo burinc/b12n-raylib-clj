@@ -359,7 +359,38 @@
     :category :games
     :title "Retro Maze 3D"
     :desc "GameBoy-style maze escape"
-    :controls "WASD, Mouse, SPACE, M, ENTER, Q"}])
+    :controls "WASD, Mouse, SPACE, M, ENTER, Q"}
+
+   ;; Shapes
+   {:alias "logo-raylib"
+    :category :shapes
+    :title "Logo Raylib"
+    :desc "Raylib logo drawn with shapes"
+    :controls "ESC to exit"}
+   {:alias "basic-shapes"
+    :category :shapes
+    :title "Basic Shapes"
+    :desc "Circles, rectangles, triangles, polygons"
+    :controls "ESC to exit"}
+
+   ;; Text
+   {:alias "writing-anim"
+    :category :text
+    :title "Writing Animation"
+    :desc "Typewriter text effect"
+    :controls "SPACE speed up, ENTER restart"}
+
+   ;; Additional Core
+   {:alias "window-should-close"
+    :category :core
+    :title "Window Should Close"
+    :desc "Custom close confirmation"
+    :controls "Y/N to confirm/cancel"}
+   {:alias "camera-2d-platformer"
+    :category :core
+    :title "Camera 2D Platformer"
+    :desc "5 camera follow modes"
+    :controls "Arrows, SPACE, C, R, Wheel"}])
 
 ;; =============================================================================
 ;; Example Lookup Functions
@@ -375,6 +406,18 @@
 ;; Example Runner
 ;; =============================================================================
 
+(def macos? (str/starts-with? (System/getProperty "os.name") "Mac"))
+
+(defn- alias->namespace
+  "Extract the main namespace from a deps.edn alias by reading the file."
+  [alias]
+  (let [deps (read-string (slurp "deps.edn"))
+        alias-key (keyword alias)
+        alias-data (get-in deps [:aliases alias-key])
+        main-opts (:main-opts alias-data)]
+    (when main-opts
+      (second (drop-while #(not= "-m" %) main-opts)))))
+
 (defn run-example! [alias]
   (if-let [example (find-example alias)]
     (let [{:keys [title desc controls category]} example
@@ -383,7 +426,15 @@
       (when desc (info desc))
       (when controls (info (str "Controls: " controls)))
       (println)
-      (p/shell "clojure" (str "-M:" alias)))
+      ;; -XstartOnFirstThread is macOS-only (required for OpenGL main thread).
+      ;; On Linux it causes "Unrecognized option" error, so we skip it.
+      (if macos?
+        (p/shell "clojure" (str "-M:" alias))
+        (let [ns-name (alias->namespace alias)]
+          (p/shell "clojure"
+                   "-J--enable-native-access=ALL-UNNAMED"
+                   "-J-Djava.library.path=libs:libs/linux_amd64:/usr/local/lib:/usr/lib"
+                   "-M" "-m" ns-name))))
     (do
       (error-msg (str "Unknown example: " alias))
       (info "Run 'bb examples' to see available examples")
