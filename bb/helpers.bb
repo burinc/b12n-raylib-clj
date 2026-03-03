@@ -427,6 +427,16 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "lines-drawing"
+    :category :shapes
+    :title "Lines Drawing"
+    :desc "Draw rainbow lines on canvas"
+    :controls "Click, Right-click, Wheel, Middle"}
+   {:alias "easings-rectangles"
+    :category :shapes
+    :title "Easings Rectangles"
+    :desc "Grid animation with easing functions"
+    :controls "SPACE to replay"}
 
    ;; Text
    {:alias "writing-anim"
@@ -455,7 +465,12 @@
     :category :core
     :title "Camera 2D Platformer"
     :desc "5 camera follow modes"
-    :controls "Arrows, SPACE, C, R, Wheel"}])
+    :controls "Arrows, SPACE, C, R, Wheel"}
+   {:alias "window-letterbox"
+    :category :core
+    :title "Window Letterbox"
+    :desc "Resolution-independent rendering"
+    :controls "SPACE, Resize window"}])
 
 ;; =============================================================================
 ;; Example Lookup Functions

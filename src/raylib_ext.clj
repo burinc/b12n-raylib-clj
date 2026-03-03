@@ -204,3 +204,9 @@
   {:arglists '([color1 color2 factor])}
   "ColorLerp"
   [::rs/color ::rs/color ::mem/float] ::rs/color)
+
+(defcfn set-texture-filter!
+  "Set texture scaling filter mode"
+  {:arglists '([texture filter])}
+  "SetTextureFilter"
+  [::rs/texture ::mem/int] ::mem/void)

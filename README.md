@@ -299,6 +299,9 @@ flowchart TB
 | `bb starfield-effect` | 3D starfield simulation |
 | `bb easings-box` | Box animation with easing functions |
 | `bb double-pendulum` | Chaotic pendulum simulation |
+| `bb lines-drawing` | Draw rainbow lines on canvas |
+| `bb easings-rectangles` | Grid animation with easing |
+| `bb window-letterbox` | Resolution-independent rendering |
 
 ### 🔧 Development
 
@@ -497,7 +500,7 @@ colors/red
 
 ## Available Examples
 
-This project includes **75 examples** - a mix of original games and ports from the official raylib C examples.
+This project includes **78 examples** - a mix of original games and ports from the official raylib C examples.
 
 ### 🎮 Original Games
 
@@ -513,7 +516,7 @@ This project includes **75 examples** - a mix of original games and ports from t
 
 These examples are Clojure ports of the official [raylib C examples](https://github.com/raysan5/raylib/tree/master/examples).
 
-#### Core Examples (19 ported)
+#### Core Examples (20 ported)
 
 | Clojure Example | C Original | Command | Description | Difficulty |
 |-----------------|------------|---------|-------------|------------|
@@ -540,8 +543,9 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 | picking_3d | core_3d_picking | `bb picking-3d` | Ray casting object selection | ⭐⭐☆☆ |
 | window_should_close | core_window_should_close | `bb window-should-close` | Custom close confirmation | ⭐☆☆☆ |
 | camera_2d_platformer | core_2d_camera_platformer | `bb camera-2d-platformer` | 5 camera follow modes | ⭐⭐⭐☆ |
+| window_letterbox | core_window_letterbox | `bb window-letterbox` | Resolution-independent rendering | ⭐⭐☆☆ |
 
-#### Shapes Examples (13 ported)
+#### Shapes Examples (15 ported)
 
 | Clojure Example | C Original | Command | Description | Difficulty |
 |-----------------|------------|---------|-------------|------------|
@@ -558,6 +562,8 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 | starfield_effect | shapes_starfield_effect | `bb starfield-effect` | 3D starfield simulation | ⭐⭐☆☆ |
 | easings_box | shapes_easings_box | `bb easings-box` | Box animation with easing functions | ⭐⭐☆☆ |
 | double_pendulum | shapes_double_pendulum | `bb double-pendulum` | Chaotic pendulum simulation | ⭐⭐☆☆ |
+| lines_drawing | shapes_lines_drawing | `bb lines-drawing` | Draw rainbow lines on canvas | ⭐☆☆☆ |
+| easings_rectangles | shapes_easings_rectangles | `bb easings-rectangles` | Grid animation with easing | ⭐⭐⭐☆ |
 
 #### Text Examples (4 ported)
 
@@ -627,7 +633,7 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 
 The following categories from raylib's official examples have not been fully ported yet:
 
-#### Core (remaining ~28 examples)
+#### Core (remaining ~27 examples)
 - `core_2d_camera_mouse_zoom` - Mouse zoom for 2D camera
 - `core_2d_camera_split_screen` - 2D split screen
 - `core_3d_camera_mode` - Camera mode switching
@@ -640,8 +646,8 @@ The following categories from raylib's official examples have not been fully por
 - `core_loading_thread` - Background loading
 - And more...
 
-#### Shapes (~5 remaining examples)
-- Kaleidoscope, recursive tree, ring drawing, etc.
+#### Shapes (~3 remaining examples)
+- Kaleidoscope, ring drawing, etc.
 
 #### Textures (~25 examples)  
 - Image loading, processing, drawing modes, etc.

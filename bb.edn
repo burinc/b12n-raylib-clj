@@ -269,6 +269,12 @@
   double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
                    :task (h/run-example! "double-pendulum")}
 
+  lines-drawing {:doc "🔷 Lines Drawing - draw rainbow lines on canvas"
+                 :task (h/run-example! "lines-drawing")}
+
+  easings-rectangles {:doc "🔷 Easings Rectangles - grid animation with easing"
+                      :task (h/run-example! "easings-rectangles")}
+
   ;; =============================================================================
   ;; 📝 Text Examples
   ;; =============================================================================
@@ -291,6 +297,9 @@
 
   camera-2d-platformer {:doc "📦 Camera 2D Platformer - 5 camera follow modes"
                         :task (h/run-example! "camera-2d-platformer")}
+
+  window-letterbox {:doc "📦 Window Letterbox - resolution-independent rendering"
+                    :task (h/run-example! "window-letterbox")}
 
   ;; =============================================================================
   ;; 🔧 Development

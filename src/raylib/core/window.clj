@@ -122,6 +122,12 @@
   "SetWindowSize"
   [::mem/int ::mem/int] ::mem/void)
 
+(defcfn set-window-min-size!
+  "Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)"
+  {:arglists '([width height])}
+  "SetWindowMinSize"
+  [::mem/int ::mem/int] ::mem/void)
+
 (defcfn get-current-monitor
   "Get current connected monitor"
   "GetCurrentMonitor"
