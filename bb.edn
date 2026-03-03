@@ -242,6 +242,15 @@
   rectangle-scaling {:doc "🔷 Rectangle Scaling - drag to resize rectangle"
                      :task (h/run-example! "rectangle-scaling")}
 
+  mouse-trail {:doc "🔷 Mouse Trail - circles following mouse cursor"
+               :task (h/run-example! "mouse-trail")}
+
+  lines-bezier {:doc "🔷 Lines Bezier - interactive bezier curve"
+                :task (h/run-example! "lines-bezier")}
+
+  easings-ball {:doc "🔷 Easings Ball - easing function animation"
+                :task (h/run-example! "easings-ball")}
+
   ;; =============================================================================
   ;; 📝 Text Examples
   ;; =============================================================================
@@ -251,6 +260,9 @@
 
   format-text {:doc "📝 Format Text - formatted score/timer display"
                :task (h/run-example! "format-text")}
+
+  input-box {:doc "📝 Input Box - text input field"
+             :task (h/run-example! "input-box")}
 
   ;; =============================================================================
   ;; 📦 Additional Core Examples

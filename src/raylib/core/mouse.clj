@@ -55,6 +55,12 @@
   "GetMouseWheelMove"
   [] ::mem/float)
 
+(defcfn set-mouse-cursor!
+  "Set mouse cursor shape"
+  {:arglists '([cursor])}
+  "SetMouseCursor"
+  [::mem/int] ::mem/void)
+
 (defcfn get-mouse-wheel-move-v
   "Get mouse wheel movement for both X and Y"
   "GetMouseWheelMoveV"

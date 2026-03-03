@@ -110,3 +110,9 @@
   {:arglists '([center sides radius rotation line-thick color])}
   "DrawPolyLinesEx"
   [::rs/vector-2 ::mem/int ::mem/float ::mem/float ::mem/float ::rs/color] ::mem/void)
+
+(defcfn draw-line-bezier!
+  "Draw line segment cubic-bezier in-out interpolation"
+  {:arglists '([start-pos end-pos thick color])}
+  "DrawLineBezier"
+  [::rs/vector-2 ::rs/vector-2 ::mem/float ::rs/color] ::mem/void)

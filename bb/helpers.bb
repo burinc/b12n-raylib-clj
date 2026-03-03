@@ -382,6 +382,21 @@
     :title "Rectangle Scaling"
     :desc "Drag to resize rectangle"
     :controls "Drag bottom-right corner"}
+   {:alias "mouse-trail"
+    :category :shapes
+    :title "Mouse Trail"
+    :desc "Circles following mouse cursor"
+    :controls "Move mouse"}
+   {:alias "lines-bezier"
+    :category :shapes
+    :title "Lines Bezier"
+    :desc "Interactive bezier curve"
+    :controls "Drag endpoints"}
+   {:alias "easings-ball"
+    :category :shapes
+    :title "Easings Ball"
+    :desc "Easing function animation"
+    :controls "ENTER to replay"}
 
    ;; Text
    {:alias "writing-anim"
@@ -394,6 +409,11 @@
     :title "Format Text"
     :desc "Formatted score/timer display"
     :controls "ESC to exit"}
+   {:alias "input-box"
+    :category :text
+    :title "Input Box"
+    :desc "Text input field"
+    :controls "Click, type, Backspace"}
 
    ;; Additional Core
    {:alias "window-should-close"

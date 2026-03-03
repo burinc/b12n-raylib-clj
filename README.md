@@ -281,6 +281,18 @@ flowchart TB
 | `bb sound-loading` | Basic WAV/OGG playback |
 | `bb music-stream` | MP3 streaming with controls |
 | `bb sound-multi` | Multiple sound instances |
+| `bb logo-raylib` | Raylib logo drawn with shapes |
+| `bb logo-raylib-anim` | Animated logo construction |
+| `bb basic-shapes` | Shape drawing showcase |
+| `bb rectangle-scaling` | Drag to resize rectangle |
+| `bb mouse-trail` | Mouse trail effect |
+| `bb lines-bezier` | Interactive bezier curve |
+| `bb easings-ball` | Easing function animation |
+| `bb writing-anim` | Typewriter text effect |
+| `bb format-text` | Formatted text display |
+| `bb input-box` | Text input field |
+| `bb window-should-close` | Custom close confirmation |
+| `bb camera-2d-platformer` | Platformer camera modes |
 
 ### 🔧 Development
 
@@ -479,7 +491,7 @@ colors/red
 
 ## Available Examples
 
-This project includes **57 examples** - a mix of original games and ports from the official raylib C examples.
+This project includes **69 examples** - a mix of original games and ports from the official raylib C examples.
 
 ### 🎮 Original Games
 
@@ -495,7 +507,7 @@ This project includes **57 examples** - a mix of original games and ports from t
 
 These examples are Clojure ports of the official [raylib C examples](https://github.com/raysan5/raylib/tree/master/examples).
 
-#### Core Examples (17 ported)
+#### Core Examples (19 ported)
 
 | Clojure Example | C Original | Command | Description | Difficulty |
 |-----------------|------------|---------|-------------|------------|
@@ -520,6 +532,28 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 | first_person_3d | core_3d_camera_first_person | `bb first-person-3d` | First person camera | ⭐⭐☆☆ |
 | camera_fps | core_3d_camera_fps | `bb camera-fps` | Advanced FPS camera with physics | ⭐⭐⭐☆ |
 | picking_3d | core_3d_picking | `bb picking-3d` | Ray casting object selection | ⭐⭐☆☆ |
+| window_should_close | core_window_should_close | `bb window-should-close` | Custom close confirmation | ⭐☆☆☆ |
+| camera_2d_platformer | core_2d_camera_platformer | `bb camera-2d-platformer` | 5 camera follow modes | ⭐⭐⭐☆ |
+
+#### Shapes Examples (7 ported)
+
+| Clojure Example | C Original | Command | Description | Difficulty |
+|-----------------|------------|---------|-------------|------------|
+| logo_raylib | shapes_logo_raylib | `bb logo-raylib` | Raylib logo drawn with shapes | ⭐☆☆☆ |
+| logo_raylib_anim | shapes_logo_raylib_anim | `bb logo-raylib-anim` | Animated logo construction | ⭐⭐☆☆ |
+| basic_shapes | shapes_basic_shapes | `bb basic-shapes` | Circles, rectangles, triangles, polygons | ⭐☆☆☆ |
+| rectangle_scaling | shapes_rectangle_scaling | `bb rectangle-scaling` | Drag to resize rectangle | ⭐⭐☆☆ |
+| mouse_trail | shapes_mouse_trail | `bb mouse-trail` | Circles following mouse cursor | ⭐☆☆☆ |
+| lines_bezier | shapes_lines_bezier | `bb lines-bezier` | Interactive bezier curve | ⭐☆☆☆ |
+| easings_ball | shapes_easings_ball | `bb easings-ball` | Easing function animation | ⭐⭐☆☆ |
+
+#### Text Examples (4 ported)
+
+| Clojure Example | C Original | Command | Description | Difficulty |
+|-----------------|------------|---------|-------------|------------|
+| writing_anim | text_writing_anim | `bb writing-anim` | Typewriter text effect | ⭐⭐☆☆ |
+| format_text | text_format_text | `bb format-text` | Formatted score/timer display | ⭐☆☆☆ |
+| input_box | text_input_box | `bb input-box` | Text input field | ⭐⭐☆☆ |
 
 #### Textures Examples (2 ported)
 
@@ -581,14 +615,12 @@ These examples are Clojure ports of the official [raylib C examples](https://git
 
 The following categories from raylib's official examples have not been fully ported yet:
 
-#### Core (remaining ~30 examples)
+#### Core (remaining ~28 examples)
 - `core_2d_camera_mouse_zoom` - Mouse zoom for 2D camera
-- `core_2d_camera_platformer` - Platformer-style camera
 - `core_2d_camera_split_screen` - 2D split screen
 - `core_3d_camera_mode` - Camera mode switching
 - `core_window_flags` - Window configuration flags
 - `core_window_letterbox` - Letterbox scaling
-- `core_window_should_close` - Custom close behavior
 - `core_drop_files` - Drag and drop files
 - `core_custom_frame_control` - Manual frame timing
 - `core_smooth_pixelperfect` - Pixel-perfect rendering
@@ -596,14 +628,14 @@ The following categories from raylib's official examples have not been fully por
 - `core_loading_thread` - Background loading
 - And more...
 
-#### Shapes (~18 examples)
-- Basic shape drawing, collisions, curves, etc.
+#### Shapes (~11 remaining examples)
+- Collision area, dashed lines, kaleidoscope, double pendulum, etc.
 
 #### Textures (~25 examples)  
 - Image loading, processing, drawing modes, etc.
 
-#### Text (~10 examples)
-- Font loading, text formatting, Unicode, etc.
+#### Text (~7 remaining examples)
+- Font loading, Unicode, text bounds, etc.
 
 #### Models (~6 remaining)
 - 3D model loading, animation, mesh generation, skybox, heightmap, etc.
