@@ -56,6 +56,25 @@ Verify installation:
 clj --version
 ```
 
+## Installing Leiningen
+
+If you prefer Leiningen over the Clojure CLI:
+
+On macOS with Homebrew:
+
+```bash
+brew install leiningen
+```
+
+On Linux:
+
+```bash
+curl -O https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+chmod +x lein
+sudo mv lein /usr/local/bin/
+lein  # This will download the rest automatically
+```
+
 ## Installing Babashka
 
 Babashka provides fast task automation for Clojure projects.
