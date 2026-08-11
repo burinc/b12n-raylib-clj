@@ -5,6 +5,7 @@
  :tasks
  {:requires ([babashka.process :as p]
              [babashka.fs :as fs]
+             [clojure.edn :as edn]
              [clojure.string :as str]
              [bb.helpers :as h])
 
@@ -609,6 +610,45 @@ echo \"✅ Lint check passed!\"
   ;; =============================================================================
   ;; ❓ Help
   ;; =============================================================================
+
+  ;; Re-reads this file with clojure.edn/read-string, so keep bb.edn free of
+  ;; non-EDN reader macros (#"regex", @deref, #(...) — see plan-authoring notes).
+  info
+  {:doc "🔍 Grouped cheat-sheet of every bb task (start here to review the project)"
+   :task
+   (let [tasks   (:tasks (edn/read-string (slurp "bb.edn")))
+         brief   (fn [t]
+                   (let [d (str/trim (str (:doc (get tasks (symbol t)))))]
+                     (if (> (count d) 80) (str (subs d 0 79) "…") d)))
+         sect    (fn [title] (println) (println (h/color h/magenta (str "── " title " ──"))))
+         line    (fn [t]
+                   (println (str "  " (h/color h/cyan (format "%-24s" (str "bb " t))) (brief t))))
+         groups  [["🔧 Development"  ["repl" "nrepl"]]
+                  ["🔍 Code quality" ["check" "check:full" "lint"]]
+                  ["🎨 LSP"          ["lsp:format" "lsp:format-check" "lsp:clean-ns"
+                                      "lsp:clean-ns-check" "lsp:diagnostics" "lsp:check" "lsp:fix"]]
+                  ["🪝 Git hooks"    ["hooks:install" "hooks:uninstall"]]
+                  ["📦 Dependencies" ["deps" "deps:tree" "outdated"]]
+                  ["🛠️ Utilities"    ["clean" "loc" "tree" "macos:sign-lib"]]
+                  ["❓ Help"         ["help" "info"]]]
+         example-aliases (into #{} (map :alias h/examples))
+         grouped (into example-aliases (into #{"examples" "run" "record"} (mapcat second groups)))
+         other   (->> (keys tasks) (filter symbol?) (map str) (remove grouped) sort)]
+     (h/header "🎮 Raylib Clojure Playground — task cheatsheet")
+     (println (str (count h/examples) " examples across " (count h/example-categories) " categories."))
+     (sect "🎮 Run examples")
+     (line "examples")
+     (println (str "  " (h/color h/cyan (format "%-24s" "bb <name>")) "Run any example directly, e.g. bb asteroids"))
+     (line "run")
+     (line "record")
+     (doseq [[title names] groups]
+       (sect title)
+       (doseq [t names :when (contains? tasks (symbol t))] (line t)))
+     (when (seq other)
+       (sect "Other (ungrouped)")
+       (doseq [t other] (line t)))
+     (println)
+     (println "  Full example list: `bb examples` · narrative help: `bb help` · flat task list: `bb tasks`"))}
 
   help
   {:doc "❓ Show help and available tasks"

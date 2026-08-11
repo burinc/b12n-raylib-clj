@@ -48,6 +48,7 @@ If you have Babashka installed, running games is simple:
 
 ```bash
 bb help              # Show all available commands
+bb info              # Grouped task cheat-sheet (start here to review the project)
 bb asteroids         # Run Asteroids game
 bb tetris            # Run Tetris game
 ```
@@ -201,6 +202,7 @@ flowchart TB
 | `bb macos:sign-lib` | Sign raylib library for macOS security |
 | `bb hooks:install` | Install git pre-commit hook |
 | `bb help` | Show colorful help menu |
+| `bb info` | Grouped cheat-sheet of every bb task (self-updating; start here) |
 
 ## Bundled Libraries
 
