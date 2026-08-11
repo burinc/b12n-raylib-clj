@@ -67,6 +67,8 @@ ported from which raylib C source file.
   live game development
 - [`example-catalog.md`](example-catalog.md) — all 78 examples, grouped
   and tabulated
+- [`demos.md`](demos.md) — the full-size demo gallery (every example's
+  animated GIF, one-line description)
 
 ### Support
 - [`troubleshooting.md`](troubleshooting.md) — common errors and fixes

@@ -248,7 +248,9 @@ Full guide: [`docs/guide/`](docs/guide/index.md)
 - [`repl-workflow.md`](docs/guide/repl-workflow.md) — live game
   development over the embedded nREPL
 - [`example-catalog.md`](docs/guide/example-catalog.md) — all 78
-  examples, grouped and tabulated
+  examples, grouped and tabulated, with a preview-thumbnail column
+- [`demos.md`](docs/guide/demos.md) — the full-size demo gallery (every
+  example's animated GIF, one-line description)
 - [`troubleshooting.md`](docs/guide/troubleshooting.md) — common errors
   and fixes
 - [`docs/demos/`](docs/demos/README.md) — animated GIF previews,
