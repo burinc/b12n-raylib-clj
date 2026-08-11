@@ -99,14 +99,38 @@ carries:
            "-Djava.library.path=libs:libs/macos:..."]
 ```
 
-The practical consequence, already documented in the README: **you
-cannot open a raylib window from a plain `clj -M:dev` REPL on macOS.**
-The standalone `:dev` alias intentionally omits `-XstartOnFirstThread`
-so it can be used for non-GUI REPL work, which means the only way to
-get a raylib window on macOS is to launch the JVM with the flag from
-the start — i.e., run an example directly (`bb asteroids`,
-`clj -M:hello-world`, etc.) and connect to its embedded nREPL rather
-than trying to open a window from a separately-started REPL.
+The practical consequence, already documented in the README's
+["macOS Note"](../../README.md#macos-note): **you cannot open a
+raylib window from a plain `clj -M:dev` REPL on macOS.** This is
+*not* because the standalone `:dev` alias omits the flag — it
+doesn't. `grep -n "XstartOnFirstThread" deps.edn` shows the flag
+present in every single alias in the file, `:dev` included:
+
+```clojure
+:dev
+{:jvm-opts ["--enable-native-access=ALL-UNNAMED"
+            "-XstartOnFirstThread"
+            "-Djava.library.path=libs:libs/macos:..."]
+ :main-opts ["-m" "nrepl.cmdline" "--port" "7999"]}
+```
+
+`deps.edn` flags the limitation itself, with a comment right above
+`:dev`:
+
+```clojure
+;; Note: On macOS, you cannot run GUI code from this REPL due to -XstartOnFirstThread
+```
+
+Beyond that comment, this repo doesn't document the exact mechanism,
+so this guide won't invent one — the flag is present either way, and
+having it present is not sufficient to make GUI calls work from
+`:dev`. What's verified is the practical rule: a raylib window works
+from the game aliases (`bb asteroids`, `clj -M:hello-world`, etc.,
+which call `init-window!` directly from their own `-main` at process
+start) but not from a standalone `:dev` REPL session evaluating the
+same call interactively. If you need a raylib window, run an example
+directly and connect to its embedded nREPL (port 7888) instead of
+trying to open one from `:dev`'s REPL (port 7999).
 
 ## See also
 - [`adding-ffi-bindings.md`](adding-ffi-bindings.md) — the practical
