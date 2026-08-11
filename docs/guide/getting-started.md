@@ -182,9 +182,9 @@ Then connect your editor to `localhost:7888`.
 **For standalone REPL (non-GUI work):**
 
 ```bash
-bb nrepl   # Starts nREPL on port 7889
+bb nrepl   # Starts nREPL on port 7999
 ```
 
-Then connect your editor to `localhost:7889`.
+Then connect your editor to `localhost:7999`.
 
 See [REPL Workflow](repl-workflow.md) for the full live-development workflow, including hot-reloading running games from the connected REPL.
