@@ -36,6 +36,10 @@ Animated GIF previews, recorded via cgevent — see [`scripts/record_all.clj`](.
 
 ![floppy](floppy.gif)
 
+### hello-world
+
+![hello-world](hello-world.gif)
+
 ## 📦 Core Examples
 
 ### window-letterbox
