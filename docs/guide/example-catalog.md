@@ -5,7 +5,12 @@ A map of the whole suite. Each example is one namespace under
 runnable via `bb <name>` or `clj -M:<alias>`. `bb examples` prints this
 same grouping live from `bb/helpers.bb`'s `examples` registry — this
 page is that registry rendered as a browsable table, plus (where known)
-which official raylib C example a given Clojure example ports.
+which official raylib C example a given Clojure example ports. Nearly
+every "ported from" cell cites a file in
+[`raysan5/raylib`](https://github.com/raysan5/raylib)'s own `examples/`
+tree; the 3 cells marked ¹ instead cite the companion
+[`raysan5/raylib-games`](https://github.com/raysan5/raylib-games) repo
+— see the note under the games table below.
 
 > **Full-size preview gallery:** not yet built. This project doesn't
 > have a headless GIF-capture pipeline the way
@@ -31,9 +36,18 @@ bb examples     # this same grouping, printed from the terminal
 | `asteroids2` | Asteroids 2 | Alternate version | Arrows, Space | — |
 | `tetris` | Tetris | Block-stacking puzzle | Arrows, Space | — |
 | `vampire-survivors` | Vampire Survivors | Survival action | WASD | — |
-| `snake` | Snake | Classic snake game | Arrows, P, ENTER, Q | `games_snake.c` |
-| `floppy` | Floppy | Flappy bird clone | SPACE, P, ENTER, Q | `games_floppy.c` |
-| `retro-maze-3d` | Retro Maze 3D | GameBoy-style maze escape | WASD, Mouse, SPACE, M, ENTER, Q | — |
+| `snake` | Snake | Classic snake game | Arrows, P, ENTER, Q | `snake.c`¹ |
+| `floppy` | Floppy | Flappy bird clone | SPACE, P, ENTER, Q | `floppy.c`¹ |
+| `retro-maze-3d` | Retro Maze 3D | GameBoy-style maze escape | WASD, Mouse, SPACE, M, ENTER, Q | `retro_maze_3d.c`¹ |
+
+¹ Ported from [`raysan5/raylib-games`](https://github.com/raysan5/raylib-games)
+— a companion repo of classic-game clones and game-jam entries, separate
+from `raysan5/raylib`'s own `examples/` tree that every other "ported
+from" cell on this page cites. `snake.c` and `floppy.c` come from its
+`classics/` collection; `retro_maze_3d.c` from its `retro_maze_3d/` GGJ
+2021 entry (header comment: "GGJ 2021 - RETRO MAZE 3D … Copyright (c)
+2021 Ramon Santamaria (@raysan5)", matching this example's own docstring
+credit).
 
 ## 📦 Core (23)
 
