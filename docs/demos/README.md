@@ -8,9 +8,25 @@ Animated GIF previews, recorded via cgevent — see [`scripts/record_all.clj`](.
 
 ![retro-maze-3d](retro-maze-3d.gif)
 
+### asteroids
+
+![asteroids](asteroids.gif)
+
 ### pong
 
 ![pong](pong.gif)
+
+### tetris
+
+![tetris](tetris.gif)
+
+### vampire-survivors
+
+![vampire-survivors](vampire-survivors.gif)
+
+### asteroids2
+
+![asteroids2](asteroids2.gif)
 
 ### snake
 
