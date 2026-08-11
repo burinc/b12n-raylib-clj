@@ -13,8 +13,10 @@ change code while a game is running and see the change immediately.
 
 ## Live game development (recommended)
 
-Each game starts an **embedded nREPL server on port 7888**. This is
-the proper way to do live development:
+Most games start an **embedded nREPL server on port 7888** (67 of the
+78 examples — 11, including `pong`, `camera-2d`, and `music-stream`,
+don't call `nrepl/start`). This is the proper way to do live
+development for the examples that do:
 
 ```mermaid
 sequenceDiagram

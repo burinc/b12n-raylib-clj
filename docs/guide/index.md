@@ -38,9 +38,11 @@ A `.clj` (JVM Clojure) project:
 ```
 
 78 examples ship in `src/examples/` on top of the FFI bindings in
-`src/raylib/` — 9 original games plus 69 ports of official raylib C
+`src/raylib/` — a mix of original games and ports of official raylib C
 examples across core/shapes/text/textures/shaders/audio/models
-categories.
+categories. See [`example-catalog.md`](example-catalog.md) for the
+per-example breakdown of what's an original creation and what's
+ported from which raylib C source file.
 
 ## Pages
 

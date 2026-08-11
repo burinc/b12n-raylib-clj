@@ -7,9 +7,7 @@ Raylib's C library directly from Clojure. Coffi is built on the JDK's
 **Foreign Function & Memory API** (Project Panama), and that API only
 reached stable (non-preview) status in **JDK 22** — earlier JDK
 versions only had it available behind a preview flag. Coffi depends on
-the stable API, which is why this project requires JDK 22 or newer.
-This is already documented in this repo's README, under
-["Why JDK 22?"](../../README.md#why-jdk-22):
+the stable API, which is why this project requires JDK 22 or newer:
 
 > This project uses **coffi** for calling native C code from Clojure.
 > Coffi requires JDK 22+ because that's when the **Foreign Function and
@@ -99,11 +97,9 @@ carries:
            "-Djava.library.path=libs:libs/macos:..."]
 ```
 
-The practical consequence, already documented in the README's
-["macOS Note"](../../README.md#macos-note): **you cannot open a
-raylib window from a plain `clj -M:dev` REPL on macOS.** This is
-*not* because the standalone `:dev` alias omits the flag — it
-doesn't. `grep -n "XstartOnFirstThread" deps.edn` shows the flag
+The practical consequence: **you cannot open a raylib window from a
+plain `clj -M:dev` REPL on macOS.** This is *not* because the
+standalone `:dev` alias omits the flag — it doesn't. `grep -n "XstartOnFirstThread" deps.edn` shows the flag
 present in every single alias in the file, `:dev` included:
 
 ```clojure

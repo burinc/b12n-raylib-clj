@@ -102,8 +102,8 @@ bb --version
 Clone this repository:
 
 ```bash
-git clone https://github.com/ertugrulcetin/raylib-clojure-playground.git
-cd raylib-clojure-playground
+git clone https://github.com/burinc/b12n-raylib-clj.git
+cd b12n-raylib-clj
 ```
 
 ### `bb <example>` (recommended)

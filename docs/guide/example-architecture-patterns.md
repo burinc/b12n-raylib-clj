@@ -2,8 +2,11 @@
 
 ## The shared skeleton
 
-Every example follows the same shape: start the embedded nREPL, open a
-window, loop until the user closes it, clean up. Here's
+Most examples follow the same shape: start the embedded nREPL, open a
+window, loop until the user closes it, clean up (67 of 78 — 11
+examples, including `pong`, `camera-2d`, and `music-stream`, skip the
+embedded nREPL; `grep -rL "nrepl/start" src/examples/*.clj
+src/examples/*/*.clj` lists them). Here's
 [`src/examples/asteroids.clj`](../../src/examples/asteroids.clj)'s
 `-main` (around line 523), verbatim:
 
@@ -33,11 +36,12 @@ still open — commit the new state to `game-atom` and draw the frame,
 before recurring. When the loop exits (the user closed the window),
 asteroids releases its render texture and calls `close-window!`.
 
-Every example is a variation on this shape: start nREPL once, init the
-window once, loop `update -> draw -> check-close` until the window
+Most examples are a variation on this shape: start nREPL once, init
+the window once, loop `update -> draw -> check-close` until the window
 closes, then clean up. Simpler examples skip the parts specific to
 asteroids (the render texture, the letterboxing) but follow the same
-overall skeleton.
+overall skeleton — except for the 11 examples noted above, which skip
+the nREPL step entirely.
 
 ## State as an atom
 

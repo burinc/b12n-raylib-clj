@@ -32,6 +32,35 @@ flowchart TB
     style Native fill:#306998,color:#fff
 ```
 
+## Game Loop Architecture
+
+```mermaid
+flowchart LR
+    subgraph GameLoop["Main Game Loop"]
+        direction TB
+        Init["Initialize<br/>Window & State"]
+        Tick["Tick/Update<br/>Game Logic"]
+        Draw["Draw<br/>Render Frame"]
+        Check{"Window<br/>Closed?"}
+        Cleanup["Cleanup<br/>Resources"]
+    end
+    
+    Init --> Tick
+    Tick --> Draw
+    Draw --> Check
+    Check -->|No| Tick
+    Check -->|Yes| Cleanup
+    
+    subgraph State["Game State (Atom)"]
+        Ship["Ship Position/Velocity"]
+        Entities["Asteroids/Bullets"]
+        Screen["Screen State"]
+    end
+    
+    Tick -.->|Read/Update| State
+    Draw -.->|Read| State
+```
+
 ## Module layout
 
 - `src/raylib/` — FFI bindings (this is the library)
@@ -43,7 +72,7 @@ flowchart TB
   - `utils.clj` — utility functions (random, fade, etc.)
   - `audio.clj` — audio functions (Music, Sound)
   - `lights.clj` — shader-lighting helpers, based on raylib's `rlights.h`
-  - `nrepl.clj` — embedded nREPL server startup, powers the port 7888/7999 live-development workflow
+  - `nrepl.clj` — embedded nREPL server startup, powers the port 7888 live-development workflow
   - `core/` — window, drawing, keyboard, mouse, timing, camera2d, camera3d, collision, gamepad, gestures, shaders
     - `window.clj` — window management
     - `drawing.clj` — drawing primitives
