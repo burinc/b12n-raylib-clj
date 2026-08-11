@@ -27,6 +27,11 @@
   {:doc "List all available examples by category"
    :task (h/print-examples-help)}
 
+  record
+  {:doc "Record a demo GIF via cgevent: bb record --only hello-world [--force] [--dry-run]"
+   :task (let [{:keys [exit]} (apply shell {:continue true} "bb" "scripts/record_all.clj" *command-line-args*)]
+           (System/exit exit))}
+
   ;; =============================================================================
   ;; 🎮 Original Games
   ;; =============================================================================

@@ -1,0 +1,12 @@
+{:defaults
+ {:duration 6
+  :fps 10
+  :width 480
+  :warmup 10}
+
+ ;; Per-id overrides, e.g. a longer :duration or a synthesized :input
+ ;; timeline — [[at-seconds :key "chord"] [at-seconds :click x y] ...],
+ ;; see scripts/record_all.clj's play-input!. Empty for now: only
+ ;; "hello-world" has been recorded so far and it needs no input.
+ :overrides
+ {}}

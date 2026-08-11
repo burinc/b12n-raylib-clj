@@ -251,6 +251,10 @@ Full guide: [`docs/guide/`](docs/guide/index.md)
   examples, grouped and tabulated
 - [`troubleshooting.md`](docs/guide/troubleshooting.md) — common errors
   and fixes
+- [`docs/demos/`](docs/demos/README.md) — animated GIF previews,
+  recorded via [cgevent](https://github.com/burinc/b12n-cgevent)
+  (`bb record --only <example-name>`; see
+  [`scripts/record_all.clj`](scripts/record_all.clj))
 
 ## Controls
 
