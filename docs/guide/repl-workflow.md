@@ -7,7 +7,7 @@ change code while a game is running and see the change immediately.
 
 | | Embedded (game) | Standalone |
 |---|---|---|
-| Port | 7888 | 7889 |
+| Port | 7888 | 7999 |
 | Start | `bb <example>` | `bb nrepl` |
 | Can open a window (macOS) | Yes | No |
 
@@ -83,10 +83,10 @@ verified about why this is the rule.
 For exploring code, testing logic, or non-GUI work, use the standalone REPL:
 
 ```bash
-bb nrepl   # or: clj -M:dev (starts on port 7889)
+bb nrepl   # or: clj -M:dev (starts on port 7999)
 ```
 
-> **Port note:** Standalone REPL uses port **7889** to avoid conflicts with games that use **7888**.
+> **Port note:** Standalone REPL uses port **7999** to avoid conflicts with games that use **7888**.
 
 What works from standalone REPL:
 
