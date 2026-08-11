@@ -106,9 +106,39 @@
             :out nil
             :err nil} "cgevent" "click" "--pid" (str pid) "--window" (str x) (str y)))
 
+(defn synth-move!
+  "Move the cursor to (x, y) relative to `pid`'s frontmost window."
+  [pid x y]
+  (p/shell {:continue true
+            :out nil
+            :err nil} "cgevent" "move" "--pid" (str pid) "--window" (str x) (str y)))
+
+(defn synth-drag!
+  "Drag from (x1, y1) to (x2, y2), both relative to `pid`'s frontmost window."
+  [pid x1 y1 x2 y2]
+  (p/shell {:continue true
+            :out nil
+            :err nil} "cgevent" "drag" "--pid" (str pid) "--window"
+           (str x1) (str y1) (str x2) (str y2)))
+
+(defn synth-scroll!
+  "Scroll wheel by (dx, dy) line units, targeted at `pid`."
+  [pid dx dy]
+  (p/shell {:continue true
+            :out nil
+            :err nil} "cgevent" "scroll" "--pid" (str pid) (str dx) (str dy)))
+
+(defn synth-type!
+  "Type Unicode `text`, targeted at `pid`."
+  [pid text]
+  (p/shell {:continue true
+            :out nil
+            :err nil} "cgevent" "type" "--pid" (str pid) text))
+
 (defn play-input!
-  "Fire a timeline of [at-seconds :key \"left\"] / [at-seconds :click x y]
-   events against `pid` on a background thread."
+  "Fire a timeline of [at-seconds action & args] events against `pid` on a
+   background thread. Actions: :key chord, :click x y, :move x y,
+   :drag x1 y1 x2 y2, :scroll dx dy, :type text."
   [pid timeline]
   (future
     (let [t0 (System/currentTimeMillis)]
@@ -116,8 +146,12 @@
         (let [wait (- (+ t0 (long (* 1000 at))) (System/currentTimeMillis))]
           (when (pos? wait) (Thread/sleep wait))
           (case action
-            :key   (synth-key! pid (first args))
-            :click (let [[x y] args] (synth-click! pid x y))
+            :key    (synth-key! pid (first args))
+            :click  (let [[x y] args] (synth-click! pid x y))
+            :move   (let [[x y] args] (synth-move! pid x y))
+            :drag   (let [[x1 y1 x2 y2] args] (synth-drag! pid x1 y1 x2 y2))
+            :scroll (let [[dx dy] args] (synth-scroll! pid dx dy))
+            :type   (synth-type! pid (first args))
             nil))))))
 
 ;; ---------------------------------------------------------------- one example
@@ -226,10 +260,18 @@
    everything ever successfully recorded, not just this run's newly-recorded
    subset. A run where everything was already up to date has an empty
    `results`; keying off `ledger` instead means the README doesn't get
-   wiped down to nothing on such a run."
+   wiped down to nothing on such a run.
+
+   Also requires the gif to actually exist on disk: a ledger entry alone
+   isn't enough — a *later* run can fail (permission revoked, capture
+   error, etc.) after a successful one and delete the file without ever
+   clearing its now-stale ledger entry (record-one! only deletes on
+   failure; it doesn't touch the ledger, and main only updates the
+   ledger on :done). Trusting the ledger blindly would link a GIF that
+   no longer exists."
   [path ledger out-dir]
   (fs/create-dirs (fs/parent path))
-  (let [done-ids (keys ledger)
+  (let [done-ids (filter #(fs/exists? (fs/file out-dir (str % ".gif"))) (keys ledger))
         group-of (fn [id] (:category (h/find-example id)))]
     (spit path
           (str "# Demos\n\n"
@@ -282,7 +324,9 @@
       (let [failed (remove #(= :done (:status %)) results)]
         (when (seq failed)
           (println "\nFailed:")
-          (doseq [f failed] (println "  " (:id f) (:status f))))))))
+          (doseq [f failed]
+            (println "  " (:id f) (:status f))
+            (when-let [err (:stderr f)] (println "    " err))))))))
 
 (when (= *file* (System/getProperty "babashka.file"))
   (apply -main *command-line-args*))

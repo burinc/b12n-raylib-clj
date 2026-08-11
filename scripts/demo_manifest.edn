@@ -4,9 +4,123 @@
   :width 480
   :warmup 10}
 
- ;; Per-id overrides, e.g. a longer :duration or a synthesized :input
- ;; timeline — [[at-seconds :key "chord"] [at-seconds :click x y] ...],
- ;; see scripts/record_all.clj's play-input!. Empty for now: only
- ;; "hello-world" has been recorded so far and it needs no input.
+ ;; Per-id overrides — an :input timeline
+ ;; ([[at-seconds :key "chord"] [at-seconds :click x y] [at-seconds :move x y]
+ ;;   [at-seconds :drag x1 y1 x2 y2] [at-seconds :scroll dx dy]
+ ;;   [at-seconds :type "text"] ...], see scripts/record_all.clj's
+ ;; play-input!) and/or a longer :duration. Most windows are 800x450
+ ;; (verified via grep across src/examples/), so (400 225) is the window
+ ;; center for click/move points below.
+ ;;
+ ;; Examples with no override below are either self-animating already
+ ;; (orbiting camera, particle/chaos sims) or genuinely static without
+ ;; input (e.g. "ESC to exit" only) — recorded as-is, same as most of
+ ;; b12n-rljlt's own manifest.
  :overrides
- {}}
+ {;; games — "replay"/"start" keys fire early (0.3-0.5s) so a full
+  ;; play/animation cycle fits inside the capture window; per-tick
+  ;; steering keys are spread across it like b12n-rljlt's manifest.
+  "pong"               {:input [[0.5 :key "enter"] [1.0 :key "w"] [1.5 :key "k"]
+                                [2.5 :key "s"] [3.0 :key "j"]]}
+  ;; asteroids/asteroids2/tetris/vampire-survivors all gate on a
+  ;; :title-screen ENTER press before arrows/space do anything.
+  ;;
+  ;; asteroids ALSO force-enters borderless fullscreen at startup
+  ;; (`toggle-borderless-windowed!` in its own `init`) — verified cgevent
+  ;; cannot screenshot/record-gif a window in that state ("could not
+  ;; create image from window"; the window's bounds match the display's
+  ;; bounds exactly). F11 toggles it back to windowed (asteroids.clj has
+  ;; its own F11 handler), so fire that FIRST, before enter/arrows.
+  "asteroids"          {:input [[0.3 :key "f11"] [0.6 :key "enter"] [1.0 :key "up"]
+                                [1.5 :key "space"] [2.5 :key "left"] [3.5 :key "space"]
+                                [4.5 :key "right"]]}
+  "asteroids2"         {:input [[0.5 :key "enter"] [1.0 :key "up"] [1.5 :key "space"]
+                                [2.5 :key "left"] [3.5 :key "space"] [4.5 :key "right"]]}
+  "tetris"             {:input [[0.5 :key "enter"] [1.0 :key "left"] [1.5 :key "left"]
+                                [2.0 :key "down"] [2.5 :key "up"] [3.5 :key "right"] [4.5 :key "down"]]}
+  "vampire-survivors"  {:input [[0.5 :key "enter"] [1.0 :key "d"] [2.0 :key "s"]
+                                [3.0 :key "a"] [4.0 :key "w"]]}
+  "snake"              {:input [[0.5 :key "enter"] [1.0 :key "right"] [2.0 :key "down"]]}
+  "floppy"             {:input [[0.5 :key "enter"] [1.0 :key "space"] [2.0 :key "space"]
+                                [3.0 :key "space"]]}
+  "retro-maze-3d"      {:input [[0.5 :key "enter"] [1.0 :key "w"] [2.0 :key "a"] [3.0 :key "d"]]}
+
+  ;; core
+  "bouncing-ball"      {:input [[2.0 :key "space"]]}
+  "following-eyes"     {:input [[1.0 :move 200 150] [2.5 :move 600 350] [4.0 :move 400 225]]}
+  "screen-manager"     {:duration 8
+                        :input [[1.5 :key "enter"] [3.5 :key "enter"] [5.5 :key "enter"]]}
+  "input-keys"         {:input [[1.0 :key "up"] [1.5 :key "right"] [2.5 :key "down"] [3.5 :key "left"]]}
+  "input-mouse"        {:input [[1.0 :click 400 225] [2.5 :move 600 300]]}
+  "mouse-wheel"        {:input [[1.0 :scroll 0 3] [2.5 :scroll 0 -3]]}
+  "gestures-testbed"   {:input [[1.0 :click 300 200] [2.5 :click 500 300]]}
+  "scissor-test"       {:input [[1.0 :key "s"] [2.0 :move 500 300]]}
+  "camera-2d"          {:input [[1.0 :key "right"] [2.0 :key "up"] [3.0 :scroll 0 2]]}
+  "camera-3d-free"     {:input [[1.0 :move 500 300] [2.5 :scroll 0 2]]}
+  "split-screen-3d"    {:input [[1.0 :key "w"] [2.0 :key "up"] [3.0 :key "s"] [4.0 :key "down"]]}
+  "first-person-3d"    {:input [[1.0 :key "w"] [2.0 :key "a"] [3.0 :key "d"]]}
+  "camera-fps"         {:input [[1.0 :key "w"] [2.0 :key "space"] [3.0 :key "d"]]}
+  "world-screen"       {:input [[1.0 :move 500 300] [2.5 :scroll 0 2]]}
+  "picking-3d"         {:input [[1.5 :click 350 200] [3.0 :click 500 300]]}
+  "collision-area"     {:input [[1.0 :move 500 300] [2.0 :key "space"]]}
+  "colors-palette"     {:input [[1.0 :move 400 225] [2.0 :key "space"]]}
+  "logo-anim"          {:input [[0.3 :key "r"]]}
+  "camera-2d-platformer" {:input [[1.0 :key "right"] [2.0 :key "space"] [3.0 :key "c"]]}
+  "window-letterbox"   {:input [[2.0 :key "space"]]}
+
+  ;; textures
+  "sprite-animation"   {:input [[1.0 :key "right"] [2.5 :key "left"]]}
+
+  ;; audio — GIFs are silent, but a keypress still drives the on-screen
+  ;; playback UI (progress bar / state label).
+  "audio-module"       {:input [[1.0 :key "space"]]}
+  "sound-loading"      {:input [[1.0 :key "space"] [2.0 :key "enter"]]}
+  "music-stream"       {:input [[1.0 :key "space"]]}
+  "sound-multi"        {:input [[1.0 :key "space"] [2.0 :key "space"] [3.0 :key "space"]]}
+
+  ;; shaders
+  "basic-lighting"     {:input [[1.0 :move 400 225] [2.0 :key "r"]]}
+
+  ;; models
+  "box-collisions"     {:input [[1.0 :key "right"] [2.0 :key "up"]]}
+  "orthographic-projection" {:duration 8
+                             :input [[3.0 :key "space"]]}
+  "point-cloud"        {:input [[1.0 :key "up"] [2.5 :key "down"]]}
+  "wireframe-shapes"   {:input [[2.0 :key "space"]]}
+  "camera-modes"       {:input [[1.0 :key "2"] [2.0 :key "w"] [3.0 :key "a"]]}
+  "ray-picking"        {:input [[1.5 :click 350 200] [3.0 :click 500 300]]}
+  "bouncing-spheres"   {:input [[2.0 :key "space"]]}
+  "rotating-cube"      {:input [[1.0 :key "right"] [2.0 :key "up"]]}
+  "particle-system"    {:input [[0.3 :key "space"]]}
+  "dna-helix"          {:input [[1.0 :key "space"]]}
+  "first-person-maze"  {:input [[1.0 :key "w"] [2.0 :key "a"]]}
+  "yaw-pitch-roll"     {:input [[1.0 :key "space"] [2.0 :key "right"]]}
+  "lissajous-3d"       {:input [[1.0 :key "2"] [2.0 :key "space"]]}
+  "lorenz-attractor"   {:input [[0.3 :key "space"]]}
+  "terrain-generation" {:input [[1.0 :key "2"] [2.0 :key "space"]]}
+  "mesh-generation"    {:input [[1.0 :key "right"] [2.5 :key "space"]]}
+
+  ;; shapes
+  "logo-raylib-anim"   {:input [[0.3 :key "r"]]}
+  ;; rectangle at (100,100) 200x80 -> resize handle is the 12x12 mark at its
+  ;; bottom-right corner, ~(288-300, 168-180); drag must start inside it.
+  "rectangle-scaling"  {:input [[1.0 :drag 294 174 480 320]]}
+  "mouse-trail"        {:input [[1.0 :move 200 150] [2.5 :move 600 350] [4.0 :move 400 225]]}
+  ;; endpoints default to (30,30) and (770,420); drag the start endpoint.
+  "lines-bezier"       {:input [[1.0 :drag 30 30 300 300]]}
+  "easings-ball"       {:input [[0.3 :key "enter"]]}
+  "simple-particles"   {:input [[1.0 :key "right"] [2.0 :click 400 225]]}
+  "dashed-line"        {:input [[1.0 :key "right"] [2.0 :key "c"]]}
+  "starfield-effect"   {:input [[1.0 :key "space"] [2.5 :scroll 0 2]]}
+  "easings-box"        {:input [[0.3 :key "space"]]}
+  ;; a single :click posts down+up at the same point (no line segment); a
+  ;; drag actually paints a stroke across the canvas.
+  "lines-drawing"      {:input [[1.0 :drag 100 100 700 400]]}
+  "easings-rectangles" {:input [[0.3 :key "space"]]}
+
+  ;; text
+  "writing-anim"       {:input [[0.3 :key "enter"]]}
+  ;; box is 225x50 at (300,180); mouse must actually be over it while
+  ;; typing (polled via GetMousePosition each frame) — :move (not just
+  ;; :click) is what makes the cursor position observable to the app.
+  "input-box"          {:input [[1.0 :move 412 205] [1.3 :click 412 205] [1.8 :type "hello"]]}}}
