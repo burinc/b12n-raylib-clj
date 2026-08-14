@@ -45,8 +45,8 @@
  ;; Per-id overrides — an :input timeline
  ;; ([[at-seconds :key "chord"] [at-seconds :click x y] [at-seconds :move x y]
  ;;   [at-seconds :drag x1 y1 x2 y2] [at-seconds :scroll dx dy]
- ;;   [at-seconds :type "text"] ...], see scripts/record_all.clj's
- ;; play-input!) and/or a longer :duration. Most windows are 800x450
+ ;;   [at-seconds :type "text"] ...], see screen-grab's
+ ;; screen_grab/input.clj play!) and/or a longer :duration. Most windows are 800x450
  ;; (verified via grep across src/examples/), so (400 225) is the window
  ;; center for click/move points below.
  ;;
