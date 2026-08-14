@@ -1,5 +1,7 @@
 # Demos
 
+Animated GIF previews, recorded with [screen-grab](https://github.com/burinc/b12n-screen-grab) via cgevent. Regenerate with `bb record`.
+
 ## 🎮 Original Games
 
 ### hello-world

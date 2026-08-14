@@ -257,8 +257,14 @@ Full guide: [`docs/guide/`](docs/guide/index.md)
   and fixes
 - [`docs/demos/`](docs/demos/README.md) — animated GIF previews,
   recorded via [cgevent](https://github.com/burinc/b12n-cgevent)
-  (`bb record --only <example-name>`; see
-  [`scripts/record_all.clj`](scripts/record_all.clj))
+  (`bb record --only <example-name>`, which matches an exact id or an id
+  prefix — e.g. `asteroids` also selects `asteroids2` — configured by
+  [`scripts/demo_manifest.edn`](scripts/demo_manifest.edn) and shelled out
+  to the [`screen-grab`](https://github.com/burinc/b12n-screen-grab) CLI)
+
+`bb record` requires the `screen-grab` CLI on your PATH. Install it from
+[b12n-screen-grab](https://github.com/burinc/b12n-screen-grab):
+`cd ~/dev/b12n-screen-grab && bb install:home`
 
 ## Controls
 

@@ -2,8 +2,10 @@
 
 Every example at full size — linked from
 [the example catalog](example-catalog.md)'s preview thumbnails.
-Recorded via [cgevent](https://github.com/burinc/b12n-cgevent) — see
-[`scripts/record_all.clj`](../../scripts/record_all.clj). Regenerate
+Recorded via [cgevent](https://github.com/burinc/b12n-cgevent), driven by
+the [`screen-grab`](https://github.com/burinc/b12n-screen-grab) CLI and
+configured by
+[`scripts/demo_manifest.edn`](../../scripts/demo_manifest.edn). Regenerate
 with `bb record`.
 
 ## 🎮 Original games (9)

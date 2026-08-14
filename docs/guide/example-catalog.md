@@ -16,7 +16,10 @@ tree; the 3 cells marked ¹ instead cite the companion
 > at full size, one-line description included. The `preview` column
 > below thumbnails straight from the same recorded GIFs
 > (`docs/demos/*.gif`, via [cgevent](https://github.com/burinc/b12n-cgevent)
-> and `bb record` — see [`scripts/record_all.clj`](../../scripts/record_all.clj)).
+> and `bb record`, shelled out to the
+> [`screen-grab`](https://github.com/burinc/b12n-screen-grab) CLI and
+> configured by
+> [`scripts/demo_manifest.edn`](../../scripts/demo_manifest.edn)).
 
 Run one, or see them all grouped:
 ```sh
