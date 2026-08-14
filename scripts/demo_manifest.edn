@@ -1,8 +1,45 @@
-{:defaults
- {:duration 6
-  :fps 10
-  :width 480
-  :warmup 10}
+;; KNOWN LIMITATION — window-letterbox is not recordable.
+;;
+;; That example demonstrates resolution-independent rendering, so its window
+;; CHANGES SIZE during capture. gifski rejects a frame whose dimensions differ
+;; from the first ("Frame N has wrong size"), so the encode always fails and
+;; screen-grab deletes the partial output.
+;;
+;; This is NOT caused by the screen-grab migration: the previous
+;; scripts/record_all.clj fails identically (verified 2026-08-14 — old script
+;; "Frame 7 has wrong size (480x307)", screen-grab "Frame 3 has wrong size
+;; (480x295)"). The committed window-letterbox.gif is a single frozen frame
+;; from an older capture and is kept deliberately.
+;;
+;; Consequence: `bb record --force` will fail this one item and delete its GIF.
+;; Restore it with `git checkout -- docs/demos/window-letterbox.gif`.
+;; A future screen-grab could support a per-item :skip flag, or tolerate
+;; varying frame sizes by cropping to the first frame's dimensions.
+
+{:driver  :spawn
+ :capture :cgevent-gif
+
+ :examples-cmd "bb demos:examples"
+
+ :out-dir "docs/demos"
+ :ledger  "docs/demos/ledger.edn"
+ :readme  "docs/demos/README.md"
+ :title   "Demos"
+
+ ;; Replaces record_all.clj's category-order + example-categories lookup.
+ ;; Values below were read from bb.helpers/example-categories on
+ ;; 2026-08-14 and ordered by record_all.clj's own category-order vector
+ ;; [:games :core :shapes :textures :audio :shaders :models :text].
+ :groups [{:key "games"    :title "🎮 Original Games"}
+          {:key "core"     :title "📦 Core Examples"}
+          {:key "shapes"   :title "🔷 Shapes Examples"}
+          {:key "textures" :title "🖼️ Textures Examples"}
+          {:key "audio"    :title "🔊 Audio Examples"}
+          {:key "shaders"  :title "✨ Shaders Examples"}
+          {:key "models"   :title "🗿 Models Examples"}
+          {:key "text"     :title "📝 Text Examples"}]
+
+ :defaults {:duration 6 :fps 10 :width 480 :warmup 10}
 
  ;; Per-id overrides — an :input timeline
  ;; ([[at-seconds :key "chord"] [at-seconds :click x y] [at-seconds :move x y]

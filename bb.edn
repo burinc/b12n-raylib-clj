@@ -29,9 +29,37 @@
    :task (h/print-examples-help)}
 
   record
-  {:doc "Record a demo GIF via cgevent: bb record --only hello-world [--force] [--dry-run]"
-   :task (let [{:keys [exit]} (apply shell {:continue true} "bb" "scripts/record_all.clj" *command-line-args*)]
+  {:doc "Batch-record a demo GIF for every example: bb record [--only a,b] [--force] [--dry-run]"
+   :task (let [{:keys [exit]} (apply shell {:continue true}
+                                     "screen-grab" "record"
+                                     "--manifest" "scripts/demo_manifest.edn"
+                                     *command-line-args*)]
            (System/exit exit))}
+
+  demos:examples
+  {:doc "Print the demo item list as EDN for screen-grab"
+   :requires ([bb.helpers :as h]
+              [clojure.edn :as edn]
+              [clojure.string :as str])
+   :task
+   (let [aliases (:aliases (edn/read-string (slurp "deps.edn")))
+         ;; Mirrors scripts/record_all.clj's src-path: the namespace comes
+         ;; from deps.edn's :main-opts after "-m", NOT from the alias
+         ;; string. Changing this changes every sha and invalidates the
+         ;; whole ledger.
+         src-path (fn [alias]
+                    (let [main-opts (:main-opts (get aliases (keyword alias)))
+                          ns-str (str (second (drop-while (fn [x] (not= "-m" x))
+                                                          main-opts)))]
+                      (str "src/"
+                           (str/replace (str/replace ns-str "." "/") "-" "_")
+                           ".clj")))]
+     (prn (vec (for [{:keys [alias category desc]} h/examples]
+                 {:id alias
+                  :group (name category)
+                  :desc desc
+                  :src (src-path alias)
+                  :run (str "clojure -M:" alias)}))))}
 
   ;; =============================================================================
   ;; 🎮 Original Games
