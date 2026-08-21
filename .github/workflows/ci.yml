@@ -1,0 +1,76 @@
+name: CI
+
+# ---------------------------------------------------------------------------
+# DORMANT ON PURPOSE — manual dispatch only.
+#
+# There are deliberately no `push:` or `pull_request:` triggers. While this
+# repository is private, Actions minutes bill against the account's included
+# quota, and macOS minutes bill at 10x the Linux rate. Nothing here should run
+# without someone asking for it.
+#
+# To turn it on once the repository is public (Actions is free for standard
+# runners on public repos), add:
+#
+#   on:
+#     pull_request:
+#       branches: [main]
+#     push:
+#       branches: [main]
+#
+# above `workflow_dispatch`. Do one manual dispatch first and confirm it goes
+# green — this workflow has never been executed, so treat its first run as
+# unverified.
+#
+# Why macos-latest and not ubuntu-latest: every alias in deps.edn carries
+# `-XstartOnFirstThread`, which macOS requires for any GUI/OpenGL work. The JVM
+# treats an unrecognized `-X` option as a fatal error ("Unrecognized option:
+# …; Could not create the Java Virtual Machine" — verified), and that flag is
+# handled only by the macOS launcher. Running the gate on Linux therefore needs
+# a second, flag-free alias; adding one is a reasonable contribution, but it is
+# not what this file does today.
+# ---------------------------------------------------------------------------
+
+on:
+  workflow_dispatch:
+    inputs:
+      java-version:
+        description: "JDK to test against (must be 22+ for the Panama FFI)"
+        required: false
+        default: "23"
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: compile · lint
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # JDK 22 is the floor: java.lang.foreign (Project Panama) is not a
+      # supported API before it, and coffi's downcall handles will not link.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ inputs.java-version || '23' }}
+
+      - uses: DeLaGuardo/setup-clojure@13.0
+        with:
+          bb: latest
+          cli: latest
+          clj-kondo: latest
+
+      # The bundled dylib is a raylib release artifact, not signed by us.
+      # Gatekeeper quarantines it on a fresh checkout the same way it does on a
+      # contributor's machine; this is the fix CONTRIBUTING.md documents.
+      - name: Ad-hoc sign the bundled raylib dylib
+        run: codesign --force --sign - libs/macos/libraylib.5.5.0.dylib
+
+      # The gate that matters: requires all 104 namespaces under src/. It is the
+      # only check that catches an example with a broken require, since running
+      # any single example proves nothing about the other 77. Opens no window —
+      # -main is never called.
+      - name: Compile every namespace (headless)
+        run: bb check

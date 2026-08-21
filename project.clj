@@ -1,11 +1,12 @@
-(defproject raylib-clojure-playground "0.1.0-SNAPSHOT"
-  :description "Raylib experiments in Clojure"
-  :url "https://github.com/yourusername/raylib-clojure-playground"
-  :license {:name "EPL-2.0"
-            :url "https://www.eclipse.org/legal/epl-2.0/"}
+(defproject b12n-raylib-clj "0.1.0-SNAPSHOT"
+  :description "raylib game-development examples in Clojure, over coffi/Panama FFI"
+  :url "https://github.com/burinc/b12n-raylib-clj"
+  :license {:name "zlib"
+            :url "https://opensource.org/license/zlib"
+            :comment "Same license as raylib; see LICENSE and NOTICE"}
 
-  :dependencies [[org.clojure/clojure "1.12.4"]
-                 [org.clojure/tools.logging "1.3.1"]
+  :dependencies [[org.clojure/clojure "1.12.0"]
+                 [org.clojure/tools.logging "1.3.0"]
                  ;; Override coffi to use JDK 22+ compatible version
                  [org.suskalo/coffi "1.0.615"]
                  ;; insn is a dependency of coffi
@@ -20,7 +21,7 @@
              "-XstartOnFirstThread"  ; Required for macOS GUI/OpenGL
              "-Djava.library.path=libs:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
 
-  :profiles {:dev {:dependencies [[nrepl "1.5.2"]]}}
+  :profiles {:dev {:dependencies [[nrepl "1.3.0"]]}}
 
   :main examples.asteroids
   :aot [examples.asteroids]

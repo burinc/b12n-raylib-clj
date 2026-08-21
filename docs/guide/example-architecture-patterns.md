@@ -184,8 +184,7 @@ The recipe, as a numbered list:
    tree.
 2. Create `src/examples/<name>.clj` following the shared skeleton
    above.
-3. Add a `deps.edn` alias. From the project guide's "Adding a New Example"
-   section:
+3. Add a `deps.edn` alias, mirroring any existing one:
 
    ```clojure
    :my-example
@@ -195,12 +194,10 @@ The recipe, as a numbered list:
     :main-opts ["-m" "examples.my-example"]}
    ```
 
-4. Add a `bb.edn` task. the guide's own example here (a hand-written
-   `(do (header ...) (info ...) (p/shell ...))` body) is stale — every
-   real task in `bb.edn` today instead calls the shared
-   `h/run-example!` helper, which looks up the example's title,
-   description, and controls from the registry (step 5) and prints
-   them itself. The real `asteroids` task:
+4. Add a `bb.edn` task. Every task calls the shared `h/run-example!`
+   helper, which looks up the example's title, description, and
+   controls from the registry (step 5) and prints them itself — so the
+   task body stays a single line. The real `asteroids` task:
 
    ```clojure
    asteroids {:doc "🎮 Asteroids - shoot asteroids and survive"

@@ -1,0 +1,76 @@
+name: New example proposal
+description: Suggest an example to add, or claim one to write yourself
+labels: [example]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        New examples are very welcome. The suite is deliberately mechanical to
+        grow — one example touches exactly four places, and
+        [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md) has the recipe.
+
+        Have a look at
+        [docs/guide/example-catalog.md](../blob/main/docs/guide/example-catalog.md)
+        first to check it isn't already one of the 78.
+
+  - type: input
+    id: name
+    attributes:
+      label: Proposed name
+      description: kebab-case, as it would appear in `bb <name>`. e.g. `shapes-splines`.
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What would it show?
+      description: One or two sentences on what a reader learns from it.
+    validations:
+      required: true
+
+  - type: input
+    id: upstream
+    attributes:
+      label: Upstream raylib example, if it's a port
+      description: |
+        The path in raylib's own examples tree, e.g. `shapes/shapes_splines_drawing`.
+        Leave blank if it's an original.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Matches the `:category` in `bb/helpers.bb`'s registry.
+      options:
+        - games (an original playable game)
+        - core (window, input, timing, cameras)
+        - shapes
+        - text
+        - textures
+        - audio
+        - shaders
+        - models (3D)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bindings
+    attributes:
+      label: Does it need new FFI bindings?
+      description: |
+        i.e. a raylib C function that has no `defcfn` under `src/raylib/` yet.
+        Not a problem if so — it just makes the PR bigger.
+      options:
+        - "No — everything it needs is already bound"
+        - "Yes — it needs new defcfn bindings"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: who
+    attributes:
+      label: Who writes it?
+      options:
+        - label: I'd like to write this one myself

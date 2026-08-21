@@ -9,11 +9,11 @@ Function & Memory API (Project Panama). No wrapper library, no codegen —
 
 ## Why this exists
 
-Same idea as [`b12n-rljlt`](https://github.com/burinc/b12n-rljlt) — a
+Same idea as [`b12n-raylib-jlt`](https://github.com/burinc/b12n-raylib-jlt) — a
 suite of raylib examples that bind the C library directly over FFI,
 with no wrapper layer in between — explored on a different runtime.
 Here it's the JVM: JDK 22+'s Panama Foreign Function & Memory API via
-`coffi`. `b12n-rljlt` does the same thing on Chez Scheme via jolt's
+`coffi`. `b12n-raylib-jlt` does the same thing on Chez Scheme via jolt's
 `jolt.ffi`, with no JVM at all. The pages below cover the JVM/Panama
 side of that story: what `defcfn` actually does, how structs and
 pointers cross the FFI boundary, and how to add a new binding.
@@ -74,5 +74,5 @@ ported from which raylib C source file.
 - [`troubleshooting.md`](troubleshooting.md) — common errors and fixes
 
 ## See also
-- [`b12n-rljlt`](https://github.com/burinc/b12n-rljlt) — the same idea
+- [`b12n-raylib-jlt`](https://github.com/burinc/b12n-raylib-jlt) — the same idea
   in Jolt (native Clojure on Chez Scheme, no JVM) over `jolt.ffi`

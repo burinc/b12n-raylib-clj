@@ -1,0 +1,66 @@
+Third-party attribution
+=======================
+
+This project is released under the zlib License; see LICENSE.
+
+
+raylib-clojure-playground (the origin of this project)
+------------------------------------------------------
+  Copyright (c) 2026 Ertuğrul Çetin
+  https://github.com/ertugrulcetin/raylib-clojure-playground
+
+  This repository began as that project and still carries its first nine
+  commits, so its history is preserved here in full. The coffi FFI binding
+  layer under src/raylib/ is his design; several files in it are unchanged
+  from his originals (core.clj, enums.clj, internals.clj, core/keyboard.clj,
+  core/timing.clj, textures/drawing.clj, textures/texture_loading.clj), and
+  most of the rest are extensions of them. Six of the examples started as his
+  work: asteroids, asteroids2, hello_world, pong, tetris, vampire_survivors.
+
+  The upstream repository carries no license file. This project is released
+  under zlib to match raylib's own terms; if you are reusing the binding
+  layer, credit belongs upstream as well as here.
+
+
+raylib
+------
+  Copyright (c) 2013-2026 Ramon Santamaria (@raysan5)
+  https://github.com/raysan5/raylib
+  Licensed under the zlib/libpng license (the same license as this project).
+
+  Unlike a source dependency, this project REDISTRIBUTES prebuilt raylib
+  5.5.0 binaries under libs/ (macOS, Linux x86-64/i386, Windows 32/64-bit for
+  MSVC and MinGW-w64), so an example runs without a system raylib install.
+  Those binaries are raylib's own release artifacts, unmodified. The zlib
+  license permits this provided the notice is retained — which is what this
+  section is.
+
+  Many examples under src/examples/ are Clojure ports of raylib's own example
+  programs. docs/guide/example-catalog.md names the upstream C source for each
+  (e.g. core/core_basic_window, shapes/shapes_bouncing_ball). Those examples
+  are likewise zlib/libpng licensed, and this project is released under the
+  same license so the original terms carry through unchanged.
+
+
+coffi
+-----
+  Copyright (c) Joshua Suskalo
+  https://github.com/IGJoshua/coffi
+  Licensed under the MIT license.
+
+  A source dependency (see deps.edn), not redistributed here. Every `defcfn`
+  in src/raylib/ is coffi's.
+
+
+Asteroids collision and wrapping math
+-------------------------------------
+  Derived from janetroids by @cellularmitosis
+  https://github.com/tantona/janetroids
+
+
+Media assets under resources/
+-----------------------------
+  NOT covered by this project's license. They are raylib's own example assets
+  and carry their own terms, including one asset under a NON-COMMERCIAL
+  license (resources/scarfy.png, CC-BY-NC). Per-file authorship and terms are
+  tabulated in resources/LICENSE.md — read it before reusing anything there.

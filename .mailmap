@@ -1,0 +1,8 @@
+# Collapse the two spellings of the maintainer's commit identity into one, so
+# `git shortlog -sne` and GitHub's contributor list show a single named entry
+# rather than a username and a name side by side.
+Burin Choomnuan <burin@duck.com> <burin@duck.com>
+
+# The first nine commits of this repository are from the upstream project it
+# began as (see NOTICE). Give them the author's full name.
+Ertuğrul Çetin <ertu.ctn@gmail.com> <ertu.ctn@gmail.com>

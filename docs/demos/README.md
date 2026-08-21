@@ -1,6 +1,6 @@
 # Demos
 
-Animated GIF previews, recorded with [screen-grab](https://github.com/burinc/b12n-screen-grab) via cgevent. Regenerate with `bb record`.
+Animated GIF previews, one per example. Every GIF here is committed; `bb record` regenerates them and is maintainer-only.
 
 ## 🎮 Original Games
 

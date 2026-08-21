@@ -1,6 +1,18 @@
 # Raylib Clojure Playground
 
-A collection of game development experiments using Raylib in Clojure. This project uses coffi for FFI bindings to call Raylib's C library directly from Clojure.
+A collection of game development experiments using [raylib](https://www.raylib.com/)
+in Clojure. It calls raylib's C library directly through
+[coffi](https://github.com/IGJoshua/coffi) over JDK 22+'s Foreign Function &
+Memory API (Project Panama) — no wrapper library, no codegen.
+
+78 examples ship in `src/examples/`: original games plus ports of raylib's own
+C examples across the core, shapes, text, textures, shaders, audio, and models
+categories.
+
+This project began as
+[ertugrulcetin/raylib-clojure-playground](https://github.com/ertugrulcetin/raylib-clojure-playground)
+and still carries its history; the FFI binding layer is largely his. See
+[NOTICE](NOTICE) for the full attribution.
 
 ## Architecture Overview
 
@@ -255,16 +267,15 @@ Full guide: [`docs/guide/`](docs/guide/index.md)
   example's animated GIF, one-line description)
 - [`troubleshooting.md`](docs/guide/troubleshooting.md) — common errors
   and fixes
-- [`docs/demos/`](docs/demos/README.md) — animated GIF previews,
-  recorded via [cgevent](https://github.com/burinc/b12n-cgevent)
-  (`bb record --only <example-name>`, which matches an exact id or an id
-  prefix — e.g. `asteroids` also selects `asteroids2` — configured by
-  [`scripts/demo_manifest.edn`](scripts/demo_manifest.edn) and shelled out
-  to the [`screen-grab`](https://github.com/burinc/b12n-screen-grab) CLI)
+- [`docs/demos/`](docs/demos/README.md) — animated GIF previews, one per
+  example
 
-`bb record` requires the `screen-grab` CLI on your PATH. Install it from
-[b12n-screen-grab](https://github.com/burinc/b12n-screen-grab):
-`cd ~/dev/b12n-screen-grab && bb install:home`
+Every GIF under `docs/demos/` is committed, so you never need to record
+anything. Regenerating them (`bb record`) drives a screen-capture tool that
+is not publicly released, so it is maintainer-only — the task says so and
+exits cleanly rather than failing obscurely. Its input timelines live in
+[`scripts/demo_manifest.edn`](scripts/demo_manifest.edn) if you want to
+propose one for a new example.
 
 ## Controls
 
@@ -326,17 +337,37 @@ Most examples share these common controls:
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Run `bb check` before committing
-4. Submit a pull request
+New examples are very welcome — the suite is deliberately mechanical to grow,
+and one new example touches exactly four places.
+
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for setup, the pre-PR gates, and the
+four-touchpoint recipe.
 
 ## Credits
 
-- **Raylib** - https://www.raylib.com/
-- **coffi** - https://github.com/IGJoshua/coffi
-- **Asteroids math** - Based on work by [@cellularmitosis](https://github.com/tantona/janetroids)
+- **[Ertuğrul Çetin](https://github.com/ertugrulcetin)** — this project began as
+  his [raylib-clojure-playground](https://github.com/ertugrulcetin/raylib-clojure-playground).
+  The coffi binding layer under `src/raylib/` is his design, several of its
+  files are unchanged from his originals, and six examples (asteroids,
+  asteroids2, hello-world, pong, tetris, vampire-survivors) started as his work.
+- **[raylib](https://www.raylib.com/)** — Ramon Santamaria ([@raysan5](https://github.com/raysan5)).
+  Most examples here are ports of raylib's own C examples.
+- **[coffi](https://github.com/IGJoshua/coffi)** — Joshua Suskalo. Every
+  `defcfn` in `src/raylib/` is coffi's.
+- **Asteroids math** — based on [janetroids](https://github.com/tantona/janetroids)
+  by [@cellularmitosis](https://github.com/tantona).
 
 ## License
 
-EPL-2.0
+[zlib](LICENSE) — the same license as raylib itself, so the terms of the many
+examples ported from raylib carry through unchanged.
+
+Two caveats, both detailed in [NOTICE](NOTICE):
+
+- **`libs/` redistributes prebuilt raylib 5.5.0 binaries** (macOS, Linux,
+  Windows) so the examples run without a system raylib install. They are
+  raylib's own release artifacts, unmodified, under raylib's zlib license.
+- **`resources/` media is not covered by this license.** Those are raylib's
+  example assets under their own terms — mostly CC0, and one
+  (`resources/scarfy.png`) under **CC-BY-NC**, which is non-commercial. Per-file
+  authorship and terms: [resources/LICENSE.md](resources/LICENSE.md).

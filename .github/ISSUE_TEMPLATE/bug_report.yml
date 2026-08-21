@@ -1,0 +1,87 @@
+name: Bug report
+description: An example crashes, renders wrong, or won't compile
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Most failures here come down to three things: your JDK version, your OS,
+        and whether the bundled `libraylib` loaded. Please fill those in — they
+        turn a guess into a diagnosis.
+
+        **Check these two first — both are expected, not bugs:**
+
+        - **`UnsupportedClassVersionError`, or anything about `java.lang.foreign`
+          not existing.** This project needs **JDK 22 or newer** for the Foreign
+          Function & Memory API. There is no workaround on an older JDK.
+        - **`WARNING: A restricted method in java.lang.foreign.Linker has been
+          called`.** Harmless and expected — the JDK warns on every native
+          downcall. It is not the cause of your problem.
+
+  - type: input
+    id: example
+    attributes:
+      label: Which example?
+      description: The `bb` name or `clojure` alias, e.g. `bb tetris` or `clojure -M:camera-2d`.
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what did you expect?
+      description: Paste the full error output if there is one.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please paste the output of these two commands.
+      value: |
+        ```
+        $ uname -sm
+        (paste here — OS and CPU architecture)
+
+        $ java -version
+        (paste here — must be 22 or newer)
+        ```
+    validations:
+      required: true
+
+  - type: dropdown
+    id: raylib-source
+    attributes:
+      label: Which libraylib is being used?
+      description: |
+        Every example prints this on startup, e.g.
+        `[raylib] Loading bundled library: libs/macos/libraylib.5.5.0.dylib`
+      options:
+        - The bundled one under libs/ (the default)
+        - A system raylib (brew / apt / pacman / a source build)
+        - Nothing printed / not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: compile-check
+    attributes:
+      label: Does the headless compile-check pass?
+      description: |
+        `bb check` requires all 104 namespaces under `src/` without opening a
+        window. If it fails, the problem is in the shared binding layer rather
+        than in one example — paste its output here.
+      value: |
+        ```
+        $ bb check
+        (paste here)
+        ```
+
+  - type: checkboxes
+    id: macos
+    attributes:
+      label: On macOS only
+      options:
+        - label: I ran it with `clojure`, not `clj` (rlwrap breaks GUI apps)
+        - label: If it died on a code signature, I tried `codesign --force --sign - libs/macos/libraylib.5.5.0.dylib`
