@@ -1,25 +1,17 @@
 name: CI
 
 # ---------------------------------------------------------------------------
-# DORMANT ON PURPOSE — manual dispatch only.
+# Runs on pushes and PRs to main, plus manual dispatch.
 #
-# There are deliberately no `push:` or `pull_request:` triggers. While this
-# repository is private, Actions minutes bill against the account's included
-# quota, and macOS minutes bill at 10x the Linux rate. Nothing here should run
-# without someone asking for it.
+# Actions is free for standard runners on public repositories, which this repo
+# now is. It was authored dormant while the repo was private, where minutes
+# bill against the account's quota and macOS bills at 10x the Linux rate - so
+# if this repo ever goes private again, drop the push/pull_request triggers.
 #
-# To turn it on once the repository is public (Actions is free for standard
-# runners on public repos), add:
-#
-#   on:
-#     pull_request:
-#       branches: [main]
-#     push:
-#       branches: [main]
-#
-# above `workflow_dispatch`. Do one manual dispatch first and confirm it goes
-# green — this workflow has never been executed, so treat its first run as
-# unverified.
+# Note: making a repo public does NOT re-enable Actions if it was disabled
+# while private. This repo's first dispatch sat queued forever because
+# `repos/<owner>/<repo>/actions/permissions` still read {"enabled": false};
+# there is no error, the run simply never gets a runner.
 #
 # Why macos-latest and not ubuntu-latest: every alias in deps.edn carries
 # `-XstartOnFirstThread`, which macOS requires for any GUI/OpenGL work. The JVM
@@ -31,6 +23,10 @@ name: CI
 # ---------------------------------------------------------------------------
 
 on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       java-version:

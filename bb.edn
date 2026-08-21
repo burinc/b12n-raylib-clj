@@ -386,13 +386,20 @@
            (p/shell "clojure" "-M:check")
            (println)
            (h/step 2 "Lint check...")
+           ;; clj-kondo exit codes: 0 clean, 2 warnings, 3 errors (verified).
+           ;; The gate is ERRORS. There is a standing backlog of ~69 warnings,
+           ;; nearly all `unused binding` in example code, and CONTRIBUTING.md
+           ;; tells contributors the bar is "0 errors" - so failing on exit 2
+           ;; made the documented gate unpassable and turned CI permanently red
+           ;; on a known backlog. Warnings still print, and still show up in the
+           ;; summary line, they just do not fail the build.
            (let [{:keys [exit]} (p/shell {:continue true} "clj-kondo" "--lint" "src")]
              (println)
-             (if (zero? exit)
-               (h/success "All fast checks passed!")
-               (do
-                 (h/warn "Lint warnings found (see above)")
-                 (System/exit exit)))))}
+             (cond
+               (zero? exit) (h/success "All fast checks passed!")
+               (= 2 exit)   (h/warn "Lint warnings found (see above) - not failing; the gate is errors")
+               :else        (do (h/error-msg "Lint ERRORS found (see above)")
+                                (System/exit exit)))))}
 
   docs-sync
   {:doc "Republish the docs: rebuild -> push site repo -> mirror to wiki -> S3 + CloudFront. Maintainer task (needs sibling repos, AWS_PROFILE=b12n). bb docs-sync [--no-push]"
