@@ -380,7 +380,7 @@
                (System/exit exit))))}
 
   check
-  {:doc "⭐ Fast checks (compile + lint) - use before committing"
+  {:doc "⭐ Fast checks (compile every namespace + lint) - use before committing"
    :task (do
            (h/header "🔍 Running Fast Checks")
            (h/step 1 "Compile check (every namespace under src/)...")
