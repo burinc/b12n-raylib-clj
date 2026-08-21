@@ -5,6 +5,13 @@ This project is released under the Eclipse Public License 2.0; see LICENSE.
 
 That is not a free choice: it is inherited. See the first section below.
 
+LICENSE holds the canonical EPL-2.0 text and nothing else, deliberately: an
+appended note stops GitHub detecting the license, and an undetectable license
+is exactly what caused the mistake this file records. Scope notes live here
+instead - the native libraries under libs/ and the media under resources/ are
+third-party works under their own terms, and many examples under src/examples/
+are ports of raylib's zlib/libpng-licensed programs.
+
 
 raylib-clojure-playground (the origin of this project)
 ------------------------------------------------------

@@ -78,15 +78,3 @@ Simply including a copy of this Agreement, including this Exhibit A is not suffi
 If it is not possible or desirable to put the notice in a particular file, then You may include the notice in a location (such as a LICENSE file in a relevant directory) where a recipient would be likely to look for such a notice.
 
 You may add additional accurate notices of copyright ownership.
-
---------------------------------------------------------------------------
-This project inherits EPL-2.0 from the project it began as,
-ertugrulcetin/raylib-clojure-playground, which declares EPL-2.0 in its
-README and its project.clj. Substantial parts of src/raylib/ are unchanged
-from or derived from that work, and EPL-2.0 is copyleft at the file level,
-so this project cannot relicense them.
-
-The native libraries under libs/ and the media assets under resources/ are
-third-party works redistributed under their own terms. Many examples under
-src/examples/ are ports of raylib's own zlib/libpng-licensed examples. See
-NOTICE and resources/LICENSE.md.
