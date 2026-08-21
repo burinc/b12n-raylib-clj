@@ -14,7 +14,7 @@ change code while a game is running and see the change immediately.
 ## Live game development (recommended)
 
 Most games start an **embedded nREPL server on port 7888** (67 of the
-78 examples — 11, including `pong`, `camera-2d`, and `music-stream`,
+78 examples; 11, including `pong`, `camera-2d`, and `music-stream`,
 don't call `nrepl/start`). This is the proper way to do live
 development for the examples that do:
 
@@ -72,7 +72,7 @@ INFO: starting nREPL server on port 7888
 ## Why macOS can't open windows from a standalone REPL
 
 On macOS, you cannot open a raylib window from the standalone `:dev`
-REPL — only from a game alias (`bb asteroids`, `clj -M:hello-world`,
+REPL, only from a game alias (`bb asteroids`, `clj -M:hello-world`,
 etc.) started fresh, which is why live game development connects to
 the game's own embedded nREPL instead of running the game from
 `:dev`. See

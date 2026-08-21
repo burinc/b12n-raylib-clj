@@ -5,12 +5,12 @@
 unmodified so the examples run out of the box. Each carries its own terms,
 reproduced from raylib's own `examples/*/resources/LICENSE.md`.
 
-Read the table before reusing anything here. **`scarfy.png` is CC-BY-NC** —
+Read the table before reusing anything here. **`scarfy.png` is CC-BY-NC**:
 non-commercial only, which is *more restrictive* than the code around it.
 
 | File | Author | License | Used by | Source |
 |------|--------|---------|---------|--------|
-| `scarfy.png` | [Eiden Marsal](https://www.artstation.com/marshall_z) | [**CC-BY-NC 4.0**](https://creativecommons.org/licenses/by-nc/4.0/legalcode) — non-commercial | `sprite-animation` | raylib `examples/textures/resources` |
+| `scarfy.png` | [Eiden Marsal](https://www.artstation.com/marshall_z) | [**CC-BY-NC 4.0**](https://creativecommons.org/licenses/by-nc/4.0/legalcode), non-commercial | `sprite-animation` | raylib `examples/textures/resources` |
 | `cyberpunk_street_background.png` | [Luis Zuno](http://ansimuz.com/site/) | [CC-BY 3.0](http://creativecommons.org/licenses/by/3.0/) | `background-scrolling` | [Cyberpunk Street Environment](https://ansimuz.itch.io/cyberpunk-street-environment) |
 | `cyberpunk_street_midground.png` | [Luis Zuno](http://ansimuz.com/site/) | [CC-BY 3.0](http://creativecommons.org/licenses/by/3.0/) | `background-scrolling` | [Cyberpunk Street Environment](https://ansimuz.itch.io/cyberpunk-street-environment) |
 | `cyberpunk_street_foreground.png` | [Luis Zuno](http://ansimuz.com/site/) | [CC-BY 3.0](http://creativecommons.org/licenses/by/3.0/) | `background-scrolling` | [Cyberpunk Street Environment](https://ansimuz.itch.io/cyberpunk-street-environment) |
@@ -26,5 +26,5 @@ non-commercial only, which is *more restrictive* than the code around it.
 ## If the NC asset is a problem for you
 
 `scarfy.png` is used by exactly one example (`sprite-animation`). Deleting the
-file and that example leaves the rest of the tree uniformly permissive —
+file and that example leaves the rest of the tree uniformly permissive:
 CC0, CC-BY 3.0, zlib, and one Mod Archive module (none of them share-alike).

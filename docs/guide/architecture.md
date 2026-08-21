@@ -63,33 +63,33 @@ flowchart LR
 
 ## Module layout
 
-- `src/raylib/` — FFI bindings (this is the library)
-  - `core.clj` — loads the native library; every binding namespace requires this first
-  - `structs.clj` — C struct definitions via `defalias` (Color, Vector2, Vector3, Vector4, Texture, RenderTexture, Rectangle)
-  - `colors.clj` — color constants (raywhite, red, etc.)
-  - `enums.clj` — keyboard/mouse enums
-  - `internals.clj` — internal helpers (ubyte, bool types)
-  - `utils.clj` — utility functions (random, fade, etc.)
-  - `audio.clj` — audio functions (Music, Sound)
-  - `lights.clj` — shader-lighting helpers, based on raylib's `rlights.h`
-  - `nrepl.clj` — embedded nREPL server startup, powers the port 7888 live-development workflow
-  - `core/` — window, drawing, keyboard, mouse, timing, camera2d, camera3d, collision, gamepad, gestures, shaders
-    - `window.clj` — window management
-    - `drawing.clj` — drawing primitives
-    - `keyboard.clj` — keyboard input
-    - `mouse.clj` — mouse input
-    - `timing.clj` — frame timing (FPS, delta time)
-    - `camera2d.clj` — 2D camera
-    - `camera3d.clj` — 3D camera and rendering
-    - `collision.clj` — ray casting and collision detection
-    - `gamepad.clj` — gamepad input
-    - `gestures.clj` — touch gesture detection
-    - `shaders.clj` — shader loading and management
-  - `text/`, `shapes/`, `textures/` — drawing/loading helpers
-- `src/examples/` — the 78 example namespaces (54 top-level + 3 in `games/` + 21 in `models/`)
-- `src/debug_stats.clj` — F1 overlay plugin (see [Example Architecture Patterns](example-architecture-patterns.md) for usage)
-- `src/raylib_ext.clj` — extended/derived bindings not in core raylib
-- `libs/` — bundled native libraries per platform
+- `src/raylib/`: FFI bindings (this is the library)
+  - `core.clj`: loads the native library; every binding namespace requires this first
+  - `structs.clj`: C struct definitions via `defalias` (Color, Vector2, Vector3, Vector4, Texture, RenderTexture, Rectangle)
+  - `colors.clj`: color constants (raywhite, red, etc.)
+  - `enums.clj`: keyboard/mouse enums
+  - `internals.clj`: internal helpers (ubyte, bool types)
+  - `utils.clj`: utility functions (random, fade, etc.)
+  - `audio.clj`: audio functions (Music, Sound)
+  - `lights.clj`: shader-lighting helpers, based on raylib's `rlights.h`
+  - `nrepl.clj`: embedded nREPL server startup, powers the port 7888 live-development workflow
+  - `core/`: window, drawing, keyboard, mouse, timing, camera2d, camera3d, collision, gamepad, gestures, shaders
+    - `window.clj`: window management
+    - `drawing.clj`: drawing primitives
+    - `keyboard.clj`: keyboard input
+    - `mouse.clj`: mouse input
+    - `timing.clj`: frame timing (FPS, delta time)
+    - `camera2d.clj`: 2D camera
+    - `camera3d.clj`: 3D camera and rendering
+    - `collision.clj`: ray casting and collision detection
+    - `gamepad.clj`: gamepad input
+    - `gestures.clj`: touch gesture detection
+    - `shaders.clj`: shader loading and management
+  - `text/`, `shapes/`, `textures/`: drawing/loading helpers
+- `src/examples/`: the 78 example namespaces (54 top-level + 3 in `games/` + 21 in `models/`)
+- `src/debug_stats.clj`: F1 overlay plugin (see [Example Architecture Patterns](example-architecture-patterns.md) for usage)
+- `src/raylib_ext.clj`: extended/derived bindings not in core raylib
+- `libs/`: bundled native libraries per platform
 
 ## Project structure diagram
 

@@ -3,7 +3,7 @@
 A collection of game development experiments using [raylib](https://www.raylib.com/)
 in Clojure. It calls raylib's C library directly through
 [coffi](https://github.com/IGJoshua/coffi) over JDK 22+'s Foreign Function &
-Memory API (Project Panama) — no wrapper library, no codegen.
+Memory API (Project Panama): no wrapper library, no codegen.
 
 78 examples ship in `src/examples/`: original games plus ports of raylib's own
 C examples across the core, shapes, text, textures, shaders, audio, and models
@@ -74,7 +74,7 @@ clojure -M:pong          # Run Pong
 clojure -M:hello-world   # Run Hello World
 ```
 
-Use `clojure`, not `clj` — `clj` adds `rlwrap`, which interferes with a GUI
+Use `clojure`, not `clj`; `clj` adds `rlwrap`, which interferes with a GUI
 app's event loop.
 
 **On Linux, use `bb <name>` instead.** Every example alias carries
@@ -197,7 +197,7 @@ flowchart TB
 
 | Command | Description |
 |---------|-------------|
-| `bb check` | ⭐ Fast checks — compiles every namespace under `src/`, then runs clj-kondo. The pre-commit gate. |
+| `bb check` | ⭐ Fast checks: compiles every namespace under `src/`, then runs clj-kondo. The pre-commit gate. |
 | `bb check:full` | Comprehensive checks (compile + lint + LSP) |
 | `bb lint` | Run clj-kondo linter |
 | `bb lsp:format` | Format all Clojure files |
@@ -257,31 +257,31 @@ codesign --force --sign - libs/macos/libraylib.5.5.0.dylib
 
 Full guide: [`docs/guide/`](docs/guide/index.md)
 
-- [`getting-started.md`](docs/guide/getting-started.md) — full install
+- [`getting-started.md`](docs/guide/getting-started.md): full install
   walkthrough (per-OS), IDE setup, connecting to the embedded/standalone
   nREPL
-- [`architecture.md`](docs/guide/architecture.md) — module layout,
+- [`architecture.md`](docs/guide/architecture.md): module layout,
   project structure diagram
-- [`adding-ffi-bindings.md`](docs/guide/adding-ffi-bindings.md) —
+- [`adding-ffi-bindings.md`](docs/guide/adding-ffi-bindings.md):
   `defcfn`/`defalias`, the type-mapping table, a worked example
-- [`coffi-panama-internals.md`](docs/guide/coffi-panama-internals.md) —
+- [`coffi-panama-internals.md`](docs/guide/coffi-panama-internals.md):
   what happens under the hood on the JDK Panama FFI
-- [`example-architecture-patterns.md`](docs/guide/example-architecture-patterns.md) —
+- [`example-architecture-patterns.md`](docs/guide/example-architecture-patterns.md):
   the shared example skeleton and the recipe for porting a new one
-- [`repl-workflow.md`](docs/guide/repl-workflow.md) — live game
+- [`repl-workflow.md`](docs/guide/repl-workflow.md): live game
   development over the embedded nREPL
-- [`example-catalog.md`](docs/guide/example-catalog.md) — all 78
+- [`example-catalog.md`](docs/guide/example-catalog.md): all 78
   examples, grouped and tabulated, with a preview-thumbnail column
-- [`demos.md`](docs/guide/demos.md) — the full-size demo gallery (every
+- [`demos.md`](docs/guide/demos.md): the full-size demo gallery (every
   example's animated GIF, one-line description)
-- [`troubleshooting.md`](docs/guide/troubleshooting.md) — common errors
+- [`troubleshooting.md`](docs/guide/troubleshooting.md): common errors
   and fixes
-- [`docs/demos/`](docs/demos/README.md) — animated GIF previews, one per
+- [`docs/demos/`](docs/demos/README.md): animated GIF previews, one per
   example
 
 Every GIF under `docs/demos/` is committed, so you never need to record
 anything. Regenerating them (`bb record`) drives a screen-capture tool that
-is not publicly released, so it is maintainer-only — the task says so and
+is not publicly released, so it is maintainer-only; the task says so and
 exits cleanly rather than failing obscurely. Its input timelines live in
 [`scripts/demo_manifest.edn`](scripts/demo_manifest.edn) if you want to
 propose one for a new example.
@@ -346,7 +346,7 @@ Most examples share these common controls:
 
 ## Contributing
 
-New examples are very welcome — the suite is deliberately mechanical to grow,
+New examples are very welcome; the suite is deliberately mechanical to grow,
 and one new example touches exactly four places.
 
 See **[CONTRIBUTING.md](CONTRIBUTING.md)** for setup, the pre-PR gates, and the
@@ -354,16 +354,16 @@ four-touchpoint recipe.
 
 ## Credits
 
-- **[Ertuğrul Çetin](https://github.com/ertugrulcetin)** — this project began as
+- **[Ertuğrul Çetin](https://github.com/ertugrulcetin)**: this project began as
   his [raylib-clojure-playground](https://github.com/ertugrulcetin/raylib-clojure-playground).
   The coffi binding layer under `src/raylib/` is his design, several of its
   files are unchanged from his originals, and six examples (asteroids,
   asteroids2, hello-world, pong, tetris, vampire-survivors) started as his work.
-- **[raylib](https://www.raylib.com/)** — Ramon Santamaria ([@raysan5](https://github.com/raysan5)).
+- **[raylib](https://www.raylib.com/)**: Ramon Santamaria ([@raysan5](https://github.com/raysan5)).
   Most examples here are ports of raylib's own C examples.
-- **[coffi](https://github.com/IGJoshua/coffi)** — Joshua Suskalo. Every
+- **[coffi](https://github.com/IGJoshua/coffi)**: Joshua Suskalo. Every
   `defcfn` in `src/raylib/` is coffi's.
-- **Asteroids math** — based on [janetroids](https://github.com/tantona/janetroids)
+- **Asteroids math**: based on [janetroids](https://github.com/tantona/janetroids)
   by [@cellularmitosis](https://github.com/tantona).
 
 ## License
@@ -384,6 +384,6 @@ Three caveats, all detailed in [NOTICE](NOTICE):
   Windows) so the examples run without a system raylib install. They are
   raylib's own release artifacts, unmodified, under raylib's zlib license.
 - **`resources/` media is not covered by this license.** Those are raylib's
-  example assets under their own terms — mostly CC0, and one
+  example assets under their own terms: mostly CC0, and one
   (`resources/scarfy.png`) under **CC-BY-NC**, which is non-commercial. Per-file
   authorship and terms: [resources/LICENSE.md](resources/LICENSE.md).

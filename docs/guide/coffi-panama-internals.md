@@ -5,7 +5,7 @@
 This project uses [coffi](https://github.com/IGJoshua/coffi) to call
 Raylib's C library directly from Clojure. Coffi is built on the JDK's
 **Foreign Function & Memory API** (Project Panama), and that API only
-reached stable (non-preview) status in **JDK 22** — earlier JDK
+reached stable (non-preview) status in **JDK 22**; earlier JDK
 versions only had it available behind a preview flag. Coffi depends on
 the stable API, which is why this project requires JDK 22 or newer:
 
@@ -43,15 +43,15 @@ sequenceDiagram
    is evaluated, coffi asks the JDK Panama API to create a **method
    handle** bound to the named C symbol (`"InitWindow"`). Panama
    resolves that symbol against the already-loaded `libraylib` shared
-   library. This only works because `raylib.core` — required first by
-   every binding namespace — has already loaded the native library by
+    library. This only works because `raylib.core`, required first by
+    every binding namespace, has already loaded the native library by
    the time any `defcfn` in that namespace runs; without it, the
    symbol lookup has nothing to search.
 
 2. **Call time.** Every time Clojure calls the function `defcfn`
    defined (e.g. `(draw-circle! 100 100 50 red)`), coffi serializes
    the Clojure arguments into native memory laid out according to
-   their declared types — a plain value like an int passes straight
+    their declared types: a plain value like an int passes straight
    through, while a struct argument (a map like
    `{:r 255 :g 0 :b 0 :a 255}`) gets written into memory following the
    field layout its `defalias` declared. Coffi then invokes the
@@ -64,8 +64,8 @@ sequenceDiagram
 
 The `update-camera` example in
 [Adding a new FFI binding](adding-ffi-bindings.md#pointer-inout-parameters)
-uses `mem/confined-arena` to allocate a native memory segment by hand
-— that page walks through each call; this section explains what the
+uses `mem/confined-arena` to allocate a native memory segment by hand.
+That page walks through each call; this section explains what the
 arena itself is.
 
 A **confined arena** owns the lifetime of the native memory segments
@@ -73,11 +73,11 @@ allocated from it. It's scoped to the thread and block that created
 it: the segment `mem/alloc-instance` allocates from a confined arena
 stays valid only until that arena closes, at which point the native
 memory is freed. This matters because Panama's native memory isn't
-garbage-collected by the JVM — something has to own and release it
+garbage-collected by the JVM; something has to own and release it
 explicitly, and the arena is that owner.
 
 You only need to reach for an arena yourself when you're **explicitly
-allocating a segment for an in/out pointer parameter** — the
+allocating a segment for an in/out pointer parameter**: the
 `update-camera` case, where raylib mutates a `Camera3D*` in place. For
 ordinary struct arguments passed by value (like `draw-cube!`'s
 `::rs/vector-3` and `::rs/color` parameters), coffi manages the
@@ -99,7 +99,7 @@ carries:
 
 The practical consequence: **you cannot open a raylib window from a
 plain `clj -M:dev` REPL on macOS.** This is *not* because the
-standalone `:dev` alias omits the flag — it doesn't. `grep -n "XstartOnFirstThread" deps.edn` shows the flag
+standalone `:dev` alias omits the flag; it doesn't. `grep -n "XstartOnFirstThread" deps.edn` shows the flag
 present in every single alias in the file, `:dev` included:
 
 ```clojure
@@ -118,7 +118,7 @@ present in every single alias in the file, `:dev` included:
 ```
 
 Beyond that comment, this repo doesn't document the exact mechanism,
-so this guide won't invent one — the flag is present either way, and
+so this guide won't invent one; the flag is present either way, and
 having it present is not sufficient to make GUI calls work from
 `:dev`. What's verified is the practical rule: a raylib window works
 from the game aliases (`bb asteroids`, `clj -M:hello-world`, etc.,
@@ -129,7 +129,7 @@ directly and connect to its embedded nREPL (port 7888) instead of
 trying to open one from `:dev`'s REPL (port 7999).
 
 ## See also
-- [`adding-ffi-bindings.md`](adding-ffi-bindings.md) — the practical
+- [`adding-ffi-bindings.md`](adding-ffi-bindings.md): the practical
   guide to writing a new binding using these mechanics
-- [`repl-workflow.md`](repl-workflow.md) — the live consequence of the
+- [`repl-workflow.md`](repl-workflow.md): the live consequence of the
   macOS main-thread requirement on REPL workflow
