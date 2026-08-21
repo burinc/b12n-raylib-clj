@@ -1,9 +1,9 @@
 (defproject b12n-raylib-clj "0.1.0-SNAPSHOT"
   :description "raylib game-development examples in Clojure, over coffi/Panama FFI"
   :url "https://github.com/burinc/b12n-raylib-clj"
-  :license {:name "zlib"
-            :url "https://opensource.org/license/zlib"
-            :comment "Same license as raylib; see LICENSE and NOTICE"}
+  :license {:name "EPL-2.0"
+            :url "https://www.eclipse.org/legal/epl-2.0/"
+            :comment "Inherited from ertugrulcetin/raylib-clojure-playground; see NOTICE"}
 
   :dependencies [[org.clojure/clojure "1.12.0"]
                  [org.clojure/tools.logging "1.3.0"]

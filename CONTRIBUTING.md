@@ -100,9 +100,14 @@ mention it in your PR; a maintainer will record it.
 
 ## Licensing
 
-This project is released under the zlib/libpng license — the same license as
-raylib itself. By contributing, you agree your contribution is licensed under
-those terms.
+This project is released under the **Eclipse Public License 2.0**. That is
+inherited, not chosen: it began as
+[ertugrulcetin/raylib-clojure-playground](https://github.com/ertugrulcetin/raylib-clojure-playground),
+which declares EPL-2.0, and EPL-2.0 is copyleft at the file level. By
+contributing, you agree your contribution is licensed under those terms.
+
+Examples ported from raylib carry their upstream zlib/libpng origin, noted per
+example; that does not change the project's own license.
 
 If your example is a port of an upstream raylib example, name the original in
 its namespace docstring (`Based on: shapes/shapes_bouncing_ball.c`) so the

@@ -1,6 +1,6 @@
 # Media asset licenses
 
-**These assets are not covered by this project's zlib license** (see
+**These assets are not covered by this project's EPL-2.0 license** (see
 `../LICENSE`). Every one of them is a raylib example asset, redistributed here
 unmodified so the examples run out of the box. Each carries its own terms,
 reproduced from raylib's own `examples/*/resources/LICENSE.md`.
@@ -27,4 +27,4 @@ non-commercial only, which is *more restrictive* than the code around it.
 
 `scarfy.png` is used by exactly one example (`sprite-animation`). Deleting the
 file and that example leaves the rest of the tree uniformly permissive —
-CC0, CC-BY 3.0, zlib, and one Mod Archive module.
+CC0, CC-BY 3.0, zlib, and one Mod Archive module (none of them share-alike).

@@ -368,10 +368,17 @@ four-touchpoint recipe.
 
 ## License
 
-[zlib](LICENSE) — the same license as raylib itself, so the terms of the many
-examples ported from raylib carry through unchanged.
+[EPL-2.0](LICENSE), inherited rather than chosen. This project began as
+[ertugrulcetin/raylib-clojure-playground](https://github.com/ertugrulcetin/raylib-clojure-playground),
+which declares EPL-2.0 in its README and `project.clj`. EPL-2.0 is copyleft at
+the file level, so the parts of `src/raylib/` derived from that work cannot be
+relicensed, and the project follows suit.
 
-Two caveats, both detailed in [NOTICE](NOTICE):
+Three caveats, all detailed in [NOTICE](NOTICE):
+
+- **Many examples are ports of raylib's own zlib/libpng-licensed examples.**
+  Their upstream terms are noted per example; the project as a whole is
+  EPL-2.0.
 
 - **`libs/` redistributes prebuilt raylib 5.5.0 binaries** (macOS, Linux,
   Windows) so the examples run without a system raylib install. They are

@@ -1,7 +1,9 @@
 Third-party attribution
 =======================
 
-This project is released under the zlib License; see LICENSE.
+This project is released under the Eclipse Public License 2.0; see LICENSE.
+
+That is not a free choice: it is inherited. See the first section below.
 
 
 raylib-clojure-playground (the origin of this project)
@@ -17,16 +19,26 @@ raylib-clojure-playground (the origin of this project)
   most of the rest are extensions of them. Six of the examples started as his
   work: asteroids, asteroids2, hello_world, pong, tetris, vampire_survivors.
 
-  The upstream repository carries no license file. This project is released
-  under zlib to match raylib's own terms; if you are reusing the binding
-  layer, credit belongs upstream as well as here.
+  That project declares **EPL-2.0** - in its README's License section and in
+  the `:license` key of its `project.clj` - even though it carries no separate
+  LICENSE file. EPL-2.0 is copyleft at the file level, so this project cannot
+  relicense the parts derived from it, and does not try to: the whole project
+  is EPL-2.0.
+
+  An earlier version of this repository briefly declared zlib. That was a
+  mistake on this project's part, made after checking GitHub's detected-license
+  field (which only reports a LICENSE *file*) instead of reading the upstream
+  README. Corrected here.
+
+  If you are reusing the binding layer, credit belongs upstream as well as
+  here.
 
 
 raylib
 ------
   Copyright (c) 2013-2026 Ramon Santamaria (@raysan5)
   https://github.com/raysan5/raylib
-  Licensed under the zlib/libpng license (the same license as this project).
+  Licensed under the zlib/libpng license.
 
   Unlike a source dependency, this project REDISTRIBUTES prebuilt raylib
   5.5.0 binaries under libs/ (macOS, Linux x86-64/i386, Windows 32/64-bit for
@@ -38,8 +50,10 @@ raylib
   Many examples under src/examples/ are Clojure ports of raylib's own example
   programs. docs/guide/example-catalog.md names the upstream C source for each
   (e.g. core/core_basic_window, shapes/shapes_bouncing_ball). Those examples
-  are likewise zlib/libpng licensed, and this project is released under the
-  same license so the original terms carry through unchanged.
+  are zlib/libpng licensed at their origin. zlib is permissive and imposes no
+  reciprocal obligation, so distributing those ports within an EPL-2.0 project
+  is fine; their upstream origin is recorded per example so the attribution
+  stays traceable.
 
 
 coffi
