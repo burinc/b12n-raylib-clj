@@ -9,14 +9,22 @@ Function & Memory API (Project Panama). No wrapper library, no codegen —
 
 ## Why this exists
 
-Same idea as [`b12n-raylib-jlt`](https://github.com/burinc/b12n-raylib-jlt) — a
-suite of raylib examples that bind the C library directly over FFI,
-with no wrapper layer in between — explored on a different runtime.
-Here it's the JVM: JDK 22+'s Panama Foreign Function & Memory API via
-`coffi`. `b12n-raylib-jlt` does the same thing on Chez Scheme via jolt's
-`jolt.ffi`, with no JVM at all. The pages below cover the JVM/Panama
-side of that story: what `defcfn` actually does, how structs and
-pointers cross the FFI boundary, and how to add a new binding.
+One idea — a suite of raylib examples that reach the C library
+directly, with no wrapper layer in between — explored on three Clojure
+runtimes, one repo each.
+
+This is the JVM one: JDK 22+'s Panama Foreign Function & Memory API via
+`coffi`, where a binding is a `defcfn` form and a C struct arrives as a
+plain Clojure map. [`b12n-raylib-jlt`](https://github.com/burinc/b12n-raylib-jlt)
+does it on Chez Scheme through jolt's `jolt.ffi`, with no JVM at all.
+[`b12n-raylib-jnk`](https://github.com/burinc/b12n-raylib-jnk) does it in
+jank, which compiles through C++/LLVM to a native binary and so has no FFI
+layer to speak of — it includes `raylib.h` and calls the C++ directly.
+
+Reading them side by side is the interesting part: the same example, drawn
+three ways, shows exactly where each runtime puts the boundary. The pages
+below cover the JVM/Panama side — what `defcfn` actually does, how structs
+and pointers cross, and how to add a new binding.
 
 ## What b12n-raylib-clj is
 
@@ -74,5 +82,13 @@ ported from which raylib C source file.
 - [`troubleshooting.md`](troubleshooting.md) — common errors and fixes
 
 ## See also
-- [`b12n-raylib-jlt`](https://github.com/burinc/b12n-raylib-jlt) — the same idea
-  in Jolt (native Clojure on Chez Scheme, no JVM) over `jolt.ffi`
+
+The same suite on the other two Clojure runtimes:
+
+- [`b12n-raylib-jlt`](https://github.com/burinc/b12n-raylib-jlt) — in Jolt
+  (native Clojure on Chez Scheme, no JVM), over `jolt.ffi`.
+  [raylib-jlt.b12n.app](https://raylib-jlt.b12n.app)
+- [`b12n-raylib-jnk`](https://github.com/burinc/b12n-raylib-jnk) — in jank
+  (native Clojure via C++/LLVM), calling raylib as ordinary C++ through
+  `(:include "raylib.h")` — no FFI layer at all.
+  [raylib-jnk.b12n.app](https://raylib-jnk.b12n.app)
