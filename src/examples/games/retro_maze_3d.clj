@@ -22,7 +22,6 @@
    [raylib.core.camera3d :as rc3d]
    [raylib.shapes.basic :as rsb]
    [raylib.text.drawing :as rtd]
-   [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]))
 

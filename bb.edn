@@ -30,11 +30,22 @@
 
   record
   {:doc "Batch-record a demo GIF for every example: bb record [--only a,b] [--force] [--dry-run]"
-   :task (let [{:keys [exit]} (apply shell {:continue true}
-                                     "screen-grab" "record"
-                                     "--manifest" "scripts/demo_manifest.edn"
-                                     *command-line-args*)]
-           (System/exit exit))}
+   ;; Maintainer-only. This shells out to a screen-capture CLI that is not
+   ;; publicly released, so a contributor can never run it — say that plainly
+   ;; instead of letting `shell` throw a raw Java stack trace on ENOENT.
+   ;; Every GIF under docs/demos/ is committed, so nobody needs to.
+   :task (if (fs/which "screen-grab")
+           (let [{:keys [exit]} (apply shell {:continue true}
+                                       "screen-grab" "record"
+                                       "--manifest" "scripts/demo_manifest.edn"
+                                       *command-line-args*)]
+             (System/exit exit))
+           (do
+             (h/error-msg "`bb record` is maintainer-only — the screen-grab CLI it drives is not publicly released.")
+             (h/info "Nothing to do: every demo GIF is already committed under docs/demos/.")
+             (h/info "To propose a capture timeline for a new example, add an :overrides")
+             (h/info "entry in scripts/demo_manifest.edn and mention it in your PR.")
+             (System/exit 0)))}
 
   demos:examples
   {:doc "Print the demo item list as EDN for screen-grab"
@@ -372,8 +383,8 @@
   {:doc "⭐ Fast checks (compile + lint) - use before committing"
    :task (do
            (h/header "🔍 Running Fast Checks")
-           (h/step 1 "Compile check...")
-           (p/shell "clj" "-M" "-e" "(require 'examples.asteroids)")
+           (h/step 1 "Compile check (every namespace under src/)...")
+           (p/shell "clojure" "-M:check")
            (println)
            (h/step 2 "Lint check...")
            (let [{:keys [exit]} (p/shell {:continue true} "clj-kondo" "--lint" "src")]

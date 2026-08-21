@@ -4,7 +4,6 @@
   (:require
    [raylib.core.window :as rcw]
    [raylib.nrepl :as nrepl]
-   [raylib.core.timing :as rct]
    [raylib.core.drawing :as rcd]
    [raylib.core.keyboard :as rck]
    [raylib.text.drawing :as rtd]

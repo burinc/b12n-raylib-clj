@@ -13,8 +13,19 @@ pom.xml.asc
 # IDE
 .idea/
 *.iml
-.clj-kondo/
-.lsp/
+
+# clj-kondo's analysis cache. The config and the coffi/defcfn hook next to it
+# ARE tracked — they're what makes `bb lint` usable (without the hook the suite
+# reports 776 false positives).
+.clj-kondo/.cache/
+
+# clj-kondo configs clojure-lsp auto-imports from whatever's on its resolved
+# classpath — unrelated to this project's own config.
+.clj-kondo/imports/
+
+# clojure-lsp's analysis cache, created by `bb lsp:*`
+.lsp/.cache/
+.lsp/sqlite.db
 
 # OS
 .DS_Store

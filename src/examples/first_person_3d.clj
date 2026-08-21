@@ -25,7 +25,6 @@
    [raylib.text.drawing :as rtd]
    [raylib.shapes.basic :as rsb]
    [raylib.colors :as colors]
-   [raylib.structs :as rs]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
    [coffi.mem :as mem]

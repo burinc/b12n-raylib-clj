@@ -3,7 +3,7 @@
    [raylib.core]
    [raylib.structs :as rs]
    [coffi.mem :as mem]
-   [coffi.ffi :as ffi :refer [defcfn]]))
+   [coffi.ffi :as ffi]))
 
 (def draw-texture!*
   (let [primfn (ffi/make-downcall "DrawTexture" [::rs/texture ::mem/int ::mem/int ::rs/color] ::mem/void)]

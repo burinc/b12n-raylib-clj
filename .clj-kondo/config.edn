@@ -1,0 +1,14 @@
+;; clj-kondo configuration for b12n-raylib-clj.
+;;
+;; coffi.ffi/defcfn defines a var per bound C symbol. clj-kondo cannot see
+;; through the macro, so hooks/raylib_ffi.clj rewrites each call into an
+;; equivalent `defn` — see that file for why this overrides the hook coffi
+;; ships in its own jar rather than importing it. Without a hook at all the
+;; suite reports 776 false positives and the linter is unusable as a gate.
+{:hooks {:analyze-call {coffi.ffi/defcfn hooks.raylib-ffi/defcfn}}
+
+ :linters
+ {;; Raised by the hook above when a defcfn's native symbol or one of its
+  ;; types is malformed. An error, not a warning: a bad type signature is a
+  ;; native crash waiting to happen, not a style question.
+  :coffi.ffi/invalid-syntax {:level :error}}}

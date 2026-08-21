@@ -26,6 +26,7 @@
      (debug-stats/draw!)
      (rcd/end-drawing!))"
   (:require
+   [clojure.string :as str]
    [raylib.core.keyboard :as rck]
    [raylib.text.drawing :as rtd]
    [raylib.shapes.basic :as rsb]
@@ -185,9 +186,9 @@
         (when-not (empty? line)
           (let [line-y (+ y padding (* (inc idx) line-height))
                 color (cond
-                        (clojure.string/starts-with? line "FPS") colors/lime
-                        (clojure.string/starts-with? line "Mem") colors/skyblue
-                        (clojure.string/starts-with? line "--") colors/yellow
+                        (str/starts-with? line "FPS") colors/lime
+                        (str/starts-with? line "Mem") colors/skyblue
+                        (str/starts-with? line "--") colors/yellow
                         :else colors/white)]
             (rtd/draw-text! line (+ x padding) line-y font-size color)))))))
 

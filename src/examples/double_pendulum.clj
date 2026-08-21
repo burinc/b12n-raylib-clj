@@ -10,7 +10,6 @@
    [raylib.core.window :as rcw]
    [raylib.core.timing :as rct]
    [raylib.core.drawing :as rcd]
-   [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.utils :as ru]
    [raylib-ext :as ext]

@@ -2,7 +2,6 @@
   "Shader loading and management functions"
   (:require
    [raylib.core]
-   [raylib.structs :as rs]
    [coffi.mem :as mem :refer [defalias]]
    [coffi.ffi :refer [defcfn]]))
 

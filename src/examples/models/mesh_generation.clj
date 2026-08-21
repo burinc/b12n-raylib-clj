@@ -24,8 +24,7 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]))
+   [raylib.nrepl :as nrepl]))
 
 (def WIDTH 800)
 (def HEIGHT 450)

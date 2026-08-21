@@ -11,12 +11,10 @@
    [raylib.core.timing :as rct]
    [raylib.core.drawing :as rcd]
    [raylib.core.mouse :as rcm]
-   [raylib.core.keyboard :as rck]
    [raylib.shapes.basic :as rsb]
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib.utils :as ru]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 

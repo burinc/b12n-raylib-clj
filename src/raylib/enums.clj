@@ -1,6 +1,4 @@
-(ns raylib.enums
-  (:require
-   [coffi.mem :as mem]))
+(ns raylib.enums)
 
 (def keyboard-key
   {:null 0

@@ -181,12 +181,6 @@
   "CheckCollisionPointRec"
   [::rs/vector-2 ::rectangle] ::mem/byte)
 
-(defcfn measure-text
-  "Measure string width for default font"
-  {:arglists '([text font-size])}
-  "MeasureText"
-  [::mem/c-string ::mem/int] ::mem/int)
-
 (defcfn draw-line-v!
   "Draw a line (Vector version)"
   {:arglists '([start-pos end-pos color])}

@@ -7,7 +7,19 @@
         nrepl/nrepl {:mvn/version "1.3.0"}}
 
  :aliases
- {;; Standalone REPL for non-GUI work (port 7999 to avoid conflict with games on 7888)
+ {;; Headless compile-check of every namespace under src/ — the pre-commit and
+  ;; CI gate. Adds scripts/ to the classpath for check-all; needs the same
+  ;; native-access and library-path flags as any example, because requiring a
+  ;; binding namespace links against libraylib. No window opens: -main is never
+  ;; called. Usage: clojure -M:check
+  :check
+  {:extra-paths ["scripts"]
+   :jvm-opts ["--enable-native-access=ALL-UNNAMED"
+              "-XstartOnFirstThread"
+              "-Djava.library.path=libs:libs/macos:libs/linux_amd64:libs/win64_msvc16:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+   :main-opts ["-m" "check-all"]}
+
+  ;; Standalone REPL for non-GUI work (port 7999 to avoid conflict with games on 7888)
   ;; Usage: clj -M:dev
   ;; Note: On macOS, you cannot run GUI code from this REPL due to -XstartOnFirstThread
   :dev
