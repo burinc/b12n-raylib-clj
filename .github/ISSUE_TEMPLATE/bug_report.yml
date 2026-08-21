@@ -15,8 +15,10 @@ body:
           not existing.** This project needs **JDK 22 or newer** for the Foreign
           Function & Memory API. There is no workaround on an older JDK.
         - **`WARNING: A restricted method in java.lang.foreign.Linker has been
-          called`.** Harmless and expected — the JDK warns on every native
-          downcall. It is not the cause of your problem.
+          called`.** Harmless, but it means you ran without the project's JVM
+          flags — every `deps.edn` alias passes
+          `--enable-native-access=ALL-UNNAMED`, which suppresses it entirely.
+          Use `bb <name>`, or `clojure -M:<alias>` on macOS.
 
   - type: input
     id: example

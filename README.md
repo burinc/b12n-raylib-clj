@@ -65,14 +65,23 @@ bb asteroids         # Run Asteroids game
 bb tetris            # Run Tetris game
 ```
 
-### Using Clojure CLI
+### Using Clojure CLI (macOS)
 
 ```bash
-clj -M:asteroids     # Run Asteroids
-clj -M:tetris        # Run Tetris
-clj -M:pong          # Run Pong
-clj -M:hello-world   # Run Hello World
+clojure -M:asteroids     # Run Asteroids
+clojure -M:tetris        # Run Tetris
+clojure -M:pong          # Run Pong
+clojure -M:hello-world   # Run Hello World
 ```
+
+Use `clojure`, not `clj` — `clj` adds `rlwrap`, which interferes with a GUI
+app's event loop.
+
+**On Linux, use `bb <name>` instead.** Every example alias carries
+`-XstartOnFirstThread`, a macOS-only flag that the JVM rejects fatally
+elsewhere; `bb` builds a flag-free command line per platform. See
+[getting-started.md](docs/guide/getting-started.md#running-by-alias-macos-only)
+for the raw command if you'd rather not install Babashka.
 
 ### Using Leiningen
 

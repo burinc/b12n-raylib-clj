@@ -116,13 +116,38 @@ bb asteroids         # Run Asteroids game
 bb tetris            # Run Tetris game
 ```
 
-### `clj -M:<alias>`
+### Running by alias (macOS only)
 
 ```bash
-clj -M:asteroids     # Run Asteroids
-clj -M:tetris        # Run Tetris
-clj -M:pong          # Run Pong
-clj -M:hello-world   # Run Hello World
+clojure -M:asteroids     # Run Asteroids
+clojure -M:tetris        # Run Tetris
+clojure -M:pong          # Run Pong
+clojure -M:hello-world   # Run Hello World
+```
+
+Two things to know about this path:
+
+**Use `clojure`, not `clj`.** `clj` wraps the same launcher in `rlwrap` for
+line editing, which interferes with a GUI app's event loop. Every `bb` task
+here shells out to `clojure` for exactly this reason.
+
+**These aliases only work on macOS.** Every example alias in `deps.edn`
+carries `-XstartOnFirstThread`, which macOS requires to run OpenGL on the
+main thread. It is a macOS-only flag, and the JVM treats an unrecognized
+`-X` option as fatal — so on Linux the same command dies before it starts:
+
+```
+Unrecognized option: -XstartOnFirstThread
+Error: Could not create the Java Virtual Machine.
+```
+
+On Linux, use `bb <name>` (below), which builds a flag-free command line for
+you. If you'd rather not install Babashka, that command is:
+
+```bash
+clojure -J--enable-native-access=ALL-UNNAMED \
+        -J-Djava.library.path=libs:libs/linux_amd64:/usr/local/lib:/usr/lib \
+        -M -m examples.asteroids
 ```
 
 ### `lein run -m examples.<ns>`
