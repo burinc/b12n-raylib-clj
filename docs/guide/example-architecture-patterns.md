@@ -3,7 +3,7 @@
 ## The shared skeleton
 
 Most examples follow the same shape: start the embedded nREPL, open a
-window, loop until the user closes it, clean up (67 of 78 — 11
+window, loop until the user closes it, clean up (67 of 78; 11
 examples, including `pong`, `camera-2d`, and `music-stream`, skip the
 embedded nREPL; `grep -rL "nrepl/start" src/examples/*.clj
 src/examples/*/*.clj` lists them). Here's
@@ -26,13 +26,13 @@ src/examples/*/*.clj` lists them). Here's
   (rcw/close-window!))
 ```
 
-`nrepl/start` runs first, before the window even opens — so you can
+`nrepl/start` runs first, before the window even opens, so you can
 connect a REPL to a game that's still starting up. `(init)` does the
-one-time setup (`init-window!`, config flags, and — in asteroids'
-case — allocating the letterboxed render texture and calling
+one-time setup (`init-window!`, config flags, and, in asteroids'
+case, allocating the letterboxed render texture and calling
 `debug-stats/enable!`). Then the loop: compute the next game state
-(`tick`), check `window-should-close?`, and — while the window is
-still open — commit the new state to `game-atom` and draw the frame,
+(`tick`), check `window-should-close?`, and, while the window is
+still open, commit the new state to `game-atom` and draw the frame,
 before recurring. When the loop exits (the user closed the window),
 asteroids releases its render texture and calls `close-window!`.
 
@@ -40,7 +40,7 @@ Most examples are a variation on this shape: start nREPL once, init
 the window once, loop `update -> draw -> check-close` until the window
 closes, then clean up. Simpler examples skip the parts specific to
 asteroids (the render texture, the letterboxing) but follow the same
-overall skeleton — except for the 11 examples noted above, which skip
+overall skeleton, except for the 11 examples noted above, which skip
 the nREPL step entirely.
 
 ## State as an atom
@@ -66,11 +66,11 @@ Asteroids keeps its entire game state in one atom,
 
 Ship, asteroids, bullets, and the current screen all live in this one
 map. The `-main` loop above reads it, computes a new value with
-`tick`, and `reset!`s it back — the atom is the single source of
+`tick`, and `reset!`s it back; the atom is the single source of
 truth for "what's happening right now."
 
-The functions that compute the *next* state are pure — deterministic,
-no game-state mutation — even where they lean on an FFI call
+The functions that compute the *next* state are pure (deterministic,
+no game-state mutation) even where they lean on an FFI call
 underneath. `vector-add` and `check-point-circle` are two the README
 calls out as testable straight from a standalone REPL:
 
@@ -83,11 +83,11 @@ calls out as testable straight from a standalone REPL:
 `vector-add` is plain Clojure arithmetic; `check-point-circle`
 delegates its actual geometry to `ext/check-collision-point-circle?`
 (an FFI-backed call) but is still deterministic and doesn't touch
-`game-atom` or draw anything — you can call either at a REPL with
+`game-atom` or draw anything; you can call either at a REPL with
 made-up arguments and get the same answer every time. The *draw*
 phase is the opposite: `draw` calls
 `rcd/begin-drawing!`, a sequence of raylib draw calls, and
-`rcd/end-drawing!` — every one of those is a side effect (it writes
+`rcd/end-drawing!`; every one of those is a side effect (it writes
 pixels to the screen), and calling `draw` twice with the same game
 state does not give you back a value to compare, it paints a frame.
 Keeping the state-update functions pure is what makes them REPL- and
@@ -171,7 +171,7 @@ Called once in `-main` as `(nrepl/start {:port 7888})`. The
 `BindException` catch is what makes port 7888 safe to reuse: if
 another example (or another instance of the same one) is already
 listening there, `start` logs a warning and returns `nil` instead of
-crashing — the second game still runs, it just doesn't get its own
+crashing; the second game still runs, it just doesn't get its own
 nREPL server. Any other exception during startup is logged and
 re-thrown.
 
@@ -196,7 +196,7 @@ The recipe, as a numbered list:
 
 4. Add a `bb.edn` task. Every task calls the shared `h/run-example!`
    helper, which looks up the example's title, description, and
-   controls from the registry (step 5) and prints them itself — so the
+    controls from the registry (step 5) and prints them itself, so the
    task body stays a single line. The real `asteroids` task:
 
    ```clojure
@@ -208,7 +208,7 @@ The recipe, as a numbered list:
    only prints the right header/controls text once the registry entry
    in step 5 exists.
 5. Add the example's entry to
-   [`bb/helpers.bb`](../../bb/helpers.bb)'s `examples` registry — this
+    [`bb/helpers.bb`](../../bb/helpers.bb)'s `examples` registry; this
    is what makes `bb examples`, `run-example!`'s header text, and this
    guide's own `example-catalog.md` pick it up. One real entry, as the
    shape to copy:
@@ -222,5 +222,5 @@ The recipe, as a numbered list:
    ```
 
 ## See also
-- [`example-catalog.md`](example-catalog.md) — every example this
+- [`example-catalog.md`](example-catalog.md): every example this
   pattern produced, in one table

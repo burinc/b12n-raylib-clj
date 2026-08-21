@@ -38,7 +38,7 @@ Error: Could not create the Java Virtual Machine.
 
 You ran `clojure -M:<alias>` on Linux. Every example alias in `deps.edn`
 carries `-XstartOnFirstThread` because macOS requires it to run OpenGL on the
-main thread — but it is a macOS-only flag, and the JVM treats any
+main thread, but it is a macOS-only flag, and the JVM treats any
 unrecognized `-X` option as fatal rather than ignoring it.
 
 Use `bb <name>` instead. It detects the platform and builds a flag-free
@@ -80,7 +80,7 @@ WARNING: Restricted methods will be blocked in a future release unless
          native access is enabled
 ```
 
-Nothing breaks today — but note the last line. A future JDK will *block*
+Nothing breaks today, but note the last line. A future JDK will *block*
 these calls rather than warn, so get the flag onto your command line rather
 than learning to ignore the message:
 
@@ -99,5 +99,5 @@ This project supports both the Clojure CLI and Leiningen:
 | Start REPL | `clj` | `lein repl` |
 | Start nREPL | `bb nrepl` (or `clojure -M:dev`) | `lein repl` |
 
-`clj` is fine for a plain REPL — the `rlwrap` line editing it adds is useful
+`clj` is fine for a plain REPL; the `rlwrap` line editing it adds is useful
 there. It is only GUI examples that need `clojure`.

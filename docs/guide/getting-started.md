@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- **JDK 22 or newer** — required for the Foreign Function API (see
+- **JDK 22 or newer**: required for the Foreign Function API (see
   [Coffi & Panama Internals](coffi-panama-internals.md) for why JDK 22+
   specifically)
 - **Clojure CLI** (recommended) or Leiningen
@@ -134,7 +134,7 @@ here shells out to `clojure` for exactly this reason.
 **These aliases only work on macOS.** Every example alias in `deps.edn`
 carries `-XstartOnFirstThread`, which macOS requires to run OpenGL on the
 main thread. It is a macOS-only flag, and the JVM treats an unrecognized
-`-X` option as fatal — so on Linux the same command dies before it starts:
+`-X` option as fatal, so on Linux the same command dies before it starts:
 
 ```
 Unrecognized option: -XstartOnFirstThread

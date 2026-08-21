@@ -31,23 +31,23 @@ Every raylib binding is a `defcfn` form. Here are three real ones from
 
 `defcfn` (from `coffi.ffi`) always has the same four-part shape:
 
-1. **Docstring** — describes what the C function does. Copy it from
+1. **Docstring**: describes what the C function does. Copy it from
    `raylib.h`'s comment on the same line as the function signature.
-2. **`{:arglists '(...)}`** — optional. Only needed when the function
+2. **`{:arglists '(...)}`**: optional. Only needed when the function
    takes arguments, since `defcfn`'s own parameter vector is a list of
-   *types*, not names — `:arglists` is what makes `(doc init-window!)`
+   *types*, not names; `:arglists` is what makes `(doc init-window!)`
    and editor autocomplete show meaningful argument names instead of
    `[arg0 arg1 arg2]`. `window-should-close?` and `close-window!` both
    take no arguments, so they skip it.
-3. **C function name string** — the exact symbol raylib exports (e.g.
+3. **C function name string**: the exact symbol raylib exports (e.g.
    `"InitWindow"`), used to look up the function in the shared
    library.
-4. **`[param-types] return-type`** — the parameter types vector
+4. **`[param-types] return-type`**: the parameter types vector
    followed by the return type, both from the type-mapping table
    below.
 
 Every binding namespace requires `raylib.core` first (see the `:require`
-above) — that namespace is what loads the native `libraylib` shared
+above); that namespace is what loads the native `libraylib` shared
 library, and a `defcfn` can't resolve its C symbol until the library is
 loaded.
 
@@ -70,7 +70,7 @@ loaded.
 | `Camera3D` | `::rc3d/camera3d` |
 | Pointer (in/out param) | `::mem/pointer` |
 
-`::ri/bool` and `::ri/ubyte` are **not** built-in coffi types — coffi
+`::ri/bool` and `::ri/ubyte` are **not** built-in coffi types; coffi
 only ships primitive types like `::mem/int` and `::mem/byte` out of the
 box. They're custom types this project defines in
 [`src/raylib/internals.clj`](../../src/raylib/internals.clj):
@@ -107,7 +107,7 @@ box. They're custom types this project defines in
 ```
 
 Raylib's C `bool` and `unsigned char` both travel over the FFI boundary
-as a single byte — that's just how they're laid out in memory. coffi's
+as a single byte; that's just how they're laid out in memory. coffi's
 `mem/primitive-type` multimethod tells coffi which real primitive
 (`::mem/byte`) to use on the wire for a custom type. `mem/serialize*`
 and `mem/deserialize*` then teach coffi how to box and unbox that raw
@@ -145,7 +145,7 @@ for a `::color`.
 
 **Field order must match the C struct layout exactly.** coffi lays out
 the native memory segment for a `::mem/struct` field-by-field, in the
-order you list them — it has no way to know raylib's real field order
+order you list them; it has no way to know raylib's real field order
 except from what you tell it. If `raylib.h` declares `Color` as
 `r, g, b, a` and you write the `defalias` fields in a different order,
 every read and write against that struct silently misaligns.
@@ -153,7 +153,7 @@ every read and write against that struct silently misaligns.
 ## Pointer in/out parameters
 
 Some raylib functions take a struct **pointer** and mutate it in place
-rather than returning a new struct — `UpdateCamera(Camera3D *camera, int mode)`
+rather than returning a new struct: `UpdateCamera(Camera3D *camera, int mode)`
 is one. The worked example for this pattern is `update-camera` in
 [`src/raylib/core/camera3d.clj`](../../src/raylib/core/camera3d.clj):
 
@@ -177,20 +177,20 @@ is one. The worked example for this pattern is `update-camera` in
     (mem/deserialize-from seg ::camera3d)))
 ```
 
-The raw `defcfn` (`update-camera!`) takes `::mem/pointer` — coffi
+The raw `defcfn` (`update-camera!`) takes `::mem/pointer`; coffi
 can't serialize a Clojure map directly as a pointer argument, so the
 wrapper function (`update-camera`) does the pointer dance by hand:
 
-1. **`mem/confined-arena`** — creates an arena that owns the lifetime
+1. **`mem/confined-arena`**: creates an arena that owns the lifetime
    of any native memory allocated from it, scoped to this block.
-2. **`mem/alloc-instance`** — allocates a native memory segment inside
+2. **`mem/alloc-instance`**: allocates a native memory segment inside
    that arena, sized and laid out for the `::camera3d` struct.
-3. **`mem/serialize-into`** — writes the Clojure `camera` map's fields
+3. **`mem/serialize-into`**: writes the Clojure `camera` map's fields
    into that segment, following the struct's field layout.
-4. **`update-camera!`** — the raw `defcfn` call passes the segment as
+4. **`update-camera!`**: the raw `defcfn` call passes the segment as
    the pointer argument; raylib's `UpdateCamera` mutates the segment's
    bytes in place.
-5. **`mem/deserialize-from`** — reads the (now-mutated) segment back
+5. **`mem/deserialize-from`**: reads the (now-mutated) segment back
    out into a fresh Clojure map, which becomes the wrapper's return
    value.
 
@@ -200,7 +200,7 @@ for what a confined arena actually is and when you need one at all.
 ## Worked example: adding a new raylib function end-to-end
 
 `DrawRectangleGradientV` is a real raylib C function that isn't bound
-anywhere in this repo yet — confirmed with:
+anywhere in this repo yet, confirmed with:
 
 ```bash
 grep -rn "DrawRectangleGradientV" src/raylib/
@@ -238,5 +238,5 @@ draw call with two `Color` arguments and no pointer trickery.
    of throwing.
 
 ## See also
-- [`coffi-panama-internals.md`](coffi-panama-internals.md) — what
+- [`coffi-panama-internals.md`](coffi-panama-internals.md): what
   happens underneath `defcfn` when Clojure calls the resulting function
