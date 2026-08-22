@@ -27,6 +27,9 @@ pom.xml.asc
 .lsp/.cache/
 .lsp/sqlite.db
 
+# storage.data is written by the storage-values example at runtime
+storage.data
+
 # OS
 .DS_Store
 

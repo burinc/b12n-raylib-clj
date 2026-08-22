@@ -427,6 +427,16 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "storage-values"
+    :category :core
+    :title "Storage Values"
+    :desc "Save and load scores to a file"
+    :controls "R random, ENTER save, SPACE load, Q to exit"}
+   {:alias "input-virtual-controls"
+    :category :core
+    :title "Input Virtual Controls"
+    :desc "On-screen D-pad"
+    :controls "Click/touch the D-pad, Q to exit"}
    {:alias "input-gestures"
     :category :core
     :title "Input Gestures"

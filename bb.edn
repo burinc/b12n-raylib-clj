@@ -313,6 +313,12 @@
   double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
                    :task (h/run-example! "double-pendulum")}
 
+  storage-values {:doc "📦 Storage Values - save and load scores to a file"
+                 :task (h/run-example! "storage-values")}
+
+  input-virtual-controls {:doc "📦 Input Virtual Controls - on-screen d-pad"
+                         :task (h/run-example! "input-virtual-controls")}
+
   input-gestures {:doc "📦 Input Gestures - log of detected touch gestures"
                  :task (h/run-example! "input-gestures")}
 
