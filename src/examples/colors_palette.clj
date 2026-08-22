@@ -22,7 +22,6 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]
    [debug-stats]))
 
 ;; Constants
@@ -160,7 +159,7 @@
           ;; Draw black background for name
           (rsb/draw-rectangle! x (+ y height -26) width 20 colors/black)
           ;; Draw color name
-          (let [text-width (ext/measure-text name 10)
+          (let [text-width (rtd/measure-text name 10)
                 text-x (+ x width (- text-width) -12)
                 text-y (+ y height -20)]
             (rtd/draw-text! name text-x text-y 10 color)))

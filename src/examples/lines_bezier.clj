@@ -14,7 +14,7 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib-ext :as ext]
+   [raylib.core.collision :as rcol]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 
@@ -40,8 +40,8 @@
   (let [mouse (rcm/get-mouse-position)
         left-down (rcm/is-mouse-button-down? (:left enums/mouse-button))
         left-released (rcm/is-mouse-button-released? (:left enums/mouse-button))
-        over-start (pos? (ext/check-collision-point-circle? mouse start-point (float 10.0)))
-        over-end (pos? (ext/check-collision-point-circle? mouse end-point (float 10.0)))
+        over-start (pos? (rcol/check-collision-point-circle? mouse start-point (float 10.0)))
+        over-end (pos? (rcol/check-collision-point-circle? mouse end-point (float 10.0)))
         ;; Start dragging
         move-start (if (and (not move-start) over-start left-down) true move-start)
         move-end (if (and (not move-end) (not move-start) over-end left-down) true move-end)
@@ -68,8 +68,8 @@
 
   ;; Draw endpoint circles with hover feedback
   (let [mouse (rcm/get-mouse-position)
-        over-start (pos? (ext/check-collision-point-circle? mouse start-point (float 10.0)))
-        over-end (pos? (ext/check-collision-point-circle? mouse end-point (float 10.0)))
+        over-start (pos? (rcol/check-collision-point-circle? mouse start-point (float 10.0)))
+        over-end (pos? (rcol/check-collision-point-circle? mouse end-point (float 10.0)))
         start-radius (if over-start (float 14.0) (float 8.0))
         end-radius (if over-end (float 14.0) (float 8.0))
         start-color (if move-start colors/red colors/blue)

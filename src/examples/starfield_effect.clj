@@ -16,7 +16,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.utils :as ru]
-   [raylib-ext :as ext]
+   [raylib.shapes.basic :as rsb]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 
@@ -33,7 +33,7 @@
   {:stars (vec (repeatedly star-count make-star))
    :speed (float (/ 10.0 9.0))
    :draw-lines true
-   :bg-color (ext/color-lerp colors/darkblue colors/black (float 0.69))})
+   :bg-color (ru/color-lerp colors/darkblue colors/black (float 0.69))})
 
 (def game-atom (atom (initial-state)))
 
@@ -91,12 +91,12 @@
           (when (> (- t (:z star)) 1e-3)
             (let [start-pos {:x (float (+ (* screen-width 0.5) (/ (:x star) t)))
                              :y (float (+ (* screen-height 0.5) (/ (:y star) t)))}]
-              (ext/draw-line-v! start-pos
+              (rsb/draw-line-v! start-pos
                                 {:x (float (:x spos)) :y (float (:y spos))}
                                 colors/raywhite))))
         ;; Draw circles
         (let [radius (lerp (:z star) 1.0 5.0)]
-          (ext/draw-circle-v! {:x (float (:x spos)) :y (float (:y spos))}
+          (rsb/draw-circle-v! {:x (float (:x spos)) :y (float (:y spos))}
                               (float radius) colors/raywhite)))))
 
   (rtd/draw-text! (format "[MOUSE WHEEL] Current Speed: %.0f" (* 9.0 (/ speed 2.0)))

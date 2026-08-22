@@ -19,7 +19,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]))
+   [raylib.utils :as ru]))
 
 ;; Constants
 (def WIDTH 800)
@@ -73,7 +73,7 @@
       (update :moon-orbit + (* 8.0 ROTATION_SPEED))))
 
 (defn update-camera [game]
-  (let [time (ext/get-time)
+  (let [time (rct/get-time)
         camera-time (* time 0.3)
         new-x (* (Math/cos camera-time) 20.0)
         new-z (* (Math/sin camera-time) 20.0)]
@@ -136,7 +136,7 @@
                          :y 0.0
                          :z 0.0}
                         90.0
-                        (ext/fade colors/red 0.5))
+                        (ru/fade colors/red 0.5))
 
   ;; Draw grid
   (rc3d/draw-grid! 20 1.0)

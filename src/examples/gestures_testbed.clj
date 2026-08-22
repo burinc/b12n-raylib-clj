@@ -28,7 +28,8 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]
+   [raylib.core.collision :as rcol]
+   [raylib.utils :as ru]
    [debug-stats]))
 
 ;; Constants
@@ -149,10 +150,10 @@
   (if (rcm/is-mouse-button-released? 0)
     (let [mouse-pos (rcm/get-mouse-position)]
       (cond
-        (pos? (ext/check-collision-point-rec? mouse-pos log-button1))
+        (pos? (rcol/check-collision-point-rec? mouse-pos log-button1))
         (assoc game :log-mode (case log-mode 3 2, 2 3, 1 0, 1))
 
-        (pos? (ext/check-collision-point-rec? mouse-pos log-button2))
+        (pos? (rcol/check-collision-point-rec? mouse-pos log-button2))
         (assoc game :log-mode (case log-mode 3 1, 2 0, 1 3, 2))
 
         :else game))
@@ -187,36 +188,36 @@
     (rsb/draw-rectangle! (+ x 20) (+ y 40) 20 20 (if (= last-gesture rcg/GESTURE_SWIPE_DOWN) colors/red colors/lightgray))
 
     ;; Tap indicator
-    (ext/draw-circle-int! (+ x 80) (+ y 16) 10 (if (= last-gesture rcg/GESTURE_TAP) colors/blue colors/lightgray))
+    (rsb/draw-circle! (+ x 80) (+ y 16) 10 (if (= last-gesture rcg/GESTURE_TAP) colors/blue colors/lightgray))
 
     ;; Drag indicator (ring)
-    (ext/draw-ring! {:x (+ x 103)
+    (rsb/draw-ring! {:x (+ x 103)
                      :y (+ y 16)} 6.0 11.0 0.0 360.0 0
                     (if (= last-gesture rcg/GESTURE_DRAG) colors/lime colors/lightgray))
 
     ;; Double tap indicator
-    (ext/draw-circle-int! (+ x 80) (+ y 43) 10 (if (= last-gesture rcg/GESTURE_DOUBLETAP) colors/skyblue colors/lightgray))
-    (ext/draw-circle-int! (+ x 103) (+ y 43) 10 (if (= last-gesture rcg/GESTURE_DOUBLETAP) colors/skyblue colors/lightgray))
+    (rsb/draw-circle! (+ x 80) (+ y 43) 10 (if (= last-gesture rcg/GESTURE_DOUBLETAP) colors/skyblue colors/lightgray))
+    (rsb/draw-circle! (+ x 103) (+ y 43) 10 (if (= last-gesture rcg/GESTURE_DOUBLETAP) colors/skyblue colors/lightgray))
 
     ;; Pinch out indicator (triangles pointing outward)
-    (ext/draw-triangle! {:x (+ x 122)
+    (rsb/draw-triangle! {:x (+ x 122)
                          :y (+ y 16)} {:x (+ x 137)
                                        :y (+ y 26)} {:x (+ x 137)
                                                      :y (+ y 6)}
                         (if (= last-gesture rcg/GESTURE_PINCH_OUT) colors/orange colors/lightgray))
-    (ext/draw-triangle! {:x (+ x 147)
+    (rsb/draw-triangle! {:x (+ x 147)
                          :y (+ y 6)} {:x (+ x 147)
                                       :y (+ y 26)} {:x (+ x 162)
                                                     :y (+ y 16)}
                         (if (= last-gesture rcg/GESTURE_PINCH_OUT) colors/orange colors/lightgray))
 
     ;; Pinch in indicator (triangles pointing inward)
-    (ext/draw-triangle! {:x (+ x 125)
+    (rsb/draw-triangle! {:x (+ x 125)
                          :y (+ y 33)} {:x (+ x 125)
                                        :y (+ y 53)} {:x (+ x 140)
                                                      :y (+ y 43)}
                         (if (= last-gesture rcg/GESTURE_PINCH_IN) colors/violet colors/lightgray))
-    (ext/draw-triangle! {:x (+ x 144)
+    (rsb/draw-triangle! {:x (+ x 144)
                          :y (+ y 43)} {:x (+ x 159)
                                        :y (+ y 53)} {:x (+ x 159)
                                                      :y (+ y 33)}
@@ -224,7 +225,7 @@
 
     ;; Touch count indicators
     (doseq [i (range 4)]
-      (ext/draw-circle-int! (+ x 180) (+ y 7 (* i 15)) 5
+      (rsb/draw-circle! (+ x 180) (+ y 7 (* i 15)) 5
                             (if (<= touch-count i) colors/lightgray gesture-color)))))
 
 (defn draw-gesture-log [{:keys [gesture-log gesture-log-index gesture-color log-mode]}]
@@ -246,11 +247,11 @@
                                     2 [colors/gray colors/maroon]
                                     1 [colors/maroon colors/gray]
                                     [colors/gray colors/gray])]
-      (ext/draw-rectangle-rec! log-button1 btn1-color)
+      (rsb/draw-rectangle-rec! log-button1 btn1-color)
       (rtd/draw-text! "Hide" (+ (:x log-button1) 7) (+ (:y log-button1) 3) 10 colors/white)
       (rtd/draw-text! "Repeat" (+ (:x log-button1) 7) (+ (:y log-button1) 13) 10 colors/white)
 
-      (ext/draw-rectangle-rec! log-button2 btn2-color)
+      (rsb/draw-rectangle-rec! log-button2 btn2-color)
       (rtd/draw-text! "Hide" (+ (:x log-button1) 62) (+ (:y log-button1) 3) 10 colors/white)
       (rtd/draw-text! "Hold" (+ (:x log-button1) 62) (+ (:y log-button1) 13) 10 colors/white))))
 
@@ -266,21 +267,21 @@
     (rtd/draw-text! (format "%.2f" current-angle) (int (+ x 55)) (int (+ y 92)) 20 gesture-color)
 
     ;; Protractor circle
-    (ext/draw-circle-v! protractor-pos 80.0 colors/white)
+    (rsb/draw-circle-v! protractor-pos 80.0 colors/white)
 
     ;; Cross lines
-    (ext/draw-line-ex! {:x (- x 90)
+    (rsb/draw-line-ex! {:x (- x 90)
                         :y y} {:x (+ x 90)
                                :y y} 3.0 colors/lightgray)
-    (ext/draw-line-ex! {:x x
+    (rsb/draw-line-ex! {:x x
                         :y (- y 90)} {:x x
                                       :y (+ y 90)} 3.0 colors/lightgray)
 
     ;; Diagonal lines (30/150 degree markers)
-    (ext/draw-line-ex! {:x (- x 80)
+    (rsb/draw-line-ex! {:x (- x 80)
                         :y (- y 45)} {:x (+ x 80)
                                       :y (+ y 45)} 3.0 colors/green)
-    (ext/draw-line-ex! {:x (- x 80)
+    (rsb/draw-line-ex! {:x (- x 80)
                         :y (+ y 45)} {:x (+ x 80)
                                       :y (- y 45)} 3.0 colors/green)
 
@@ -296,7 +297,7 @@
 
     ;; Current angle line
     (when (not= current-angle 0.0)
-      (ext/draw-line-ex! protractor-pos {:x final-x
+      (rsb/draw-line-ex! protractor-pos {:x final-x
                                          :y final-y} 3.0 gesture-color))))
 
 (defn draw-touch-points [{:keys [gesture-color]}]
@@ -308,18 +309,18 @@
         (do
           (doseq [i (range touch-count)]
             (let [pos (rcg/get-touch-position i)]
-              (ext/draw-circle-v! pos 50.0 (ext/fade gesture-color 0.5))
-              (ext/draw-circle-v! pos 5.0 gesture-color)))
+              (rsb/draw-circle-v! pos 50.0 (ru/fade gesture-color 0.5))
+              (rsb/draw-circle-v! pos 5.0 gesture-color)))
           ;; Draw line between two touch points (for pinch gestures)
           (when (= touch-count 2)
             (let [pos0 (rcg/get-touch-position 0)
                   pos1 (rcg/get-touch-position 1)
                   thickness (if (= current-gesture 512) 8.0 12.0)]
-              (ext/draw-line-ex! pos0 pos1 thickness gesture-color))))
+              (rsb/draw-line-ex! pos0 pos1 thickness gesture-color))))
         ;; Draw mouse position
         (let [mouse-pos (rcm/get-mouse-position)]
-          (ext/draw-circle-v! mouse-pos 35.0 (ext/fade gesture-color 0.5))
-          (ext/draw-circle-v! mouse-pos 5.0 gesture-color))))))
+          (rsb/draw-circle-v! mouse-pos 35.0 (ru/fade gesture-color 0.5))
+          (rsb/draw-circle-v! mouse-pos 5.0 gesture-color))))))
 
 (defn draw [game]
   (rcd/begin-drawing!)

@@ -9,7 +9,7 @@
    [raylib.shapes.basic :as rsb]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib-ext :as ext]))
+   [raylib.core.collision :as rcol]))
 
 (def WIDTH 800)
 (def HEIGHT 450)
@@ -75,7 +75,7 @@
   (move-paddle game (:k enums/keyboard-key) (:j enums/keyboard-key) :paddle2))
 
 (defn check-collision [x y radius rect]
-  (let [result (ext/check-collision-circle-rec? {:x x
+  (let [result (rcol/check-collision-circle-rec? {:x x
                                                  :y y} radius rect)]
     (if (boolean? result) result (pos? result))))
 
@@ -152,7 +152,7 @@
   (rcd/clear-background! colors/black)
   (let [text "press ENTER to start"
         size 20
-        width (ext/measure-text text size)]
+        width (rtd/measure-text text size)]
     (rtd/draw-text! text (int (- (quot WIDTH 2) (/ width 2))) (int (/ HEIGHT 2)) size colors/white))
   (rcd/end-drawing!))
 
@@ -166,7 +166,7 @@
   (rtd/draw-text! (str " fps: " avg-fps) 720 20 20 colors/purple)
   (rtd/draw-text! (str left) (- (quot WIDTH 2) 100) 20 20 colors/white)
   (rtd/draw-text! (str right) (+ (quot WIDTH 2) 100) 20 20 colors/white)
-  (ext/draw-circle! (int (first ball)) (int (second ball)) BALL_RADIUS colors/white)
+  (rsb/draw-circle! (int (first ball)) (int (second ball)) BALL_RADIUS colors/white)
   (rcd/end-drawing!))
 
 (defn draw-ending [{:keys [left right winner]}]
@@ -178,11 +178,11 @@
         text (str "Congratulations " winner-name "!")
         winner-color (if (= winner :left) colors/blue colors/red)
         size 20
-        width (ext/measure-text text size)]
+        width (rtd/measure-text text size)]
     (rtd/draw-text! text (int (- (quot WIDTH 2) (/ width 2))) (int (/ HEIGHT 2)) size winner-color))
   (let [text "press ENTER to restart"
         size 20
-        width (ext/measure-text text size)]
+        width (rtd/measure-text text size)]
     (rtd/draw-text! text (int (- (quot WIDTH 2) (/ width 2))) (- HEIGHT 100) size colors/white))
   (rcd/end-drawing!))
 

@@ -20,7 +20,6 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]
    [coffi.mem :as mem]
    [debug-stats]))
 
@@ -134,7 +133,7 @@
   ;; 2D UI elements (drawn after 3D, so they appear on top)
   ;; Draw label above the cube using screen coordinates
   (let [label "Enemy: 100/100"
-        text-width (ext/measure-text label 20)
+        text-width (rtd/measure-text label 20)
         x (- (int (:x cube-screen-position)) (/ text-width 2))
         y (int (:y cube-screen-position))]
     (rtd/draw-text! label (int x) y 20 colors/black))

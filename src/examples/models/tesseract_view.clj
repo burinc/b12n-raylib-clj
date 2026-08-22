@@ -18,8 +18,7 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]))
+   [raylib.nrepl :as nrepl]))
 
 ;; Constants
 (def WIDTH 800)
@@ -97,7 +96,7 @@
     (= 3 (reduce + diffs))))
 
 (defn draw [{:keys [camera]}]
-  (let [time (ext/get-time)
+  (let [time (rct/get-time)
         rotation (* DEG2RAD 45.0 time)
         ;; Transform all vertices
         transformed (mapv #(transform-vertex % rotation) tesseract-vertices)]

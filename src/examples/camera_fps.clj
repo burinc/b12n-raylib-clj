@@ -26,7 +26,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]
+   [raylib.utils :as ru]
    [debug-stats]))
 
 ;; Constants
@@ -384,8 +384,8 @@
   (rc3/end-mode-3d!)
 
   ;; Info box
-  (rsb/draw-rectangle! 5 5 330 75 (ext/fade colors/skyblue 0.5))
-  (ext/draw-rectangle-lines! 5 5 330 75 colors/blue)
+  (rsb/draw-rectangle! 5 5 330 75 (ru/fade colors/skyblue 0.5))
+  (rsb/draw-rectangle-lines! 5 5 330 75 colors/blue)
 
   (rtd/draw-text! "Camera controls:" 15 15 10 colors/black)
   (rtd/draw-text! "- Move keys: W, A, S, D, Space, Left-Ctrl" 15 30 10 colors/black)

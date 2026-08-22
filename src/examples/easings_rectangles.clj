@@ -14,7 +14,7 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib-ext :as ext]
+   [raylib.shapes.basic :as rsb]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 
@@ -83,7 +83,7 @@
 
   (if (= state 0)
     (doseq [rec recs]
-      (ext/draw-rectangle-pro!
+      (rsb/draw-rectangle-pro!
        rec
        {:x (float (/ (:width rec) 2)) :y (float (/ (:height rec) 2))}
        (float rotation)

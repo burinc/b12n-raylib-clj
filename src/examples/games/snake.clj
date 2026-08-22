@@ -20,8 +20,7 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]))
+   [raylib.nrepl :as nrepl]))
 
 (def WIDTH 800)
 (def HEIGHT 450)
@@ -241,7 +240,7 @@
 
   (if game-over?
     (let [text "PRESS [ENTER] TO PLAY AGAIN"
-          text-width (ext/measure-text text 20)]
+          text-width (rtd/measure-text text 20)]
       (rtd/draw-text! text
                       (- (quot WIDTH 2) (quot text-width 2))
                       (- (quot HEIGHT 2) 50)
@@ -257,7 +256,7 @@
       ;; Draw pause overlay
       (when paused?
         (let [text "GAME PAUSED"
-              text-width (ext/measure-text text 40)]
+              text-width (rtd/measure-text text 40)]
           (rtd/draw-text! text
                           (- (quot WIDTH 2) (quot text-width 2))
                           (- (quot HEIGHT 2) 40)

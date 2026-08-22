@@ -85,10 +85,9 @@ flowchart LR
     - `gamepad.clj`: gamepad input
     - `gestures.clj`: touch gesture detection
     - `shaders.clj`: shader loading and management
-  - `text/`, `shapes/`, `textures/`: drawing/loading helpers
+  - `text/`, `shapes/`, `textures/`: text, shape and texture bindings
 - `src/examples/`: the 78 example namespaces (54 top-level + 3 in `games/` + 21 in `models/`)
 - `src/debug_stats.clj`: F1 overlay plugin (see [Example Architecture Patterns](example-architecture-patterns.md) for usage)
-- `src/raylib_ext.clj`: extended/derived bindings not in core raylib
 - `libs/`: bundled native libraries per platform
 
 ## Project structure diagram
@@ -120,7 +119,6 @@ flowchart TB
         end
         
         debug["debug_stats.clj - FPS/Memory overlay"]
-        raylibext["raylib_ext.clj - Extended bindings"]
     end
     
     subgraph libs["libs/ - Native Libraries"]

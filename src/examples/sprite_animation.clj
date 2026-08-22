@@ -22,7 +22,6 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]
    [debug-stats]))
 
 ;; Constants
@@ -98,14 +97,14 @@
                      :height frame-height}]
 
       ;; Draw full spritesheet as reference
-      (ext/draw-texture-ex! scarfy {:x 15
+      (rtl/draw-texture-ex! scarfy {:x 15
                                     :y 40} 0.0 1.0 colors/white)
 
       ;; Draw outline around full spritesheet
-      (ext/draw-rectangle-lines! 15 40 (:width scarfy) (:height scarfy) colors/lime)
+      (rsb/draw-rectangle-lines! 15 40 (:width scarfy) (:height scarfy) colors/lime)
 
       ;; Draw outline around current frame
-      (ext/draw-rectangle-lines! (+ 15 (int frame-x)) 40 (int frame-width) (int frame-height) colors/red)
+      (rsb/draw-rectangle-lines! (+ 15 (int frame-x)) 40 (int frame-width) (int frame-height) colors/red)
 
       ;; Draw frame speed controls
       (rtd/draw-text! "FRAME SPEED: " 165 210 10 colors/darkgray)
@@ -117,10 +116,10 @@
         (let [bar-x (+ 250 (* 21 i))]
           (when (< i frames-speed)
             (rsb/draw-rectangle! bar-x 205 20 20 colors/red))
-          (ext/draw-rectangle-lines! bar-x 205 20 20 colors/maroon)))
+          (rsb/draw-rectangle-lines! bar-x 205 20 20 colors/maroon)))
 
       ;; Draw animated sprite
-      (ext/draw-texture-rec! scarfy frame-rec position colors/white)
+      (rtl/draw-texture-rec! scarfy frame-rec position colors/white)
 
       ;; Draw attribution
       (rtd/draw-text! "(c) Scarfy sprite by Eiden Marsal" (- WIDTH 200) (- HEIGHT 20) 10 colors/gray)))
@@ -131,7 +130,7 @@
   (rcd/end-drawing!))
 
 (defn cleanup [{:keys [scarfy]}]
-  (when scarfy (ext/unload-texture! scarfy)))
+  (when scarfy (rtl/unload-texture! scarfy)))
 
 (defn start []
   (nrepl/start {:port 7888})

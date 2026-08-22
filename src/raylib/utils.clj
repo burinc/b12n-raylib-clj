@@ -37,3 +37,18 @@
   {:arglists '([hue saturation value])}
   "ColorFromHSV"
   [::mem/float ::mem/float ::mem/float] ::rs/color)
+
+;; Moved from raylib-ext (2026-08-22 consolidation)
+(defcfn get-color
+  "Get Color structure from hexadecimal value"
+  {:arglists '([hex-value])}
+  "GetColor"
+  [::mem/int] ::rs/color)
+
+;; Additional shape drawing functions
+
+(defcfn color-lerp
+  "Get color lerp interpolation between two colors"
+  {:arglists '([color1 color2 factor])}
+  "ColorLerp"
+  [::rs/color ::rs/color ::mem/float] ::rs/color)

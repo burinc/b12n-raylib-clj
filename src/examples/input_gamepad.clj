@@ -27,7 +27,6 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]
    [clojure.string :as str]
    [debug-stats]))
 
@@ -98,21 +97,21 @@
 
   ;; Xbox home button
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE))
-    (ext/draw-circle-int! 394 89 19 colors/red))
+    (rsb/draw-circle! 394 89 19 colors/red))
 
   ;; Basic buttons
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE_RIGHT))
-    (ext/draw-circle-int! 436 150 9 colors/red))
+    (rsb/draw-circle! 436 150 9 colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE_LEFT))
-    (ext/draw-circle-int! 352 150 9 colors/red))
+    (rsb/draw-circle! 352 150 9 colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_LEFT))
-    (ext/draw-circle-int! 501 151 15 colors/blue))
+    (rsb/draw-circle! 501 151 15 colors/blue))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_DOWN))
-    (ext/draw-circle-int! 536 187 15 colors/lime))
+    (rsb/draw-circle! 536 187 15 colors/lime))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_RIGHT))
-    (ext/draw-circle-int! 572 151 15 colors/maroon))
+    (rsb/draw-circle! 572 151 15 colors/maroon))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_UP))
-    (ext/draw-circle-int! 536 115 15 colors/gold))
+    (rsb/draw-circle! 536 115 15 colors/gold))
 
   ;; D-pad background
   (rsb/draw-rectangle! 317 202 19 71 colors/black)
@@ -129,23 +128,23 @@
 
   ;; Shoulder buttons
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_LEFT_TRIGGER_1))
-    (ext/draw-circle-int! 259 61 20 colors/red))
+    (rsb/draw-circle! 259 61 20 colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_TRIGGER_1))
-    (ext/draw-circle-int! 536 61 20 colors/red))
+    (rsb/draw-circle! 536 61 20 colors/red))
 
   ;; Left stick
   (let [stick-color (if (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_LEFT_THUMB))
                       colors/red colors/black)]
-    (ext/draw-circle-int! 259 152 39 colors/black)
-    (ext/draw-circle-int! 259 152 34 colors/lightgray)
-    (ext/draw-circle-int! (+ 259 (int (* left-x 20))) (+ 152 (int (* left-y 20))) 25 stick-color))
+    (rsb/draw-circle! 259 152 39 colors/black)
+    (rsb/draw-circle! 259 152 34 colors/lightgray)
+    (rsb/draw-circle! (+ 259 (int (* left-x 20))) (+ 152 (int (* left-y 20))) 25 stick-color))
 
   ;; Right stick
   (let [stick-color (if (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_THUMB))
                       colors/red colors/black)]
-    (ext/draw-circle-int! 461 237 38 colors/black)
-    (ext/draw-circle-int! 461 237 33 colors/lightgray)
-    (ext/draw-circle-int! (+ 461 (int (* right-x 20))) (+ 237 (int (* right-y 20))) 25 stick-color))
+    (rsb/draw-circle! 461 237 38 colors/black)
+    (rsb/draw-circle! 461 237 33 colors/lightgray)
+    (rsb/draw-circle! (+ 461 (int (* right-x 20))) (+ 237 (int (* right-y 20))) 25 stick-color))
 
   ;; Triggers
   (rsb/draw-rectangle! 170 30 15 70 colors/gray)
@@ -159,24 +158,24 @@
 
   ;; PS button
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE))
-    (ext/draw-circle-int! 396 222 13 colors/red))
+    (rsb/draw-circle! 396 222 13 colors/red))
 
   ;; Basic buttons
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE_LEFT))
     (rsb/draw-rectangle! 328 170 32 13 colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE_RIGHT))
-    (ext/draw-triangle! {:x 436
+    (rsb/draw-triangle! {:x 436
                          :y 168} {:x 436
                                   :y 185} {:x 464
                                            :y 177} colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_UP))
-    (ext/draw-circle-int! 557 144 13 colors/lime))
+    (rsb/draw-circle! 557 144 13 colors/lime))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_RIGHT))
-    (ext/draw-circle-int! 586 173 13 colors/red))
+    (rsb/draw-circle! 586 173 13 colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_DOWN))
-    (ext/draw-circle-int! 557 203 13 colors/violet))
+    (rsb/draw-circle! 557 203 13 colors/violet))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_LEFT))
-    (ext/draw-circle-int! 527 173 13 colors/pink))
+    (rsb/draw-circle! 527 173 13 colors/pink))
 
   ;; D-pad background
   (rsb/draw-rectangle! 225 132 24 84 colors/black)
@@ -193,23 +192,23 @@
 
   ;; Shoulder buttons
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_LEFT_TRIGGER_1))
-    (ext/draw-circle-int! 239 82 20 colors/red))
+    (rsb/draw-circle! 239 82 20 colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_TRIGGER_1))
-    (ext/draw-circle-int! 557 82 20 colors/red))
+    (rsb/draw-circle! 557 82 20 colors/red))
 
   ;; Left stick
   (let [stick-color (if (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_LEFT_THUMB))
                       colors/red colors/black)]
-    (ext/draw-circle-int! 319 255 35 colors/black)
-    (ext/draw-circle-int! 319 255 31 colors/lightgray)
-    (ext/draw-circle-int! (+ 319 (int (* left-x 20))) (+ 255 (int (* left-y 20))) 25 stick-color))
+    (rsb/draw-circle! 319 255 35 colors/black)
+    (rsb/draw-circle! 319 255 31 colors/lightgray)
+    (rsb/draw-circle! (+ 319 (int (* left-x 20))) (+ 255 (int (* left-y 20))) 25 stick-color))
 
   ;; Right stick
   (let [stick-color (if (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_THUMB))
                       colors/red colors/black)]
-    (ext/draw-circle-int! 475 255 35 colors/black)
-    (ext/draw-circle-int! 475 255 31 colors/lightgray)
-    (ext/draw-circle-int! (+ 475 (int (* right-x 20))) (+ 255 (int (* right-y 20))) 25 stick-color))
+    (rsb/draw-circle! 475 255 35 colors/black)
+    (rsb/draw-circle! 475 255 31 colors/lightgray)
+    (rsb/draw-circle! (+ 475 (int (* right-x 20))) (+ 255 (int (* right-y 20))) 25 stick-color))
 
   ;; Triggers
   (rsb/draw-rectangle! 169 48 15 70 colors/gray)
@@ -219,34 +218,34 @@
 
 (defn draw-generic-layout [gamepad left-x left-y right-x right-y left-trigger right-trigger]
   ;; Draw generic controller background
-  (ext/draw-rectangle-rounded! {:x 175
+  (rsb/draw-rectangle-rounded! {:x 175
                                 :y 110
                                 :width 460
                                 :height 220} 0.3 16 colors/darkgray)
 
   ;; Basic buttons
-  (ext/draw-circle-int! 365 170 12 colors/raywhite)
-  (ext/draw-circle-int! 405 170 12 colors/raywhite)
-  (ext/draw-circle-int! 445 170 12 colors/raywhite)
-  (ext/draw-circle-int! 516 191 17 colors/raywhite)
-  (ext/draw-circle-int! 551 227 17 colors/raywhite)
-  (ext/draw-circle-int! 587 191 17 colors/raywhite)
-  (ext/draw-circle-int! 551 155 17 colors/raywhite)
+  (rsb/draw-circle! 365 170 12 colors/raywhite)
+  (rsb/draw-circle! 405 170 12 colors/raywhite)
+  (rsb/draw-circle! 445 170 12 colors/raywhite)
+  (rsb/draw-circle! 516 191 17 colors/raywhite)
+  (rsb/draw-circle! 551 227 17 colors/raywhite)
+  (rsb/draw-circle! 587 191 17 colors/raywhite)
+  (rsb/draw-circle! 551 155 17 colors/raywhite)
 
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE_LEFT))
-    (ext/draw-circle-int! 365 170 10 colors/red))
+    (rsb/draw-circle! 365 170 10 colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE))
-    (ext/draw-circle-int! 405 170 10 colors/green))
+    (rsb/draw-circle! 405 170 10 colors/green))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_MIDDLE_RIGHT))
-    (ext/draw-circle-int! 445 170 10 colors/blue))
+    (rsb/draw-circle! 445 170 10 colors/blue))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_LEFT))
-    (ext/draw-circle-int! 516 191 15 colors/gold))
+    (rsb/draw-circle! 516 191 15 colors/gold))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_DOWN))
-    (ext/draw-circle-int! 551 227 15 colors/blue))
+    (rsb/draw-circle! 551 227 15 colors/blue))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_RIGHT))
-    (ext/draw-circle-int! 587 191 15 colors/green))
+    (rsb/draw-circle! 587 191 15 colors/green))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_FACE_UP))
-    (ext/draw-circle-int! 551 155 15 colors/red))
+    (rsb/draw-circle! 551 155 15 colors/red))
 
   ;; D-pad
   (rsb/draw-rectangle! 245 145 28 88 colors/raywhite)
@@ -263,21 +262,21 @@
     (rsb/draw-rectangle! 271 176 30 25 colors/red))
 
   ;; Shoulder buttons
-  (ext/draw-rectangle-rounded! {:x 215
+  (rsb/draw-rectangle-rounded! {:x 215
                                 :y 98
                                 :width 100
                                 :height 10} 0.5 16 colors/darkgray)
-  (ext/draw-rectangle-rounded! {:x 495
+  (rsb/draw-rectangle-rounded! {:x 495
                                 :y 98
                                 :width 100
                                 :height 10} 0.5 16 colors/darkgray)
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_LEFT_TRIGGER_1))
-    (ext/draw-rectangle-rounded! {:x 215
+    (rsb/draw-rectangle-rounded! {:x 215
                                   :y 98
                                   :width 100
                                   :height 10} 0.5 16 colors/red))
   (when (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_TRIGGER_1))
-    (ext/draw-rectangle-rounded! {:x 495
+    (rsb/draw-rectangle-rounded! {:x 495
                                   :y 98
                                   :width 100
                                   :height 10} 0.5 16 colors/red))
@@ -285,16 +284,16 @@
   ;; Left stick
   (let [stick-color (if (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_LEFT_THUMB))
                       colors/red colors/black)]
-    (ext/draw-circle-int! 345 260 40 colors/black)
-    (ext/draw-circle-int! 345 260 35 colors/lightgray)
-    (ext/draw-circle-int! (+ 345 (int (* left-x 20))) (+ 260 (int (* left-y 20))) 25 stick-color))
+    (rsb/draw-circle! 345 260 40 colors/black)
+    (rsb/draw-circle! 345 260 35 colors/lightgray)
+    (rsb/draw-circle! (+ 345 (int (* left-x 20))) (+ 260 (int (* left-y 20))) 25 stick-color))
 
   ;; Right stick
   (let [stick-color (if (pos? (rcg/is-gamepad-button-down? gamepad rcg/GAMEPAD_BUTTON_RIGHT_THUMB))
                       colors/red colors/black)]
-    (ext/draw-circle-int! 465 260 40 colors/black)
-    (ext/draw-circle-int! 465 260 35 colors/lightgray)
-    (ext/draw-circle-int! (+ 465 (int (* right-x 20))) (+ 260 (int (* right-y 20))) 25 stick-color))
+    (rsb/draw-circle! 465 260 40 colors/black)
+    (rsb/draw-circle! 465 260 35 colors/lightgray)
+    (rsb/draw-circle! (+ 465 (int (* right-x 20))) (+ 260 (int (* right-y 20))) 25 stick-color))
 
   ;; Triggers
   (rsb/draw-rectangle! 151 110 15 70 colors/gray)
@@ -356,8 +355,8 @@
   (rcd/end-drawing!))
 
 (defn cleanup [{:keys [tex-ps3 tex-xbox]}]
-  (when tex-ps3 (ext/unload-texture! tex-ps3))
-  (when tex-xbox (ext/unload-texture! tex-xbox)))
+  (when tex-ps3 (rtl/unload-texture! tex-ps3))
+  (when tex-xbox (rtl/unload-texture! tex-xbox)))
 
 (defn start []
   (nrepl/start {:port 7888})

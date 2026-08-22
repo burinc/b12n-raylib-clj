@@ -23,7 +23,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]
+   [raylib.textures.texture-loading :as rtl]
    [debug-stats]))
 
 ;; Constants
@@ -70,8 +70,8 @@
   (rct/set-target-fps! 60)
   (debug-stats/enable!)
   ;; Create render textures for split screen
-  (let [screen1 (ext/load-render-texture! HALF_WIDTH HEIGHT)
-        screen2 (ext/load-render-texture! HALF_WIDTH HEIGHT)]
+  (let [screen1 (rtl/load-render-texture! HALF_WIDTH HEIGHT)
+        screen2 (rtl/load-render-texture! HALF_WIDTH HEIGHT)]
     (swap! game-atom assoc :screen1 screen1 :screen2 screen2)))
 
 (defn move-camera-forward
@@ -157,7 +157,7 @@
 (defn draw [{:keys [camera1 camera2 screen1 screen2]}]
   (when (and screen1 screen2)
     ;; Draw Player 1's view to render texture
-    (ext/begin-texture-mode! screen1)
+    (rtl/begin-texture-mode! screen1)
     (rcd/clear-background! colors/skyblue)
     (rc3d/begin-mode-3d! camera1)
     (draw-scene (:position camera1) (:position camera2))
@@ -168,10 +168,10 @@
                                             :b 245
                                             :a 200})
     (rtd/draw-text! "PLAYER1: W/S to move" 10 10 20 colors/maroon)
-    (ext/end-texture-mode!)
+    (rtl/end-texture-mode!)
 
     ;; Draw Player 2's view to render texture
-    (ext/begin-texture-mode! screen2)
+    (rtl/begin-texture-mode! screen2)
     (rcd/clear-background! colors/skyblue)
     (rc3d/begin-mode-3d! camera2)
     (draw-scene (:position camera1) (:position camera2))
@@ -182,7 +182,7 @@
                                             :b 245
                                             :a 200})
     (rtd/draw-text! "PLAYER2: UP/DOWN to move" 10 10 20 colors/darkblue)
-    (ext/end-texture-mode!)
+    (rtl/end-texture-mode!)
 
     ;; Draw both render textures to the screen
     (rcd/begin-drawing!)
@@ -194,7 +194,7 @@
                        :y 0
                        :width (:width tex1)
                        :height (- (:height tex1))}] ; Negative height to flip
-      (ext/draw-texture-rec! tex1 source-rect {:x 0
+      (rtl/draw-texture-rec! tex1 source-rect {:x 0
                                                :y 0} colors/white))
 
     ;; Draw right half (player 2)
@@ -203,7 +203,7 @@
                        :y 0
                        :width (:width tex2)
                        :height (- (:height tex2))}]
-      (ext/draw-texture-rec! tex2 source-rect {:x HALF_WIDTH
+      (rtl/draw-texture-rec! tex2 source-rect {:x HALF_WIDTH
                                                :y 0} colors/white))
 
     ;; Draw divider line
@@ -215,8 +215,8 @@
     (rcd/end-drawing!)))
 
 (defn cleanup [{:keys [screen1 screen2]}]
-  (when screen1 (ext/unload-render-texture! screen1))
-  (when screen2 (ext/unload-render-texture! screen2)))
+  (when screen1 (rtl/unload-render-texture! screen1))
+  (when screen2 (rtl/unload-render-texture! screen2)))
 
 (defn start []
   (nrepl/start {:port 7888})

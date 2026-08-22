@@ -20,7 +20,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]))
+   [raylib.utils :as ru]))
 
 ;; Constants
 (def WIDTH 800)
@@ -89,7 +89,7 @@
         (#(assoc % :points (generate-points (:num-points %) max-radius))))))
 
 (defn update-camera [game]
-  (let [time (ext/get-time)
+  (let [time (rct/get-time)
         camera-time (* time 0.5)
         new-x (* (Math/cos camera-time) 6.0)
         new-z (* (Math/sin camera-time) 6.0)]
@@ -103,7 +103,7 @@
       update-camera))
 
 (defn draw [{:keys [camera points num-points]}]
-  (let [time (ext/get-time)]
+  (let [time (rct/get-time)]
     (rcd/begin-drawing!)
     (rcd/clear-background! colors/black)
 
@@ -112,7 +112,7 @@
     ;; Draw all points with animated colors
     (doseq [{:keys [pos hue]} points]
       (let [animated-hue (mod (+ hue (* time 50.0)) 360.0)
-            color (ext/color-from-hsv (float animated-hue) 1.0 1.0)]
+            color (ru/color-from-hsv (float animated-hue) 1.0 1.0)]
         (rc3d/draw-point-3d! pos color)))
 
     ;; Draw reference sphere wireframe

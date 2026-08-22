@@ -12,8 +12,7 @@
    [raylib.text.drawing :as rtd]
    [raylib.core.camera3d :as rcc]
    [raylib.core.collision :as rcol]
-   [raylib.core.mouse :as rcm]
-   [raylib-ext :as ext]))
+   [raylib.core.mouse :as rcm]))
 
 (def screen-width 800)
 (def screen-height 450)
@@ -167,7 +166,7 @@
 
     (when hit?
       (let [text "BOX SELECTED"
-            text-width (ext/measure-text text 30)
+            text-width (rtd/measure-text text 30)
             x (/ (- screen-width text-width) 2)
             y (int (* screen-height 0.1))]
         (rtd/draw-text! text x y 30 (:green colors))))

@@ -8,7 +8,9 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib-ext :as ext]
+   [raylib.core.collision :as rcol]
+   [raylib.shapes.basic :as rsb]
+   [raylib.textures.texture-loading :as rtl]
    [debug-stats])
   (:gen-class))
 
@@ -195,11 +197,11 @@
   (make-asteroid-at x y size))
 
 (defn check-point-circle [point center radius]
-  (let [result (ext/check-collision-point-circle? (vec->point point) (vec->point center) (float radius))]
+  (let [result (rcol/check-collision-point-circle? (vec->point point) (vec->point center) (float radius))]
     (if (boolean? result) result (pos? result))))
 
 (defn check-circles [center1 radius1 center2 radius2]
-  (let [result (ext/check-collision-circles? (vec->point center1) (float radius1) (vec->point center2) (float radius2))]
+  (let [result (rcol/check-collision-circles? (vec->point center1) (float radius1) (vec->point center2) (float radius2))]
     (if (boolean? result) result (pos? result))))
 
 (defn ship-collides-asteroid? [sps {:keys [position size]
@@ -343,7 +345,7 @@
   (let [x (int (Math/floor (first position)))
         y (int (Math/floor (second position)))
         radius (asteroid-radius asteroid)]
-    (ext/draw-circle! x y radius colors/white)))
+    (rsb/draw-circle! x y radius colors/white)))
 
 (defn draw-asteroids [{:keys [asteroids]}]
   (doseq [asteroid asteroids]
@@ -379,7 +381,7 @@
     translated-rotated-points))
 
 (defn draw-triangle [[v1 v2 v3] color]
-  (ext/draw-triangle! (vec->point v1) (vec->point v2) (vec->point v3) color))
+  (rsb/draw-triangle! (vec->point v1) (vec->point v2) (vec->point v3) color))
 
 (defn draw-thrust [game]
   (draw-triangle (thrust-points game) colors/orange))
@@ -399,7 +401,7 @@
 
 (defn draw-bullet [bullet]
   (let [[x y] (:position bullet)]
-    (ext/draw-circle! (int (Math/floor x)) (int (Math/floor y)) BULLET_RADIUS colors/white)))
+    (rsb/draw-circle! (int (Math/floor x)) (int (Math/floor y)) BULLET_RADIUS colors/white)))
 
 (defn draw-bullets [{:keys [bullets]}]
   (doseq [bullet bullets]
@@ -408,11 +410,11 @@
 (defn draw-dead []
   (let [text "DEAD"
         size 48
-        width (ext/measure-text text size)]
+        width (rtd/measure-text text size)]
     (rtd/draw-text! text (int (- (quot WIDTH 2) (/ width 2))) (int (- (/ HEIGHT 2) 40)) size colors/red))
   (let [text "press SPACE to restart"
         size 16
-        width (ext/measure-text text size)]
+        width (rtd/measure-text text size)]
     (rtd/draw-text! text (int (- (quot WIDTH 2) (/ width 2))) (int (+ (/ HEIGHT 2) 20)) size colors/white)))
 
 (defn draw-game-content [game]
@@ -428,14 +430,14 @@
 (defn draw-ending [game]
   (let [text "You DIED. Press ENTER to restart"
         size 20
-        width (ext/measure-text text size)]
+        width (rtd/measure-text text size)]
     (rtd/draw-text! text (int (- (quot WIDTH 2) (/ width 2))) (int (/ HEIGHT 2)) size colors/white)))
 
 (defn draw-title-content [_]
   (rcd/clear-background! colors/black)
   (let [text "press ENTER to start"
         size 20
-        width (ext/measure-text text size)]
+        width (rtd/measure-text text size)]
     (rtd/draw-text! text (int (- (quot WIDTH 2) (/ width 2))) (int (/ HEIGHT 2)) size colors/white))
   (rtd/draw-text! "F1 for debug stats | F11 toggle fullscreen" 10 (- HEIGHT 30) 14 colors/gray)
   ;; Draw debug stats overlay
@@ -445,12 +447,12 @@
   "Draw game content to render texture at virtual resolution"
   [{:keys [screen]
     :as game}]
-  (ext/begin-texture-mode! @render-target)
+  (rtl/begin-texture-mode! @render-target)
   (condp = screen
     :title (draw-title-content game)
     :game (draw-game-content game)
     :ending (draw-ending game))
-  (ext/end-texture-mode!))
+  (rtl/end-texture-mode!))
 
 (defn draw-render-texture-to-screen
   "Draw the render texture scaled to fit screen with letterboxing"
@@ -467,7 +469,7 @@
               :y (float offset-y)
               :width (float (* VIRTUAL_WIDTH scale))
               :height (float (* VIRTUAL_HEIGHT scale))}]
-    (ext/draw-texture-pro! (:texture target) source dest {:x 0.0
+    (rtl/draw-texture-pro! (:texture target) source dest {:x 0.0
                                                           :y 0.0} 0.0 colors/white)))
 
 (defn draw [{:keys [screen]
@@ -508,7 +510,7 @@
   (rcw/init-window! VIRTUAL_WIDTH VIRTUAL_HEIGHT "Raylib Clojure Asteroids")
 
   ;; Create render texture at virtual resolution
-  (reset! render-target (ext/load-render-texture! VIRTUAL_WIDTH VIRTUAL_HEIGHT))
+  (reset! render-target (rtl/load-render-texture! VIRTUAL_WIDTH VIRTUAL_HEIGHT))
 
   ;; Start in true fullscreen (hides menu bar)
   (rcw/toggle-borderless-windowed!)
@@ -531,7 +533,7 @@
         (recur))))
   ;; Cleanup
   (when @render-target
-    (ext/unload-render-texture! @render-target))
+    (rtl/unload-render-texture! @render-target))
   (rcw/close-window!))
 
 (comment

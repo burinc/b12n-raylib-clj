@@ -26,7 +26,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]
+   [raylib.utils :as ru]
    [coffi.mem :as mem]
    [debug-stats]))
 
@@ -218,7 +218,7 @@
     (let [{:keys [enabled position color]} light]
       (if enabled
         (rc3/draw-sphere-ex! position 0.2 8 8 color)
-        (rc3/draw-sphere-wires! position 0.2 8 8 (ext/fade color 0.3)))))
+        (rc3/draw-sphere-wires! position 0.2 8 8 (ru/fade color 0.3)))))
 
   (rc3/draw-grid! 10 1.0)
 

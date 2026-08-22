@@ -31,8 +31,7 @@
    [raylib.text.drawing :as rtd]
    [raylib.shapes.basic :as rsb]
    [raylib.colors :as colors]
-   [raylib.enums :as enums]
-   [raylib-ext :as ext])
+   [raylib.enums :as enums])
   (:import [java.lang Runtime]))
 
 ;; State
@@ -162,7 +161,7 @@
           all-lines (concat lines custom-lines)
 
           ;; Calculate background size
-          max-width (apply max (map #(if (empty? %) 0 (ext/measure-text % font-size)) all-lines))
+          max-width (apply max (map #(if (empty? %) 0 (rtd/measure-text % font-size)) all-lines))
           bg-width (+ max-width (* padding 2))
           bg-height (+ (* (count all-lines) line-height) (* padding 2))]
 

@@ -15,7 +15,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.utils :as ru]
-   [raylib-ext :as ext]
+   [raylib.shapes.basic :as rsb]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 
@@ -120,7 +120,7 @@
   (rcd/begin-drawing!)
   (rcd/clear-background! colors/raywhite)
 
-  (ext/draw-rectangle-pro!
+  (rsb/draw-rectangle-pro!
    {:x (float (:x rec)) :y (float (:y rec))
     :width (float (:width rec)) :height (float (:height rec))}
    {:x (float (/ (:width rec) 2)) :y (float (/ (:height rec) 2))}

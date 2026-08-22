@@ -18,7 +18,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]))
+   [raylib.utils :as ru]))
 
 ;; Constants
 (def WIDTH 800)
@@ -87,7 +87,7 @@
     (assoc :exit? true)))
 
 (defn tick [game]
-  (let [time (ext/get-time)]
+  (let [time (rct/get-time)]
     (-> game
         handle-input
         (assoc :rotation time))))
@@ -97,7 +97,7 @@
         angle (* rotation speed 60.0) ; Convert to degrees
         ;; Animate hue over time
         animated-hue (mod (+ hue (* rotation 20.0)) 360.0)
-        color (ext/color-from-hsv (float animated-hue) 0.8 0.9)
+        color (ru/color-from-hsv (float animated-hue) 0.8 0.9)
         ;; Make cube "bob" up and down
         bob-offset (* 0.3 (Math/sin (* rotation speed 2.0)))
         adjusted-pos (update pos :y + bob-offset)]

@@ -18,8 +18,7 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]))
+   [raylib.nrepl :as nrepl]))
 
 ;; Constants
 (def WIDTH 800)
@@ -176,7 +175,7 @@
         (rc3d/draw-line-3d! p1 p2 color)))))
 
 (defn draw [{:keys [camera rotating?]}]
-  (let [time (if rotating? (ext/get-time) 0.0)
+  (let [time (if rotating? (rct/get-time) 0.0)
         rotation (* time 0.5)]
     (rcd/begin-drawing!)
     (rcd/clear-background! colors/raywhite)

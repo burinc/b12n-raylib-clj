@@ -11,7 +11,6 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.shapes.basic :as rsb]
-   [raylib-ext :as ext]
    [debug-stats])
   (:gen-class))
 
@@ -1371,9 +1370,9 @@
     #_(rsb/draw-rectangle! 0 0 SCREEN_WIDTH SCREEN_HEIGHT dark-bg)
     ;; Grid lines
     (doseq [x (range start-x (+ SCREEN_WIDTH grid-size) grid-size)]
-      (ext/draw-line! x 0 x SCREEN_HEIGHT grid-color))
+      (rsb/draw-line! x 0 x SCREEN_HEIGHT grid-color))
     (doseq [y (range start-y (+ SCREEN_HEIGHT grid-size) grid-size)]
-      (ext/draw-line! 0 y SCREEN_WIDTH y grid-color))))
+      (rsb/draw-line! 0 y SCREEN_WIDTH y grid-color))))
 
 ;; ============================================================================
 ;; DRAWING - ENTITIES
@@ -1395,12 +1394,12 @@
                  :b 255
                  :a 255})]
     ;; Body
-    (ext/draw-circle! x y PLAYER_SIZE color)
+    (rsb/draw-circle! x y PLAYER_SIZE color)
     ;; Direction indicator
     (let [facing (:facing player)
           indicator-pos {:x (+ x (* (:x facing) 25))
                          :y (+ y (* (:y facing) 25))}]
-      (ext/draw-circle! (int (:x indicator-pos)) (int (:y indicator-pos)) 6
+      (rsb/draw-circle! (int (:x indicator-pos)) (int (:y indicator-pos)) 6
                         {:r 255
                          :g 255
                          :b 100
@@ -1421,11 +1420,11 @@
               ;; Health bar for bosses/elites
               show-health? (or (:boss? enemy) (:elite? enemy))]
           ;; Enemy body
-          (ext/draw-circle! x y size color)
+          (rsb/draw-circle! x y size color)
           ;; Eyes
           (let [eye-offset (* size 0.3)]
-            (ext/draw-circle! (int (- x eye-offset)) (int (- y (* size 0.2))) 3 colors/red)
-            (ext/draw-circle! (int (+ x eye-offset)) (int (- y (* size 0.2))) 3 colors/red))
+            (rsb/draw-circle! (int (- x eye-offset)) (int (- y (* size 0.2))) 3 colors/red)
+            (rsb/draw-circle! (int (+ x eye-offset)) (int (- y (* size 0.2))) 3 colors/red))
           ;; Health bar
           (when show-health?
             (let [bar-width (* size 2)
@@ -1475,12 +1474,12 @@
                       colors/white)]
           ;; Different shapes for different weapons
           (case (:type proj)
-            :garlic (ext/draw-circle! x y size {:r 200
+            :garlic (rsb/draw-circle! x y size {:r 200
                                                 :g 255
                                                 :b 200
                                                 :a 50})
             :whip (rsb/draw-rectangle! (int (- x size)) (int (- y 5)) (int (* size 2)) 10 color)
-            (ext/draw-circle! x y size color)))))))
+            (rsb/draw-circle! x y size color)))))))
 
 (defn draw-xp-gems [gems camera]
   (doseq [gem gems]
@@ -1504,12 +1503,12 @@
                              :b 255
                              :a 255})]
           ;; Glow
-          (ext/draw-circle! x y glow-size {:r (:r color)
+          (rsb/draw-circle! x y glow-size {:r (:r color)
                                            :g (:g color)
                                            :b (:b color)
                                            :a 100})
           ;; Gem
-          (ext/draw-circle! x y size color))))))
+          (rsb/draw-circle! x y size color))))))
 
 (defn draw-damage-numbers [damage-numbers camera]
   (doseq [num damage-numbers]
@@ -1546,10 +1545,10 @@
                           :b 50
                           :a 255})
     ;; Border
-    (ext/draw-line! bar-x bar-y (+ bar-x bar-width) bar-y colors/white)
-    (ext/draw-line! bar-x (+ bar-y bar-height) (+ bar-x bar-width) (+ bar-y bar-height) colors/white)
-    (ext/draw-line! bar-x bar-y bar-x (+ bar-y bar-height) colors/white)
-    (ext/draw-line! (+ bar-x bar-width) bar-y (+ bar-x bar-width) (+ bar-y bar-height) colors/white)
+    (rsb/draw-line! bar-x bar-y (+ bar-x bar-width) bar-y colors/white)
+    (rsb/draw-line! bar-x (+ bar-y bar-height) (+ bar-x bar-width) (+ bar-y bar-height) colors/white)
+    (rsb/draw-line! bar-x bar-y bar-x (+ bar-y bar-height) colors/white)
+    (rsb/draw-line! (+ bar-x bar-width) bar-y (+ bar-x bar-width) (+ bar-y bar-height) colors/white)
     ;; Text
     (rtd/draw-text! (str (int current-hp) "/" (int max-hp))
                     (+ bar-x 10) (+ bar-y 3) 20 colors/white)))
@@ -1630,7 +1629,7 @@
                                                             :b 40
                                                             :a 255})
         ;; Weapon symbol
-        (ext/draw-circle! (+ x (/ icon-size 2)) (+ start-y (/ icon-size 2)) 12 color)
+        (rsb/draw-circle! (+ x (/ icon-size 2)) (+ start-y (/ icon-size 2)) 12 color)
         ;; Level
         (rtd/draw-text! (str (:level weapon))
                         (+ x icon-size -12) (+ start-y icon-size -14) 12 colors/white)))))
@@ -1651,12 +1650,12 @@
     (rsb/draw-rectangle! 0 0 SCREEN_WIDTH SCREEN_HEIGHT overlay-color)
     (let [text "PAUSED"
           size 60
-          width (ext/measure-text text size)]
+          width (rtd/measure-text text size)]
       (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2)))
                       (int (- (/ SCREEN_HEIGHT 2) 50)) size colors/white))
     (let [text "Press ESC to continue"
           size 20
-          width (ext/measure-text text size)]
+          width (rtd/measure-text text size)]
       (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2)))
                       (int (+ (/ SCREEN_HEIGHT 2) 20)) size colors/gray))))
 
@@ -1670,7 +1669,7 @@
     ;; Title
     (let [text "LEVEL UP!"
           size 50
-          width (ext/measure-text text size)]
+          width (rtd/measure-text text size)]
       (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2))) 80 size colors/gold))
 
     ;; Choices
@@ -1728,7 +1727,7 @@
 
     (let [text "GAME OVER"
           size 60
-          width (ext/measure-text text size)]
+          width (rtd/measure-text text size)]
       (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2)))
                       (int (- (/ SCREEN_HEIGHT 2) 100)) size colors/red))
 
@@ -1743,7 +1742,7 @@
 
     (let [text "Press ENTER to play again"
           size 24
-          width (ext/measure-text text size)]
+          width (rtd/measure-text text size)]
       (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2)))
                       (int (+ (/ SCREEN_HEIGHT 2) 100)) size colors/gray))))
 

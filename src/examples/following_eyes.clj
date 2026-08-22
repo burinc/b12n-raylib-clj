@@ -20,7 +20,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]
+   [raylib.text.drawing :as rtd]
    [debug-stats]))
 
 ;; Constants
@@ -123,8 +123,8 @@
   (draw-eye right-sclera right-iris colors/lightgray colors/darkgreen)
 
   ;; Draw instructions
-  (ext/draw-line! 0 (- HEIGHT 20) WIDTH (- HEIGHT 20) colors/lightgray)
-  (ext/measure-text "Move your mouse to make eyes follow!" 20) ;; just to warm up the binding
+  (rsb/draw-line! 0 (- HEIGHT 20) WIDTH (- HEIGHT 20) colors/lightgray)
+  (rtd/measure-text "Move your mouse to make eyes follow!" 20) ;; just to warm up the binding
 
   ;; Draw debug stats overlay
   (debug-stats/draw!)

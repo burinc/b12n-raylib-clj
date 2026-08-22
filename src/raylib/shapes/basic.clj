@@ -123,3 +123,33 @@
   "DrawCircleLinesV"
   [::rs/vector-2 ::mem/float ::rs/color] ::mem/void)
 
+;; Moved from raylib-ext (2026-08-22 consolidation)
+(defcfn draw-rectangle-rounded!
+  "Draw rectangle with rounded edges"
+  {:arglists '([rec roundness segments color])}
+  "DrawRectangleRounded"
+  [::rs/rectangle ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-line-ex!
+  "Draw a line with thickness"
+  {:arglists '([start-pos end-pos thick color])}
+  "DrawLineEx"
+  [::rs/vector-2 ::rs/vector-2 ::mem/float ::rs/color] ::mem/void)
+
+(defcfn draw-ring!
+  "Draw ring"
+  {:arglists '([center inner-radius outer-radius start-angle end-angle segments color])}
+  "DrawRing"
+  [::rs/vector-2 ::mem/float ::mem/float ::mem/float ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-line-v!
+  "Draw a line (Vector version)"
+  {:arglists '([start-pos end-pos color])}
+  "DrawLineV"
+  [::rs/vector-2 ::rs/vector-2 ::rs/color] ::mem/void)
+
+(defcfn draw-rectangle-pro!
+  "Draw a color-filled rectangle with pro parameters"
+  {:arglists '([rec origin rotation color])}
+  "DrawRectanglePro"
+  [::rs/rectangle ::rs/vector-2 ::mem/float ::rs/color] ::mem/void)

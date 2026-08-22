@@ -11,7 +11,6 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.shapes.basic :as rsb]
-   [raylib-ext :as ext]
    [debug-stats])
   (:gen-class))
 
@@ -560,10 +559,10 @@
       (rsb/draw-rectangle! x y SQUARE_SIZE SQUARE_SIZE color)
       ;; Draw empty cell grid lines
       (do
-        (ext/draw-line! x y (+ x SQUARE_SIZE) y colors/lightgray)
-        (ext/draw-line! x y x (+ y SQUARE_SIZE) colors/lightgray)
-        (ext/draw-line! (+ x SQUARE_SIZE) y (+ x SQUARE_SIZE) (+ y SQUARE_SIZE) colors/lightgray)
-        (ext/draw-line! x (+ y SQUARE_SIZE) (+ x SQUARE_SIZE) (+ y SQUARE_SIZE) colors/lightgray)))))
+        (rsb/draw-line! x y (+ x SQUARE_SIZE) y colors/lightgray)
+        (rsb/draw-line! x y x (+ y SQUARE_SIZE) colors/lightgray)
+        (rsb/draw-line! (+ x SQUARE_SIZE) y (+ x SQUARE_SIZE) (+ y SQUARE_SIZE) colors/lightgray)
+        (rsb/draw-line! x (+ y SQUARE_SIZE) (+ x SQUARE_SIZE) (+ y SQUARE_SIZE) colors/lightgray)))))
 
 (defn draw-game [game]
   (rcd/begin-drawing!)
@@ -600,10 +599,10 @@
                   (rsb/draw-rectangle! x y SQUARE_SIZE SQUARE_SIZE colors/gray)
                   ;; Draw empty cell grid lines
                   (do
-                    (ext/draw-line! x y (+ x SQUARE_SIZE) y colors/lightgray)
-                    (ext/draw-line! x y x (+ y SQUARE_SIZE) colors/lightgray)
-                    (ext/draw-line! (+ x SQUARE_SIZE) y (+ x SQUARE_SIZE) (+ y SQUARE_SIZE) colors/lightgray)
-                    (ext/draw-line! x (+ y SQUARE_SIZE) (+ x SQUARE_SIZE) (+ y SQUARE_SIZE) colors/lightgray)))))
+                    (rsb/draw-line! x y (+ x SQUARE_SIZE) y colors/lightgray)
+                    (rsb/draw-line! x y x (+ y SQUARE_SIZE) colors/lightgray)
+                    (rsb/draw-line! (+ x SQUARE_SIZE) y (+ x SQUARE_SIZE) (+ y SQUARE_SIZE) colors/lightgray)
+                    (rsb/draw-line! x (+ y SQUARE_SIZE) (+ x SQUARE_SIZE) (+ y SQUARE_SIZE) colors/lightgray)))))
 
             ;; Draw labels
             (rtd/draw-text! "INCOMING:" preview-x (- preview-y 15) 10 colors/gray)
@@ -613,7 +612,7 @@
           (when (:pause game)
             (let [text "GAME PAUSED"
                   size 40
-                  width (ext/measure-text text size)]
+                  width (rtd/measure-text text size)]
               (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2)))
                               (int (- (/ SCREEN_HEIGHT 2) 40)) size colors/gray))))
 
@@ -626,7 +625,7 @@
       ;; Game over screen
       (let [text "PRESS [ENTER] TO PLAY AGAIN"
             size 20
-            width (ext/measure-text text size)]
+            width (rtd/measure-text text size)]
         (rtd/draw-text! text (int (- (/ (rcw/get-screen-width) 2) (/ width 2)))
                         (int (- (/ (rcw/get-screen-height) 2) 50)) size colors/gray)
         (debug-stats/draw!))))

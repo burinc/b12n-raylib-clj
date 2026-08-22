@@ -19,7 +19,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]))
+   [raylib.utils :as ru]))
 
 ;; Constants
 (def WIDTH 800)
@@ -63,7 +63,7 @@
         (assoc-in [:position :z] new-z))))
 
 (defn tick [game]
-  (let [time (ext/get-time)]
+  (let [time (rct/get-time)]
     (-> game
         handle-input
         (update :camera update-camera time))))
@@ -83,13 +83,13 @@
                       :z (+ (* (- z (/ NUM_BLOCKS 2)) (* scale 3.0)) scatter)}
             ;; Calculate rainbow color based on position
             hue (float (mod (* (+ x y z) 18) 360))
-            cube-color (ext/color-from-hsv hue 0.75 0.9)
+            cube-color (ru/color-from-hsv hue 0.75 0.9)
             ;; Calculate cube size
             cube-size (* (- 2.4 scale) block-scale)]
         (rc3d/draw-cube! cube-pos cube-size cube-size cube-size cube-color)))))
 
 (defn draw [{:keys [camera]}]
-  (let [time (ext/get-time)]
+  (let [time (rct/get-time)]
     (rcd/begin-drawing!)
     (rcd/clear-background! colors/raywhite)
 
@@ -123,7 +123,7 @@
   @game-atom
 
   ;; Test color generation
-  (ext/color-from-hsv 180.0 0.75 0.9)
+  (ru/color-from-hsv 180.0 0.75 0.9)
 
   ;; Reset
   (reset! game-atom (initial-state))

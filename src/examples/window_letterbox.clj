@@ -17,7 +17,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.utils :as ru]
-   [raylib-ext :as ext]
+   [raylib.textures.texture-loading :as rtl]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 
@@ -46,8 +46,8 @@
   (rcw/set-window-min-size! 320 240)
   (rct/set-target-fps! 60)
   (debug-stats/enable!)
-  (let [target (ext/load-render-texture! game-screen-width game-screen-height)]
-    (ext/set-texture-filter! (:texture target) TEXTURE-FILTER-BILINEAR)
+  (let [target (rtl/load-render-texture! game-screen-width game-screen-height)]
+    (rtl/set-texture-filter! (:texture target) TEXTURE-FILTER-BILINEAR)
     (swap! game-atom assoc :target target)))
 
 (defn tick [{:keys [bar-colors] :as state}]
@@ -70,7 +70,7 @@
 
     ;; Draw to render texture
     (when target
-      (ext/begin-texture-mode! target)
+      (rtl/begin-texture-mode! target)
       (rcd/clear-background! colors/raywhite)
 
       (let [bar-height (/ game-screen-height 10)]
@@ -84,7 +84,7 @@
                       350 25 20 colors/green)
       (rtd/draw-text! (format "Virtual Mouse: [%d , %d]" (int virtual-mouse-x) (int virtual-mouse-y))
                       350 55 20 colors/yellow)
-      (ext/end-texture-mode!))
+      (rtl/end-texture-mode!))
 
     ;; Draw render texture to screen with scaling
     (rcd/begin-drawing!)
@@ -96,7 +96,7 @@
             dest-h (* game-screen-height scale)
             offset-x (* (- (rcw/get-screen-width) dest-w) 0.5)
             offset-y (* (- (rcw/get-screen-height) dest-h) 0.5)]
-        (ext/draw-texture-pro!
+        (rtl/draw-texture-pro!
          tex
          {:x 0.0 :y 0.0 :width (float (:width tex)) :height (float (- (:height tex)))}
          {:x (float offset-x) :y (float offset-y) :width (float dest-w) :height (float dest-h)}
@@ -117,5 +117,5 @@
         (draw game)
         (recur))))
   (when-let [target (:target @game-atom)]
-    (ext/unload-render-texture! target))
+    (rtl/unload-render-texture! target))
   (rcw/close-window!))

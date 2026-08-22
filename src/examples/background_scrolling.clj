@@ -20,7 +20,6 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.nrepl :as nrepl]
-   [raylib-ext :as ext]
    [debug-stats]))
 
 ;; Constants
@@ -95,10 +94,10 @@
   [texture scroll-x y-offset]
   (let [tex-width (* (:width texture) 2)]
     ;; Draw first copy
-    (ext/draw-texture-ex! texture {:x scroll-x
+    (rtl/draw-texture-ex! texture {:x scroll-x
                                    :y y-offset} 0.0 2.0 colors/white)
     ;; Draw second copy (seamless wrap)
-    (ext/draw-texture-ex! texture {:x (+ tex-width scroll-x)
+    (rtl/draw-texture-ex! texture {:x (+ tex-width scroll-x)
                                    :y y-offset} 0.0 2.0 colors/white)))
 
 (defn draw [{:keys [background midground foreground
@@ -129,9 +128,9 @@
   (rcd/end-drawing!))
 
 (defn cleanup [{:keys [background midground foreground]}]
-  (when background (ext/unload-texture! background))
-  (when midground (ext/unload-texture! midground))
-  (when foreground (ext/unload-texture! foreground)))
+  (when background (rtl/unload-texture! background))
+  (when midground (rtl/unload-texture! midground))
+  (when foreground (rtl/unload-texture! foreground)))
 
 (defn start []
   (nrepl/start {:port 7888})

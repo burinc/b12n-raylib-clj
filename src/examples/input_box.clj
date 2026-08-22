@@ -16,7 +16,7 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib-ext :as ext]
+   [raylib.core.collision :as rcol]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 
@@ -57,7 +57,7 @@
 (defn tick [{:keys [name text-box] :as state}]
   (debug-stats/update!)
   (let [mouse (rcm/get-mouse-position)
-        mouse-on-text (pos? (ext/check-collision-point-rec? mouse text-box))]
+        mouse-on-text (pos? (rcol/check-collision-point-rec? mouse text-box))]
     ;; Set cursor shape
     (if mouse-on-text
       (rcm/set-mouse-cursor! MOUSE-CURSOR-IBEAM)
@@ -108,7 +108,7 @@
       ;; Draw blinking underscore
       (when (zero? (mod (quot frames 20) 2))
         (rtd/draw-text! "_"
-                        (+ (int (:x text-box)) 8 (ext/measure-text name 40))
+                        (+ (int (:x text-box)) 8 (rtd/measure-text name 40))
                         (+ (int (:y text-box)) 12)
                         40 colors/maroon))
       (rtd/draw-text! "Press BACKSPACE to delete chars..." 230 300 20 colors/gray)))

@@ -19,3 +19,11 @@
 
 (defmacro draw-text [{:keys [text x y size color]}]
   `(draw-text! ~text ~x ~y ~size ~color))
+
+;; Moved from raylib-ext (2026-08-22 consolidation)
+(defcfn measure-text
+  "Measure string width for default font"
+  {:arglists '([text font-size])}
+  "MeasureText"
+  [::mem/c-string ::mem/int] ::mem/int)
+

@@ -17,7 +17,6 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.utils :as ru]
-   [raylib-ext :as ext]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 
@@ -44,7 +43,7 @@
                   y1 (+ (:y start-pos) (* ny dist))
                   x2 (+ (:x start-pos) (* nx dash-end))
                   y2 (+ (:y start-pos) (* ny dash-end))]
-              (ext/draw-line-ex! {:x (float x1) :y (float y1)}
+              (rsb/draw-line-ex! {:x (float x1) :y (float y1)}
                                  {:x (float x2) :y (float y2)}
                                  (float 2.0) color)
               (recur (+ dist segment)))))))))

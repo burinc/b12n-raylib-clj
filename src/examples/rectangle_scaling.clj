@@ -16,7 +16,7 @@
    [raylib.colors :as colors]
    [raylib.enums :as enums]
    [raylib.utils :as ru]
-   [raylib-ext :as ext]
+   [raylib.core.collision :as rcol]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 
@@ -46,7 +46,7 @@
                    :y (float (+ (:y rec) (:height rec) (- MARK-SIZE)))
                    :width (float MARK-SIZE)
                    :height (float MARK-SIZE)}
-        over-mark (pos? (ext/check-collision-point-rec? mouse mark-rect))]
+        over-mark (pos? (rcol/check-collision-point-rec? mouse mark-rect))]
     (if scale-mode
       ;; Currently scaling
       (let [w (max MARK-SIZE (min (- mx (:x rec)) (- screen-width (:x rec))))

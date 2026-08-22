@@ -15,7 +15,8 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib-ext :as ext]
+   [raylib.textures.texture-loading :as rtl]
+   [raylib.utils :as ru]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 
@@ -35,11 +36,11 @@
   (rcw/init-window! screen-width screen-height "raylib [shapes] example - lines drawing")
   (rct/set-target-fps! 60)
   (debug-stats/enable!)
-  (let [canvas (ext/load-render-texture! screen-width screen-height)]
+  (let [canvas (rtl/load-render-texture! screen-width screen-height)]
     ;; Clear canvas to white
-    (ext/begin-texture-mode! canvas)
+    (rtl/begin-texture-mode! canvas)
     (rcd/clear-background! colors/raywhite)
-    (ext/end-texture-mode!)
+    (rtl/end-texture-mode!)
     (swap! game-atom assoc :canvas canvas)))
 
 (defn- v2-distance [a b]
@@ -54,9 +55,9 @@
                      false start-text)
         ;; Clear canvas on middle click
         _ (when (rcm/is-mouse-button-pressed? (:middle enums/mouse-button))
-            (ext/begin-texture-mode! canvas)
+            (rtl/begin-texture-mode! canvas)
             (rcd/clear-background! colors/raywhite)
-            (ext/end-texture-mode!))
+            (rtl/end-texture-mode!))
         ;; Draw on canvas
         left-down (rcm/is-mouse-button-down? (:left enums/mouse-button))
         right-down (rcm/is-mouse-button-down? (:right enums/mouse-button))
@@ -66,13 +67,13 @@
                                      (loop [h h] (if (>= h 360.0) (recur (- h 360.0)) h)))
                                    line-hue)
                          draw-color (if left-down
-                                      (ext/color-from-hsv (float new-hue) (float 1.0) (float 1.0))
+                                      (ru/color-from-hsv (float new-hue) (float 1.0) (float 1.0))
                                       colors/raywhite)]
-                     (ext/begin-texture-mode! canvas)
-                     (ext/draw-circle-v! prev-mouse (float (/ line-thickness 2.0)) draw-color)
-                     (ext/draw-circle-v! mouse-pos (float (/ line-thickness 2.0)) draw-color)
-                     (ext/draw-line-ex! prev-mouse mouse-pos (float line-thickness) draw-color)
-                     (ext/end-texture-mode!)
+                     (rtl/begin-texture-mode! canvas)
+                     (rsb/draw-circle-v! prev-mouse (float (/ line-thickness 2.0)) draw-color)
+                     (rsb/draw-circle-v! mouse-pos (float (/ line-thickness 2.0)) draw-color)
+                     (rsb/draw-line-ex! prev-mouse mouse-pos (float line-thickness) draw-color)
+                     (rtl/end-texture-mode!)
                      new-hue)
                    line-hue)
         ;; Update thickness from mouse wheel
@@ -90,7 +91,7 @@
   ;; Draw canvas (flipped vertically)
   (when canvas
     (let [tex (:texture canvas)]
-      (ext/draw-texture-rec!
+      (rtl/draw-texture-rec!
        tex
        {:x 0.0 :y 0.0 :width (float (:width tex)) :height (float (- (:height tex)))}
        {:x 0.0 :y 0.0}
@@ -119,5 +120,5 @@
         (draw game)
         (recur))))
   (when-let [canvas (:canvas @game-atom)]
-    (ext/unload-render-texture! canvas))
+    (rtl/unload-render-texture! canvas))
   (rcw/close-window!))

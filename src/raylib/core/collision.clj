@@ -2,6 +2,11 @@
   "Ray casting and collision detection functions"
   (:require
    [raylib.core]
+   ;; ::ray's camera param is :raylib.core.camera3d/camera3d, so that
+   ;; namespace's defalias must be registered before this one loads.
+   ;; This was an implicit dependency until 2026-08-22 - it happened to
+   ;; work because another namespace loaded camera3d first.
+   [raylib.core.camera3d]
    [raylib.structs :as rs]
    [coffi.mem :as mem :refer [defalias]]
    [coffi.ffi :refer [defcfn]]))
@@ -90,3 +95,28 @@
   {:arglists '([box center radius])}
   "CheckCollisionBoxSphere"
   [::bounding-box ::rs/vector-3 ::mem/float] ::mem/byte)
+
+;; Moved from raylib-ext (2026-08-22 consolidation)
+(defcfn check-collision-circle-rec?
+  "Check collision between circle and rectangle"
+  {:arglists '([center radius rec])}
+  "CheckCollisionCircleRec"
+  [::rs/vector-2 ::mem/float ::rs/rectangle] ::mem/byte)
+
+(defcfn check-collision-point-circle?
+  "Check if point is inside circle"
+  {:arglists '([point center radius])}
+  "CheckCollisionPointCircle"
+  [::rs/vector-2 ::rs/vector-2 ::mem/float] ::mem/byte)
+
+(defcfn check-collision-circles?
+  "Check collision between two circles"
+  {:arglists '([center1 radius1 center2 radius2])}
+  "CheckCollisionCircles"
+  [::rs/vector-2 ::mem/float ::rs/vector-2 ::mem/float] ::mem/byte)
+
+(defcfn check-collision-point-rec?
+  "Check if point is inside rectangle"
+  {:arglists '([point rec])}
+  "CheckCollisionPointRec"
+  [::rs/vector-2 ::rs/rectangle] ::mem/byte)

@@ -9,7 +9,8 @@
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
-   [raylib-ext :as ext]
+   [raylib.core.collision :as rcol]
+   [raylib.shapes.basic :as rsb]
    [debug-stats])
   (:gen-class))
 
@@ -270,7 +271,7 @@
   (mapv update-meteor-position meteors))
 
 (defn check-collision-circles [pos1 radius1 pos2 radius2]
-  (let [result (ext/check-collision-circles? pos1 (float radius1) pos2 (float radius2))]
+  (let [result (rcol/check-collision-circles? pos1 (float radius1) pos2 (float radius2))]
     ;; raylib returns byte (0 or non-zero), convert to boolean
     (if (boolean? result)
       result
@@ -497,7 +498,7 @@
             :y (- (:y pos) (* (Math/sin (* rot DEG2RAD)) (/ PLAYER_BASE_SIZE 2)))}
         v3 {:x (+ (:x pos) (* (Math/cos (* rot DEG2RAD)) (/ PLAYER_BASE_SIZE 2)))
             :y (+ (:y pos) (* (Math/sin (* rot DEG2RAD)) (/ PLAYER_BASE_SIZE 2)))}]
-    (ext/draw-triangle! v1 v2 v3 colors/maroon)))
+    (rsb/draw-triangle! v1 v2 v3 colors/maroon)))
 
 (defn draw-meteors [meteors active-color]
   (doseq [meteor meteors]
@@ -506,9 +507,9 @@
           y (int (:y pos))
           radius (:radius meteor)]
       (if (:active meteor)
-        (ext/draw-circle! x y radius active-color)
+        (rsb/draw-circle! x y radius active-color)
         ;; Faded lightgray (0.3 alpha)
-        (ext/draw-circle! x y radius {:r 200
+        (rsb/draw-circle! x y radius {:r 200
                                       :g 200
                                       :b 200
                                       :a 76})))))
@@ -520,7 +521,7 @@
             x (int (:x pos))
             y (int (:y pos))
             radius (:radius shoot)]
-        (ext/draw-circle! x y radius colors/black)))))
+        (rsb/draw-circle! x y radius colors/black)))))
 
 (defn draw-game [game]
   (rcd/begin-drawing!)
@@ -544,14 +545,14 @@
         (when (:victory game)
           (let [text "VICTORY"
                 size 20
-                width (ext/measure-text text size)]
+                width (rtd/measure-text text size)]
             (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2))) (int (/ SCREEN_HEIGHT 2)) size colors/lightgray)))
 
         ;; Draw pause message
         (when (:pause game)
           (let [text "GAME PAUSED"
                 size 40
-                width (ext/measure-text text size)]
+                width (rtd/measure-text text size)]
             (rtd/draw-text! text (int (- (/ SCREEN_WIDTH 2) (/ width 2))) (int (- (/ SCREEN_HEIGHT 2) 40)) size colors/gray)))
 
         ;; Draw controls info
@@ -564,7 +565,7 @@
       (do
         (let [text "PRESS [ENTER] TO PLAY AGAIN"
               size 20
-              width (ext/measure-text text size)]
+              width (rtd/measure-text text size)]
           (rtd/draw-text! text (int (- (/ (rcw/get-screen-width) 2) (/ width 2)))
                           (int (- (/ (rcw/get-screen-height) 2) 50)) size colors/gray))
         ;; Draw debug stats even on game over screen

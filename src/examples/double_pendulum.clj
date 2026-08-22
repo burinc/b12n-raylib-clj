@@ -12,7 +12,8 @@
    [raylib.core.drawing :as rcd]
    [raylib.colors :as colors]
    [raylib.utils :as ru]
-   [raylib-ext :as ext]
+   [raylib.shapes.basic :as rsb]
+   [raylib.textures.texture-loading :as rtl]
    [raylib.nrepl :as nrepl]
    [debug-stats]))
 
@@ -50,12 +51,12 @@
   (rcw/init-window! screen-width screen-height "raylib [shapes] example - double pendulum")
   (rct/set-target-fps! 60)
   (debug-stats/enable!)
-  (let [target (ext/load-render-texture! screen-width screen-height)]
+  (let [target (rtl/load-render-texture! screen-width screen-height)]
     (swap! game-atom assoc :target target)
     ;; Clear the render texture to black
-    (ext/begin-texture-mode! target)
+    (rtl/begin-texture-mode! target)
     (rcd/clear-background! colors/black)
-    (ext/end-texture-mode!)))
+    (rtl/end-texture-mode!)))
 
 (defn- physics-step [{:keys [l1 m1 theta1 w1 l2 m2 theta2 w2 length-scaler]} step]
   (let [big-l1 (* l1 length-scaler)
@@ -105,15 +106,15 @@
                  :y (float (+ (- (/ screen-height 2.0) 100) (:y cur)))}]
     ;; Draw trail to render texture
     (when target
-      (ext/begin-texture-mode! target)
+      (rtl/begin-texture-mode! target)
       ;; Fade effect - smaller alpha = longer trails
-      (ext/draw-rectangle-rec!
+      (rsb/draw-rectangle-rec!
        {:x 0.0 :y 0.0 :width (float screen-width) :height (float screen-height)}
        (ru/fade colors/black (float 0.01)))
       ;; Draw trail segment
-      (ext/draw-circle-v! prev-pos (float 2.0) colors/red)
-      (ext/draw-line-ex! prev-pos cur-pos (float 4.0) colors/red)
-      (ext/end-texture-mode!))
+      (rsb/draw-circle-v! prev-pos (float 2.0) colors/red)
+      (rsb/draw-line-ex! prev-pos cur-pos (float 4.0) colors/red)
+      (rtl/end-texture-mode!))
     (merge state result {:prev-pos cur-pos})))
 
 (defn draw [{:keys [target l1 l2 theta1 theta2]}]
@@ -123,7 +124,7 @@
   ;; Draw trails texture (flipped vertically because render textures are upside down)
   (when target
     (let [tex (:texture target)]
-      (ext/draw-texture-rec!
+      (rtl/draw-texture-rec!
        tex
        {:x 0.0 :y 0.0 :width (float (:width tex)) :height (float (- (:height tex)))}
        {:x 0.0 :y 0.0}
@@ -135,14 +136,14 @@
         line-thick 20.0
         e1 (pendulum-endpoint l1 theta1)]
     ;; First arm
-    (ext/draw-rectangle-pro!
+    (rsb/draw-rectangle-pro!
      {:x (float pivot-x) :y (float pivot-y)
       :width (float (* 10 l1)) :height (float line-thick)}
      {:x 0.0 :y (float (* line-thick 0.5))}
      (float (- 90 (* RAD2DEG theta1)))
      colors/raywhite)
     ;; Second arm
-    (ext/draw-rectangle-pro!
+    (rsb/draw-rectangle-pro!
      {:x (float (+ pivot-x (:x e1))) :y (float (+ pivot-y (:y e1)))
       :width (float (* 10 l2)) :height (float line-thick)}
      {:x 0.0 :y (float (* line-thick 0.5))}
@@ -162,5 +163,5 @@
         (draw game)
         (recur))))
   (when-let [target (:target @game-atom)]
-    (ext/unload-render-texture! target))
+    (rtl/unload-render-texture! target))
   (rcw/close-window!))
