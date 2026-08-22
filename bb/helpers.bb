@@ -428,6 +428,11 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "easings-testbed"
+    :category :shapes
+    :title "Easings Testbed"
+    :desc "All 28 easing curves, one per axis"
+    :controls "LEFT/RIGHT x-curve, UP/DOWN y-curve, ENTER play, SPACE restart, Q/W/A/S duration, T bound"}
    {:alias "undo-redo"
     :category :core
     :title "Undo Redo"

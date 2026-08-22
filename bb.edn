@@ -367,6 +367,9 @@
   double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
                    :task (h/run-example! "double-pendulum")}
 
+  easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
+                  :task (h/run-example! "easings-testbed")}
+
   undo-redo {:doc "📦 Undo Redo - ring-buffer undo history on a grid"
             :task (h/run-example! "undo-redo")}
 
