@@ -1,4 +1,4 @@
-# The example catalog: 78 raylib examples
+# The example catalog: 91 raylib examples
 
 A map of the whole suite. Each example is one namespace under
 `src/examples/` (or `src/examples/games/`, `src/examples/models/`),
@@ -48,7 +48,7 @@ from" cell on this page cites. `snake.c` and `floppy.c` come from its
 2021 Ramon Santamaria (@raysan5)", matching this example's own docstring
 credit).
 
-## 📦 Core (23)
+## 📦 Core (32)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
@@ -75,8 +75,17 @@ credit).
 | [<img src="../demos/window-should-close.gif" width="80">](demos.md#window-should-close) | `window-should-close` | Window Should Close | Custom close confirmation | Y/N to confirm/cancel | `core_window_should_close.c` |
 | [<img src="../demos/camera-2d-platformer.gif" width="80">](demos.md#camera-2d-platformer) | `camera-2d-platformer` | Camera 2D Platformer | 5 camera follow modes | Arrows, SPACE, C, R, Wheel | `core_2d_camera_platformer.c` |
 | [<img src="../demos/window-letterbox.gif" width="80">](demos.md#window-letterbox) | `window-letterbox` | Window Letterbox | Resolution-independent rendering | SPACE, Resize window | `core_window_letterbox.c` |
+| [<img src="../demos/storage-values.gif" width="80">](demos.md#storage-values) | `storage-values` | Storage Values | Save and load scores to a file | R, ENTER, SPACE | `core_storage_values.c` |
+| [<img src="../demos/input-virtual-controls.gif" width="80">](demos.md#input-virtual-controls) | `input-virtual-controls` | Input Virtual Controls | On-screen D-pad | Click the pad | `core_input_virtual_controls.c` |
+| [<img src="../demos/input-gestures.gif" width="80">](demos.md#input-gestures) | `input-gestures` | Input Gestures | Log of detected touch gestures | Click, drag, swipe | `core_input_gestures.c` |
+| [<img src="../demos/camera-2d-split-screen.gif" width="80">](demos.md#camera-2d-split-screen) | `camera-2d-split-screen` | Camera 2D Split Screen | Two players, two cameras, one grid | W/S/A/D, Arrow keys | `core_2d_camera_split_screen.c` |
+| [<img src="../demos/render-texture.gif" width="80">](demos.md#render-texture) | `render-texture` | Render Texture | Bouncing ball drawn into an offscreen target | Watch | `core_render_texture.c` |
+| [<img src="../demos/smooth-pixelperfect.gif" width="80">](demos.md#smooth-pixelperfect) | `smooth-pixelperfect` | Smooth Pixelperfect | Pixel-aligned world, sub-pixel smooth camera | Watch | `core_smooth_pixelperfect.c` |
+| [<img src="../demos/delta-time.gif" width="80">](demos.md#delta-time) | `delta-time` | Delta Time | Frame-rate independent vs fixed-step motion | R to restart | `core_delta_time.c` |
+| [<img src="../demos/camera-3d-mode.gif" width="80">](demos.md#camera-3d-mode) | `camera-3d-mode` | Camera 3D Mode | Minimal 3D scene, cube on a grid | Watch | `core_3d_camera_mode.c` |
+| [<img src="../demos/input-multitouch.gif" width="80">](demos.md#input-multitouch) | `input-multitouch` | Input Multitouch | Numbered circle per touch point | Hold the mouse | `core_input_multitouch.c` |
 
-## 🔷 Shapes (15)
+## 🔷 Shapes (18)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
@@ -95,6 +104,9 @@ credit).
 | [<img src="../demos/double-pendulum.gif" width="80">](demos.md#double-pendulum) | `double-pendulum` | Double Pendulum | Chaotic pendulum simulation | ESC to exit | `shapes_double_pendulum.c` |
 | [<img src="../demos/lines-drawing.gif" width="80">](demos.md#lines-drawing) | `lines-drawing` | Lines Drawing | Draw rainbow lines on canvas | Click, Right-click, Wheel, Middle | `shapes_lines_drawing.c` |
 | [<img src="../demos/easings-rectangles.gif" width="80">](demos.md#easings-rectangles) | `easings-rectangles` | Easings Rectangles | Grid animation with easing functions | SPACE to replay | `shapes_easings_rectangles.c` |
+| [<img src="../demos/clock-of-clocks.gif" width="80">](demos.md#clock-of-clocks) | `clock-of-clocks` | Clock of Clocks | Digits drawn from a grid of analogue clocks | SPACE | `shapes_clock_of_clocks.c` |
+| [<img src="../demos/ellipse-collision.gif" width="80">](demos.md#ellipse-collision) | `ellipse-collision` | Ellipse Collision | Steer one ellipse into another | A, B, move mouse | `shapes_ellipse_collision.c` |
+| [<img src="../demos/math-angle-rotation.gif" width="80">](demos.md#math-angle-rotation) | `math-angle-rotation` | Math Angle Rotation | Fixed and sweeping angle lines | Watch | `shapes_math_angle_rotation.c` |
 
 ## 📝 Text (3)
 
@@ -104,12 +116,13 @@ credit).
 | [<img src="../demos/format-text.gif" width="80">](demos.md#format-text) | `format-text` | Format Text | Formatted score/timer display | ESC to exit | `text_format_text.c` |
 | [<img src="../demos/input-box.gif" width="80">](demos.md#input-box) | `input-box` | Input Box | Text input field | Click, type, Backspace | `text_input_box.c` |
 
-## 🖼️ Textures (2)
+## 🖼️ Textures (3)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
 | [<img src="../demos/background-scrolling.gif" width="80">](demos.md#background-scrolling) | `background-scrolling` | Background Scrolling | Parallax demo | Watch | `textures_background_scrolling.c` |
 | [<img src="../demos/sprite-animation.gif" width="80">](demos.md#sprite-animation) | `sprite-animation` | Sprite Animation | Spritesheet | LEFT/RIGHT | `textures_sprite_animation.c` |
+| [<img src="../demos/srcrec-dstrec.gif" width="80">](demos.md#srcrec-dstrec) | `srcrec-dstrec` | Srcrec Dstrec | Source/destination rects with rotation | Watch | `textures_srcrec_dstrec.c` |
 
 ## ✨ Shaders (1)
 

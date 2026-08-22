@@ -5,7 +5,7 @@ in Clojure. It calls raylib's C library directly through
 [coffi](https://github.com/IGJoshua/coffi) over JDK 22+'s Foreign Function &
 Memory API (Project Panama): no wrapper library, no codegen.
 
-78 examples ship in `src/examples/`: original games plus ports of raylib's own
+91 examples ship in `src/examples/`: original games plus ports of raylib's own
 C examples across the core, shapes, text, textures, shaders, audio, and models
 categories.
 
@@ -270,7 +270,7 @@ Full guide: [`docs/guide/`](docs/guide/index.md)
   the shared example skeleton and the recipe for porting a new one
 - [`repl-workflow.md`](docs/guide/repl-workflow.md): live game
   development over the embedded nREPL
-- [`example-catalog.md`](docs/guide/example-catalog.md): all 78
+- [`example-catalog.md`](docs/guide/example-catalog.md): all 91
   examples, grouped and tabulated, with a preview-thumbnail column
 - [`demos.md`](docs/guide/demos.md): the full-size demo gallery (every
   example's animated GIF, one-line description)
