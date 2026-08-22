@@ -428,6 +428,11 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "undo-redo"
+    :category :core
+    :title "Undo Redo"
+    :desc "Ring-buffer undo history on a grid"
+    :controls "Arrows move, SPACE colour, CTRL+Z undo, CTRL+Y redo, Q exit"}
    {:alias "storage-values"
     :category :core
     :title "Storage Values"

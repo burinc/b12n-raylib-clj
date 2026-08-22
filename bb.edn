@@ -367,6 +367,9 @@
   double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
                    :task (h/run-example! "double-pendulum")}
 
+  undo-redo {:doc "📦 Undo Redo - ring-buffer undo history on a grid"
+            :task (h/run-example! "undo-redo")}
+
   storage-values {:doc "📦 Storage Values - save and load scores to a file"
                  :task (h/run-example! "storage-values")}
 
