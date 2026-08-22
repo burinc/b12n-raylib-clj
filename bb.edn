@@ -313,6 +313,12 @@
   double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
                    :task (h/run-example! "double-pendulum")}
 
+  camera-3d-mode {:doc "📦 Camera 3D Mode - minimal 3d scene - cube on a grid"
+                 :task (h/run-example! "camera-3d-mode")}
+
+  input-multitouch {:doc "📦 Input Multitouch - numbered circle per touch point"
+                   :task (h/run-example! "input-multitouch")}
+
   ellipse-collision {:doc "🔷 Ellipse Collision - steer one ellipse into another"
                      :task (h/run-example! "ellipse-collision")}
 

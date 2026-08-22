@@ -427,6 +427,16 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "camera-3d-mode"
+    :category :core
+    :title "Camera 3D Mode"
+    :desc "Minimal 3D scene - cube on a grid"
+    :controls "Q to exit"}
+   {:alias "input-multitouch"
+    :category :core
+    :title "Input Multitouch"
+    :desc "Numbered circle per touch point"
+    :controls "Touch/click, Q to exit"}
    {:alias "ellipse-collision"
     :category :shapes
     :title "Ellipse Collision"
