@@ -443,6 +443,11 @@
     :title "Viewport Scaling"
     :desc "Six ways to fit a fixed-resolution game onto a resizable window"
     :controls "Click < > to change resolution and viewport type, resize the window"}
+   {:alias "keyboard-testbed"
+    :category :core
+    :title "Keyboard Testbed"
+    :desc "On-screen ENG-US keyboard showing what raylib reports per key"
+    :controls "Press any key to light it up, hover to highlight, close via title bar"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"

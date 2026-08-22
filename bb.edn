@@ -376,6 +376,9 @@
   viewport-scaling {:doc "🖼️  Viewport Scaling - six ways to fit a game onto a resizable window"
                    :task (h/run-example! "viewport-scaling")}
 
+  keyboard-testbed {:doc "⌨️  Keyboard Testbed - on-screen keyboard showing what raylib reports"
+                   :task (h/run-example! "keyboard-testbed")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 
