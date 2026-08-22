@@ -433,6 +433,11 @@
     :title "Penrose Tile"
     :desc "L-system Penrose tiling drawn by turtle"
     :controls "UP/DOWN change generations, Q to exit"}
+   {:alias "bullet-hell"
+    :category :shapes
+    :title "Bullet Hell"
+    :desc "Throughput test firing rows of bullets from a rotating circle"
+    :controls "RIGHT/LEFT rows, UP/DOWN speed, Z/X cooldown, SPACE angle, ENTER draw method, C clear"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"

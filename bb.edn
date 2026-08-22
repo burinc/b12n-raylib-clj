@@ -370,6 +370,9 @@
   penrose-tile {:doc "🔷 Penrose Tile - l-system penrose tiling drawn by turtle"
                :task (h/run-example! "penrose-tile")}
 
+  bullet-hell {:doc "🔴 Bullet Hell - throughput test firing rows of bullets"
+              :task (h/run-example! "bullet-hell")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 
