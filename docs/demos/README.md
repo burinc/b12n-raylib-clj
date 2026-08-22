@@ -362,6 +362,12 @@ Throughput test firing rows of bullets from a rotating circle
 
 ![bullet-hell](bullet-hell.gif)
 
+### circle-sector-drawing
+
+Circle sector angles, radius and segments on raygui sliders
+
+![circle-sector-drawing](circle-sector-drawing.gif)
+
 ### easings-testbed
 
 All 28 easing curves, one per axis

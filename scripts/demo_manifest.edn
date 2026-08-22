@@ -55,7 +55,16 @@
  ;; input (e.g. "ESC to exit" only) — recorded as-is, same as most of
  ;; b12n-rljlt's own manifest.
  :overrides
- {;; The six 2026-08-23 ports. bullet-hell and penrose-tile self-animate
+ {;; Drags the four raygui sliders. This is also the visual proof that the
+  ;; ported controls track the pointer and hold a drag: each :drag sweeps a
+  ;; slider and the sector redraws to match.
+  "circle-sector-drawing" {:input [[0.5 :drag 660 50 700 50]    ; StartAngle up
+                                   [1.5 :drag 660 80 620 80]    ; EndAngle down
+                                   [2.5 :drag 660 150 710 150]  ; Radius up
+                                   [3.5 :drag 660 180 610 180]  ; Segments down -> AUTO
+                                   [4.5 :drag 610 180 690 180]  ; Segments up -> MANUAL
+                                   [5.5 :move 660 50]]}
+;; The six 2026-08-23 ports. bullet-hell and penrose-tile self-animate
   ;; (bullets fire continuously; the tiling reveals itself), so they need
   ;; no steering. The four below are static until something happens.
   ;;

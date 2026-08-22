@@ -453,6 +453,11 @@
     :title "Input Actions"
     :desc "Remappable action layer over keys and gamepad buttons"
     :controls "WASD or arrows to move, SPACE to recentre, TAB swaps keyset"}
+   {:alias "circle-sector-drawing"
+    :category :shapes
+    :title "Circle Sector Drawing"
+    :desc "Circle sector angles, radius and segments on raygui sliders"
+    :controls "Drag the four sliders on the right"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"

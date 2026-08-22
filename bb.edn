@@ -382,6 +382,9 @@
   input-actions {:doc "🎯 Input Actions - remappable action layer over keys and gamepad"
                 :task (h/run-example! "input-actions")}
 
+  circle-sector-drawing {:doc "🥧 Circle Sector Drawing - sector params on raygui sliders"
+                        :task (h/run-example! "circle-sector-drawing")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 
