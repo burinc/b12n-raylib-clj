@@ -313,6 +313,12 @@
   double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
                    :task (h/run-example! "double-pendulum")}
 
+  render-texture {:doc "📦 Render Texture - bouncing ball drawn into an offscreen target"
+                 :task (h/run-example! "render-texture")}
+
+  smooth-pixelperfect {:doc "📦 Smooth Pixelperfect - pixel-aligned world, sub-pixel smooth camera"
+                      :task (h/run-example! "smooth-pixelperfect")}
+
   srcrec-dstrec {:doc "🖼️ Srcrec Dstrec - source/destination rects with rotation"
                 :task (h/run-example! "srcrec-dstrec")}
 

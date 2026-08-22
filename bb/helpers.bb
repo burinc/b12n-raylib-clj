@@ -427,6 +427,16 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "render-texture"
+    :category :core
+    :title "Render Texture"
+    :desc "Bouncing ball drawn into an offscreen target"
+    :controls "Q to exit"}
+   {:alias "smooth-pixelperfect"
+    :category :core
+    :title "Smooth Pixelperfect"
+    :desc "Pixel-aligned world, sub-pixel smooth camera"
+    :controls "Q to exit"}
    {:alias "srcrec-dstrec"
     :category :textures
     :title "Srcrec Dstrec"
