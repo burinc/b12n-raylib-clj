@@ -313,6 +313,12 @@
   double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
                    :task (h/run-example! "double-pendulum")}
 
+  ellipse-collision {:doc "🔷 Ellipse Collision - steer one ellipse into another"
+                     :task (h/run-example! "ellipse-collision")}
+
+  math-angle-rotation {:doc "🔷 Math Angle Rotation - fixed and sweeping angle lines"
+                       :task (h/run-example! "math-angle-rotation")}
+
   lines-drawing {:doc "🔷 Lines Drawing - draw rainbow lines on canvas"
                  :task (h/run-example! "lines-drawing")}
 

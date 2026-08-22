@@ -427,6 +427,16 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "ellipse-collision"
+    :category :shapes
+    :title "Ellipse Collision"
+    :desc "Steer one ellipse into another"
+    :controls "A/B to switch control, Mouse to move, Q to exit"}
+   {:alias "math-angle-rotation"
+    :category :shapes
+    :title "Math Angle Rotation"
+    :desc "Fixed and sweeping angle lines"
+    :controls "Q to exit"}
    {:alias "lines-drawing"
     :category :shapes
     :title "Lines Drawing"
