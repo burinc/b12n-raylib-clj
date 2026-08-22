@@ -180,6 +180,60 @@ Logo animation
 
 ![logo-anim](logo-anim.gif)
 
+### storage-values
+
+Save and load scores to a file
+
+![storage-values](storage-values.gif)
+
+### input-virtual-controls
+
+On-screen D-pad
+
+![input-virtual-controls](input-virtual-controls.gif)
+
+### input-gestures
+
+Log of detected touch gestures
+
+![input-gestures](input-gestures.gif)
+
+### camera-2d-split-screen
+
+Two players, two cameras, one grid
+
+![camera-2d-split-screen](camera-2d-split-screen.gif)
+
+### render-texture
+
+Bouncing ball drawn into an offscreen target
+
+![render-texture](render-texture.gif)
+
+### smooth-pixelperfect
+
+Pixel-aligned world, sub-pixel smooth camera
+
+![smooth-pixelperfect](smooth-pixelperfect.gif)
+
+### delta-time
+
+Frame-rate independent vs fixed-step motion
+
+![delta-time](delta-time.gif)
+
+### camera-3d-mode
+
+Minimal 3D scene - cube on a grid
+
+![camera-3d-mode](camera-3d-mode.gif)
+
+### input-multitouch
+
+Numbered circle per touch point
+
+![input-multitouch](input-multitouch.gif)
+
 ### window-should-close
 
 Custom close confirmation
@@ -278,6 +332,24 @@ Chaotic pendulum simulation
 
 ![double-pendulum](double-pendulum.gif)
 
+### clock-of-clocks
+
+Digits drawn from a grid of analogue clocks
+
+![clock-of-clocks](clock-of-clocks.gif)
+
+### ellipse-collision
+
+Steer one ellipse into another
+
+![ellipse-collision](ellipse-collision.gif)
+
+### math-angle-rotation
+
+Fixed and sweeping angle lines
+
+![math-angle-rotation](math-angle-rotation.gif)
+
 ### lines-drawing
 
 Draw rainbow lines on canvas
@@ -303,6 +375,12 @@ Parallax demo
 Spritesheet
 
 ![sprite-animation](sprite-animation.gif)
+
+### srcrec-dstrec
+
+Source/destination rects with rotation
+
+![srcrec-dstrec](srcrec-dstrec.gif)
 
 ## 🔊 Audio Examples
 
