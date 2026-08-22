@@ -92,8 +92,12 @@ covers what actually happens under `defcfn`, if you want the layer below that.
 ## Demo GIFs
 
 You don't need to record anything. Every GIF under `docs/demos/` is committed.
-`bb record` drives a screen-capture tool that is not publicly released, so it
-is maintainer-only; the task says so and exits cleanly rather than failing
+`bb record:status` tells you which GIFs are missing, stale or current. It reads
+the ledger and hashes source files, so it needs no capture tool and anyone can
+run it — useful for confirming a new example still needs recording.
+
+`bb record` and `bb record:new` drive a screen-capture tool that is not
+publicly released, so they are maintainer-only; the task says so and exits cleanly rather than failing
 obscurely. If your example would look better with a specific input sequence in
 its demo, add an `:overrides` entry for it in `scripts/demo_manifest.edn` and
 mention it in your PR; a maintainer will record it.

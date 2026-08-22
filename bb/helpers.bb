@@ -2,6 +2,7 @@
   "Shared helper functions for bb tasks"
   (:require [babashka.process :as p]
             [babashka.fs :as fs]
+            [clojure.edn :as edn]
             [clojure.string :as str]))
 
 ;; =============================================================================
@@ -611,3 +612,58 @@
   (println "   bb asteroids")
   (println "   bb camera-2d")
   (println "   bb basic-lighting"))
+
+;; =============================================================================
+;; Demo recording status
+;; =============================================================================
+;;
+;; screen-grab decides what to re-record by hashing each example's SOURCE file
+;; and comparing against docs/demos/ledger.edn. That is the right default for
+;; a maintainer keeping GIFs honest, but it conflates two very different
+;; things:
+;;
+;;   MISSING - no GIF exists. The example has never been recorded.
+;;   STALE   - a GIF exists, but the source changed since it was recorded.
+;;
+;; A refactor that touches many example files - renaming a namespace, say -
+;; marks dozens STALE without altering a single pixel they draw. After the
+;; 2026-08-22 raylib_ext consolidation, 49 examples went stale that way while
+;; only 13 were genuinely missing. Re-recording all 62 costs an hour of
+;; window-grabbing to reproduce 49 identical files.
+;;
+;; So `demo-status` separates the two, and `bb record:new` records only the
+;; MISSING set.
+
+(defn example-src
+  "Path to an example's source file, derived the same way scripts do: from
+   the namespace in deps.edn's :main-opts, NOT from the alias string.
+   Deriving it differently would compute different shas and invalidate the
+   whole ledger."
+  [aliases alias]
+  (let [main-opts (:main-opts (get aliases (keyword alias)))
+        ns-str (str (second (drop-while (fn [x] (not= "-m" x)) main-opts)))]
+    (str "src/" (str/replace (str/replace ns-str "." "/") "-" "_") ".clj")))
+
+(defn- sha256 [path]
+  (when (fs/exists? path)
+    (let [md (java.security.MessageDigest/getInstance "SHA-256")]
+      (apply str (map (fn [b] (format "%02x" b)) (.digest md (fs/read-all-bytes path)))))))
+
+(defn demo-status
+  "Classify every registered example as :missing, :stale or :current.
+
+   Reads docs/demos/ledger.edn and deps.edn; needs neither screen-grab nor a
+   window, so a contributor without the capture tool can still run it."
+  []
+  (let [ledger (if (fs/exists? "docs/demos/ledger.edn")
+                 (edn/read-string (slurp "docs/demos/ledger.edn"))
+                 {})
+        aliases (:aliases (edn/read-string (slurp "deps.edn")))]
+    (for [{:keys [alias]} examples]
+      (let [gif (str "docs/demos/" alias ".gif")
+            entry (get ledger alias)
+            state (cond
+                    (not (fs/exists? gif)) :missing
+                    (not= (:sha entry) (sha256 (example-src aliases alias))) :stale
+                    :else :current)]
+        {:alias alias :state state}))))

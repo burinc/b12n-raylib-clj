@@ -280,7 +280,9 @@ Full guide: [`docs/guide/`](docs/guide/index.md)
   example
 
 Every GIF under `docs/demos/` is committed, so you never need to record
-anything. Regenerating them (`bb record`) drives a screen-capture tool that
+anything. `bb record:status` shows which are missing or stale and needs no
+extra tooling. Regenerating them (`bb record`, or `bb record:new` for just the
+ones never recorded) drives a screen-capture tool that
 is not publicly released, so it is maintainer-only; the task says so and
 exits cleanly rather than failing obscurely. Its input timelines live in
 [`scripts/demo_manifest.edn`](scripts/demo_manifest.edn) if you want to

@@ -46,6 +46,60 @@
              (h/info "entry in scripts/demo_manifest.edn and mention it in your PR.")
              (System/exit 0)))}
 
+  record:status
+  {:doc "Which demo GIFs are missing, stale or current (no recording, no screen-grab needed)"
+   ;; Safe for anyone: reads the ledger and hashes source files, nothing else.
+   :task (let [rows (h/demo-status)
+               by (group-by :state rows)
+               show (fn [state label]
+                      (let [xs (sort (map :alias (get by state)))]
+                        (println (str "  " label " " (count xs)))
+                        (doseq [g (partition-all 4 xs)]
+                          (println (str "      " (str/join "  " g))))))]
+           (h/header "🎬 Demo recording status")
+           (show :missing "missing (never recorded):")
+           (show :stale   "stale   (source changed since recording):")
+           (println (str "  current " (count (get by :current))))
+           (println)
+           (h/info "bb record:new   records only the missing ones")
+           (h/info "bb record       records missing AND stale (screen-grab's default)"))}
+
+  record:new
+  {:doc "Record demo GIFs for examples that have none yet - skips stale ones: bb record:new [--dry-run]"
+   ;; The reason this exists rather than just using `bb record`: screen-grab
+   ;; treats "source changed" as needing a re-record, so a refactor touching
+   ;; many example files marks dozens stale without changing what they draw.
+   ;; This records only what has never been recorded.
+   ;;
+   ;; Maintainer-only, like `bb record` - screen-grab is not publicly released.
+   :task (let [missing (sort (map :alias (filter (fn [r] (= :missing (:state r)))
+                                                 (h/demo-status))))]
+           (cond
+             (empty? missing)
+             (h/success "Every example already has a demo GIF - nothing to record.")
+
+             (not (fs/which "screen-grab"))
+             (do (h/error-msg "`bb record:new` is maintainer-only - the screen-grab CLI it drives is not publicly released.")
+                 (h/info (str (count missing) " example(s) have no GIF: " (str/join ", " missing)))
+                 (h/info "A maintainer will record them; every committed GIF is already in docs/demos/.")
+                 (System/exit 0))
+
+             :else
+             (do
+               (h/info (str "Recording " (count missing) " example(s) with no GIF:"))
+               (doseq [g (partition-all 4 missing)]
+                 (println (str "    " (str/join "  " g))))
+               (println)
+               ;; --only takes exact ids here. It also matches by PREFIX, so an
+               ;; id that prefixes another would pull the other in too; that
+               ;; would only re-record an already-good GIF, never skip one.
+               (let [{:keys [exit]} (apply shell {:continue true}
+                                           "screen-grab" "record"
+                                           "--manifest" "scripts/demo_manifest.edn"
+                                           "--only" (str/join "," missing)
+                                           *command-line-args*)]
+                 (System/exit exit)))))}
+
   demos:examples
   {:doc "Print the demo item list as EDN for screen-grab"
    :requires ([bb.helpers :as h]
