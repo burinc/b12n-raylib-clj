@@ -1,4 +1,4 @@
-# The example catalog: 91 raylib examples
+# The example catalog: 97 raylib examples
 
 A map of the whole suite. Each example is one namespace under
 `src/examples/` (or `src/examples/games/`, `src/examples/models/`),
@@ -48,7 +48,7 @@ from" cell on this page cites. `snake.c` and `floppy.c` come from its
 2021 Ramon Santamaria (@raysan5)", matching this example's own docstring
 credit).
 
-## 📦 Core (32)
+## 📦 Core (35)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
@@ -84,8 +84,11 @@ credit).
 | [<img src="../demos/delta-time.gif" width="80">](demos.md#delta-time) | `delta-time` | Delta Time | Frame-rate independent vs fixed-step motion | R to restart | `core_delta_time.c` |
 | [<img src="../demos/camera-3d-mode.gif" width="80">](demos.md#camera-3d-mode) | `camera-3d-mode` | Camera 3D Mode | Minimal 3D scene, cube on a grid | Watch | `core_3d_camera_mode.c` |
 | [<img src="../demos/input-multitouch.gif" width="80">](demos.md#input-multitouch) | `input-multitouch` | Input Multitouch | Numbered circle per touch point | Hold the mouse | `core_input_multitouch.c` |
+| [<img src="../demos/viewport-scaling.gif" width="80">](demos.md#viewport-scaling) | `viewport-scaling` | Viewport Scaling | Six ways to fit a fixed-resolution game onto a resizable window | Click &lt; &gt;, resize window | `core_viewport_scaling.c` |
+| [<img src="../demos/keyboard-testbed.gif" width="80">](demos.md#keyboard-testbed) | `keyboard-testbed` | Keyboard Testbed | On-screen ENG-US keyboard showing what raylib reports per key | Press keys, hover | `core_keyboard_testbed.c` |
+| [<img src="../demos/undo-redo.gif" width="80">](demos.md#undo-redo) | `undo-redo` | Undo Redo | Ring-buffer undo history on a grid | Arrows, SPACE, CTRL+Z/Y | `core_undo_redo.c` |
 
-## 🔷 Shapes (18)
+## 🔷 Shapes (21)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
@@ -107,6 +110,9 @@ credit).
 | [<img src="../demos/clock-of-clocks.gif" width="80">](demos.md#clock-of-clocks) | `clock-of-clocks` | Clock of Clocks | Digits drawn from a grid of analogue clocks | SPACE | `shapes_clock_of_clocks.c` |
 | [<img src="../demos/ellipse-collision.gif" width="80">](demos.md#ellipse-collision) | `ellipse-collision` | Ellipse Collision | Steer one ellipse into another | A, B, move mouse | `shapes_ellipse_collision.c` |
 | [<img src="../demos/math-angle-rotation.gif" width="80">](demos.md#math-angle-rotation) | `math-angle-rotation` | Math Angle Rotation | Fixed and sweeping angle lines | Watch | `shapes_math_angle_rotation.c` |
+| [<img src="../demos/penrose-tile.gif" width="80">](demos.md#penrose-tile) | `penrose-tile` | Penrose Tile | L-system Penrose tiling drawn by turtle | UP/DOWN generations | `shapes_penrose_tile.c` |
+| [<img src="../demos/bullet-hell.gif" width="80">](demos.md#bullet-hell) | `bullet-hell` | Bullet Hell | Rows of bullets fired from a rotating circle | Arrows, Z/X, SPACE, ENTER | `shapes_bullet_hell.c` |
+| [<img src="../demos/easings-testbed.gif" width="80">](demos.md#easings-testbed) | `easings-testbed` | Easings Testbed | All 28 easing curves, one per axis | Arrows pick curves, ENTER plays | `shapes_easings_testbed.c` |
 
 ## 📝 Text (3)
 

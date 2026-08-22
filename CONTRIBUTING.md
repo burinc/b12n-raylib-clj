@@ -38,7 +38,7 @@ Run the gate. It is fast and opens no window:
 bb check          # compile every namespace under src/, then clj-kondo
 ```
 
-Step 1 requires all 104 namespaces; this is the check that catches a new
+Step 1 requires all 123 namespaces; this is the check that catches a new
 example whose requires are broken, which is the easiest mistake to make and
 the one a passing `bb <your-example>` will not reveal (you only ran one).
 

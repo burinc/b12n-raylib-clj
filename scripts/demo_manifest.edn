@@ -55,7 +55,58 @@
  ;; input (e.g. "ESC to exit" only) — recorded as-is, same as most of
  ;; b12n-rljlt's own manifest.
  :overrides
- {;; games — "replay"/"start" keys fire early (0.3-0.5s) so a full
+ {;; The six 2026-08-23 ports. bullet-hell and penrose-tile self-animate
+  ;; (bullets fire continuously; the tiling reveals itself), so they need
+  ;; no steering. The four below are static until something happens.
+  ;;
+  ;; Note what each one relies on. easings-testbed, undo-redo and
+  ;; viewport-scaling all react to input with a PERSISTENT state change -
+  ;; an animation starts, a cursor moves, a viewport mode changes - so a
+  ;; single instantaneous cgevent keypress is enough; the result stays on
+  ;; screen for many frames. keyboard-testbed is the exception: a key only
+  ;; lights up WHILE held, and `cgevent key` presses and releases in one
+  ;; go, so at 10fps a tap rarely coincides with a captured frame. Its
+  ;; demo therefore leans on the mouse-hover highlight, which persists
+  ;; wherever the cursor is left; the keypresses are a bonus if they land.
+  "viewport-scaling"   {:input [[0.4 :move 400 300]
+                                [0.8 :click 220 50]   ; type >   -> keep-height-integer
+                                [1.4 :move 250 200]
+                                [1.8 :click 220 50]   ; type >   -> keep-width-integer
+                                [2.4 :move 550 320]
+                                [2.8 :click 220 35]   ; res >    -> 256x240
+                                [3.4 :move 300 380]
+                                [3.8 :click 220 50]   ; type >   -> keep-aspect
+                                [4.4 :move 600 150]
+                                [4.8 :click 220 35]   ; res >    -> 320x180
+                                [5.4 :move 400 250]]}
+  ;; Hover points are key centres from the layout table in
+  ;; examples/keyboard_testbed.clj: rows start at y 80/114/156/198/240/282
+  ;; and x from 26. ESC, then the home row, then SPACE, then QWE.
+  "keyboard-testbed"   {:input [[0.3 :move 48 95]     ; ESC
+                                [0.8 :move 120 217] [1.0 :key "a"]
+                                [1.5 :move 170 217] [1.7 :key "s"]
+                                [2.2 :move 218 217] [2.4 :key "d"]
+                                [2.9 :move 312 301] [3.1 :key "space"]
+                                [3.6 :move 102 175] [3.8 :key "q"]
+                                [4.3 :move 151 175] [4.5 :key "w"]
+                                [5.0 :move 200 175] [5.2 :key "e"]]}
+  "easings-testbed"    {:input [[0.4 :key "return"]   ; play
+                                [2.0 :key "right"]    ; next x curve
+                                [2.4 :key "return"]
+                                [3.6 :key "up"]       ; next y curve
+                                [4.0 :key "return"]
+                                [5.2 :key "right"]]}
+  ;; Q exits this one, so it stays out of the timeline.
+  "undo-redo"          {:input [[0.4 :key "right"] [0.7 :key "right"]
+                                [1.0 :key "down"] [1.3 :key "space"]
+                                [1.7 :key "right"] [2.0 :key "down"]
+                                [2.3 :key "space"] [2.7 :key "left"]
+                                [3.0 :key "up"]
+                                [3.4 :key "control + z"] [3.8 :key "control + z"]
+                                [4.2 :key "control + z"]
+                                [4.7 :key "control + y"] [5.1 :key "control + y"]
+                                [5.5 :key "space"]]}
+;; games — "replay"/"start" keys fire early (0.3-0.5s) so a full
   ;; play/animation cycle fits inside the capture window; per-tick
   ;; steering keys are spread across it like b12n-rljlt's manifest.
   "pong"               {:input [[0.5 :key "enter"] [1.0 :key "w"] [1.5 :key "k"]

@@ -12,16 +12,32 @@ Examples read at <https://raylib-clj.b12n.app>.
 
 ## Unreleased
 
-- 13 new example ports, taking the suite from 78 to **91**:
+- 19 new example ports, taking the suite from 78 to **97**:
   `math-angle-rotation`, `ellipse-collision`, `camera-3d-mode`,
   `input-multitouch`, `delta-time`, `srcrec-dstrec`, `render-texture`,
   `smooth-pixelperfect`, `clock-of-clocks`, `input-gestures`,
-  `camera-2d-split-screen`, `storage-values` and
-  `input-virtual-controls`. The suite now groups as 32 core, 21 models,
-  18 shapes, 9 games, 4 audio, 3 textures, 3 text and 1 shaders.
+  `camera-2d-split-screen`, `storage-values`,
+  `input-virtual-controls`, `penrose-tile`, `easings-testbed`,
+  `undo-redo`, `bullet-hell`, `viewport-scaling` and
+  `keyboard-testbed`. The suite now groups as 35 core, 21 models,
+  21 shapes, 9 games, 4 audio, 3 textures, 3 text and 1 shaders.
+- Three of those ports depart from their C original where the C was
+  working around a constraint Clojure does not have, and each says so in
+  its own docstring rather than quietly diverging. `bullet-hell` drops
+  off-screen bullets instead of flagging them in a 500,000-slot array,
+  which also removes the periodic mass-vanish when that array fills.
+  `undo-redo` keeps its ring buffer, because the example draws the 26
+  slots. `keyboard-testbed` replaces a 100-case keycode-to-label switch
+  with a layout table, so a key's code, caption and width are declared
+  once.
+- `viewport-scaling` documents a finding about the upstream example: it
+  offers six named scaling modes but only four distinct behaviours.
+  `KEEP_HEIGHT_INTEGER` and `KEEP_HEIGHT` compute identical rectangles,
+  as do the two `KEEP_WIDTH` variants; only `KEEP_ASPECT_INTEGER` really
+  differs. Checked across 100 window and game size combinations.
 - `bb record:new` records only the examples that have never been
   captured; `bb record:status` reports what is missing and what has gone
-  stale. Re-recording all 91 takes long enough that "just the new ones"
+  stale. Re-recording all 97 takes long enough that "just the new ones"
   is worth its own task.
 - `raylib_ext` folded into the module namespaces, so an extension lives
   beside the module it extends rather than in a separate pile.
@@ -36,10 +52,18 @@ Examples read at <https://raylib-clj.b12n.app>.
   could tell a publish from a no-op.
 - Em-dashes removed from the docs.
 
-**Known gap:** the docs still say 78 examples, and the demo gallery has
-no GIF for the 13 new ports (`bb record:status` also reports 49 existing
-GIFs as stale against changed sources). `bb record:new` and a docs pass
-close both.
+- Every example now has a demo GIF, and the gallery, catalog and counts
+  across the docs match the registry: 97 entries, 97 GIFs, no broken
+  preview links or anchors. Four of the new demos gained input timelines
+  in `scripts/demo_manifest.edn`, since they show nothing until something
+  happens. `keyboard-testbed` steers by mouse hover rather than
+  keypresses: a key lights only while held, and a synthetic press
+  releases too fast to reliably land inside a captured frame.
+
+**Known gap:** `bb record:status` reports 49 existing GIFs as stale
+against changed sources. Those are the `raylib_ext` consolidation's
+call-site renames, which changed no pixels, so they have deliberately
+not been re-recorded.
 
 ## 2026-08-21 — Public launch
 

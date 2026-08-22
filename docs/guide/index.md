@@ -45,7 +45,7 @@ A `.clj` (JVM Clojure) project:
 (rcw/close-window!)
 ```
 
-91 examples ship in `src/examples/` on top of the FFI bindings in
+97 examples ship in `src/examples/` on top of the FFI bindings in
 `src/raylib/`: a mix of original games and ports of official raylib C
 examples across core/shapes/text/textures/shaders/audio/models
 categories. See [`example-catalog.md`](example-catalog.md) for the
@@ -73,7 +73,7 @@ ported from which raylib C source file.
   nREPL integration, the porting recipe
 - [`repl-workflow.md`](repl-workflow.md): embedded vs standalone REPL,
   live game development
-- [`example-catalog.md`](example-catalog.md): all 91 examples, grouped
+- [`example-catalog.md`](example-catalog.md): all 97 examples, grouped
   and tabulated
 - [`demos.md`](demos.md): the full-size demo gallery (every example's
   animated GIF, one-line description)

@@ -64,7 +64,7 @@ a GameBoy-style 3D maze escape (WASD + mouse look)
 ![retro-maze-3d](../demos/retro-maze-3d.gif)
 
 
-## 📦 Core (23)
+## 📦 Core (35)
 
 ### bouncing-ball
 
@@ -204,8 +204,80 @@ resolution-independent rendering via letterboxing (SPACE, resize)
 
 ![window-letterbox](../demos/window-letterbox.gif)
 
+### camera-2d-split-screen
 
-## 🔷 Shapes (15)
+two players, two cameras, one grid (P1 W/S/A/D, P2 arrows)
+
+![camera-2d-split-screen](../demos/camera-2d-split-screen.gif)
+
+### camera-3d-mode
+
+a minimal 3D scene, one cube on a grid
+
+![camera-3d-mode](../demos/camera-3d-mode.gif)
+
+### delta-time
+
+frame-rate independent vs fixed-step motion (wheel changes the FPS cap, R resets)
+
+![delta-time](../demos/delta-time.gif)
+
+### input-gestures
+
+a running log of detected touch gestures (click, drag, or flick in the test area)
+
+![input-gestures](../demos/input-gestures.gif)
+
+### input-multitouch
+
+a numbered circle per touch point
+
+![input-multitouch](../demos/input-multitouch.gif)
+
+### input-virtual-controls
+
+an on-screen D-pad (click the pad)
+
+![input-virtual-controls](../demos/input-virtual-controls.gif)
+
+### keyboard-testbed
+
+an on-screen ENG-US keyboard that lights up as you press keys (hover highlights a key)
+
+![keyboard-testbed](../demos/keyboard-testbed.gif)
+
+### render-texture
+
+a bouncing ball drawn into an offscreen target, then blitted
+
+![render-texture](../demos/render-texture.gif)
+
+### smooth-pixelperfect
+
+a pixel-aligned world viewed through a sub-pixel smooth camera
+
+![smooth-pixelperfect](../demos/smooth-pixelperfect.gif)
+
+### storage-values
+
+save and load values to a file (R randomises, ENTER saves, SPACE loads)
+
+![storage-values](../demos/storage-values.gif)
+
+### undo-redo
+
+a ring-buffer undo history on a grid (arrows move, SPACE recolours, CTRL+Z / CTRL+Y)
+
+![undo-redo](../demos/undo-redo.gif)
+
+### viewport-scaling
+
+six ways to fit a fixed-resolution game onto a resizable window (click < > to change resolution and mode)
+
+![viewport-scaling](../demos/viewport-scaling.gif)
+
+
+## 🔷 Shapes (21)
 
 ### logo-raylib
 
@@ -297,6 +369,42 @@ a grid of rectangles animating on easing curves (SPACE replays)
 
 ![easings-rectangles](../demos/easings-rectangles.gif)
 
+### bullet-hell
+
+rows of bullets fired from a rotating circle (ENTER switches between texture and circle drawing)
+
+![bullet-hell](../demos/bullet-hell.gif)
+
+### clock-of-clocks
+
+digits drawn from a grid of analogue clocks (SPACE toggles 12/24h)
+
+![clock-of-clocks](../demos/clock-of-clocks.gif)
+
+### easings-testbed
+
+all 28 easing curves, one per axis (arrows pick the curves, ENTER plays)
+
+![easings-testbed](../demos/easings-testbed.gif)
+
+### ellipse-collision
+
+steer one ellipse into another (A/B switch which one the mouse drives)
+
+![ellipse-collision](../demos/ellipse-collision.gif)
+
+### math-angle-rotation
+
+fixed and sweeping angle lines
+
+![math-angle-rotation](../demos/math-angle-rotation.gif)
+
+### penrose-tile
+
+an L-system Penrose tiling drawn by turtle (UP/DOWN change the generation count)
+
+![penrose-tile](../demos/penrose-tile.gif)
+
 
 ## 📝 Text (3)
 
@@ -319,7 +427,7 @@ type into a text box (click to focus, Backspace to edit)
 ![input-box](../demos/input-box.gif)
 
 
-## 🖼️ Textures (2)
+## 🖼️ Textures (3)
 
 ### background-scrolling
 
@@ -332,6 +440,12 @@ a parallax-scrolling background
 a spritesheet character walk cycle (LEFT/RIGHT)
 
 ![sprite-animation](../demos/sprite-animation.gif)
+
+### srcrec-dstrec
+
+source and destination rectangles with rotation applied
+
+![srcrec-dstrec](../demos/srcrec-dstrec.gif)
 
 
 ## ✨ Shaders (1)

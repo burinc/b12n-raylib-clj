@@ -180,6 +180,24 @@ Logo animation
 
 ![logo-anim](logo-anim.gif)
 
+### viewport-scaling
+
+Six ways to fit a fixed-resolution game onto a resizable window
+
+![viewport-scaling](viewport-scaling.gif)
+
+### keyboard-testbed
+
+On-screen ENG-US keyboard showing what raylib reports per key
+
+![keyboard-testbed](keyboard-testbed.gif)
+
+### undo-redo
+
+Ring-buffer undo history on a grid
+
+![undo-redo](undo-redo.gif)
+
 ### storage-values
 
 Save and load scores to a file
@@ -331,6 +349,24 @@ Box animation with easing functions
 Chaotic pendulum simulation
 
 ![double-pendulum](double-pendulum.gif)
+
+### penrose-tile
+
+L-system Penrose tiling drawn by turtle
+
+![penrose-tile](penrose-tile.gif)
+
+### bullet-hell
+
+Throughput test firing rows of bullets from a rotating circle
+
+![bullet-hell](bullet-hell.gif)
+
+### easings-testbed
+
+All 28 easing curves, one per axis
+
+![easings-testbed](easings-testbed.gif)
 
 ### clock-of-clocks
 
