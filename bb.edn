@@ -313,6 +313,9 @@
   double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
                    :task (h/run-example! "double-pendulum")}
 
+  clock-of-clocks {:doc "🔷 Clock Of Clocks - digits drawn from a grid of analogue clocks"
+                  :task (h/run-example! "clock-of-clocks")}
+
   render-texture {:doc "📦 Render Texture - bouncing ball drawn into an offscreen target"
                  :task (h/run-example! "render-texture")}
 

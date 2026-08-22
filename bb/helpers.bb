@@ -427,6 +427,11 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "clock-of-clocks"
+    :category :shapes
+    :title "Clock Of Clocks"
+    :desc "Digits drawn from a grid of analogue clocks"
+    :controls "Space to toggle 12/24h, Q to exit"}
    {:alias "render-texture"
     :category :core
     :title "Render Texture"
