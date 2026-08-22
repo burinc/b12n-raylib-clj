@@ -18,6 +18,7 @@
    [raylib.core.drawing :as rcd]
    [raylib.core.keyboard :as rck]
    [raylib.core.camera3d :as rc3d]
+   [raylib.core.cursor :as rcur]
    [raylib.shapes.basic :as rsb]
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
@@ -109,7 +110,7 @@
 
 (defn init []
   (rcw/init-window! WIDTH HEIGHT "raylib [models] example - first person maze")
-  (rc3d/disable-cursor!)
+  (rcur/disable-cursor!)
   (rct/set-target-fps! 60))
 
 (defn world->grid [world-pos]
@@ -255,7 +256,7 @@
   (rcd/end-drawing!))
 
 (defn cleanup []
-  (rc3d/enable-cursor!))
+  (rcur/enable-cursor!))
 
 (defn start []
   (nrepl/start {:port 7888})

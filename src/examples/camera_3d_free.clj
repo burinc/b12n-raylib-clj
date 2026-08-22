@@ -11,6 +11,7 @@
    [raylib.core.drawing :as rcd]
    [raylib.core.keyboard :as rck]
    [raylib.core.camera3d :as rc3d]
+   [raylib.core.cursor :as rcur]
    [raylib.text.drawing :as rtd]
    [raylib.shapes.basic :as rsb]
    [raylib.utils :as ru]
@@ -39,7 +40,7 @@
                        :y 0.0
                        :z 0.0}]
 
-    (rc3d/disable-cursor!) ; Lock cursor for camera control
+    (rcur/disable-cursor!) ; Lock cursor for camera control
     (rct/set-target-fps! 60)
 
     (loop [camera initial-camera]

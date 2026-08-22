@@ -17,6 +17,7 @@
    [raylib.core.timing :as rct]
    [raylib.core.drawing :as rcd]
    [raylib.core.camera3d :as rc3]
+   [raylib.core.cursor :as rcur]
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.nrepl :as nrepl]
@@ -94,7 +95,7 @@
     (camera->native! (:camera @game-atom) camera-ptr)
     (swap! game-atom assoc :camera-ptr camera-ptr)
     ;; Disable cursor for camera control
-    (rc3/disable-cursor!)))
+    (rcur/disable-cursor!)))
 
 (defn tick [{:keys [camera camera-ptr cube-position]
              :as game}]
@@ -152,7 +153,7 @@
   (rcd/end-drawing!))
 
 (defn cleanup []
-  (rc3/enable-cursor!))
+  (rcur/enable-cursor!))
 
 (defn start []
   (nrepl/start {:port 7888})

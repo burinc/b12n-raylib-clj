@@ -20,6 +20,7 @@
    [raylib.core.keyboard :as rck]
    [raylib.core.mouse :as rcmouse]
    [raylib.core.camera3d :as rc3d]
+   [raylib.core.cursor :as rcur]
    [raylib.shapes.basic :as rsb]
    [raylib.text.drawing :as rtd]
    [raylib.enums :as enums]
@@ -188,7 +189,7 @@
 (defn init []
   (rcw/init-window! WIDTH HEIGHT "RETRO MAZE 3D")
   (rct/set-target-fps! 60)
-  (rc3d/disable-cursor!))
+  (rcur/disable-cursor!))
 
 ;; ============================================================================
 ;; Collision Detection
@@ -536,7 +537,7 @@
         (reset! game-atom game)
         (draw game)
         (recur))))
-  (rc3d/enable-cursor!)
+  (rcur/enable-cursor!)
   (rcw/close-window!))
 
 (defn -main [& _args]

@@ -19,6 +19,7 @@
    [raylib.core.drawing :as rcd]
    [raylib.core.keyboard :as rck]
    [raylib.core.camera3d :as rc3d]
+   [raylib.core.cursor :as rcur]
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
    [raylib.enums :as enums]
@@ -75,9 +76,9 @@
         should-disable? (or (= new-mode CAMERA_FREE)
                             (= new-mode CAMERA_FIRST_PERSON))]
     (when (and mode-changed? should-disable? (not cursor-disabled?))
-      (rc3d/disable-cursor!))
+      (rcur/disable-cursor!))
     (when (and mode-changed? (not should-disable?) cursor-disabled?)
-      (rc3d/enable-cursor!))
+      (rcur/enable-cursor!))
     (cond-> game
       (rck/is-key-pressed? (:q enums/keyboard-key))
       (assoc :exit? true)
@@ -161,7 +162,7 @@
 
 (defn cleanup [{:keys [cursor-disabled?]}]
   (when cursor-disabled?
-    (rc3d/enable-cursor!)))
+    (rcur/enable-cursor!)))
 
 (defn start []
   (nrepl/start {:port 7888})

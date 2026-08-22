@@ -19,6 +19,7 @@
    [raylib.core.keyboard :as rck]
    [raylib.core.mouse :as rcm]
    [raylib.core.camera3d :as rc3d]
+   [raylib.core.cursor :as rcur]
    [raylib.core.collision :as rcol]
    [raylib.text.drawing :as rtd]
    [raylib.colors :as colors]
@@ -114,9 +115,9 @@
 
     ;; Manage cursor state
     (when (and toggle-cursor? new-cursor-enabled?)
-      (rc3d/enable-cursor!))
+      (rcur/enable-cursor!))
     (when (and toggle-cursor? (not new-cursor-enabled?))
-      (rc3d/disable-cursor!))
+      (rcur/disable-cursor!))
 
     (cond-> game
       (rck/is-key-pressed? (:q enums/keyboard-key))
@@ -193,7 +194,7 @@
 
 (defn cleanup [{:keys [cursor-enabled?]}]
   (when-not cursor-enabled?
-    (rc3d/enable-cursor!)))
+    (rcur/enable-cursor!)))
 
 (defn start []
   (nrepl/start {:port 7888})

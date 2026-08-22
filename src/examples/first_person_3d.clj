@@ -22,6 +22,7 @@
    [raylib.core.drawing :as rcd]
    [raylib.core.keyboard :as rck]
    [raylib.core.camera3d :as rc3d]
+   [raylib.core.cursor :as rcur]
    [raylib.text.drawing :as rtd]
    [raylib.shapes.basic :as rsb]
    [raylib.colors :as colors]
@@ -122,7 +123,7 @@
     ;; Initialize native camera memory
     (camera->native! camera-ptr (:camera @game-atom)))
   ;; Disable cursor for FPS-style mouse look
-  (rc3d/disable-cursor!))
+  (rcur/disable-cursor!))
 
 (defn camera-mode-name [mode]
   (case mode
@@ -284,7 +285,7 @@
 
 (defn cleanup [_game]
   ;; Re-enable cursor before exiting
-  (rc3d/enable-cursor!))
+  (rcur/enable-cursor!))
 
 (defn start []
   (nrepl/start {:port 7888})

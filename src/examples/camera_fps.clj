@@ -21,6 +21,7 @@
    [raylib.core.keyboard :as rck]
    [raylib.core.mouse :as rcm]
    [raylib.core.camera3d :as rc3]
+   [raylib.core.cursor :as rcur]
    [raylib.text.drawing :as rtd]
    [raylib.shapes.basic :as rsb]
    [raylib.colors :as colors]
@@ -155,7 +156,7 @@
   (rcw/init-window! WIDTH HEIGHT "raylib [core] example - 3d camera fps")
   (rct/set-target-fps! 60)
   (debug-stats/enable!)
-  (rc3/disable-cursor!))
+  (rcur/disable-cursor!))
 
 (defn update-body [{:keys [player look-rotation]
                     :as game} side forward jump-pressed? crouch?]
@@ -401,7 +402,7 @@
   (rcd/end-drawing!))
 
 (defn cleanup []
-  (rc3/enable-cursor!))
+  (rcur/enable-cursor!))
 
 (defn start []
   (nrepl/start {:port 7888})

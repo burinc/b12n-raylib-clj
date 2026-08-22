@@ -107,22 +107,6 @@
   "UpdateCamera"
   [::mem/pointer ::mem/int] ::mem/void)
 
-;; Cursor control functions
-(defcfn disable-cursor!
-  "Disables cursor (lock cursor)"
-  "DisableCursor"
-  [] ::mem/void)
-
-(defcfn enable-cursor!
-  "Enables cursor (unlock cursor)"
-  "EnableCursor"
-  [] ::mem/void)
-
-(defcfn is-cursor-hidden?
-  "Check if cursor is not visible"
-  "IsCursorHidden"
-  [] ::mem/byte)
-
 (defcfn get-world-to-screen
   "Get the screen space position for a 3D world space position"
   {:arglists '([position camera])}

@@ -11,6 +11,7 @@
    [raylib.core.drawing :as rcd]
    [raylib.text.drawing :as rtd]
    [raylib.core.camera3d :as rcc]
+   [raylib.core.cursor :as rcur]
    [raylib.core.collision :as rcol]
    [raylib.core.mouse :as rcm]))
 
@@ -93,8 +94,8 @@
         ;; Update cursor visibility
         _ (when toggle-cursor?
             (if new-cursor-hidden
-              (rcc/disable-cursor!)
-              (rcc/enable-cursor!)))
+              (rcur/disable-cursor!)
+              (rcur/enable-cursor!)))
 
         ;; Update camera if cursor is hidden (FPS mode)
         new-camera (if new-cursor-hidden
