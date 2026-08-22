@@ -427,6 +427,16 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "srcrec-dstrec"
+    :category :textures
+    :title "Srcrec Dstrec"
+    :desc "Source/destination rects with rotation"
+    :controls "Q to exit"}
+   {:alias "delta-time"
+    :category :core
+    :title "Delta Time"
+    :desc "Frame-rate independent vs fixed-step motion"
+    :controls "Wheel to change FPS, R to reset, Q to exit"}
    {:alias "camera-3d-mode"
     :category :core
     :title "Camera 3D Mode"

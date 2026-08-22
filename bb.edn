@@ -313,6 +313,12 @@
   double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
                    :task (h/run-example! "double-pendulum")}
 
+  srcrec-dstrec {:doc "🖼️ Srcrec Dstrec - source/destination rects with rotation"
+                :task (h/run-example! "srcrec-dstrec")}
+
+  delta-time {:doc "📦 Delta Time - frame-rate independent vs fixed-step motion"
+             :task (h/run-example! "delta-time")}
+
   camera-3d-mode {:doc "📦 Camera 3D Mode - minimal 3d scene - cube on a grid"
                  :task (h/run-example! "camera-3d-mode")}
 
