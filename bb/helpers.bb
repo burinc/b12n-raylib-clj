@@ -448,6 +448,11 @@
     :title "Keyboard Testbed"
     :desc "On-screen ENG-US keyboard showing what raylib reports per key"
     :controls "Press any key to light it up, hover to highlight, close via title bar"}
+   {:alias "input-actions"
+    :category :core
+    :title "Input Actions"
+    :desc "Remappable action layer over keys and gamepad buttons"
+    :controls "WASD or arrows to move, SPACE to recentre, TAB swaps keyset"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"

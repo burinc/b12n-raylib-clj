@@ -379,6 +379,9 @@
   keyboard-testbed {:doc "⌨️  Keyboard Testbed - on-screen keyboard showing what raylib reports"
                    :task (h/run-example! "keyboard-testbed")}
 
+  input-actions {:doc "🎯 Input Actions - remappable action layer over keys and gamepad"
+                :task (h/run-example! "input-actions")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 
