@@ -87,6 +87,35 @@
   "SetShaderValue"
   [::shader ::mem/int ::mem/pointer ::mem/int] ::mem/void)
 
+(defcfn set-shader-value-v-raw!
+  "Set shader uniform value vector (internal)"
+  {:arglists '([shader loc-index value uniform-type count])}
+  "SetShaderValueV"
+  [::shader ::mem/int ::mem/pointer ::mem/int ::mem/int] ::mem/void)
+
+(defn set-shader-value-ints!
+  "Set a shader uniform to an array of ints.
+
+   `values` is a flat sequence, `uniform-type` says how the shader groups
+   it: SHADER_UNIFORM_IVEC3 with 30 ints is 10 vec3s, and `count` is the
+   number of GROUPS, not the number of ints. Getting that wrong reads past
+   the buffer, so it is derived here rather than passed in."
+  [shader loc-index values uniform-type]
+  (let [values (vec values)
+        per-group (case (int uniform-type)
+                    4 1     ; SHADER_UNIFORM_INT
+                    5 2     ; SHADER_UNIFORM_IVEC2
+                    6 3     ; SHADER_UNIFORM_IVEC3
+                    7 4)    ; SHADER_UNIFORM_IVEC4
+        n (count values)]
+    (when-not (zero? (mod n per-group))
+      (throw (ex-info "value count is not a multiple of the uniform's group size"
+                      {:values n :per-group per-group :uniform-type uniform-type})))
+    (let [buf (mem/alloc (* 4 n))]
+      (dotimes [i n]
+        (mem/write-int (mem/slice buf (* 4 i)) 0 (int (nth values i))))
+      (set-shader-value-v-raw! shader loc-index buf uniform-type (quot n per-group)))))
+
 (defn set-shader-value-float!
   "Set shader uniform float value"
   [shader loc-index value]

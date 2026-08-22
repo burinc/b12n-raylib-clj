@@ -21,7 +21,11 @@
 
 ;; Color utilities
 (defcfn fade
-  "Get color with alpha applied, alpha goes from 0.0f to 1.0f"
+  "Get color with alpha applied, alpha goes from 0.0f to 1.0f.
+
+   This is also raylib's `ColorAlpha`. The two are separate exported
+   symbols with byte-identical bodies in `rtextures.c`, so `ColorAlpha`
+   is deliberately not bound - a C example calling it ports to `fade`."
   {:arglists '([color alpha])}
   "Fade"
   [::rs/color ::mem/float] ::rs/color)

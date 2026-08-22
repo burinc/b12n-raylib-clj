@@ -145,4 +145,17 @@
   "GetMonitorHeight"
   [::mem/int] ::mem/int)
 
+;; Clipboard
+
+(defcfn get-clipboard-text
+  "Get clipboard text content"
+  "GetClipboardText"
+  [] ::mem/c-string)
+
+(defcfn set-clipboard-text!
+  "Set clipboard text content"
+  {:arglists '([text])}
+  "SetClipboardText"
+  [::mem/c-string] ::mem/void)
+
 ; ...

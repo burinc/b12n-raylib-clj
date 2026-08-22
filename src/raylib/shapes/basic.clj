@@ -142,6 +142,30 @@
   "DrawRing"
   [::rs/vector-2 ::mem/float ::mem/float ::mem/float ::mem/float ::mem/int ::rs/color] ::mem/void)
 
+(defcfn draw-ring-lines!
+  "Draw ring outline"
+  {:arglists '([center inner-radius outer-radius start-angle end-angle segments color])}
+  "DrawRingLines"
+  [::rs/vector-2 ::mem/float ::mem/float ::mem/float ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-circle-sector!
+  "Draw a piece of a circle"
+  {:arglists '([center radius start-angle end-angle segments color])}
+  "DrawCircleSector"
+  [::rs/vector-2 ::mem/float ::mem/float ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-circle-sector-lines!
+  "Draw circle sector outline"
+  {:arglists '([center radius start-angle end-angle segments color])}
+  "DrawCircleSectorLines"
+  [::rs/vector-2 ::mem/float ::mem/float ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-rectangle-v!
+  "Draw a color-filled rectangle (Vector version)"
+  {:arglists '([position size color])}
+  "DrawRectangleV"
+  [::rs/vector-2 ::rs/vector-2 ::rs/color] ::mem/void)
+
 (defcfn draw-line-v!
   "Draw a line (Vector version)"
   {:arglists '([start-pos end-pos color])}

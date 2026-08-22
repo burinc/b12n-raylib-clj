@@ -45,6 +45,12 @@
   "DrawTexturePro"
   [::rs/texture ::rs/rectangle ::rs/rectangle ::rs/vector-2 ::mem/float ::rs/color] ::mem/void)
 
+(defcfn draw-texture-v!
+  "Draw a Texture2D with position defined as Vector2"
+  {:arglists '([texture position tint])}
+  "DrawTextureV"
+  [::rs/texture ::rs/vector-2 ::rs/color] ::mem/void)
+
 (defcfn draw-texture-rec!
   "Draw a part of a texture defined by a rectangle"
   {:arglists '([texture source position tint])}
