@@ -438,6 +438,11 @@
     :title "Bullet Hell"
     :desc "Throughput test firing rows of bullets from a rotating circle"
     :controls "RIGHT/LEFT rows, UP/DOWN speed, Z/X cooldown, SPACE angle, ENTER draw method, C clear"}
+   {:alias "viewport-scaling"
+    :category :core
+    :title "Viewport Scaling"
+    :desc "Six ways to fit a fixed-resolution game onto a resizable window"
+    :controls "Click < > to change resolution and viewport type, resize the window"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"

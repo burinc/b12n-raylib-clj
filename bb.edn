@@ -373,6 +373,9 @@
   bullet-hell {:doc "🔴 Bullet Hell - throughput test firing rows of bullets"
               :task (h/run-example! "bullet-hell")}
 
+  viewport-scaling {:doc "🖼️  Viewport Scaling - six ways to fit a game onto a resizable window"
+                   :task (h/run-example! "viewport-scaling")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 
