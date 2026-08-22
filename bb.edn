@@ -313,6 +313,12 @@
   double-pendulum {:doc "🔷 Double Pendulum - chaotic pendulum simulation"
                    :task (h/run-example! "double-pendulum")}
 
+  input-gestures {:doc "📦 Input Gestures - log of detected touch gestures"
+                 :task (h/run-example! "input-gestures")}
+
+  camera-2d-split-screen {:doc "📦 Camera 2D Split Screen - two players, two cameras, one grid"
+                         :task (h/run-example! "camera-2d-split-screen")}
+
   clock-of-clocks {:doc "🔷 Clock Of Clocks - digits drawn from a grid of analogue clocks"
                   :task (h/run-example! "clock-of-clocks")}
 

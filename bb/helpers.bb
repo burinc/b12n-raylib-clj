@@ -427,6 +427,16 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "input-gestures"
+    :category :core
+    :title "Input Gestures"
+    :desc "Log of detected touch gestures"
+    :controls "Click/drag/flick in the test area, Q to exit"}
+   {:alias "camera-2d-split-screen"
+    :category :core
+    :title "Camera 2D Split Screen"
+    :desc "Two players, two cameras, one grid"
+    :controls "P1 W/S/A/D, P2 arrows, Q to exit"}
    {:alias "clock-of-clocks"
     :category :shapes
     :title "Clock Of Clocks"
