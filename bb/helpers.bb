@@ -428,6 +428,11 @@
     :title "Double Pendulum"
     :desc "Chaotic pendulum simulation"
     :controls "ESC to exit"}
+   {:alias "penrose-tile"
+    :category :shapes
+    :title "Penrose Tile"
+    :desc "L-system Penrose tiling drawn by turtle"
+    :controls "UP/DOWN change generations, Q to exit"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"
