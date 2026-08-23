@@ -81,7 +81,8 @@
  :overrides
  {;; NOTE: the committed GIF for this one was NOT produced by the timeline
   ;; below. Every control here is a button, and `bb record` posts input
-  ;; pid-routed, which cannot actuate a button on a GLFW target at all
+  ;; pid-routed, which cannot actuate a button in ANY app - AppKit or GLFW
+  ;; alike, measured against Finder and Calculator too, not just raylib
   ;; (b12n-screen-grab#1). Run as-is it yields a single static frame.
   ;;
   ;; It was recorded by driving the app GLOBALLY while the capture ran:
@@ -92,7 +93,12 @@
   ;;   cgevent drag --steps 30 --delay 12 $X $Y $((X+1)) $Y    # note: no --pid
   ;;
   ;; The press must be global, the app frontmost, and held >=250ms (30 steps
-  ;; x 12ms = 360ms clears it). That produced 12 frames showing RANDOM, COPY
+  ;; x 12ms = 360ms clears it). Those are two SEPARATE requirements: global
+  ;; posting is needed for every app, while the hold is specific to
+  ;; raylib/GLFW - Finder and Calculator actuate from a global click with no
+  ;; hold at all. Fixing only one of them still gets you nothing here.
+  ;; (The 250ms figure was measured against raylib 5.5; this project now
+  ;; bundles 6.0 and it has not been re-measured.) That produced 12 frames showing RANDOM, COPY
   ;; and PASTE firing. The timeline below is kept so it works unchanged if
   ;; screen-grab gains a global-posting option.
   ;;
