@@ -12,6 +12,14 @@ Examples read at <https://raylib-clj.b12n.app>.
 
 ## Unreleased
 
+- 3 further example ports, taking the suite to **109**: `tiled-drawing`,
+  `palette-switch` and `ascii-rendering`. These are the three that were
+  waiting on asset files; all three now use them.
+- `set-shader-value-vec2!` added. The namespace had float, vec3, vec4 and int
+  helpers but no vec2, so a `resolution` uniform had nowhere to go.
+- A `texture-filter` enum for `set-texture-filter!`, which previously took a
+  bare int with no named constants.
+
 - **Bundled raylib upgraded from 5.5.0 to 6.0** across all five platforms.
   Nothing this project binds was removed, so no example changed: all 209
   bound symbols resolve against 6.0 exactly as they did against 5.5.0.

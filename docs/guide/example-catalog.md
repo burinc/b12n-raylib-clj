@@ -1,4 +1,4 @@
-# The example catalog: 106 raylib examples
+# The example catalog: 109 raylib examples
 
 A map of the whole suite. Each example is one namespace under
 `src/examples/` (or `src/examples/games/`, `src/examples/models/`),
@@ -131,19 +131,22 @@ credit).
 | [<img src="../demos/format-text.gif" width="80">](demos.md#format-text) | `format-text` | Format Text | Formatted score/timer display | ESC to exit | `text_format_text.c` |
 | [<img src="../demos/input-box.gif" width="80">](demos.md#input-box) | `input-box` | Input Box | Text input field | Click, type, Backspace | `text_input_box.c` |
 
-## 🖼️ Textures (3)
+## 🖼️ Textures (4)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
 | [<img src="../demos/background-scrolling.gif" width="80">](demos.md#background-scrolling) | `background-scrolling` | Background Scrolling | Parallax demo | Watch | `textures_background_scrolling.c` |
 | [<img src="../demos/sprite-animation.gif" width="80">](demos.md#sprite-animation) | `sprite-animation` | Sprite Animation | Spritesheet | LEFT/RIGHT | `textures_sprite_animation.c` |
 | [<img src="../demos/srcrec-dstrec.gif" width="80">](demos.md#srcrec-dstrec) | `srcrec-dstrec` | Srcrec Dstrec | Source/destination rects with rotation | Watch | `textures_srcrec_dstrec.c` |
+| [<img src="../demos/tiled-drawing.gif" width="80">](demos.md#tiled-drawing) | `tiled-drawing` | Tiled Drawing | Tile a texture patch with selectable pattern, tint, scale and rotation | Click pattern/colour, arrows, SPACE | `textures_tiled_drawing.c` |
 
-## ✨ Shaders (1)
+## ✨ Shaders (3)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
 | [<img src="../demos/basic-lighting.gif" width="80">](demos.md#basic-lighting) | `basic-lighting` | Basic Lighting | Dynamic lighting | Mouse, Y/R/G/B | `shaders_basic_lighting.c` |
+| [<img src="../demos/palette-switch.gif" width="80">](demos.md#palette-switch) | `palette-switch` | Palette Switch | Fragment shader remaps index-encoded bands through a palette | &lt; &gt; to switch palette | `shaders_palette_switch.c` |
+| [<img src="../demos/ascii-rendering.gif" width="80">](demos.md#ascii-rendering) | `ascii-rendering` | Ascii Rendering | Post-process the scene into ASCII glyphs via a render texture | &lt; &gt; to change cell size | `shaders_ascii_rendering.c` |
 
 ## 🔊 Audio (4)
 
