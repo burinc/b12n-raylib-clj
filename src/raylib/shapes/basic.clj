@@ -130,6 +130,18 @@
   "DrawRectangleRounded"
   [::rs/rectangle ::mem/float ::mem/int ::rs/color] ::mem/void)
 
+(defcfn draw-rectangle-rounded-lines!
+  "Draw rectangle lines with rounded edges"
+  {:arglists '([rec roundness segments color])}
+  "DrawRectangleRoundedLines"
+  [::rs/rectangle ::mem/float ::mem/int ::rs/color] ::mem/void)
+
+(defcfn draw-rectangle-rounded-lines-ex!
+  "Draw rectangle with rounded edges outline"
+  {:arglists '([rec roundness segments line-thick color])}
+  "DrawRectangleRoundedLinesEx"
+  [::rs/rectangle ::mem/float ::mem/int ::mem/float ::rs/color] ::mem/void)
+
 (defcfn draw-line-ex!
   "Draw a line with thickness"
   {:arglists '([start-pos end-pos thick color])}
