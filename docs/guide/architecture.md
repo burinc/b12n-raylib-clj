@@ -91,7 +91,7 @@ flowchart LR
     - `shaders.clj`: shader loading and management
   - `models.clj`: 3D model loading, mesh generation and drawing
   - `text/`, `shapes/`, `textures/`: text, shape and texture bindings
-- `src/examples/`: the 110 example namespaces (85 top-level + 3 in `games/` + 22 in `models/`)
+- `src/examples/`: the 113 example namespaces (85 top-level + 3 in `games/` + 25 in `models/`)
 - `src/debug_stats.clj`: F1 overlay plugin (see [Example Architecture Patterns](example-architecture-patterns.md) for usage)
 - `libs/`: bundled native libraries per platform
 

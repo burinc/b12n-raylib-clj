@@ -12,6 +12,27 @@ Examples read at <https://raylib-clj.b12n.app>.
 
 ## Unreleased
 
+- 3 models examples ported, taking the suite to **113**:
+  `billboard-rendering`, `cubicmap-rendering` and `heightmap-rendering`.
+  All three orbit on their own, so their demo GIFs are honest recordings
+  rather than the best a synthetic-input timeline could manage.
+- **An image tier in `raylib.textures.texture-loading`**: `load-image`,
+  `is-image-valid?`, `unload-image!` and `load-texture-from-image`, plus
+  the `Image` struct in `raylib.structs`. Images are the CPU-side
+  counterpart to textures, and generating a mesh from a picture needs the
+  pixels, not a GPU handle.
+- `gen-mesh-cubicmap` and `gen-mesh-heightmap`: meshes generated from an
+  image rather than from parameters. The cubicmap emits one cube per
+  non-black pixel; the heightmap reads brightness as elevation and emits
+  two triangles per pixel quad, which for the bundled 128x128 map is
+  exactly (128-1)^2 * 2 = 32,258 triangles.
+- `set-model-material-texture!`, the texture counterpart to
+  `set-model-material-color!`. raylib does have a function for this one, so
+  it defers to `SetMaterialTexture` rather than walking pointers.
+- `docs/demos/ledger.edn` is now one sorted entry per line. It used to be a
+  single line, so recording three demos read as a 660-line whole-file
+  rewrite in review. Fixed upstream in `b12n-screen-grab`.
+
 - **`raylib.models`**: 3D model loading, mesh generation and drawing. 24 new
   bindings (209 to 233) plus the five structs they need, and the largest
   single addition to the binding surface so far. It opens the models
