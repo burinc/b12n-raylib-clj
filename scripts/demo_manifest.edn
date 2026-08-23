@@ -96,10 +96,22 @@
   ;; and PASTE firing. The timeline below is kept so it works unchanged if
   ;; screen-grab gains a global-posting option.
   ;;
-  ;; Also: `cgevent type` outruns raylib's own 16-character input queue
-  ;; (MAX_CHAR_PRESSED_QUEUE in rcore.c) - typing more than 16 characters in
-  ;; one burst silently drops the rest. Measured: "typed into the box" landed
-  ;; as "typed into the b", exactly 16.
+  ;; Also, on typing: raylib accepts at most 16 characters PER FRAME, and
+  ;; silently discards the rest. Not a queue that fills up over time - the
+  ;; count is reset every frame before polling, and the enqueue is capped
+  ;; within the frame with no else branch. Verified against tag 5.5, which
+  ;; is what this repo bundles:
+  ;;
+  ;;   MAX_CHAR_PRESSED_QUEUE 16      src/rcore.c:245
+  ;;   capped enqueue, no else        src/platforms/rcore_desktop_glfw.c:1828
+  ;;   count reset each frame         src/platforms/rcore_desktop_glfw.c:1136
+  ;;                                  (inside PollInputEvents)
+  ;;
+  ;; `cgevent type` posts far faster than one frame, so ANY string over 16
+  ;; truncates at exactly 16 - measured, "typed into the box" landed as
+  ;; "typed into the b". The rule is per frame, not per call: send chunks of
+  ;; <=16 characters at least ~17ms apart at 60fps. A 16-char chunk every 5ms
+  ;; would still truncate.
   "clipboard-text" {:input [[0.8 :drag 730 140 731 140]   ; RANDOM
                             [2.0 :drag 294 200 295 200]   ; COPY
                             [3.4 :drag 730 140 731 140]   ; RANDOM again
