@@ -157,7 +157,7 @@ credit).
 | [<img src="../demos/music-stream.gif" width="80">](demos.md#music-stream) | `music-stream` | Music Stream | MP3 streaming | SPACE, P, Arrows | `audio_music_stream.c` |
 | [<img src="../demos/sound-multi.gif" width="80">](demos.md#sound-multi) | `sound-multi` | Sound Multi | Multiple sounds | SPACE | `audio_sound_multi.c` |
 
-## 🗿 Models (22)
+## 🗿 Models (25)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
