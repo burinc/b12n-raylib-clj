@@ -26,28 +26,6 @@
 (def line-colors [colors/red colors/orange colors/gold colors/green
                   colors/blue colors/violet colors/pink colors/black])
 
-(defn- draw-dashed-line!
-  "Draw a dashed line between two points (pure Clojure implementation)."
-  [start-pos end-pos dash-length blank-length color]
-  (let [dx (- (:x end-pos) (:x start-pos))
-        dy (- (:y end-pos) (:y start-pos))
-        total-len (Math/sqrt (+ (* dx dx) (* dy dy)))]
-    (when (> total-len 0)
-      (let [nx (/ dx total-len)
-            ny (/ dy total-len)
-            segment (+ dash-length blank-length)]
-        (loop [dist 0.0]
-          (when (< dist total-len)
-            (let [dash-end (min (+ dist dash-length) total-len)
-                  x1 (+ (:x start-pos) (* nx dist))
-                  y1 (+ (:y start-pos) (* ny dist))
-                  x2 (+ (:x start-pos) (* nx dash-end))
-                  y2 (+ (:y start-pos) (* ny dash-end))]
-              (rsb/draw-line-ex! {:x (float x1) :y (float y1)}
-                                 {:x (float x2) :y (float y2)}
-                                 (float 2.0) color)
-              (recur (+ dist segment)))))))))
-
 (defn initial-state []
   {:start-pos {:x 20.0 :y 50.0}
    :dash-length 25
@@ -84,7 +62,10 @@
   ;; Draw dashed line to mouse position
   (let [end-pos (rcm/get-mouse-position)
         line-color (nth line-colors color-index)]
-    (draw-dashed-line! start-pos end-pos dash-length blank-length line-color))
+    ;; 2.0 keeps this example's original look: the shared helper defaults to
+    ;; 1px, matching raylib's own DrawLineDashed, but this drew at 2px before
+    ;; the helper existed and its committed demo GIF was recorded that way.
+    (rsb/draw-dashed-line! start-pos end-pos dash-length blank-length line-color 2.0))
 
   ;; UI panel
   (rsb/draw-rectangle! 5 5 265 95 (ru/fade colors/skyblue (float 0.5)))

@@ -189,3 +189,74 @@
   {:arglists '([rec origin rotation color])}
   "DrawRectanglePro"
   [::rs/rectangle ::rs/vector-2 ::mem/float ::rs/color] ::mem/void)
+
+;; ---------------------------------------------------------------------------
+;; Not a binding.
+;;
+;; raylib 6.x added DrawLineDashed, but this project bundles 5.5.0, whose
+;; library does not export it - a defcfn would compile and then crash on a
+;; null function pointer. This is a Clojure stand-in following rshapes.c's
+;; own logic, including its fallback to a solid line when the line is too
+;; short to dash or the dash size is not positive.
+;;
+;; raylib draws the dashes 1px wide and takes no thickness argument. The
+;; 5-argument form matches it; the 6-argument form exists because the
+;; dashed-line example draws at 2px and predates this helper.
+
+(defn draw-dashed-line!
+  "Draw a dashed line from `start-pos` to `end-pos`.
+
+   Mirrors raylib 6.x's `DrawLineDashed`, which the bundled 5.5.0 lacks.
+   Falls back to a solid line when the span is shorter than one dash plus
+   one gap, or when `dash-size` is not positive."
+  ([start-pos end-pos dash-size space-size color]
+   (draw-dashed-line! start-pos end-pos dash-size space-size color 1.0))
+  ([start-pos end-pos dash-size space-size color thickness]
+   (let [dx (- (:x end-pos) (:x start-pos))
+         dy (- (:y end-pos) (:y start-pos))
+         line-length (Math/sqrt (+ (* dx dx) (* dy dy)))]
+     (if (or (< line-length (+ dash-size space-size)) (<= dash-size 0))
+       (draw-line-ex! {:x (float (:x start-pos)) :y (float (:y start-pos))}
+                      {:x (float (:x end-pos)) :y (float (:y end-pos))}
+                      (float thickness) color)
+       (let [dir-x (/ dx line-length)
+             dir-y (/ dy line-length)
+             stride (+ dash-size space-size)]
+         (loop [travelled 0.0]
+           (when (< travelled line-length)
+             (let [dash-end (min (+ travelled dash-size) line-length)]
+               (draw-line-ex!
+                {:x (float (+ (:x start-pos) (* dir-x travelled)))
+                 :y (float (+ (:y start-pos) (* dir-y travelled)))}
+                {:x (float (+ (:x start-pos) (* dir-x dash-end)))
+                 :y (float (+ (:y start-pos) (* dir-y dash-end)))}
+                (float thickness) color)
+               (recur (+ travelled stride))))))))))
+
+(defcfn draw-spline-linear-raw!
+  "Draw spline: Linear, minimum 2 points (internal - takes a Vector2 array)"
+  {:arglists '([points point-count thick color])}
+  "DrawSplineLinear"
+  [::mem/pointer ::mem/int ::mem/float ::rs/color] ::mem/void)
+
+(defn draw-spline-linear!
+  "Draw a linear spline through `points`, a seq of `{:x :y}` maps.
+
+   raylib wants a contiguous `Vector2 *`, so the points are packed into one
+   here - two floats per point, eight bytes each. The allocation goes to
+   coffi's automatic arena, so it is reclaimed by the GC rather than leaked,
+   which is what makes calling this once per frame acceptable.
+
+   Needs at least two points; fewer is a no-op rather than a crash, since
+   raylib would read past the end of a one-element array."
+  [points thick color]
+  (let [pts (vec points)
+        n (count pts)]
+    (when (>= n 2)
+      (let [buf (mem/alloc (* 8 n))]
+        (dotimes [i n]
+          (let [p (nth pts i)
+                slot (mem/slice buf (* 8 i))]
+            (mem/write-float slot 0 (float (:x p)))
+            (mem/write-float (mem/slice slot 4) 0 (float (:y p)))))
+        (draw-spline-linear-raw! buf n (float thick) color)))))

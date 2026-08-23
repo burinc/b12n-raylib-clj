@@ -1,4 +1,4 @@
-# The example catalog: 103 raylib examples
+# The example catalog: 105 raylib examples
 
 A map of the whole suite. Each example is one namespace under
 `src/examples/` (or `src/examples/games/`, `src/examples/models/`),
@@ -89,7 +89,7 @@ credit).
 | [<img src="../demos/undo-redo.gif" width="80">](demos.md#undo-redo) | `undo-redo` | Undo Redo | Ring-buffer undo history on a grid | Arrows, SPACE, CTRL+Z/Y | `core_undo_redo.c` |
 | [<img src="../demos/input-actions.gif" width="80">](demos.md#input-actions) | `input-actions` | Input Actions | Remappable action layer over keys and gamepad buttons | WASD/arrows, SPACE, TAB | `core_input_actions.c` |
 
-## 🔷 Shapes (26)
+## 🔷 Shapes (28)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
@@ -119,6 +119,8 @@ credit).
 | [<img src="../demos/recursive-tree.gif" width="80">](demos.md#recursive-tree) | `recursive-tree` | Recursive Tree | Binary tree grown by splitting each branch in two | Angle, Length, Decay, Depth, Bezier | `shapes_recursive_tree.c` |
 | [<img src="../demos/kaleidoscope.gif" width="80">](demos.md#kaleidoscope) | `kaleidoscope` | Kaleidoscope | Strokes repeated around six-fold symmetry and mirrored | Drag to draw, &lt; &gt; to step, Reset | `shapes_kaleidoscope.c` |
 | [<img src="../demos/rounded-rectangle-drawing.gif" width="80">](demos.md#rounded-rectangle-drawing) | `rounded-rectangle-drawing` | Rounded Rectangle Drawing | Corner roundness, size and segments on sliders | Drag sliders, toggle draw modes | `shapes_rounded_rectangle_drawing.c` |
+| [<img src="../demos/hilbert-curve.gif" width="80">](demos.md#hilbert-curve) | `hilbert-curve` | Hilbert Curve | Space-filling curve drawn stroke by stroke, hue along its length | Spinner sets order, sliders size it | `shapes_hilbert_curve.c` |
+| [<img src="../demos/math-sine-cosine.gif" width="80">](demos.md#math-sine-cosine) | `math-sine-cosine` | Math Sine Cosine | Unit circle with sine, cosine, tangent and related angles | Angle slider, Pause toggle | `shapes_math_sine_cosine.c` |
 
 ## 📝 Text (3)
 

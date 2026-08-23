@@ -397,6 +397,12 @@
   rounded-rectangle-drawing {:doc "▢ Rounded Rectangle Drawing - roundness params on raygui sliders"
                              :task (h/run-example! "rounded-rectangle-drawing")}
 
+  hilbert-curve {:doc "🌀 Hilbert Curve - space-filling curve with a raygui spinner"
+                :task (h/run-example! "hilbert-curve")}
+
+  math-sine-cosine {:doc "📐 Math Sine Cosine - unit circle trig visualised"
+                   :task (h/run-example! "math-sine-cosine")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 

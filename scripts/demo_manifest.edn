@@ -54,8 +54,54 @@
  ;; (orbiting camera, particle/chaos sims) or genuinely static without
  ;; input (e.g. "ESC to exit" only) — recorded as-is, same as most of
  ;; b12n-rljlt's own manifest.
+ ;; ---------------------------------------------------------------------
+ ;; SYNTHETIC INPUT IS BEST-EFFORT. A DEMO THAT NEEDS REAL INTERACTION
+ ;; SHOULD BE RECORDED BY A HUMAN.
+ ;;
+ ;; screen-grab and cgevent are good enough to steer an example that mostly
+ ;; animates itself, and good enough to nudge a slider. They are not good
+ ;; enough to stand in for someone using the thing. Measured 2026-08-23:
+ ;;
+ ;;  - Re-recording ONE example three times from an unchanged manifest gave
+ ;;    4, 4 and 1 distinct frames. Frame count is not a signal you can read a
+ ;;    coordinate change off, and a single bad take proves nothing.
+ ;;  - Pointer POSITION lands reliably; mouse-BUTTON delivery does not. The
+ ;;    same coordinates actuate a control on some passes and not others, for
+ ;;    both :click and :drag. Reported as b12n-cgevent#1.
+ ;;  - Separately, `cgevent move --window` needs the title bar added (+28
+ ;;    here) to hover a control at a given content y, while the coordinates
+ ;;    below are content-relative and do work. Unexplained; b12n-cgevent#2.
+ ;;
+ ;; So the timelines below are a convenience, not a guarantee. If a preview
+ ;; genuinely needs to show a feature being used - a control being operated,
+ ;; a gesture, anything where the interaction IS the subject - record it by
+ ;; hand and commit that GIF. Do not spend time tuning coordinates against a
+ ;; flaky pipeline, and never judge a take by its frame count: open the GIF.
+ ;; ---------------------------------------------------------------------
  :overrides
- {;; An example about input needs input. WASD drives the box under the
+ {
+  ;; Driven by the SIZE slider, not the order spinner: changing either
+  ;; regenerates the curve and replays its draw-on animation, which is the
+  ;; thing worth showing. At the default order 2 that animation is over in
+  ;; ~0.27s, so an unsteered capture is one static frame.
+  ;;
+  ;; Expect to re-record this one. Synthetic input delivery is intermittent
+  ;; (b12n-cgevent#1): steering the order spinner gave 1, 1, 1 and 2 distinct
+  ;; frames on four consecutive attempts, and even this slider version lands
+  ;; only some passes - the committed take is 19 frames. If a capture comes
+  ;; out static, run it again rather than editing these coordinates.
+ "hilbert-curve" {:input [[0.6 :drag 600 202 700 202]   ; TOTAL SIZE -> replay
+                           [2.2 :drag 700 202 640 202]   ; -> replay
+                           [3.8 :drag 640 202 760 202]   ; -> replay
+                           [5.0 :drag 600 162 680 162]   ; thickness
+                           [5.7 :move 660 202]]}
+  ;; This one animates unaided, so the input only exercises the controls.
+  "math-sine-cosine" {:input [[1.2 :click 700 80]        ; Pause on
+                              [2.0 :drag 660 50 720 50]  ; scrub the angle
+                              [3.2 :drag 720 50 670 50]
+                              [4.2 :click 700 80]        ; Pause off
+                              [5.4 :move 700 50]]}
+  ;; An example about input needs input. WASD drives the box under the
   ;; default keyset, TAB swaps to the alternate one, and the arrow keys
   ;; then drive it through the same actions - which is the whole point.
   ;; SPACE recentres, briefly turning the box blue on release.
