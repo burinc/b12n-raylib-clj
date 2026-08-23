@@ -42,6 +42,33 @@
     [:texture ::texture]
     [:depth ::texture]]])
 
+;; Matrix: 4x4, stored COLUMN-major the way raylib writes it - the field
+;; names run m0 m4 m8 m12 across the first row, not m0 m1 m2 m3. Laid out
+;; here in declaration order so the bytes match; do not "tidy" the order.
+(defalias ::matrix
+  [::mem/struct
+   [[:m0 ::mem/float] [:m4 ::mem/float] [:m8 ::mem/float] [:m12 ::mem/float]
+    [:m1 ::mem/float] [:m5 ::mem/float] [:m9 ::mem/float] [:m13 ::mem/float]
+    [:m2 ::mem/float] [:m6 ::mem/float] [:m10 ::mem/float] [:m14 ::mem/float]
+    [:m3 ::mem/float] [:m7 ::mem/float] [:m11 ::mem/float] [:m15 ::mem/float]]])
+
+;; Moved here from core/collision so models can use it without depending on
+;; the collision namespace.
+(defalias ::bounding-box
+  [::mem/struct
+   [[:min ::vector-3]
+    [:max ::vector-3]]])
+
+;; Camera3D (raylib also calls it Camera). Lives here rather than in
+;; core/camera3d because the models billboards take one by value too.
+(defalias ::camera-3d
+  [::mem/struct
+   [[:position ::vector-3]
+    [:target ::vector-3]
+    [:up ::vector-3]
+    [:fovy ::mem/float]
+    [:projection ::mem/int]]])
+
 (defalias ::rectangle
   [::mem/struct
    [[:x ::mem/float]

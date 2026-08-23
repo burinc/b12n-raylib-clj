@@ -14,13 +14,9 @@
 ;;     float fovy;             // Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic
 ;;     int projection;         // Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
 ;; } Camera3D;
-(defalias ::camera3d
-  [::mem/struct
-   [[:position ::rs/vector-3]
-    [:target ::rs/vector-3]
-    [:up ::rs/vector-3]
-    [:fovy ::mem/float]
-    [:projection ::mem/int]]])
+;; The struct moved to raylib.structs so raylib.models can use it too.
+;; Kept as a local alias so existing ::camera3d references still resolve.
+(defalias ::camera3d ::rs/camera-3d)
 
 ;; Camera projection constants
 (def CAMERA_PERSPECTIVE 0)
