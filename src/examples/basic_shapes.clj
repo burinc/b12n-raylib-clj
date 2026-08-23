@@ -42,7 +42,7 @@
 
   ;; Circle shapes and lines
   (rsb/draw-circle! (quot screen-width 5) 120 (float 35) colors/darkblue)
-  (rsb/draw-circle-gradient! (quot screen-width 5) 220 (float 60) colors/green colors/skyblue)
+  (rsb/draw-circle-gradient! {:x (float (quot screen-width 5)) :y 220.0} (float 60) colors/green colors/skyblue)
   (rsb/draw-circle-lines! (quot screen-width 5) 340 (float 80) colors/darkblue)
   (rsb/draw-ellipse! (quot screen-width 5) 120 (float 25) (float 20) colors/yellow)
   (rsb/draw-ellipse-lines! (quot screen-width 5) 120 (float 30) (float 25) colors/yellow)

@@ -52,10 +52,15 @@
   [::mem/int ::mem/int ::mem/float ::rs/color] ::mem/void)
 
 (defcfn draw-circle-gradient!
-  "Draw a gradient-filled circle"
-  {:arglists '([center-x center-y radius inner-color outer-color])}
+  "Draw a gradient-filled circle.
+
+   NOTE: raylib 6.0 changed this signature. It took (int centerX, int centerY,
+   float radius, ...) up to 5.5 and takes a Vector2 centre from 6.0 onward.
+   The exported symbol name did not change, so a symbol-resolution check
+   cannot catch this - only a signature diff can."
+  {:arglists '([center radius inner-color outer-color])}
   "DrawCircleGradient"
-  [::mem/int ::mem/int ::mem/float ::rs/color ::rs/color] ::mem/void)
+  [::rs/vector-2 ::mem/float ::rs/color ::rs/color] ::mem/void)
 
 (defcfn draw-circle-lines!
   "Draw circle outline"
