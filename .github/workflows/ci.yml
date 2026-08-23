@@ -62,7 +62,7 @@ jobs:
       # Gatekeeper quarantines it on a fresh checkout the same way it does on a
       # contributor's machine; this is the fix CONTRIBUTING.md documents.
       - name: Ad-hoc sign the bundled raylib dylib
-        run: codesign --force --sign - libs/macos/libraylib.5.5.0.dylib
+        run: codesign --force --sign - libs/macos/libraylib.*.dylib
 
       # The gate that matters: requires all 104 namespaces under src/. It is the
       # only check that catches an example with a broken require, since running

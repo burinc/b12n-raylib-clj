@@ -198,11 +198,14 @@
 ;; ---------------------------------------------------------------------------
 ;; Not a binding.
 ;;
-;; raylib 6.x added DrawLineDashed, but this project bundles 5.5.0, whose
-;; library does not export it - a defcfn would compile and then crash on a
-;; null function pointer. This is a Clojure stand-in following rshapes.c's
-;; own logic, including its fallback to a solid line when the line is too
-;; short to dash or the dash size is not positive.
+;; Written when this project bundled raylib 5.5.0, which does not export
+;; DrawLineDashed - a defcfn would have compiled and then crashed on a null
+;; function pointer. The bundled library is now 6.0, which DOES export it, so
+;; this is no longer standing in for something missing; it is simply a
+;; Clojure implementation that happens to already work. Kept rather than
+;; swapped because the behaviour is identical and it costs no FFI call.
+;; It follows rshapes.c's own logic, including the fallback to a solid line
+;; when the line is too short to dash or the dash size is not positive.
 ;;
 ;; raylib draws the dashes 1px wide and takes no thickness argument. The
 ;; 5-argument form matches it; the 6-argument form exists because the
@@ -211,9 +214,9 @@
 (defn draw-dashed-line!
   "Draw a dashed line from `start-pos` to `end-pos`.
 
-   Mirrors raylib 6.x's `DrawLineDashed`, which the bundled 5.5.0 lacks.
-   Falls back to a solid line when the span is shorter than one dash plus
-   one gap, or when `dash-size` is not positive."
+   Mirrors raylib's own `DrawLineDashed`, including its fallback to a solid
+   line when the span is shorter than one dash plus one gap, or when
+   `dash-size` is not positive."
   ([start-pos end-pos dash-size space-size color]
    (draw-dashed-line! start-pos end-pos dash-size space-size color 1.0))
   ([start-pos end-pos dash-size space-size color thickness]

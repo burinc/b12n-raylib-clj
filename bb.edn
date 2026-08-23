@@ -973,7 +973,7 @@ echo \"✅ Lint check passed!\"
   {:doc "🍎 Sign raylib library for macOS"
    :task (do
            (h/header "🍎 Signing Raylib Library for macOS")
-           (let [lib-path "libs/macos/libraylib.5.5.0.dylib"]
+           (let [lib-path (str (first (fs/glob "libs/macos" "libraylib.*.dylib")))]
              (if (fs/exists? lib-path)
                (do
                  (p/shell "codesign" "--force" "--sign" "-" lib-path)

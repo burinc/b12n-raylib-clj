@@ -26,10 +26,10 @@ mkdir -p target/staging
 cp "target/$JAR_NAME" target/staging/
 
 echo "==> Copying native raylib library..."
-cp libs/libraylib.5.5.0.dylib target/staging/
+cp libs/libraylib.6.0.0.dylib target/staging/
 
 echo "==> Removing quarantine attribute..."
-xattr -d com.apple.quarantine target/staging/libraylib.5.5.0.dylib 2>/dev/null || true
+xattr -d com.apple.quarantine target/staging/libraylib.6.0.0.dylib 2>/dev/null || true
 
 echo "==> Creating minimal JRE with jlink..."
 # Modules needed for Clojure + coffi (FFI):
