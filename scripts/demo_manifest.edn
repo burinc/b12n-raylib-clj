@@ -79,7 +79,14 @@
  ;; flaky pipeline, and never judge a take by its frame count: open the GIF.
  ;; ---------------------------------------------------------------------
  :overrides
- {;; ascii-rendering animates unaided (the sprite tracks back and forth), so
+ {;; First-person, so the mouse look is the motion worth showing - and
+  ;; pointer MOVES land reliably where button presses do not. The click is
+  ;; included on the chance it registers and removes a cube.
+  "basic-voxel" {:input [[0.6 :move 500 200] [1.4 :move 300 260]
+                         [2.2 :move 520 180] [3.0 :move 340 240]
+                         [3.8 :drag 400 225 401 225]
+                         [4.6 :move 460 210] [5.4 :move 360 250]]}
+;; ascii-rendering animates unaided (the sprite tracks back and forth), so
   ;; the keys only exercise the glyph-size uniform. Arrow keys read
   ;; is-key-pressed?, which latches for a frame, so taps register.
   "ascii-rendering" {:input [[1.0 :key "right"] [1.8 :key "right"]

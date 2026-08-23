@@ -1,4 +1,4 @@
-# The example catalog: 109 raylib examples
+# The example catalog: 110 raylib examples
 
 A map of the whole suite. Each example is one namespace under
 `src/examples/` (or `src/examples/games/`, `src/examples/models/`),
@@ -157,7 +157,7 @@ credit).
 | [<img src="../demos/music-stream.gif" width="80">](demos.md#music-stream) | `music-stream` | Music Stream | MP3 streaming | SPACE, P, Arrows | `audio_music_stream.c` |
 | [<img src="../demos/sound-multi.gif" width="80">](demos.md#sound-multi) | `sound-multi` | Sound Multi | Multiple sounds | SPACE | `audio_sound_multi.c` |
 
-## 🗿 Models (21)
+## 🗿 Models (22)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
@@ -182,6 +182,7 @@ credit).
 | [<img src="../demos/lorenz-attractor.gif" width="80">](demos.md#lorenz-attractor) | `lorenz-attractor` | Lorenz Attractor | Chaos theory | 1-3, Arrows, SPACE, R, Q | *(original)* |
 | [<img src="../demos/terrain-generation.gif" width="80">](demos.md#terrain-generation) | `terrain-generation` | Terrain Generation | Procedural terrain | 1-3, Arrows, G, W, SPACE, Q | *(original)* |
 | [<img src="../demos/mesh-generation.gif" width="80">](demos.md#mesh-generation) | `mesh-generation` | Mesh Generation | Procedural 3D shapes | Left/Right, Click, SPACE, R, Q | `models_mesh_generation.c` |
+| [<img src="../demos/basic-voxel.gif" width="80">](demos.md#basic-voxel) | `basic-voxel` | Basic Voxel | First-person voxel world, click to remove a cube | WASD, mouse, left-click | `models_basic_voxel.c` |
 
 ## Adding a new example
 

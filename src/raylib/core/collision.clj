@@ -26,12 +26,6 @@
     [:point ::rs/vector-3]
     [:normal ::rs/vector-3]]])
 
-;; BoundingBox struct: min (Vector3) + max (Vector3) = 24 bytes
-(defalias ::bounding-box
-  [::mem/struct
-   [[:min ::rs/vector-3]
-    [:max ::rs/vector-3]]])
-
 (defcfn get-screen-to-world-ray
   "Get a ray trace from screen position (i.e. mouse)"
   {:arglists '([position camera])}
@@ -42,7 +36,7 @@
   "Get collision info between ray and box"
   {:arglists '([ray box])}
   "GetRayCollisionBox"
-  [::ray ::bounding-box] ::ray-collision)
+  [::ray ::rs/bounding-box] ::ray-collision)
 
 (defcfn draw-ray!
   "Draw a ray line"
@@ -88,13 +82,13 @@
   "Check collision between two bounding boxes"
   {:arglists '([box1 box2])}
   "CheckCollisionBoxes"
-  [::bounding-box ::bounding-box] ::mem/byte)
+  [::rs/bounding-box ::rs/bounding-box] ::mem/byte)
 
 (defcfn check-collision-box-sphere?
   "Check collision between box and sphere"
   {:arglists '([box center radius])}
   "CheckCollisionBoxSphere"
-  [::bounding-box ::rs/vector-3 ::mem/float] ::mem/byte)
+  [::rs/bounding-box ::rs/vector-3 ::mem/float] ::mem/byte)
 
 ;; Moved from raylib-ext (2026-08-22 consolidation)
 (defcfn check-collision-circle-rec?

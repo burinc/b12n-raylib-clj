@@ -415,6 +415,9 @@
   ascii-rendering {:doc "🔤 Ascii Rendering - post-process the scene into ASCII glyphs"
                   :task (h/run-example! "ascii-rendering")}
 
+  basic-voxel {:doc "🧊 Basic Voxel - walk an 8x8x8 block and shoot cubes away"
+              :task (h/run-example! "basic-voxel")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 
