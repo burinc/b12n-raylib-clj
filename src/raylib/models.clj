@@ -186,6 +186,18 @@
   "UnloadMesh"
   [::mesh] ::mem/void)
 
+(defcfn gen-mesh-cubicmap
+  "Generate a cubes-based map mesh from an image, one cube per non-black pixel"
+  {:arglists '([cubicmap cube-size])}
+  "GenMeshCubicmap"
+  [::rs/image ::rs/vector-3] ::mesh)
+
+(defcfn gen-mesh-heightmap
+  "Generate a heightmap mesh from an image, using pixel brightness as height"
+  {:arglists '([heightmap size])}
+  "GenMeshHeightmap"
+  [::rs/image ::rs/vector-3] ::mesh)
+
 (defcfn gen-mesh-poly
   "Generate a polygonal mesh"
   {:arglists '([sides radius])}
@@ -281,7 +293,30 @@
      model)))
 
 (defcfn set-material-texture!
-  "Set a texture into one of a material's map slots"
-  {:arglists '([material map-type texture])}
+  "Set a texture into one of a material's map slots.
+
+   Takes a POINTER to the Material, which raylib mutates in place. For a
+   model's own material, prefer `set-model-material-texture!` below."
+  {:arglists '([material-ptr map-type texture])}
   "SetMaterialTexture"
   [::mem/pointer ::mem/int ::rs/texture] ::mem/void)
+
+(defn set-model-material-texture!
+  "Set a texture into one of a model's material map slots, in place.
+
+   raylib's own examples write `model.materials[0].maps[MAP].texture = tex`
+   directly. There IS a function for this one - unlike the colour case - so
+   this defers to `SetMaterialTexture` rather than walking pointers by hand.
+
+   `(:materials model)` is already the address of `materials[0]`, so the
+   zero-index case needs no arithmetic; a later index is offset by whole
+   Material structs."
+  ([model texture] (set-model-material-texture! model 0 :diffuse texture))
+  ([model material-index map-key texture]
+   (let [base (:materials model)
+         ptr (if (zero? material-index)
+               base
+               (mem/slice (mem/reinterpret base (* material-size (inc material-index)))
+                          (* material-size material-index)))]
+     (set-material-texture! ptr (material-map-index map-key) texture)
+     model)))
