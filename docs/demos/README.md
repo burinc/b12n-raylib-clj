@@ -398,6 +398,18 @@ Corner roundness, size, thickness and segments on raygui sliders
 
 ![rounded-rectangle-drawing](rounded-rectangle-drawing.gif)
 
+### hilbert-curve
+
+Space-filling curve drawn stroke by stroke with hue along its length
+
+![hilbert-curve](hilbert-curve.gif)
+
+### math-sine-cosine
+
+Unit circle with sine, cosine, tangent and related angles drawn live
+
+![math-sine-cosine](math-sine-cosine.gif)
+
 ### easings-testbed
 
 All 28 easing curves, one per axis

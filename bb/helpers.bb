@@ -478,6 +478,16 @@
     :title "Rounded Rectangle Drawing"
     :desc "Corner roundness, size, thickness and segments on raygui sliders"
     :controls "Drag the sliders, toggle the three draw modes"}
+   {:alias "hilbert-curve"
+    :category :shapes
+    :title "Hilbert Curve"
+    :desc "Space-filling curve drawn stroke by stroke with hue along its length"
+    :controls "Spinner sets order, sliders set thickness and size"}
+   {:alias "math-sine-cosine"
+    :category :shapes
+    :title "Math Sine Cosine"
+    :desc "Unit circle with sine, cosine, tangent and related angles drawn live"
+    :controls "Angle slider, Pause toggle"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"
