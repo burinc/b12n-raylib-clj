@@ -3,7 +3,7 @@
 ## The shared skeleton
 
 Most examples follow the same shape: start the embedded nREPL, open a
-window, loop until the user closes it, clean up (92 of 103; 11
+window, loop until the user closes it, clean up (94 of 105; 11
 examples, including `pong`, `camera-2d`, and `music-stream`, skip the
 embedded nREPL; `grep -rL "nrepl/start" src/examples/*.clj
 src/examples/*/*.clj` lists them). Here's

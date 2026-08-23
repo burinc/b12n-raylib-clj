@@ -12,6 +12,18 @@ Examples read at <https://raylib-clj.b12n.app>.
 
 ## Unreleased
 
+- 2 further example ports, taking the suite to **105**: `hilbert-curve` and
+  `math-sine-cosine`.
+- `raylib.raygui` gains **line, group box, toggle and spinner**. The spinner
+  displays but cannot be typed into: raygui backs that with a text field
+  (GuiValueBox) and the example using one does not enable it.
+- **`draw-dashed-line!`** in `raylib.shapes.basic`, and it is not a binding.
+  raylib 6.x added `DrawLineDashed`, but the bundled 5.5.0 does not export
+  it, so a binding would compile and then crash. This replaces a private
+  copy that lived in the `dashed-line` example.
+- `DrawSplineLinear` bound, wrapped so callers pass Clojure maps rather than
+  a raw pointer.
+
 - 6 further example ports, taking the suite to **103**: `input-actions`,
   `circle-sector-drawing`, `ring-drawing`, `recursive-tree`,
   `kaleidoscope` and `rounded-rectangle-drawing`. The suite now groups as

@@ -283,7 +283,7 @@ a box steered through an action layer, so WASD and the arrow keys can drive the 
 ![input-actions](../demos/input-actions.gif)
 
 
-## 🔷 Shapes (26)
+## 🔷 Shapes (28)
 
 ### logo-raylib
 
@@ -440,6 +440,18 @@ a ring with its radii, angles and segment count on sliders, and three draw modes
 a rounded rectangle with its corner roundness, size and outline thickness on sliders
 
 ![rounded-rectangle-drawing](../demos/rounded-rectangle-drawing.gif)
+
+### hilbert-curve
+
+a Hilbert curve drawn stroke by stroke, hue cycling along its length (a spinner sets the order)
+
+![hilbert-curve](../demos/hilbert-curve.gif)
+
+### math-sine-cosine
+
+the unit circle animated, with sine, cosine, tangent and the related angles drawn against it
+
+![math-sine-cosine](../demos/math-sine-cosine.gif)
 
 
 ## 📝 Text (3)
