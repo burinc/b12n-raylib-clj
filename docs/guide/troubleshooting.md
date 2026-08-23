@@ -9,7 +9,7 @@ Make sure you're running from the project root directory where `libs/` folder ex
 Run `bb macos:sign-lib` or manually sign the library:
 
 ```bash
-codesign --force --sign - libs/macos/libraylib.5.5.0.dylib
+codesign --force --sign - libs/macos/libraylib.6.0.0.dylib
 ```
 
 See [Architecture: macOS code signing](architecture.md#macos-code-signing)

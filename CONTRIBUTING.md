@@ -18,7 +18,7 @@ clojure --version # Clojure CLI
 bb --version      # babashka, optional, but every example has a `bb <name>` task
 ```
 
-You do **not** need to install raylib. Prebuilt 5.5.0 binaries for macOS,
+You do **not** need to install raylib. Prebuilt 6.0 binaries for macOS,
 Linux, and Windows ship under `libs/` and are selected by OS/arch at load time
 (see `src/raylib/core.clj`). If you'd rather link a system raylib, put it
 anywhere on the `-Djava.library.path` list in `deps.edn`.
@@ -27,7 +27,7 @@ On macOS, Gatekeeper may quarantine the bundled dylib. If a run dies on a
 signature error:
 
 ```sh
-codesign --force --sign - libs/macos/libraylib.5.5.0.dylib
+codesign --force --sign - libs/macos/libraylib.6.0.0.dylib
 ```
 
 ## Before you open a PR

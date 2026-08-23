@@ -227,12 +227,12 @@ flowchart TB
 
 ## Bundled Libraries
 
-This project includes pre-built Raylib 5.5.0 libraries for different platforms:
+This project includes pre-built Raylib 6.0 libraries for different platforms:
 
 | Platform | Directory | Library |
 |----------|-----------|---------|
-| macOS (Intel/ARM) | `libs/macos` | `libraylib.5.5.0.dylib` |
-| Linux 64-bit | `libs/linux_amd64` | `libraylib.so.5.5.0` |
+| macOS (Intel/ARM) | `libs/macos` | `libraylib.6.0.0.dylib` |
+| Linux 64-bit | `libs/linux_amd64` | `libraylib.so.6.0.0` |
 | Linux 32-bit | `libs/linux_i386` | `libraylib.a` |
 | Windows 64-bit | `libs/win64_msvc16` | `raylib.dll` |
 | Windows 32-bit | `libs/win32_msvc16` | `raylib.dll` |
@@ -250,7 +250,7 @@ bb macos:sign-lib
 Or manually:
 
 ```bash
-codesign --force --sign - libs/macos/libraylib.5.5.0.dylib
+codesign --force --sign - libs/macos/libraylib.6.0.0.dylib
 ```
 
 ## Documentation
@@ -382,7 +382,7 @@ Three caveats, all detailed in [NOTICE](NOTICE):
   Their upstream terms are noted per example; the project as a whole is
   EPL-2.0.
 
-- **`libs/` redistributes prebuilt raylib 5.5.0 binaries** (macOS, Linux,
+- **`libs/` redistributes prebuilt raylib 6.0 binaries** (macOS, Linux,
   Windows) so the examples run without a system raylib install. They are
   raylib's own release artifacts, unmodified, under raylib's zlib license.
 - **`resources/` media is not covered by this license.** Those are raylib's

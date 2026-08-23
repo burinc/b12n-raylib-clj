@@ -116,15 +116,19 @@ possible:
   expensive than the addition.
 
 A useful corollary when adding bindings. The header in a raylib checkout
-is not the list of what you can call - the bundled library is. This repo
-ships raylib 5.5.0, and 27 functions declared in raylib's current header
-are absent from it. Binding one of those compiles cleanly and then fails
-at runtime with a null function-pointer call, which surfaces as a
-`SIGSEGV` at address zero rather than as a missing-symbol message. Check
-against the library:
+is not the list of what you can call - the bundled library is. Binding a
+function the shipped library does not export compiles cleanly and then
+fails at runtime with a null function-pointer call, which surfaces as a
+`SIGSEGV` at address zero rather than as a missing-symbol message.
+
+This repo ships raylib **6.0**, which narrows that gap considerably but
+does not close it: of the 613 functions declared in raylib's development
+header, 16 are absent from the 6.0 library, leaving 597 callable. Under
+the 5.5.0 this project shipped previously the gap was 27. Always check
+against the library rather than the header:
 
 ```bash
-nm -gU libs/macos/libraylib.5.5.0.dylib | awk '{print $3}' | sed 's/^_//' | sort -u
+nm -gU libs/macos/libraylib.6.0.0.dylib | awk '{print $3}' | sed 's/^_//' | sort -u
 ```
 
 ## Project structure diagram
@@ -167,12 +171,12 @@ flowchart TB
 
 ## Bundled libraries
 
-This project includes pre-built Raylib 5.5.0 libraries for different platforms:
+This project includes pre-built Raylib 6.0 libraries for different platforms:
 
 | Platform | Directory | Library |
 |----------|-----------|---------|
-| macOS (Intel/ARM) | `libs/macos` | `libraylib.5.5.0.dylib` |
-| Linux 64-bit | `libs/linux_amd64` | `libraylib.so.5.5.0` |
+| macOS (Intel/ARM) | `libs/macos` | `libraylib.6.0.0.dylib` |
+| Linux 64-bit | `libs/linux_amd64` | `libraylib.so.6.0.0` |
 | Linux 32-bit | `libs/linux_i386` | `libraylib.a` |
 | Windows 64-bit | `libs/win64_msvc16` | `raylib.dll` |
 | Windows 32-bit | `libs/win32_msvc16` | `raylib.dll` |
@@ -190,5 +194,5 @@ bb macos:sign-lib
 Or manually:
 
 ```bash
-codesign --force --sign - libs/macos/libraylib.5.5.0.dylib
+codesign --force --sign - libs/macos/libraylib.6.0.0.dylib
 ```

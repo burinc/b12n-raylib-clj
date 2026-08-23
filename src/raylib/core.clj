@@ -41,8 +41,8 @@
 ;; Get library filename for current OS
 (defn- get-lib-name []
   (case (get-os-name)
-    :macos "libraylib.5.5.0.dylib"
-    :linux "libraylib.so.5.5.0"
+    :macos "libraylib.6.0.0.dylib"
+    :linux "libraylib.so.6.0.0"
     :windows "raylib.dll"
     nil))
 
