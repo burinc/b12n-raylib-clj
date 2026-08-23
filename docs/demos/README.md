@@ -192,6 +192,12 @@ On-screen ENG-US keyboard showing what raylib reports per key
 
 ![keyboard-testbed](keyboard-testbed.gif)
 
+### input-actions
+
+Remappable action layer over keys and gamepad buttons
+
+![input-actions](input-actions.gif)
+
 ### undo-redo
 
 Ring-buffer undo history on a grid
@@ -367,6 +373,30 @@ Throughput test firing rows of bullets from a rotating circle
 Circle sector angles, radius and segments on raygui sliders
 
 ![circle-sector-drawing](circle-sector-drawing.gif)
+
+### ring-drawing
+
+Ring inner/outer radius, angles and segments on raygui sliders
+
+![ring-drawing](ring-drawing.gif)
+
+### recursive-tree
+
+Binary tree grown by splitting each branch in two
+
+![recursive-tree](recursive-tree.gif)
+
+### kaleidoscope
+
+Mouse strokes repeated around six-fold symmetry and mirrored
+
+![kaleidoscope](kaleidoscope.gif)
+
+### rounded-rectangle-drawing
+
+Corner roundness, size, thickness and segments on raygui sliders
+
+![rounded-rectangle-drawing](rounded-rectangle-drawing.gif)
 
 ### easings-testbed
 

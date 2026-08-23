@@ -458,6 +458,26 @@
     :title "Circle Sector Drawing"
     :desc "Circle sector angles, radius and segments on raygui sliders"
     :controls "Drag the four sliders on the right"}
+   {:alias "ring-drawing"
+    :category :shapes
+    :title "Ring Drawing"
+    :desc "Ring inner/outer radius, angles and segments on raygui sliders"
+    :controls "Drag the sliders, toggle the three draw modes"}
+   {:alias "recursive-tree"
+    :category :shapes
+    :title "Recursive Tree"
+    :desc "Binary tree grown by splitting each branch in two"
+    :controls "Drag Angle/Length/Decay/Depth/Thick, toggle Bezier"}
+   {:alias "kaleidoscope"
+    :category :shapes
+    :title "Kaleidoscope"
+    :desc "Mouse strokes repeated around six-fold symmetry and mirrored"
+    :controls "Drag to draw, < > to step through lines, Reset to clear"}
+   {:alias "rounded-rectangle-drawing"
+    :category :shapes
+    :title "Rounded Rectangle Drawing"
+    :desc "Corner roundness, size, thickness and segments on raygui sliders"
+    :controls "Drag the sliders, toggle the three draw modes"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"

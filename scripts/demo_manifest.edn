@@ -55,7 +55,43 @@
  ;; input (e.g. "ESC to exit" only) — recorded as-is, same as most of
  ;; b12n-rljlt's own manifest.
  :overrides
- {;; Drags the four raygui sliders. This is also the visual proof that the
+ {;; The raygui-driven shapes examples. Each drags sliders and toggles
+  ;; checkboxes so the ported controls are visibly doing something; without
+  ;; input these are a static shape and a static panel.
+  "ring-drawing" {:input [[0.4 :drag 660 50 700 50]     ; StartAngle
+                          [1.2 :drag 660 80 620 80]     ; EndAngle
+                          [2.0 :drag 660 150 700 150]   ; InnerRadius
+                          [2.8 :drag 660 180 630 180]   ; OuterRadius
+                          [3.6 :drag 660 250 690 250]   ; Segments
+                          [4.4 :click 610 360]          ; Draw RingLines on
+                          [5.0 :click 610 390]          ; Draw CircleLines on
+                          [5.6 :move 660 250]]}
+  "recursive-tree" {:input [[0.4 :drag 700 50 660 50]   ; Angle
+                            [1.3 :drag 700 80 740 80]   ; Length
+                            [2.2 :drag 700 110 730 110] ; Decay
+                            [3.1 :drag 700 140 670 140] ; Depth
+                            [4.0 :drag 700 170 720 170] ; Thick
+                            [4.8 :click 650 200]        ; Bezier on
+                            [5.5 :drag 700 50 720 50]]}
+  ;; Drag inside the canvas to draw; the strokes are what the six-fold
+  ;; symmetry acts on, then < steps back through them.
+  "kaleidoscope" {:input [[0.4 :drag 300 200 420 260]
+                          [1.4 :drag 420 260 360 320]
+                          [2.4 :drag 360 320 460 180]
+                          [3.4 :drag 460 180 300 230]
+                          [4.4 :click 758 425]          ; < step back
+                          [4.8 :click 758 425]
+                          [5.2 :click 783 425]          ; > step forward
+                          [5.6 :move 400 225]]}
+  "rounded-rectangle-drawing" {:input [[0.4 :drag 690 50 740 50]   ; Width
+                                       [1.2 :drag 690 80 730 80]   ; Height
+                                       [2.0 :drag 690 150 740 150] ; Roundness
+                                       [2.8 :drag 690 180 720 180] ; Thickness
+                                       [3.6 :drag 690 250 720 250] ; Segments
+                                       [4.4 :click 650 360]        ; RoundedLines on
+                                       [5.0 :click 650 390]        ; DrawRect on
+                                       [5.6 :move 690 150]]}
+;; Drags the four raygui sliders. This is also the visual proof that the
   ;; ported controls track the pointer and hold a drag: each :drag sweeps a
   ;; slider and the sector redraws to match.
   "circle-sector-drawing" {:input [[0.5 :drag 660 50 700 50]    ; StartAngle up

@@ -385,6 +385,18 @@
   circle-sector-drawing {:doc "🥧 Circle Sector Drawing - sector params on raygui sliders"
                         :task (h/run-example! "circle-sector-drawing")}
 
+  ring-drawing {:doc "🍩 Ring Drawing - ring params on raygui sliders"
+                :task (h/run-example! "ring-drawing")}
+
+  recursive-tree {:doc "🌳 Recursive Tree - binary tree with raygui-controlled growth"
+                  :task (h/run-example! "recursive-tree")}
+
+  kaleidoscope {:doc "🔮 Kaleidoscope - draw with six-fold mirrored symmetry"
+                :task (h/run-example! "kaleidoscope")}
+
+  rounded-rectangle-drawing {:doc "▢ Rounded Rectangle Drawing - roundness params on raygui sliders"
+                             :task (h/run-example! "rounded-rectangle-drawing")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 
