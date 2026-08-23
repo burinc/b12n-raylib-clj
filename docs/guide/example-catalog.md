@@ -1,4 +1,4 @@
-# The example catalog: 97 raylib examples
+# The example catalog: 103 raylib examples
 
 A map of the whole suite. Each example is one namespace under
 `src/examples/` (or `src/examples/games/`, `src/examples/models/`),
@@ -48,7 +48,7 @@ from" cell on this page cites. `snake.c` and `floppy.c` come from its
 2021 Ramon Santamaria (@raysan5)", matching this example's own docstring
 credit).
 
-## 📦 Core (35)
+## 📦 Core (36)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
@@ -87,8 +87,9 @@ credit).
 | [<img src="../demos/viewport-scaling.gif" width="80">](demos.md#viewport-scaling) | `viewport-scaling` | Viewport Scaling | Six ways to fit a fixed-resolution game onto a resizable window | Click &lt; &gt;, resize window | `core_viewport_scaling.c` |
 | [<img src="../demos/keyboard-testbed.gif" width="80">](demos.md#keyboard-testbed) | `keyboard-testbed` | Keyboard Testbed | On-screen ENG-US keyboard showing what raylib reports per key | Press keys, hover | `core_keyboard_testbed.c` |
 | [<img src="../demos/undo-redo.gif" width="80">](demos.md#undo-redo) | `undo-redo` | Undo Redo | Ring-buffer undo history on a grid | Arrows, SPACE, CTRL+Z/Y | `core_undo_redo.c` |
+| [<img src="../demos/input-actions.gif" width="80">](demos.md#input-actions) | `input-actions` | Input Actions | Remappable action layer over keys and gamepad buttons | WASD/arrows, SPACE, TAB | `core_input_actions.c` |
 
-## 🔷 Shapes (21)
+## 🔷 Shapes (26)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
@@ -113,6 +114,11 @@ credit).
 | [<img src="../demos/penrose-tile.gif" width="80">](demos.md#penrose-tile) | `penrose-tile` | Penrose Tile | L-system Penrose tiling drawn by turtle | UP/DOWN generations | `shapes_penrose_tile.c` |
 | [<img src="../demos/bullet-hell.gif" width="80">](demos.md#bullet-hell) | `bullet-hell` | Bullet Hell | Rows of bullets fired from a rotating circle | Arrows, Z/X, SPACE, ENTER | `shapes_bullet_hell.c` |
 | [<img src="../demos/easings-testbed.gif" width="80">](demos.md#easings-testbed) | `easings-testbed` | Easings Testbed | All 28 easing curves, one per axis | Arrows pick curves, ENTER plays | `shapes_easings_testbed.c` |
+| [<img src="../demos/circle-sector-drawing.gif" width="80">](demos.md#circle-sector-drawing) | `circle-sector-drawing` | Circle Sector Drawing | Sector angles, radius and segments on sliders | Drag the four sliders | `shapes_circle_sector_drawing.c` |
+| [<img src="../demos/ring-drawing.gif" width="80">](demos.md#ring-drawing) | `ring-drawing` | Ring Drawing | Ring radii, angles and segments on sliders | Drag sliders, toggle draw modes | `shapes_ring_drawing.c` |
+| [<img src="../demos/recursive-tree.gif" width="80">](demos.md#recursive-tree) | `recursive-tree` | Recursive Tree | Binary tree grown by splitting each branch in two | Angle, Length, Decay, Depth, Bezier | `shapes_recursive_tree.c` |
+| [<img src="../demos/kaleidoscope.gif" width="80">](demos.md#kaleidoscope) | `kaleidoscope` | Kaleidoscope | Strokes repeated around six-fold symmetry and mirrored | Drag to draw, &lt; &gt; to step, Reset | `shapes_kaleidoscope.c` |
+| [<img src="../demos/rounded-rectangle-drawing.gif" width="80">](demos.md#rounded-rectangle-drawing) | `rounded-rectangle-drawing` | Rounded Rectangle Drawing | Corner roundness, size and segments on sliders | Drag sliders, toggle draw modes | `shapes_rounded_rectangle_drawing.c` |
 
 ## 📝 Text (3)
 

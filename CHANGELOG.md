@@ -12,6 +12,30 @@ Examples read at <https://raylib-clj.b12n.app>.
 
 ## Unreleased
 
+- 6 further example ports, taking the suite to **103**: `input-actions`,
+  `circle-sector-drawing`, `ring-drawing`, `recursive-tree`,
+  `kaleidoscope` and `rounded-rectangle-drawing`. The suite now groups as
+  36 core, 26 shapes, 21 models, 9 games, 4 audio, 3 textures, 3 text and
+  1 shaders.
+- **`raylib.raygui`**: a Clojure port of the raygui controls the examples
+  use - label, button, checkbox, slider, slider bar, the style table and
+  the enable/disable/lock state. raygui is header-only C compiled into
+  whatever includes it, so the bundled library exports no `Gui*` symbols
+  at all and there was nothing to bind. 19 of raylib's 218 examples
+  include it; five of them are now ported. Controls return their new
+  value rather than writing through a pointer.
+- **`raylib.raymath`**: a Clojure port of raymath.h's scalar, Vector2 and
+  Vector3 maths. This one *could* have been bound - raymath's symbols
+  really are exported - but a foreign call to add two floats costs more
+  than the addition, and `clamp`/`lerp` were separately reimplemented in
+  five example namespaces. Verified against the C functions themselves.
+- **`raylib.core.cursor`**: the cursor family moved out of
+  `raylib.core.camera3d`, where a first-person example had needed it
+  first, and gained `ShowCursor`/`HideCursor`/`IsCursorOnScreen`.
+- 11 new bindings: circle sectors, ring outlines, rounded-rectangle
+  outlines, `DrawRectangleV`, `DrawTextureV`, clipboard get/set and
+  `SetShaderValueV`. 195 to 208 raylib functions bound.
+
 - 19 new example ports, taking the suite from 78 to **97**:
   `math-angle-rotation`, `ellipse-collision`, `camera-3d-mode`,
   `input-multitouch`, `delta-time`, `srcrec-dstrec`, `render-texture`,
@@ -59,6 +83,13 @@ Examples read at <https://raylib-clj.b12n.app>.
   happens. `keyboard-testbed` steers by mouse hover rather than
   keypresses: a key lights only while held, and a synthetic press
   releases too fast to reliably land inside a captured frame.
+
+**Worth knowing if you are adding bindings:** the repo bundles raylib
+5.5.0 while raylib's own header has moved on. 27 functions declared in the
+current header are absent from the shipped library, and binding one
+compiles cleanly and then dies at runtime with a null function-pointer
+call rather than a readable error. Derive what is bindable from `nm` on
+the dylib, not from the header.
 
 **Known gap:** `bb record:status` reports 49 existing GIFs as stale
 against changed sources. Those are the `raylib_ext` consolidation's

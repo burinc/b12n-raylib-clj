@@ -64,7 +64,7 @@ a GameBoy-style 3D maze escape (WASD + mouse look)
 ![retro-maze-3d](../demos/retro-maze-3d.gif)
 
 
-## 📦 Core (35)
+## 📦 Core (36)
 
 ### bouncing-ball
 
@@ -276,8 +276,14 @@ six ways to fit a fixed-resolution game onto a resizable window (click < > to ch
 
 ![viewport-scaling](../demos/viewport-scaling.gif)
 
+### input-actions
 
-## 🔷 Shapes (21)
+a box steered through an action layer, so WASD and the arrow keys can drive the same actions (TAB swaps keysets)
+
+![input-actions](../demos/input-actions.gif)
+
+
+## 🔷 Shapes (26)
 
 ### logo-raylib
 
@@ -404,6 +410,36 @@ fixed and sweeping angle lines
 an L-system Penrose tiling drawn by turtle (UP/DOWN change the generation count)
 
 ![penrose-tile](../demos/penrose-tile.gif)
+
+### circle-sector-drawing
+
+a circle sector with its angles, radius and segment count on sliders
+
+![circle-sector-drawing](../demos/circle-sector-drawing.gif)
+
+### kaleidoscope
+
+mouse strokes repeated around six-fold symmetry and mirrored (< and > step through the stored lines)
+
+![kaleidoscope](../demos/kaleidoscope.gif)
+
+### recursive-tree
+
+a binary tree grown by splitting each branch in two (sliders set the angle, length, decay and depth)
+
+![recursive-tree](../demos/recursive-tree.gif)
+
+### ring-drawing
+
+a ring with its radii, angles and segment count on sliders, and three draw modes to overlay
+
+![ring-drawing](../demos/ring-drawing.gif)
+
+### rounded-rectangle-drawing
+
+a rounded rectangle with its corner roundness, size and outline thickness on sliders
+
+![rounded-rectangle-drawing](../demos/rounded-rectangle-drawing.gif)
 
 
 ## 📝 Text (3)
