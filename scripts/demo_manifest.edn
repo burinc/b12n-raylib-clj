@@ -55,7 +55,27 @@
  ;; input (e.g. "ESC to exit" only) — recorded as-is, same as most of
  ;; b12n-rljlt's own manifest.
  :overrides
- {;; The raygui-driven shapes examples. Each drags sliders and toggles
+ {;; An example about input needs input. WASD drives the box under the
+  ;; default keyset, TAB swaps to the alternate one, and the arrow keys
+  ;; then drive it through the same actions - which is the whole point.
+  ;; SPACE recentres, briefly turning the box blue on release.
+  ;; What this demo can and cannot show. The keyset swap (TAB) and the
+  ;; recentre (SPACE) both read is-key-pressed?, which raylib latches for a
+  ;; frame, so a synthetic tap registers. MOVEMENT reads is-key-down?, and
+  ;; `cgevent key` releases immediately - the key is almost never still down
+  ;; when the frame is polled. So the box mostly stays put and the timeline
+  ;; leans on the label, which is the example's actual subject: the same
+  ;; game reading two different keysets. The movement taps are left in on
+  ;; the chance one lands inside a poll. Same limitation as
+  ;; keyboard-testbed, for the same reason.
+  "input-actions" {:input [[0.6 :key "d"] [0.8 :key "d"] [1.0 :key "s"]
+                           [1.6 :key "tab"]
+                           [2.2 :key "left"] [2.4 :key "up"] [2.6 :key "left"]
+                           [3.2 :key "space"]
+                           [4.0 :key "tab"]
+                           [4.6 :key "d"] [4.8 :key "s"]
+                           [5.4 :key "space"]]}
+;; The raygui-driven shapes examples. Each drags sliders and toggles
   ;; checkboxes so the ported controls are visibly doing something; without
   ;; input these are a static shape and a static panel.
   "ring-drawing" {:input [[0.4 :drag 660 50 700 50]     ; StartAngle
