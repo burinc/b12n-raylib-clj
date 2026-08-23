@@ -503,6 +503,11 @@
     :title "Palette Switch"
     :desc "Fragment shader remaps index-encoded bands through a palette"
     :controls "LEFT/RIGHT to switch palette"}
+   {:alias "ascii-rendering"
+    :category :shaders
+    :title "Ascii Rendering"
+    :desc "Post-process the scene into ASCII glyphs via a render texture"
+    :controls "LEFT/RIGHT to change the glyph cell size"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"
