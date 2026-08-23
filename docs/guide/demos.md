@@ -64,7 +64,7 @@ a GameBoy-style 3D maze escape (WASD + mouse look)
 ![retro-maze-3d](../demos/retro-maze-3d.gif)
 
 
-## 📦 Core (36)
+## 📦 Core (37)
 
 ### bouncing-ball
 
@@ -281,6 +281,12 @@ six ways to fit a fixed-resolution game onto a resizable window (click < > to ch
 a box steered through an action layer, so WASD and the arrow keys can drive the same actions (TAB swaps keysets)
 
 ![input-actions](../demos/input-actions.gif)
+
+### clipboard-text
+
+cut, copy and paste against the system clipboard, by button or by CTRL+X / CTRL+C / CTRL+V
+
+![clipboard-text](../demos/clipboard-text.gif)
 
 
 ## 🔷 Shapes (28)

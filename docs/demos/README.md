@@ -198,6 +198,12 @@ Remappable action layer over keys and gamepad buttons
 
 ![input-actions](input-actions.gif)
 
+### clipboard-text
+
+Cut, copy and paste against the system clipboard
+
+![clipboard-text](clipboard-text.gif)
+
 ### undo-redo
 
 Ring-buffer undo history on a grid

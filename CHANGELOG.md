@@ -12,6 +12,14 @@ Examples read at <https://raylib-clj.b12n.app>.
 
 ## Unreleased
 
+- `clipboard-text` ported, taking the suite to **106**. Cut, copy and paste
+  against the system clipboard, by button or by CTRL+X / CTRL+C / CTRL+V.
+- `raylib.raygui` gains a **text box** and **icon captions**. A raygui caption
+  can carry a leading icon as `#NNN#`; the five icons these buttons need are
+  ported rather than raygui's full 200+ set. The text box edits at the end of
+  the text only - no caret movement, selection or multiline - which covers
+  what the examples do.
+
 - 2 further example ports, taking the suite to **105**: `hilbert-curve` and
   `math-sine-cosine`.
 - `raylib.raygui` gains **line, group box, toggle and spinner**. The spinner
