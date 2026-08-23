@@ -493,6 +493,11 @@
     :title "Clipboard Text"
     :desc "Cut, copy and paste against the system clipboard"
     :controls "Buttons or CTRL+X / CTRL+C / CTRL+V, click the box to edit"}
+   {:alias "tiled-drawing"
+    :category :textures
+    :title "Tiled Drawing"
+    :desc "Tile a texture patch with selectable pattern, tint, scale and rotation"
+    :controls "Click a pattern or colour, UP/DOWN scale, LEFT/RIGHT rotate, SPACE reset"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"
