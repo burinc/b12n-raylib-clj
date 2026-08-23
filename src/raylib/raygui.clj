@@ -75,7 +75,11 @@
    [:slider :slider-padding] 1
    [:checkbox :text-padding] 4
    [:checkbox :text-alignment] align-right
-   [:checkbox :check-padding] 1})
+   [:checkbox :check-padding] 1
+   [:valuebox :text-padding] 0
+   [:valuebox :text-alignment] align-left
+   [:valuebox :spinner-button-width] 24
+   [:valuebox :spinner-button-spacing] 2})
 
 (defonce ^:private style (atom default-style))
 
@@ -277,3 +281,104 @@
    In the C this is GuiSlider with SLIDER_WIDTH temporarily forced to 0."
   [bounds text-left text-right value min-value max-value]
   (slider-pro bounds text-left text-right value min-value max-value 0))
+
+(defn line
+  "A horizontal rule, optionally with a label set into it: the C draws
+   `--- text ------------`, a short stub before the text and the remainder
+   after it."
+  [bounds text]
+  (let [color (color-of (get-style :default (if (= @gui-state state-disabled)
+                                              :border-disabled :line-color)))
+        mid (+ (:y bounds) (/ (:height bounds) 2.0))
+        margin 12.0 pad 4.0]
+    (if (or (nil? text) (= "" text))
+      (rsb/draw-rectangle-rec! {:x (:x bounds) :y mid :width (:width bounds) :height 1.0} color)
+      (let [tw (+ (text-width text) 2)]
+        (rsb/draw-rectangle-rec! {:x (:x bounds) :y mid :width (- margin pad) :height 1.0} color)
+        (draw-aligned-text text {:x (+ (:x bounds) margin) :y (:y bounds)
+                                 :width (float tw) :height (:height bounds)}
+                           align-left color)
+        (rsb/draw-rectangle-rec! {:x (+ (:x bounds) margin tw pad) :y mid
+                                  :width (- (:width bounds) tw margin pad) :height 1.0}
+                                 color))))
+  nil)
+
+(defn group-box
+  "A labelled frame. Only three sides are drawn as plain rules - the top is a
+   `line` carrying the label, which is what breaks the border for the text."
+  [bounds text]
+  (let [color (color-of (get-style :default (if (= @gui-state state-disabled)
+                                              :border-disabled :line-color)))
+        thick 1.0]
+    (rsb/draw-rectangle-rec! {:x (:x bounds) :y (:y bounds)
+                              :width thick :height (:height bounds)} color)
+    (rsb/draw-rectangle-rec! {:x (:x bounds) :y (+ (:y bounds) (:height bounds) -1)
+                              :width (:width bounds) :height thick} color)
+    (rsb/draw-rectangle-rec! {:x (+ (:x bounds) (:width bounds) -1) :y (:y bounds)
+                              :width thick :height (:height bounds)} color)
+    (line {:x (:x bounds) :y (- (:y bounds) (/ (get-style :default :text-size) 2.0))
+           :width (:width bounds) :height (float (get-style :default :text-size))}
+          text))
+  nil)
+
+(defn toggle
+  "A button that stays in. Returns the new active state.
+
+   While idle an active toggle borrows the PRESSED colours, which is how it
+   reads as latched; once the pointer is over it the ordinary hover and
+   press colours take over and the active state stops showing. That is the
+   C's behaviour, not an oversight here."
+  [bounds text active?]
+  (let [hovering? (and (interactive?) (inside? (mouse) bounds))
+        released? (and hovering? (button-released?))
+        active? (if released? (not active?) active?)
+        st (cond (not hovering?) @gui-state
+                 (button-down?) state-pressed
+                 released? state-normal
+                 :else state-focused)
+        latched? (and (= st state-normal) active?)
+        pick (fn [kind] (if latched?
+                          (color-of (get-style :toggle (keyword (str (name kind) "-pressed"))))
+                          (style-color :toggle kind st)))]
+    (draw-box bounds (get-style :toggle :border-width) (pick :border) (pick :base))
+    (draw-aligned-text text bounds (get-style :toggle :text-alignment) (pick :text))
+    active?))
+
+(defn spinner
+  "A number with a decrement and an increment button. Returns the new value.
+
+   raygui's spinner can also be typed into, via an edit mode backed by
+   GuiValueBox. That is not ported: the only example reaching for a spinner
+   passes editMode false, so the box here displays but does not accept text."
+  [bounds text value min-value max-value]
+  (let [bw (get-style :valuebox :spinner-button-width)
+        gap (get-style :valuebox :spinner-button-spacing)
+        left {:x (:x bounds) :y (:y bounds) :width (float bw) :height (:height bounds)}
+        right {:x (+ (:x bounds) (:width bounds) (- bw)) :y (:y bounds)
+               :width (float bw) :height (:height bounds)}
+        box {:x (+ (:x bounds) bw gap) :y (:y bounds)
+             :width (- (:width bounds) (* 2 (+ bw gap))) :height (:height bounds)}
+        st (if (and (interactive?) (inside? (mouse) bounds))
+             (if (button-down?) state-pressed state-focused)
+             @gui-state)
+        down? (button left "<")
+        up? (button right ">")
+        value (-> value (cond-> down? dec, up? inc) (max min-value) (min max-value))]
+    (draw-box box (get-style :valuebox :border-width)
+              (style-color :valuebox :border st) (style-color :valuebox :base st))
+    (draw-aligned-text (str value) box align-center (style-color :valuebox :text st))
+    (when (and text (not= "" text))
+      (let [tw (+ (text-width text) 2)
+            size (get-style :default :text-size)
+            pad (get-style :valuebox :text-padding)
+            left-aligned? (= (get-style :valuebox :text-alignment) align-left)]
+        (draw-aligned-text
+         text
+         {:x (if left-aligned?
+               (- (:x bounds) tw pad)
+               (+ (:x bounds) (:width bounds) pad))
+          :y (+ (:y bounds) (- (/ (:height bounds) 2.0) (/ size 2.0)))
+          :width (float tw) :height (float size)}
+         (if left-aligned? align-right align-left)
+         (style-color :label :text st))))
+    value))
