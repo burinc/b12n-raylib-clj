@@ -556,7 +556,7 @@ fire the same sound multiple times, overlapping (SPACE)
 ![sound-multi](../demos/sound-multi.gif)
 
 
-## 🗿 Models (22)
+## 🗿 Models (25)
 
 ### geometric-shapes
 
@@ -689,3 +689,21 @@ procedurally generated 3D meshes (Left/Right cycles, click, SPACE, R)
 an 8x8x8 block of cubes walked in first person, with left-click removing the one under the crosshair
 
 ![basic-voxel](../demos/basic-voxel.gif)
+
+### billboard-rendering
+
+two alpha billboards that always face the camera, drawn far-to-near so the transparency blends correctly
+
+![billboard-rendering](../demos/billboard-rendering.gif)
+
+### cubicmap-rendering
+
+a 3D maze built from a 32x16 PNG, one cube per non-black pixel, textured from an atlas (P pauses the orbit)
+
+![cubicmap-rendering](../demos/cubicmap-rendering.gif)
+
+### heightmap-rendering
+
+terrain generated from a greyscale PNG, each pixel's brightness read as an elevation
+
+![heightmap-rendering](../demos/heightmap-rendering.gif)

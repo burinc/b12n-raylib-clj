@@ -513,6 +513,21 @@
     :title "Basic Voxel"
     :desc "First-person 8x8x8 voxel world, left-click to remove a cube"
     :controls "WASD to move, mouse to look, left-click to remove"}
+   {:alias "billboard-rendering"
+    :category :models
+    :title "Billboard Rendering"
+    :desc "Camera-facing sprites drawn far-to-near so alpha blends correctly"
+    :controls "Orbits on its own, no input"}
+   {:alias "cubicmap-rendering"
+    :category :models
+    :title "Cubicmap Rendering"
+    :desc "A 3D maze mesh generated from a 32x16 PNG, one cube per lit pixel"
+    :controls "P to pause the orbit"}
+   {:alias "heightmap-rendering"
+    :category :models
+    :title "Heightmap Rendering"
+    :desc "Terrain mesh generated from a greyscale PNG, brightness as elevation"
+    :controls "Orbits on its own, no input"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"

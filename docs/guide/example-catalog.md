@@ -1,4 +1,4 @@
-# The example catalog: 110 raylib examples
+# The example catalog: 113 raylib examples
 
 A map of the whole suite. Each example is one namespace under
 `src/examples/` (or `src/examples/games/`, `src/examples/models/`),
@@ -183,6 +183,9 @@ credit).
 | [<img src="../demos/terrain-generation.gif" width="80">](demos.md#terrain-generation) | `terrain-generation` | Terrain Generation | Procedural terrain | 1-3, Arrows, G, W, SPACE, Q | *(original)* |
 | [<img src="../demos/mesh-generation.gif" width="80">](demos.md#mesh-generation) | `mesh-generation` | Mesh Generation | Procedural 3D shapes | Left/Right, Click, SPACE, R, Q | `models_mesh_generation.c` |
 | [<img src="../demos/basic-voxel.gif" width="80">](demos.md#basic-voxel) | `basic-voxel` | Basic Voxel | First-person voxel world, click to remove a cube | WASD, mouse, left-click | `models_basic_voxel.c` |
+| [<img src="../demos/billboard-rendering.gif" width="80">](demos.md#billboard-rendering) | `billboard-rendering` | Billboard Rendering | Camera-facing sprites, drawn far-to-near so alpha blends | *(none, orbits)* | `models_billboard_rendering.c` |
+| [<img src="../demos/cubicmap-rendering.gif" width="80">](demos.md#cubicmap-rendering) | `cubicmap-rendering` | Cubicmap Rendering | A 3D maze mesh generated from a 32x16 PNG | P to pause the orbit | `models_cubicmap_rendering.c` |
+| [<img src="../demos/heightmap-rendering.gif" width="80">](demos.md#heightmap-rendering) | `heightmap-rendering` | Heightmap Rendering | Terrain mesh from a greyscale PNG, brightness as elevation | *(none, orbits)* | `models_heightmap_rendering.c` |
 
 ## Adding a new example
 

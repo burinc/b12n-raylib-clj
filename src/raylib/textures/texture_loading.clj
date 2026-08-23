@@ -1,6 +1,7 @@
 (ns raylib.textures.texture-loading
   (:require
    [raylib.core]
+   [raylib.internals :as ri]
    [raylib.structs :as rs]
    [coffi.mem :as mem]
    [coffi.ffi :refer [defcfn]]))
@@ -14,6 +15,31 @@
 ; ...
 
 ;; Moved from raylib-ext (2026-08-22 consolidation)
+(defcfn load-image
+  "Load image from file into CPU memory (RAM)"
+  {:arglists '([filename])}
+  "LoadImage"
+  [::mem/c-string] ::rs/image)
+
+(defcfn is-image-valid?
+  "Check if an image is valid (data loaded, dimensions and format set)"
+  {:arglists '([image])}
+  "IsImageValid"
+  [::rs/image] ::ri/bool)
+
+(defcfn unload-image!
+  "Unload image from CPU memory (RAM)"
+  {:arglists '([image])}
+  "UnloadImage"
+  [::rs/image] ::mem/void)
+
+(defcfn load-texture-from-image
+  "Load texture from image data. The image stays on the CPU and is yours to
+   unload separately - this uploads a copy to the GPU."
+  {:arglists '([image])}
+  "LoadTextureFromImage"
+  [::rs/image] ::rs/texture)
+
 (defcfn load-render-texture!
   "Load texture for rendering (framebuffer)"
   {:arglists '([width height])}

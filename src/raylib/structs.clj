@@ -69,6 +69,17 @@
     [:fovy ::mem/float]
     [:projection ::mem/int]]])
 
+;; Image: CPU-side pixel data, as opposed to Texture which lives on the GPU.
+;; `data` is an opaque pointer here - raylib owns the allocation and
+;; unload-image! frees it.
+(defalias ::image
+  [::mem/struct
+   [[:data ::mem/pointer]
+    [:width ::mem/int]
+    [:height ::mem/int]
+    [:mipmaps ::mem/int]
+    [:format ::mem/int]]])
+
 (defalias ::rectangle
   [::mem/struct
    [[:x ::mem/float]

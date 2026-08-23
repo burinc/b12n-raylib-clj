@@ -30,6 +30,10 @@ Read the table before reusing anything here. Two rows need attention:
 | `raysan.png` | [@raysan5](https://github.com/raysan5) | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | `ascii-rendering` | raylib `examples/shaders/resources` |
 | `fudesumi.png` | [Eiden Marsal](https://www.artstation.com/marshall_z) | [**CC-BY-NC 4.0**](https://creativecommons.org/licenses/by-nc/4.0/), non-commercial | `ascii-rendering` | raylib `examples/shaders/resources` |
 | `patterns.png` | **unknown** | **unstated** | `tiled-drawing` | raylib `examples/textures/resources` |
+| `billboard.png` | [@raysan5](https://github.com/raysan5) | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | `billboard-rendering` | raylib `examples/models/resources` |
+| `cubicmap.png` | [@raysan5](https://github.com/raysan5) | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | `cubicmap-rendering` | raylib `examples/models/resources` |
+| `cubicmap_atlas.png` | [@raysan5](https://github.com/raysan5) | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | `cubicmap-rendering` | raylib `examples/models/resources` |
+| `heightmap.png` | [@raysan5](https://github.com/raysan5) | [CC0](https://creativecommons.org/publicdomain/zero/1.0/) | `heightmap-rendering` | raylib `examples/models/resources` |
 | `shaders/glsl330/lighting.vs` | [@raysan5](https://github.com/raysan5) | zlib/libpng | `basic-lighting` | raylib `examples/shaders/resources/shaders/glsl330` |
 | `shaders/glsl330/lighting.fs` | [@raysan5](https://github.com/raysan5) | zlib/libpng | `basic-lighting` | raylib `examples/shaders/resources/shaders/glsl330` |
 | `shaders/glsl330/palette_switch.fs` | [@raysan5](https://github.com/raysan5) | zlib/libpng | `palette-switch` | raylib `examples/shaders/resources/shaders/glsl330` |
