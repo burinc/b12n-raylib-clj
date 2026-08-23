@@ -12,6 +12,18 @@ Examples read at <https://raylib-clj.b12n.app>.
 
 ## Unreleased
 
+- **`raylib.models`**: 3D model loading, mesh generation and drawing. 24 new
+  bindings (209 to 233) plus the five structs they need, and the largest
+  single addition to the binding surface so far. It opens the models
+  examples, the biggest unported group.
+- `basic-voxel` ported, taking the suite to **110**.
+- `set-model-material-color!`, which raylib has no function for - its own
+  examples reach into the struct directly, so this walks the same pointers.
+- `Matrix` added to `raylib.structs`; `BoundingBox` and `Camera3D` moved
+  there from `core/collision` and `core/camera3d` so `raylib.models` does not
+  depend on those namespaces for types it needs by value. `core/camera3d`
+  keeps a local alias, so existing references still resolve.
+
 - 3 further example ports, taking the suite to **109**: `tiled-drawing`,
   `palette-switch` and `ascii-rendering`. These are the three that were
   waiting on asset files; all three now use them.

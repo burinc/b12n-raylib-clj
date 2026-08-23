@@ -556,7 +556,7 @@ fire the same sound multiple times, overlapping (SPACE)
 ![sound-multi](../demos/sound-multi.gif)
 
 
-## 🗿 Models (21)
+## 🗿 Models (22)
 
 ### geometric-shapes
 
@@ -683,3 +683,9 @@ procedurally generated terrain (1-3 picks an algorithm, G, W, SPACE)
 procedurally generated 3D meshes (Left/Right cycles, click, SPACE, R)
 
 ![mesh-generation](../demos/mesh-generation.gif)
+
+### basic-voxel
+
+an 8x8x8 block of cubes walked in first person, with left-click removing the one under the crosshair
+
+![basic-voxel](../demos/basic-voxel.gif)
