@@ -79,7 +79,33 @@
  ;; flaky pipeline, and never judge a take by its frame count: open the GIF.
  ;; ---------------------------------------------------------------------
  :overrides
- {
+ {;; NOTE: the committed GIF for this one was NOT produced by the timeline
+  ;; below. Every control here is a button, and `bb record` posts input
+  ;; pid-routed, which cannot actuate a button on a GLFW target at all
+  ;; (b12n-screen-grab#1). Run as-is it yields a single static frame.
+  ;;
+  ;; It was recorded by driving the app GLOBALLY while the capture ran:
+  ;;
+  ;;   bb record --force --only clipboard-text &
+  ;;   pid=$(pgrep -f 'examples.clipboard-text' | head -1)
+  ;;   # window origin from `cgevent windows --pid`, +28 for the title bar
+  ;;   cgevent drag --steps 30 --delay 12 $X $Y $((X+1)) $Y    # note: no --pid
+  ;;
+  ;; The press must be global, the app frontmost, and held >=250ms (30 steps
+  ;; x 12ms = 360ms clears it). That produced 12 frames showing RANDOM, COPY
+  ;; and PASTE firing. The timeline below is kept so it works unchanged if
+  ;; screen-grab gains a global-posting option.
+  ;;
+  ;; Also: `cgevent type` outruns raylib's own 16-character input queue
+  ;; (MAX_CHAR_PRESSED_QUEUE in rcore.c) - typing more than 16 characters in
+  ;; one burst silently drops the rest. Measured: "typed into the box" landed
+  ;; as "typed into the b", exactly 16.
+  "clipboard-text" {:input [[0.8 :drag 730 140 731 140]   ; RANDOM
+                            [2.0 :drag 294 200 295 200]   ; COPY
+                            [3.4 :drag 730 140 731 140]   ; RANDOM again
+                            [4.6 :drag 380 200 381 200]   ; PASTE
+                            [5.6 :move 294 200]]}
+
   ;; Driven by the SIZE slider, not the order spinner: changing either
   ;; regenerates the curve and replays its draw-on animation, which is the
   ;; thing worth showing. At the default order 2 that animation is over in

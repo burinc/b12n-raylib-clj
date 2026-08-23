@@ -28,6 +28,7 @@
    Colours are stored as raygui does it, 0xRRGGBBAA ints, so a style value
    copied straight out of a C example works unchanged."
   (:require
+   [raylib.core.keyboard :as rck]
    [raylib.core.mouse :as rcm]
    [raylib.core.collision :as rcol]
    [raylib.shapes.basic :as rsb]
@@ -79,7 +80,10 @@
    [:valuebox :text-padding] 0
    [:valuebox :text-alignment] align-left
    [:valuebox :spinner-button-width] 24
-   [:valuebox :spinner-button-spacing] 2})
+   [:valuebox :spinner-button-spacing] 2
+   [:textbox :text-padding] 4
+   [:textbox :text-alignment] align-left
+   [:textbox :text-readonly] 0})
 
 (defonce ^:private style (atom default-style))
 
@@ -123,6 +127,50 @@
 
 (def ^:private blank {:r 0 :g 0 :b 0 :a 0})
 
+;; ------------------------------------------------------------------- icons
+
+;; raygui packs each 16x16 icon into eight 32-bit words: word i carries rows
+;; 2i and 2i+1, and bit k of a word lights the pixel at x = k mod 16. Only
+;; the icons the ported examples ask for are here - the full set is 200+ and
+;; there is no reason to carry the rest.
+(def icons
+  {16  [0x0ff00000 0x381c0810 0x28042804 0x28042804 0x28042804 0x28042804 0x20102ffc 0x00003ff0] ; file-copy
+   17  [0x00000000 0x701c0000 0x079c1e14 0x55a000f0 0x079c00f0 0x701c1e14 0x00000000 0x00000000] ; file-cut
+   18  [0x01c00000 0x13e41bec 0x3f841004 0x204420c4 0x20442044 0x20442044 0x207c2044 0x00003fc0] ; file-paste
+   77  [0x00000000 0x06000200 0x26042ffc 0x20042204 0x20442004 0x3ff42064 0x00400060 0x00000000] ; repeat-fill
+   143 [0x00000000 0x08080ff8 0x08081ffc 0x0aa80aa8 0x0aa80aa8 0x0aa80aa8 0x08080aa8 0x00000ff8]}) ; bin
+
+(def icon-size 16)
+
+(defonce ^:private icon-scale (atom 1))
+
+(defn set-icon-scale! [scale] (when (>= scale 1) (reset! icon-scale scale)))
+
+(defn draw-icon!
+  "Draw icon `id` with its top-left at (x, y), each source pixel becoming a
+   `pixel-size` square. Unknown ids draw nothing rather than throwing - a
+   missing icon should not take an example down."
+  [id x y pixel-size color]
+  (when-let [words (icons id)]
+    (dotimes [i 8]
+      (let [w (nth words i)]
+        (dotimes [k 32]
+          (when (bit-test w k)
+            (rsb/draw-rectangle-rec!
+             {:x (float (+ x (* (mod k icon-size) pixel-size)))
+              :y (float (+ y (* (+ (* 2 i) (quot k 16)) pixel-size)))
+              :width (float pixel-size) :height (float pixel-size)}
+             color)))))))
+
+(defn split-icon
+  "raygui lets a caption carry a leading icon as `#NNN#`. Returns
+   `[icon-id remaining-text]`, with `nil` when there is no icon prefix -
+   `\"#17#CUT\"` becomes `[17 \"CUT\"]` and `\"#77#\"` becomes `[77 \"\"]`."
+  [text]
+  (if-let [[_ digits rest] (and text (re-matches #"#(\d{1,3})#(.*)" text))]
+    [(parse-long digits) rest]
+    [nil text]))
+
 ;; ---------------------------------------------------------------- drawing
 
 (defn ^:private text-width [text]
@@ -135,16 +183,33 @@
   (when (pos? border-width)
     (rsb/draw-rectangle-lines-ex! bounds (float border-width) border-color)))
 
-(defn ^:private draw-aligned-text [text bounds alignment color]
-  (when (and text (not= "" text))
-    (let [size (get-style :default :text-size)
-          w (text-width text)
-          x (condp = alignment
-              align-left (:x bounds)
-              align-right (+ (:x bounds) (- (:width bounds) w))
-              (+ (:x bounds) (/ (- (:width bounds) w) 2.0)))
-          y (+ (:y bounds) (/ (- (:height bounds) size) 2.0))]
-      (rtd/draw-text! text (int x) (int y) size color))))
+(def ^:private icon-text-padding 4)
+
+(defn ^:private draw-aligned-text
+  "Draw `text` in `bounds`, honouring a leading `#NNN#` icon if present.
+
+   Icon and caption are measured together and placed as one unit, so a
+   centred `\"#17#CUT\"` centres the pair rather than the words alone."
+  [text bounds alignment color]
+  (let [[icon-id label] (split-icon text)]
+    (when (or icon-id (and label (not= "" label)))
+      (let [size (get-style :default :text-size)
+            scale @icon-scale
+            iw (if icon-id (* icon-size scale) 0)
+            gap (if (and icon-id (seq label)) icon-text-padding 0)
+            lw (text-width label)
+            w (+ iw gap lw)
+            x (condp = alignment
+                align-left (:x bounds)
+                align-right (+ (:x bounds) (- (:width bounds) w))
+                (+ (:x bounds) (/ (- (:width bounds) w) 2.0)))
+            y (+ (:y bounds) (/ (- (:height bounds) size) 2.0))]
+        (when icon-id
+          (draw-icon! icon-id
+                      (int x) (int (+ (:y bounds) (/ (- (:height bounds) iw) 2.0)))
+                      scale color))
+        (when (seq label)
+          (rtd/draw-text! label (int (+ x iw gap)) (int y) size color))))))
 
 ;; ------------------------------------------------------------ interaction
 
@@ -382,3 +447,74 @@
          (if left-aligned? align-right align-left)
          (style-color :label :text st))))
     value))
+
+(defn text-box
+  "An editable single-line text field. Returns
+   `{:text <possibly-new-text> :toggled? <clicked-this-frame>}`.
+
+   The C mutates a `char *` in place and returns whether the box was
+   clicked, leaving the caller to flip `editMode`. Without pointers both
+   have to come back, hence the map; the caller stores `:text` and flips its
+   own edit flag on `:toggled?`.
+
+   Deliberately a subset of raygui's. It edits at the END of the text only:
+   typing appends, backspace removes the last character, and there is no
+   caret to move with the arrow keys, no selection, and no multiline. What
+   is here covers what the examples do; raygui's own version carries UTF-8
+   caret indexing, auto-repeat and its own paste path, and porting that is a
+   different job from porting a control.
+
+   Set `[:textbox :text-readonly]` to 1 to render without accepting input -
+   the C uses that for its clipboard-contents display.
+
+   While editing, this DRAINS raylib's character queue. Nothing else can
+   read typed characters in the same frame, which is the usual bargain for
+   a focused text field."
+  [bounds text max-length edit-mode?]
+  (let [text (or text "")
+        readonly? (= 1 (get-style :textbox :text-readonly))
+        editable? (and edit-mode? (interactive?) (not readonly?))
+        hovering? (and (interactive?) (not readonly?) (inside? (mouse) bounds))
+        toggled? (and hovering? (button-released?))
+        text (if-not editable?
+               text
+               ;; Drain the whole queue: raylib buffers characters, so
+               ;; reading once would drop anything typed quickly.
+               (let [typed (loop [acc []]
+                             (let [c (rck/get-char-pressed)]
+                               (if (pos? c) (recur (conj acc (char c))) acc)))
+                     with-typed (reduce (fn [t c] (if (< (count t) (dec max-length))
+                                                    (str t c) t))
+                                        text typed)]
+                 (if (and (rck/is-key-pressed? (:backspace enums/keyboard-key))
+                          (seq with-typed))
+                   (subs with-typed 0 (dec (count with-typed)))
+                   with-typed)))
+        st (cond (not (interactive?)) @gui-state
+                 editable? state-pressed
+                 hovering? state-focused
+                 :else state-normal)
+        pad (get-style :textbox :text-padding)
+        size (get-style :default :text-size)
+        inner {:x (+ (:x bounds) pad) :y (:y bounds)
+               :width (- (:width bounds) (* 2 pad)) :height (:height bounds)}
+        ;; Long text scrolls: keep dropping leading characters until the
+        ;; tail fits, so the caret end stays visible rather than the text
+        ;; running out past the border.
+        visible (loop [t text]
+                  (if (and (seq t) (> (text-width t) (:width inner)))
+                    (recur (subs t 1))
+                    t))]
+    (draw-box bounds (get-style :textbox :border-width)
+              (style-color :textbox :border st) (style-color :textbox :base st))
+    (draw-aligned-text visible inner (get-style :textbox :text-alignment)
+                       (style-color :textbox :text st))
+    (when editable?
+      (let [cw (text-width visible)
+            h (min (* size 2) (- (:height bounds) (* 2 (get-style :textbox :border-width))))]
+        (rsb/draw-rectangle-rec!
+         {:x (float (+ (:x inner) cw (get-style :default :text-spacing)))
+          :y (float (+ (:y bounds) (/ (- (:height bounds) h) 2.0)))
+          :width 2.0 :height (float h)}
+         (style-color :textbox :border state-pressed))))
+    {:text text :toggled? (boolean toggled?)}))

@@ -403,6 +403,9 @@
   math-sine-cosine {:doc "📐 Math Sine Cosine - unit circle trig visualised"
                    :task (h/run-example! "math-sine-cosine")}
 
+  clipboard-text {:doc "📋 Clipboard Text - cut/copy/paste with the system clipboard"
+                 :task (h/run-example! "clipboard-text")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 

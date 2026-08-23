@@ -1,4 +1,4 @@
-# The example catalog: 105 raylib examples
+# The example catalog: 106 raylib examples
 
 A map of the whole suite. Each example is one namespace under
 `src/examples/` (or `src/examples/games/`, `src/examples/models/`),
@@ -48,7 +48,7 @@ from" cell on this page cites. `snake.c` and `floppy.c` come from its
 2021 Ramon Santamaria (@raysan5)", matching this example's own docstring
 credit).
 
-## 📦 Core (36)
+## 📦 Core (37)
 
 | preview | `bb` name | title | shows | controls | ported from |
 |---|---|---|---|---|---|
@@ -88,6 +88,7 @@ credit).
 | [<img src="../demos/keyboard-testbed.gif" width="80">](demos.md#keyboard-testbed) | `keyboard-testbed` | Keyboard Testbed | On-screen ENG-US keyboard showing what raylib reports per key | Press keys, hover | `core_keyboard_testbed.c` |
 | [<img src="../demos/undo-redo.gif" width="80">](demos.md#undo-redo) | `undo-redo` | Undo Redo | Ring-buffer undo history on a grid | Arrows, SPACE, CTRL+Z/Y | `core_undo_redo.c` |
 | [<img src="../demos/input-actions.gif" width="80">](demos.md#input-actions) | `input-actions` | Input Actions | Remappable action layer over keys and gamepad buttons | WASD/arrows, SPACE, TAB | `core_input_actions.c` |
+| [<img src="../demos/clipboard-text.gif" width="80">](demos.md#clipboard-text) | `clipboard-text` | Clipboard Text | Cut, copy and paste against the system clipboard | Buttons or CTRL+X/C/V, click to edit | `core_clipboard_text.c` |
 
 ## 🔷 Shapes (28)
 

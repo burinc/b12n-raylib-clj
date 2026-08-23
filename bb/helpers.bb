@@ -488,6 +488,11 @@
     :title "Math Sine Cosine"
     :desc "Unit circle with sine, cosine, tangent and related angles drawn live"
     :controls "Angle slider, Pause toggle"}
+   {:alias "clipboard-text"
+    :category :core
+    :title "Clipboard Text"
+    :desc "Cut, copy and paste against the system clipboard"
+    :controls "Buttons or CTRL+X / CTRL+C / CTRL+V, click the box to edit"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"
