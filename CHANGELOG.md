@@ -12,6 +12,23 @@ Examples read at <https://raylib-clj.b12n.app>.
 
 ## Unreleased
 
+- **Bundled raylib upgraded from 5.5.0 to 6.0** across all five platforms.
+  Nothing this project binds was removed, so no example changed: all 209
+  bound symbols resolve against 6.0 exactly as they did against 5.5.0.
+  raylib 6.0 removes four functions (`DrawModelPoints`, `DrawModelPointsEx`,
+  `UnloadModelAnimation`, `UpdateModelAnimationBones`) - none of them bound
+  here.
+- The gap between raylib's header and the library actually shipped narrows
+  from 27 functions to 16. That gap is the one that matters when adding a
+  binding: a function in the header but not in the library compiles fine and
+  then dies at runtime with a null function-pointer call. `DrawLineDashed` is
+  now real, so `raylib.shapes.basic/draw-dashed-line!` is no longer standing
+  in for a missing function - it still works, and is now simply a choice.
+- **Fixed on Linux:** `libraylib.so` and `libraylib.so.550` were committed as
+  zero-byte regular files rather than the symlinks raylib ships. Anything
+  resolving the plain `libraylib.so` soname would have found an empty file.
+  They are now real symlinks pointing at `libraylib.so.6.0.0`.
+
 - `clipboard-text` ported, taking the suite to **106**. Cut, copy and paste
   against the system clipboard, by button or by CTRL+X / CTRL+C / CTRL+V.
 - `raylib.raygui` gains a **text box** and **icon captions**. A raygui caption

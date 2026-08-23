@@ -58,7 +58,7 @@ body:
       label: Which libraylib is being used?
       description: |
         Every example prints this on startup, e.g.
-        `[raylib] Loading bundled library: libs/macos/libraylib.5.5.0.dylib`
+        `[raylib] Loading bundled library: libs/macos/libraylib.6.0.0.dylib`
       options:
         - The bundled one under libs/ (the default)
         - A system raylib (brew / apt / pacman / a source build)
@@ -86,4 +86,4 @@ body:
       label: On macOS only
       options:
         - label: I ran it with `clojure`, not `clj` (rlwrap breaks GUI apps)
-        - label: If it died on a code signature, I tried `codesign --force --sign - libs/macos/libraylib.5.5.0.dylib`
+        - label: If it died on a code signature, I tried `codesign --force --sign - libs/macos/libraylib.6.0.0.dylib`

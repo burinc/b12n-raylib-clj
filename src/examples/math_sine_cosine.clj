@@ -8,9 +8,10 @@
    current angle.
 
    Two things it needs that the bundled raylib does not provide.
-   `DrawLineDashed` is a raylib 6.x addition absent from the 5.5.0 library
-   here, so the dashed guides go through the Clojure stand-in in
-   `raylib.shapes.basic`. `GuiToggle` and `GuiGroupBox` come from
+   The dashed guides go through `raylib.shapes.basic/draw-dashed-line!`, a
+   Clojure implementation of raylib's `DrawLineDashed`. It was written when
+   this project bundled 5.5.0, which lacks that function; 6.0 has it, so the
+   Clojure version is now a choice rather than a necessity. `GuiToggle` and `GuiGroupBox` come from
    `raylib.raygui`.
 
    Note the arcs are drawn with negative angles - raylib measures the sector

@@ -48,7 +48,7 @@ raylib
   Licensed under the zlib/libpng license.
 
   Unlike a source dependency, this project REDISTRIBUTES prebuilt raylib
-  5.5.0 binaries under libs/ (macOS, Linux x86-64/i386, Windows 32/64-bit for
+  6.0 binaries under libs/ (macOS, Linux x86-64/i386, Windows 32/64-bit for
   MSVC and MinGW-w64), so an example runs without a system raylib install.
   Those binaries are raylib's own release artifacts, unmodified. The zlib
   license permits this provided the notice is retained — which is what this

@@ -14,7 +14,14 @@
 (def SHADER_UNIFORM_IVEC2 5)
 (def SHADER_UNIFORM_IVEC3 6)
 (def SHADER_UNIFORM_IVEC4 7)
-(def SHADER_UNIFORM_SAMPLER2D 8)
+;; raylib 6.0 inserted the four UINT variants at 8-11, moving SAMPLER2D to
+;; 12. The constant is a plain int either way, so nothing errors if it is
+;; wrong - the shader just binds the wrong slot and samples the wrong thing.
+(def SHADER_UNIFORM_UINT 8)
+(def SHADER_UNIFORM_UIVEC2 9)
+(def SHADER_UNIFORM_UIVEC3 10)
+(def SHADER_UNIFORM_UIVEC4 11)
+(def SHADER_UNIFORM_SAMPLER2D 12)
 
 ;; Shader location indices
 (def SHADER_LOC_VERTEX_POSITION 0)
