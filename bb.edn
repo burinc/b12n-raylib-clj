@@ -417,6 +417,12 @@
 
   basic-voxel {:doc "🧊 Basic Voxel - walk an 8x8x8 block and shoot cubes away"
               :task (h/run-example! "basic-voxel")}
+  billboard-rendering {:doc "🖼️  Billboard Rendering - camera-facing sprites, depth-sorted"
+                       :task (h/run-example! "billboard-rendering")}
+  cubicmap-rendering {:doc "🧱 Cubicmap Rendering - a 3D maze generated from a PNG"
+                      :task (h/run-example! "cubicmap-rendering")}
+  heightmap-rendering {:doc "⛰️  Heightmap Rendering - terrain from a greyscale PNG"
+                       :task (h/run-example! "heightmap-rendering")}
 
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}

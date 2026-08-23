@@ -652,6 +652,30 @@ Procedural 3D shapes
 
 ![mesh-generation](mesh-generation.gif)
 
+### basic-voxel
+
+First-person 8x8x8 voxel world, left-click to remove a cube
+
+![basic-voxel](basic-voxel.gif)
+
+### billboard-rendering
+
+Camera-facing sprites drawn far-to-near so alpha blends correctly
+
+![billboard-rendering](billboard-rendering.gif)
+
+### cubicmap-rendering
+
+A 3D maze mesh generated from a 32x16 PNG, one cube per lit pixel
+
+![cubicmap-rendering](cubicmap-rendering.gif)
+
+### heightmap-rendering
+
+Terrain mesh generated from a greyscale PNG, brightness as elevation
+
+![heightmap-rendering](heightmap-rendering.gif)
+
 ## 📝 Text Examples
 
 ### writing-anim
