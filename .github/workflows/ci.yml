@@ -43,16 +43,16 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # JDK 22 is the floor: java.lang.foreign (Project Panama) is not a
       # supported API before it, and coffi's downcall handles will not link.
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: ${{ inputs.java-version || '23' }}
 
-      - uses: DeLaGuardo/setup-clojure@13.0
+      - uses: DeLaGuardo/setup-clojure@13
         with:
           bb: latest
           cli: latest
@@ -64,9 +64,9 @@ jobs:
       - name: Ad-hoc sign the bundled raylib dylib
         run: codesign --force --sign - libs/macos/libraylib.*.dylib
 
-      # The gate that matters: requires all 104 namespaces under src/. It is the
-      # only check that catches an example with a broken require, since running
-      # any single example proves nothing about the other 77. Opens no window —
-      # -main is never called.
+      # The gate that matters: requires every namespace under src/ (135 at the
+      # time of writing). It is the only check that catches an example with a
+      # broken require, since running any single example proves nothing about
+      # the other 105. Opens no window — -main is never called.
       - name: Compile every namespace (headless)
         run: bb check
