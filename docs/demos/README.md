@@ -466,6 +466,12 @@ Spritesheet
 
 ![sprite-animation](sprite-animation.gif)
 
+### tiled-drawing
+
+Tile a texture patch with selectable pattern, tint, scale and rotation
+
+![tiled-drawing](tiled-drawing.gif)
+
 ### srcrec-dstrec
 
 Source/destination rects with rotation
@@ -505,6 +511,18 @@ Multiple sounds
 Dynamic lighting
 
 ![basic-lighting](basic-lighting.gif)
+
+### palette-switch
+
+Fragment shader remaps index-encoded bands through a palette
+
+![palette-switch](palette-switch.gif)
+
+### ascii-rendering
+
+Post-process the scene into ASCII glyphs via a render texture
+
+![ascii-rendering](ascii-rendering.gif)
 
 ## 🗿 Models Examples
 

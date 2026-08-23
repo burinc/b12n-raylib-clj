@@ -493,6 +493,21 @@
     :title "Clipboard Text"
     :desc "Cut, copy and paste against the system clipboard"
     :controls "Buttons or CTRL+X / CTRL+C / CTRL+V, click the box to edit"}
+   {:alias "tiled-drawing"
+    :category :textures
+    :title "Tiled Drawing"
+    :desc "Tile a texture patch with selectable pattern, tint, scale and rotation"
+    :controls "Click a pattern or colour, UP/DOWN scale, LEFT/RIGHT rotate, SPACE reset"}
+   {:alias "palette-switch"
+    :category :shaders
+    :title "Palette Switch"
+    :desc "Fragment shader remaps index-encoded bands through a palette"
+    :controls "LEFT/RIGHT to switch palette"}
+   {:alias "ascii-rendering"
+    :category :shaders
+    :title "Ascii Rendering"
+    :desc "Post-process the scene into ASCII glyphs via a render texture"
+    :controls "LEFT/RIGHT to change the glyph cell size"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"

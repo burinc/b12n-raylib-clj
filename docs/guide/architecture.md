@@ -90,7 +90,7 @@ flowchart LR
     - `gestures.clj`: touch gesture detection
     - `shaders.clj`: shader loading and management
   - `text/`, `shapes/`, `textures/`: text, shape and texture bindings
-- `src/examples/`: the 106 example namespaces (82 top-level + 3 in `games/` + 21 in `models/`)
+- `src/examples/`: the 109 example namespaces (85 top-level + 3 in `games/` + 21 in `models/`)
 - `src/debug_stats.clj`: F1 overlay plugin (see [Example Architecture Patterns](example-architecture-patterns.md) for usage)
 - `libs/`: bundled native libraries per platform
 

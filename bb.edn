@@ -406,6 +406,15 @@
   clipboard-text {:doc "📋 Clipboard Text - cut/copy/paste with the system clipboard"
                  :task (h/run-example! "clipboard-text")}
 
+  tiled-drawing {:doc "🧱 Tiled Drawing - tile a texture patch across a resizable window"
+                :task (h/run-example! "tiled-drawing")}
+
+  palette-switch {:doc "🎨 Palette Switch - shader remaps index-encoded bands"
+                 :task (h/run-example! "palette-switch")}
+
+  ascii-rendering {:doc "🔤 Ascii Rendering - post-process the scene into ASCII glyphs"
+                  :task (h/run-example! "ascii-rendering")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 

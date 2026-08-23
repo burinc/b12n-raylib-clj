@@ -481,7 +481,7 @@ type into a text box (click to focus, Backspace to edit)
 ![input-box](../demos/input-box.gif)
 
 
-## 🖼️ Textures (3)
+## 🖼️ Textures (4)
 
 ### background-scrolling
 
@@ -501,14 +501,32 @@ source and destination rectangles with rotation applied
 
 ![srcrec-dstrec](../demos/srcrec-dstrec.gif)
 
+### tiled-drawing
 
-## ✨ Shaders (1)
+one patch of a texture atlas tiled across the window, with the pattern, tint, scale and rotation all selectable
+
+![tiled-drawing](../demos/tiled-drawing.gif)
+
+
+## ✨ Shaders (3)
 
 ### basic-lighting
 
 dynamic per-pixel lighting (mouse moves it, Y/R/G/B toggle lights)
 
 ![basic-lighting](../demos/basic-lighting.gif)
+
+### ascii-rendering
+
+the scene rendered to an offscreen target, then post-processed into ASCII glyphs (arrows resize the cells)
+
+![ascii-rendering](../demos/ascii-rendering.gif)
+
+### palette-switch
+
+eight near-black bands that a fragment shader remaps through a palette, so the colour on screen is never drawn by the program
+
+![palette-switch](../demos/palette-switch.gif)
 
 
 ## 🔊 Audio (4)

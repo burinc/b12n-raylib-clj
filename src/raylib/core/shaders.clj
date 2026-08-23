@@ -130,6 +130,14 @@
     (mem/write-float buf 0 (float value))
     (set-shader-value-raw! shader loc-index buf SHADER_UNIFORM_FLOAT)))
 
+(defn set-shader-value-vec2!
+  "Set shader uniform vec2 value"
+  [shader loc-index [x y]]
+  (let [buf (mem/alloc 8)] ; 2 floats = 8 bytes
+    (mem/write-float buf 0 (float x))
+    (mem/write-float (mem/slice buf 4) 0 (float y))
+    (set-shader-value-raw! shader loc-index buf SHADER_UNIFORM_VEC2)))
+
 (defn set-shader-value-vec3!
   "Set shader uniform vec3 value"
   [shader loc-index [x y z]]

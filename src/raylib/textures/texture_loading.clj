@@ -69,6 +69,15 @@
   "UnloadTexture"
   [::rs/texture] ::mem/void)
 
+(def texture-filter
+  "Texture scaling filter modes, for `set-texture-filter!`."
+  {:point 0
+   :bilinear 1
+   :trilinear 2
+   :anisotropic-4x 3
+   :anisotropic-8x 4
+   :anisotropic-16x 5})
+
 (defcfn set-texture-filter!
   "Set texture scaling filter mode"
   {:arglists '([texture filter])}

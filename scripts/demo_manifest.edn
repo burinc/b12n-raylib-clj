@@ -79,7 +79,22 @@
  ;; flaky pipeline, and never judge a take by its frame count: open the GIF.
  ;; ---------------------------------------------------------------------
  :overrides
- {;; NOTE: the committed GIF for this one was NOT produced by the timeline
+ {;; ascii-rendering animates unaided (the sprite tracks back and forth), so
+  ;; the keys only exercise the glyph-size uniform. Arrow keys read
+  ;; is-key-pressed?, which latches for a frame, so taps register.
+  "ascii-rendering" {:input [[1.0 :key "right"] [1.8 :key "right"]
+                             [2.6 :key "right"] [3.4 :key "right"]
+                             [4.4 :key "left"] [5.2 :key "left"]]}
+  "palette-switch" {:input [[1.2 :key "right"] [2.6 :key "right"]
+                            [4.0 :key "right"] [5.2 :key "left"]]}
+  ;; Pattern and colour are chosen by CLICKING, which `bb record` cannot
+  ;; deliver (b12n-screen-grab#1), so this leans on the keys instead: scale
+  ;; and rotation both read is-key-pressed? and both visibly re-tile.
+  "tiled-drawing" {:input [[0.8 :key "up"] [1.6 :key "up"]
+                           [2.4 :key "right"] [3.2 :key "right"]
+                           [4.0 :key "down"] [4.8 :key "left"]
+                           [5.5 :key "space"]]}
+;; NOTE: the committed GIF for this one was NOT produced by the timeline
   ;; below. Every control here is a button, and `bb record` posts input
   ;; pid-routed, which cannot actuate a button in ANY app - AppKit or GLFW
   ;; alike, measured against Finder and Calculator too, not just raylib
