@@ -498,6 +498,11 @@
     :title "Tiled Drawing"
     :desc "Tile a texture patch with selectable pattern, tint, scale and rotation"
     :controls "Click a pattern or colour, UP/DOWN scale, LEFT/RIGHT rotate, SPACE reset"}
+   {:alias "palette-switch"
+    :category :shaders
+    :title "Palette Switch"
+    :desc "Fragment shader remaps index-encoded bands through a palette"
+    :controls "LEFT/RIGHT to switch palette"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"

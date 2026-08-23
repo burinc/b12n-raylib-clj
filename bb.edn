@@ -409,6 +409,9 @@
   tiled-drawing {:doc "🧱 Tiled Drawing - tile a texture patch across a resizable window"
                 :task (h/run-example! "tiled-drawing")}
 
+  palette-switch {:doc "🎨 Palette Switch - shader remaps index-encoded bands"
+                 :task (h/run-example! "palette-switch")}
+
   easings-testbed {:doc "🔷 Easings Testbed - all 28 easing curves, one per axis"
                   :task (h/run-example! "easings-testbed")}
 
