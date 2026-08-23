@@ -508,6 +508,11 @@
     :title "Ascii Rendering"
     :desc "Post-process the scene into ASCII glyphs via a render texture"
     :controls "LEFT/RIGHT to change the glyph cell size"}
+   {:alias "basic-voxel"
+    :category :models
+    :title "Basic Voxel"
+    :desc "First-person 8x8x8 voxel world, left-click to remove a cube"
+    :controls "WASD to move, mouse to look, left-click to remove"}
    {:alias "easings-testbed"
     :category :shapes
     :title "Easings Testbed"
