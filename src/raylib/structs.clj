@@ -3,12 +3,14 @@
    [coffi.mem :as mem :refer [defalias]]
    [raylib.internals :as ri]))
 
+;; #region color-alias
 (defalias ::color
   [::mem/struct
    [[:r ::ri/ubyte]
     [:g ::ri/ubyte]
     [:b ::ri/ubyte]
     [:a ::ri/ubyte]]])
+;; #endregion
 
 (defalias ::vector-2
   [::mem/struct

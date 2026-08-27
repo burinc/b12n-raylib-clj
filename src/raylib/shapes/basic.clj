@@ -45,11 +45,13 @@
   "DrawLine"
   [::mem/int ::mem/int ::mem/int ::mem/int ::rs/color] ::mem/void)
 
+;; #region draw-circle-binding
 (defcfn draw-circle!
   "Draw a color-filled circle"
   {:arglists '([center-x center-y radius color])}
   "DrawCircle"
   [::mem/int ::mem/int ::mem/float ::rs/color] ::mem/void)
+;; #endregion
 
 (defcfn draw-circle-gradient!
   "Draw a gradient-filled circle.
