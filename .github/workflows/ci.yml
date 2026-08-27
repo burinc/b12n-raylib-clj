@@ -16,7 +16,7 @@ name: CI
 # Why macos-latest and not ubuntu-latest: every alias in deps.edn carries
 # `-XstartOnFirstThread`, which macOS requires for any GUI/OpenGL work. The JVM
 # treats an unrecognized `-X` option as a fatal error ("Unrecognized option:
-# …; Could not create the Java Virtual Machine" — verified), and that flag is
+# …; Could not create the Java Virtual Machine", verified), and that flag is
 # handled only by the macOS launcher. Running the gate on Linux therefore needs
 # a second, flag-free alias; adding one is a reasonable contribution, but it is
 # not what this file does today.
@@ -67,6 +67,6 @@ jobs:
       # The gate that matters: requires every namespace under src/ (135 at the
       # time of writing). It is the only check that catches an example with a
       # broken require, since running any single example proves nothing about
-      # the other 105. Opens no window — -main is never called.
+      # the other 105. Opens no window, since -main is never called.
       - name: Compile every namespace (headless)
         run: bb check

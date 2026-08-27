@@ -94,7 +94,7 @@ covers what actually happens under `defcfn`, if you want the layer below that.
 You don't need to record anything. Every GIF under `docs/demos/` is committed.
 `bb record:status` tells you which GIFs are missing, stale or current. It reads
 the ledger and hashes source files, so it needs no capture tool and anyone can
-run it — useful for confirming a new example still needs recording.
+run it. Useful for confirming a new example still needs recording.
 
 `bb record` and `bb record:new` drive a screen-capture tool that is not
 publicly released, so they are maintainer-only; the task says so and exits cleanly rather than failing

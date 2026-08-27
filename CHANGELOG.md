@@ -143,9 +143,9 @@ Examples read at <https://raylib-clj.b12n.app>.
   is worth its own task.
 - `raylib_ext` folded into the module namespaces, so an extension lives
   beside the module it extends rather than in a separate pile.
-- `bb docs-sync` says which kind of deploy failure it hit — unreachable
+- `bb docs-sync` says which kind of deploy failure it hit, unreachable
   AWS, missing or expired credentials, a 403, or a genuinely absent
-  bucket — instead of blaming missing infrastructure for all four and
+  bucket. Instead of blaming missing infrastructure for all four and
   recommending `tofu:apply`. On a restricted laptop `HTTPS_PROXY` is the
   usual cause, and it now detects that and prints the unset-and-retry
   line.
@@ -174,7 +174,7 @@ against changed sources. Those are the `raylib_ext` consolidation's
 call-site renames, which changed no pixels, so they have deliberately
 not been re-recorded.
 
-## 2026-08-21 — Public launch
+## 2026-08-21: Public launch
 
 Highlights:
 
@@ -184,7 +184,7 @@ Highlights:
   text, textures and shaders.
 - This is the suite where the runtime does the marshalling for you. A
   binding is a single `defcfn` naming the C symbol and its types, and
-  Panama builds the downcall from that description — so a by-value
+  Panama builds the downcall from that description, so a by-value
   `Color` is just a `{:r 255 :g 0 :b 0 :a 255}` map, serialized from a
   `defalias` layout, rather than something hand-packed into a `:uint`.
 - The seam shows where raylib mutates through a pointer: those calls
@@ -208,7 +208,7 @@ Other changes:
 - Demo recording migrated to [screen-grab](https://github.com/burinc/b12n-screen-grab),
   replacing the repo's own hand-rolled batch capture script.
 
-## 2026-08-11 — Documentation
+## 2026-08-11: Documentation
 
 - A full `docs/guide/`: getting started, architecture, adding FFI
   bindings, a coffi/Panama deep dive, example architecture patterns, the

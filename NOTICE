@@ -51,7 +51,7 @@ raylib
   6.0 binaries under libs/ (macOS, Linux x86-64/i386, Windows 32/64-bit for
   MSVC and MinGW-w64), so an example runs without a system raylib install.
   Those binaries are raylib's own release artifacts, unmodified. The zlib
-  license permits this provided the notice is retained — which is what this
+  license permits this provided the notice is retained, which is what this
   section is.
 
   Many examples under src/examples/ are Clojure ports of raylib's own example
@@ -84,4 +84,4 @@ Media assets under resources/
   NOT covered by this project's license. They are raylib's own example assets
   and carry their own terms, including one asset under a NON-COMMERCIAL
   license (resources/scarfy.png, CC-BY-NC). Per-file authorship and terms are
-  tabulated in resources/LICENSE.md — read it before reusing anything there.
+  tabulated in resources/LICENSE.md. Read it before reusing anything there.

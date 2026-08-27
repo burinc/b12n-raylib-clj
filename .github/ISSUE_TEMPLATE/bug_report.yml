@@ -6,17 +6,17 @@ body:
     attributes:
       value: |
         Most failures here come down to three things: your JDK version, your OS,
-        and whether the bundled `libraylib` loaded. Please fill those in — they
+        and whether the bundled `libraylib` loaded. Please fill those in. They
         turn a guess into a diagnosis.
 
-        **Check these two first — both are expected, not bugs:**
+        **Check these two first. Both are expected, not bugs:**
 
         - **`UnsupportedClassVersionError`, or anything about `java.lang.foreign`
           not existing.** This project needs **JDK 22 or newer** for the Foreign
           Function & Memory API. There is no workaround on an older JDK.
         - **`WARNING: A restricted method in java.lang.foreign.Linker has been
           called`.** Harmless, but it means you ran without the project's JVM
-          flags — every `deps.edn` alias passes
+          flags, every `deps.edn` alias passes
           `--enable-native-access=ALL-UNNAMED`, which suppresses it entirely.
           Use `bb <name>`, or `clojure -M:<alias>` on macOS.
 
@@ -44,10 +44,10 @@ body:
       value: |
         ```
         $ uname -sm
-        (paste here — OS and CPU architecture)
+        (paste here, OS and CPU architecture)
 
         $ java -version
-        (paste here — must be 22 or newer)
+        (paste here, must be 22 or newer)
         ```
     validations:
       required: true
@@ -73,7 +73,7 @@ body:
       description: |
         `bb check` requires all 104 namespaces under `src/` without opening a
         window. If it fails, the problem is in the shared binding layer rather
-        than in one example — paste its output here.
+        than in one example. Paste its output here.
       value: |
         ```
         $ bb check

@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         New examples are very welcome. The suite is deliberately mechanical to
-        grow — one example touches exactly four places, and
+        grow: one example touches exactly four places, and
         [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md) has the recipe.
 
         Have a look at
@@ -60,10 +60,10 @@ body:
       label: Does it need new FFI bindings?
       description: |
         i.e. a raylib C function that has no `defcfn` under `src/raylib/` yet.
-        Not a problem if so — it just makes the PR bigger.
+        Not a problem if so. It just makes the PR bigger.
       options:
-        - "No — everything it needs is already bound"
-        - "Yes — it needs new defcfn bindings"
+        - "No: everything it needs is already bound"
+        - "Yes: it needs new defcfn bindings"
         - "Not sure"
     validations:
       required: true

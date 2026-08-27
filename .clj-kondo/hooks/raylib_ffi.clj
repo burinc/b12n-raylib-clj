@@ -11,7 +11,7 @@
 
   clj-kondo cannot see through the macro. Without a hook every bound name is
   an `Unresolved symbol` in src/raylib/ and an `Unresolved var: rcw/…` at each
-  call site in the examples — 776 findings across the suite, enough to make
+  call site in the examples, 776 findings across the suite, enough to make
   the linter useless as a gate.
 
   coffi ships its own hook (clj-kondo.exports/org.suskalo/coffi), and it does
@@ -28,7 +28,7 @@
   buys three things clj-kondo could not otherwise know:
 
     * the var exists (kills the 776 false positives),
-    * its arity — passing the wrong number of arguments to a binding is
+    * its arity, passing the wrong number of arguments to a binding is
       exactly the FFI mistake that otherwise surfaces as a native crash,
     * its return type, so `(/ (rcw/get-screen-width) 2.0)` type-checks for
       real instead of being suppressed.
@@ -49,7 +49,7 @@
 (def ^:private numeric-type-names
   #{"byte" "short" "int" "long" "char" "float" "double" "ubyte"})
 
-;; ::ri/bool deserializes with (not (zero? obj)) — a real boolean, not 0/1.
+;; ::ri/bool deserializes with (not (zero? obj)), a real boolean, not 0/1.
 ;; Raw ::mem/byte returns from raylib predicates stay numeric above; those call
 ;; sites wrap them in `pos?` themselves.
 (def ^:private boolean-type-names #{"bool"})
@@ -59,7 +59,7 @@
 (def ^:private nil-type-names #{"void" "pointer"})
 
 (defn- validate-type
-  "Carried over from coffi's own hook — a type is a qualified keyword, or a
+  "Carried over from coffi's own hook, a type is a qualified keyword, or a
   vector whose first element is one (e.g. [::mem/struct …])."
   [node]
   (when-not (or (qualified-keyword? (api/sexpr node))
@@ -76,7 +76,7 @@
 
   Anything not listed above is a struct alias (::rs/color, ::rs/vector-2,
   ::rc3d/camera3d, …). coffi deserializes those into Clojure maps, so an empty
-  map node is the honest answer — it keeps `(:x (rcm/get-mouse-position))`
+  map node is the honest answer. It keeps `(:x (rcm/get-mouse-position))`
   type-checking without asserting which keys are present."
   [node]
   (let [k (try (api/sexpr node) (catch Exception _ nil))
@@ -129,7 +129,7 @@
                         (list arglist (return-node return-type-node)))
               ;; The rewrite drops the C type vector and return type, so their
               ;; auto-resolved keywords (::mem/int, ::rs/color, ::ri/bool) stop
-              ;; counting as uses of the aliases that qualify them — and every
+              ;; counting as uses of the aliases that qualify them, and every
               ;; binding namespace then reports its own `[coffi.mem :as mem]`
               ;; require as unused. Deleting those requires on that advice would
               ;; break the library at runtime. Carry the types through in an

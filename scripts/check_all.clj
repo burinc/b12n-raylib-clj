@@ -5,7 +5,7 @@
   proved the FFI layer loads but said nothing about the other 77 examples. A
   broken require or a typo'd binding in any of them shipped green. This walks
   every .clj file under src/, derives its namespace from the path, and requires
-  it — the same thing `clj -M:<alias>` does at startup, minus `-main`, so no
+  it, the same thing `clj -M:<alias>` does at startup, minus `-main`, so no
   window opens and nothing needs a display.
 
   Exits 1 with a per-namespace report if any fail."

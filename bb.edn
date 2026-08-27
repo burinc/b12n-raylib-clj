@@ -40,7 +40,7 @@
                                        *command-line-args*)]
              (System/exit exit))
            (do
-             (h/error-msg "`bb record` is maintainer-only — the screen-grab CLI it drives is not publicly released.")
+             (h/error-msg "`bb record` is maintainer-only. The screen-grab CLI it drives is not publicly released.")
              (h/info "Nothing to do: every demo GIF is already committed under docs/demos/.")
              (h/info "To propose a capture timeline for a new example, add an :overrides")
              (h/info "entry in scripts/demo_manifest.edn and mention it in your PR.")
@@ -1003,7 +1003,7 @@ echo \"✅ Lint check passed!\"
   ;; =============================================================================
 
   ;; Re-reads this file with clojure.edn/read-string, so keep bb.edn free of
-  ;; non-EDN reader macros (#"regex", @deref, #(...) — see plan-authoring notes).
+  ;; non-EDN reader macros (#"regex", @deref, #(...), see plan-authoring notes).
   info
   {:doc "🔍 Grouped cheat-sheet of every bb task (start here to review the project)"
    :task
@@ -1025,7 +1025,7 @@ echo \"✅ Lint check passed!\"
          example-aliases (into #{} (map :alias h/examples))
          grouped (into example-aliases (into #{"examples" "run" "record"} (mapcat second groups)))
          other   (->> (keys tasks) (filter symbol?) (map str) (remove grouped) sort)]
-     (h/header "🎮 Raylib Clojure Playground — task cheatsheet")
+     (h/header "🎮 Raylib Clojure Playground: task cheatsheet")
      (println (str (count h/examples) " examples across " (count h/example-categories) " categories."))
      (sect "🎮 Run examples")
      (line "examples")
