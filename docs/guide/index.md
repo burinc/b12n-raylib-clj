@@ -15,7 +15,7 @@ runtimes, one repo each.
 
 This is the JVM one: JDK 22+'s Panama Foreign Function & Memory API via
 `coffi`, where a binding is a `defcfn` form and a C struct arrives as a
-plain Clojure map. [`b12n-raylib-jlt`](https://github.com/burinc/b12n-raylib-jlt)
+plain Clojure map. [`raylib-jlt`](https://github.com/jlt-commons/raylib-jlt)
 does it on Chez Scheme through jolt's `jolt.ffi`, with no JVM at all.
 [`b12n-raylib-jnk`](https://github.com/burinc/b12n-raylib-jnk) does it in
 jank, which compiles through C++/LLVM to a native binary and so has no FFI
@@ -85,9 +85,10 @@ ported from which raylib C source file.
 
 The same suite on the other two Clojure runtimes:
 
-- [`b12n-raylib-jlt`](https://github.com/burinc/b12n-raylib-jlt): in Jolt
-  (native Clojure on Chez Scheme, no JVM), over `jolt.ffi`.
-  [raylib-jlt.b12n.app](https://raylib-jlt.b12n.app)
+- [`raylib-jlt`](https://github.com/jlt-commons/raylib-jlt): in Jolt
+  (native Clojure on Chez Scheme, no JVM), over `jolt.ffi`. It moved to the
+  jlt-commons organization, and its docs with it.
+  [jlt-commons.github.io/raylib-jlt](https://jlt-commons.github.io/raylib-jlt/)
 - [`b12n-raylib-jnk`](https://github.com/burinc/b12n-raylib-jnk): in jank
   (native Clojure via C++/LLVM), calling raylib as ordinary C++ through
   `(:include "raylib.h")`, no FFI layer at all.
