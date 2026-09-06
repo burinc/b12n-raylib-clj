@@ -102,8 +102,8 @@ bb --version
 Clone this repository:
 
 ```bash
-git clone https://github.com/burinc/b12n-raylib-clj.git
-cd b12n-raylib-clj
+git clone https://github.com/b12n-oss/raylib-clj.git
+cd raylib-clj
 ```
 
 ### `bb <example>` (recommended)

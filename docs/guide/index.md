@@ -1,6 +1,6 @@
-# b12n-raylib-clj Guide
+# raylib-clj Guide
 
-User-facing documentation for `b12n-raylib-clj`: a collection of
+User-facing documentation for `raylib-clj`: a collection of
 **[raylib](https://www.raylib.com/)** game-development examples in
 **Clojure**, calling raylib's C library directly via
 **[coffi](https://github.com/IGJoshua/coffi)** over JDK 22+'s Foreign
@@ -26,7 +26,7 @@ three ways, shows exactly where each runtime puts the boundary. The pages
 below cover the JVM/Panama side: what `defcfn` actually does, how structs
 and pointers cross, and how to add a new binding.
 
-## What b12n-raylib-clj is
+## What raylib-clj is
 
 A `.clj` (JVM Clojure) project:
 

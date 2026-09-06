@@ -1,6 +1,6 @@
 # Changelog
 
-Notable changes to b12n-raylib-clj, newest first. The format follows
+Notable changes to raylib-clj, newest first. The format follows
 [babashka's changelog](https://github.com/babashka/babashka/blob/master/CHANGELOG.md):
 one bullet per user-visible change, written as what a reader would
 notice rather than what a commit did.

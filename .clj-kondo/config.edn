@@ -1,4 +1,4 @@
-;; clj-kondo configuration for b12n-raylib-clj.
+;; clj-kondo configuration for raylib-clj.
 ;;
 ;; coffi.ffi/defcfn defines a var per bound C symbol. clj-kondo cannot see
 ;; through the macro, so hooks/raylib_ffi.clj rewrites each call into an
