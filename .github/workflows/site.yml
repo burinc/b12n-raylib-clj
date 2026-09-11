@@ -31,10 +31,9 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 env:
-  # v0.3.1 adds a shareable "copy link" anchor to every heading; jumps
-  # from v0.2.1 because b12n-oss/docs-engine (a fork with no commits of
-  # its own) was retired in favor of jlt-commons/docs-engine directly.
-  DOCS_ENGINE_REF: v0.3.1
+  # v0.3.2 fixes `jolt run build`/`clean` (docs-engine#3); v0.3.1
+  # added heading anchors.
+  DOCS_ENGINE_REF: v0.3.2
   BASE_PATH: /raylib-clj
 
 jobs:
