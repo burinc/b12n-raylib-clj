@@ -49,14 +49,12 @@ jobs:
           ref: ${{ env.DOCS_ENGINE_REF }}
           path: .docs-engine
 
-      - name: Install babashka
-        uses: DeLaGuardo/setup-clojure@13.6.1
-        with:
-          bb: latest
+      - name: Install jolt
+        uses: jlt-commons/setup-jolt@v1
 
       - name: Build
         working-directory: .docs-engine
-        run: bb build "$GITHUB_WORKSPACE"
+        run: jolt run build "$GITHUB_WORKSPACE"
 
       # Each check below names a symptom a reader would otherwise have to
       # diagnose from a rendered page.
