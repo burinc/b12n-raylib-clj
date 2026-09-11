@@ -1,8 +1,8 @@
 ;; Configuration for the documentation site, read by the docs-engine
-;; (https://github.com/b12n-oss/docs-engine).
+;; (https://github.com/jlt-commons/docs-engine).
 ;;
 ;; Build it locally from a docs-engine checkout:
-;;   cd ~/dev/b12n-oss/docs-engine && bb serve ~/dev/b12n-oss/raylib-clj
+;;   cd ~/dev/jlt-commons/docs-engine && bb serve ~/dev/b12n-oss/raylib-clj
 ;; CI builds it on every pull request from .github/workflows/site.yml, and
 ;; will publish from main once both the PUBLISH_SITE repository variable is
 ;; set to "true" and GitHub Pages is enabled, neither of which is done yet.
