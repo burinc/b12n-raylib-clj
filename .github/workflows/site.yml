@@ -2,8 +2,9 @@ name: Site
 
 # Builds the documentation site on every pull request, and will publish it to
 # GitHub Pages from main once that is switched on. The generator lives in
-# b12n-oss/docs-engine; this repo owns its content, its config in
-# docs/site.edn, and nothing else about the rendering.
+# jlt-commons/docs-engine (b12n-oss/docs-engine, a fork with zero commits
+# of its own ever, was retired 2026-09-11); this repo owns its content,
+# its config in docs/site.edn, and nothing else about the rendering.
 #
 # The engine is pinned to a tag rather than tracking its main branch, so a
 # change over there cannot break these docs without someone choosing it.
@@ -30,7 +31,10 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 env:
-  DOCS_ENGINE_REF: v0.2.1
+  # v0.3.1 adds a shareable "copy link" anchor to every heading; jumps
+  # from v0.2.1 because b12n-oss/docs-engine (a fork with no commits of
+  # its own) was retired in favor of jlt-commons/docs-engine directly.
+  DOCS_ENGINE_REF: v0.3.1
   BASE_PATH: /raylib-clj
 
 jobs:
@@ -42,7 +46,7 @@ jobs:
       - name: Check out the docs engine
         uses: actions/checkout@v7
         with:
-          repository: b12n-oss/docs-engine
+          repository: jlt-commons/docs-engine
           ref: ${{ env.DOCS_ENGINE_REF }}
           path: .docs-engine
 
